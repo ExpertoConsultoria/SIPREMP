@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="w-3/4 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('cajamenor') }}" class="text-right">
+                        <a href="{{ route('cajamenor.borradores') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49" fill="none">
                                 <g clip-path="url(#clip0_255_2)">
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="w-3/4 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('cajamenor') }}" class="text-right">
+                        <a href="{{ route('cajamenor.compras') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="49" viewBox="0 0 50 47" fill="none">
                                 <g clip-path="url(#clip0_257_25)">

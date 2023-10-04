@@ -23,11 +23,10 @@ class CompraMenorList extends Model
     ];
 
     protected $encryptable  = [
-        'icm_folio',
+        'icm_partida_presupuestal',
         'icm_cantidad',
         'icm_unidad_medida',
         'icm_concepto',
-        'icm_partida_presupuestal',
         'icm_precio_u',
         'icm_importe',
     ];

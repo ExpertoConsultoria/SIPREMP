@@ -19,29 +19,12 @@ return new class extends Migration
             $table->text('icm_cantidad');
             $table->text('icm_unidad_medida');
             $table->text('icm_concepto');
-            $table->text('icm_partida_presupuestal');
+            $table->string('icm_partida_presupuestal');
             $table->text('icm_precio_u');
             $table->text('icm_importe');
 
             $table->timestamps();
         });
-        // Schema::create('compra_menor_lists', function (Blueprint $table) {
-        //     $table->id();
-
-        //     // icm = Item de Compra Menor
-        //     $table->string('icm_folio');
-        //     $table->decimal('icm_cantidad', 10, 2);
-        //     $table->string('icm_unidad_medida');
-        //     $table->string('icm_concepto');
-        //     $table->string('icm_partida_presupuestal');
-        //     $table->decimal('icm_precio_u', 10, 2);
-        //     $table->decimal('icm_importe', 10, 2);
-
-        //     $table->foreign('icm_folio')->references('cm_folio')->on('compra_menors')
-        //         ->onUpdate('cascade')->onDelete('cascade');
-
-        //     $table->timestamps();
-        // });
     }
 
     /**

@@ -15,7 +15,14 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        {{-- Font Awesome --}}
+        <link rel=”stylesheet” href="{{ asset('fontawesome/css/all.css') }}">
+        <link href="{{ asset('fontawesome/css/fontawesome.css') }}" rel="stylesheet">
+        <link href="{{ asset('fontawesome/css/brands.css') }}" rel="stylesheet">
+        <link href="{{ asset('fontawesome/css/solid.css') }}" rel="stylesheet">
+
         <!-- Styles -->
+        @stack('css')
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
@@ -42,6 +49,7 @@
         @stack('modals')
 
         @livewireScripts
+        @stack('js')
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

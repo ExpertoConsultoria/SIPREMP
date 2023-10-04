@@ -20,7 +20,7 @@ return new class extends Migration
             $table->smallInteger('Ejercicio');
             $table->string('CvePptal', 20); //Capi-Conc-Gen-Esp
             $table->mediumText('PartidaEspecifica');
-            $table->integer('Movimiento'); //0:aprobado/1:modificado
+            $table->integer('Movimiento'); //0:aprobado/1:aumento/2:disminucion
             $table->decimal('Presupuesto', 13, 4); // Aprobado //modificado
             $table->tinyInteger('Mes')->nullable()->default(0);
             $table->decimal('Saldo', 13, 4)->nullable()->default(0.00);
@@ -40,6 +40,7 @@ return new class extends Migration
             $table->decimal('Noviembre', 13, 4)->nullable()->default(0.00);
             $table->decimal('Diciembre', 13, 4)->nullable()->default(0.00);
 
+            $table->tinyInteger('AutorizacionConsejo')->default(1);
             $table->string('Nota', 196)->nullable();
 
             //La sede funge como UE;
