@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan1Fin extends Model
 {
-    protected $connection = 'mysql_second';
     protected $table = 'plan1_fins';
 
     protected $primaryKey = 'id';

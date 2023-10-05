@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan3Componente extends Model
 {
-    protected $connection = 'mysql_second';
     protected $table = 'plan3_componentes';
 
     protected $primaryKey = 'id';
