@@ -187,7 +187,8 @@
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         @foreach ($partidas_presupuestales as $pp)
                                             <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
-                                        @endforeach
+                                            @endforeach
+                                            <option value="Quesadillas de pollo con queso">Quesadillas de pollo con queso</option>
                                     </select>
                                     @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
                                 </div>

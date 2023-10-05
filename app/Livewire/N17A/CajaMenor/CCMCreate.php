@@ -68,6 +68,9 @@ class CCMCreate extends Component
     public $item_compra;
     public $is_editing = false;
 
+    public $userSede;
+    public $specificUserSede;
+
     protected function rules() {
         return [
             'fecha'   => 'required|date',
@@ -106,7 +109,7 @@ class CCMCreate extends Component
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
 
         'cantidad.required' => 'Este campo es Obligatorio.',
-        'cantidad.numeric' => 'No es un número.',
+        'cantidad.numeric' => 'No es un nÃºmero.',
 
         'unidad_medida.required' => 'Este campo es Obligatorio.',
         'unidad_medida.string' => 'Texto Invalido.',
@@ -125,10 +128,13 @@ class CCMCreate extends Component
         // Default Input Data
 
         if ($this->edit_to_folio == '') {
+
+            $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-CM-00000";
             $this->solicitante = auth()->user()->name;
-            $this->sucursal = Helper::GetUserSede()->SedeNombre;
+            $this->sucursal = $this->userSede;
             $this->fin_mir = '';
             $this->proposito_mir = '';
             $this->componente_mir = '';
@@ -158,7 +164,10 @@ class CCMCreate extends Component
             // Search User Data by ID
             $get_user = User::where('id',$this->compra_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
-            $this->sucursal = Helper::GetSpecificUserSede($get_user)->SedeNombre;
+
+            $this->specificUserSede = $this->sucursal =is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+
+            $this->sucursal = $this->specificUserSede;
 
             // Values that can be set here
             $this->fecha = $this->compra_to_edit->cm_fecha;
@@ -292,7 +301,7 @@ class CCMCreate extends Component
 
         if(!$this->is_editing){
 
-            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', Helper::GetUserSede()->Serie);
+            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->userSede);
 
             $this->validate();
 
@@ -343,8 +352,7 @@ class CCMCreate extends Component
                 $this->compra_CM->cm_folio = $this->folio;
             } else {
                 if (str_starts_with($this->compra_CM->cm_folio, '&')) {
-                    $get_user = User::where('id', $this->compra_to_edit->solicitante_id)->first();
-                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', Helper::GetSpecificUserSede($get_user)->Serie);
+                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->specificUserSede);
                 }else{
                     $this->compra_CM->cm_folio = $this->folio;
                 }
@@ -381,7 +389,7 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede()->SedeNombre;
+        $this->sucursal = $this->userSede;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -472,7 +480,7 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede()->SedeNombre;
+        $this->sucursal = $this->userSede;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
