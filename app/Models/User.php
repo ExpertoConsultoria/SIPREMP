@@ -67,29 +67,8 @@ class User extends Authenticatable
     ];
 
 
-    // Pending
-    // public function org4empleado(): HasOne
-    // {
-    //     return $this->hasOne(Org4Empleado::class);
-    // }
-
-    // public function plan1Fin(): HasOne
-    // {
-    //     return $this->hasOne(Plan1Fin::class);
-    // }
-
-    // public function plan2Proposito(): HasOne
-    // {
-    //     return $this->hasOne(Plan2Proposito::class);
-    // }
-
-    // public function plan3Componente(): HasOne
-    // {
-    //     return $this->hasOne(Plan3Componente::class);
-    // }
-
-    // public function plan4Actividad(): HasOne
-    // {
-    //     return $this->hasOne(Plan4Actividad::class);
-    // }
+    public function org4empleado(): HasOne
+    {
+        return $this->hasOne(Org4Empleado::class);
+    }
 }

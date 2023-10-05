@@ -9,7 +9,7 @@ class Helper {
 
     // We use this Helper to format the IDs of our documents.
 
-    public static function FolioGenerator($model, $trow, $length = 4, $prefix){
+    public static function FolioGenerator($model, $trow, $length = 4, $prefix, $branchKey){
 
         $data = $model::orderBy($trow,'desc')->first(); //Get the last Record
 
@@ -17,7 +17,11 @@ class Helper {
             $folio_length = $length-1;
             $last_folio = '1';
         }else{
-            $code = substr($data->$trow, strlen($prefix)+1); //Get the last code, WITHOUT the prefix
+
+            $prefixLength = 7 + strlen($prefix) + strlen($branchKey);
+            $suffixLength = -5; // -20XX
+
+            $code = substr($data->$trow, $prefixLength,$suffixLength); //Get the last code, WITHOUT all the code extra
             $code = intval($code);
             $actual_last_number = ($code*1)/1; // Delete the 0 in the Code
             $increment_last_number = $actual_last_number + 1;
@@ -32,7 +36,10 @@ class Helper {
             $zeros .= '0';
         }
 
-        return $prefix.'-'.$zeros.$last_folio;
+        $actualYear = date("Y");
+
+             // MPEO-CM-SUC1-000000-2023
+        return 'MPEO-'.$prefix.'-'.$branchKey.'-'.$zeros.$last_folio.'-'.$actualYear;
     }
 
     public static function FakeFolioGenerator($length, $prefix){

@@ -12,6 +12,8 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 
+use App\Models\PptoDeEgreso;
+
 use App\Models\User;
 use App\Models\CompraMenor;
 use App\Models\CompraMenorList;
@@ -51,6 +53,7 @@ class CCMCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
+    public $partidas_presupuestales = [];
 
     // Making Interactions
     public $mir2 = false;
@@ -125,7 +128,7 @@ class CCMCreate extends Component
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-CM-00000";
             $this->solicitante = auth()->user()->name;
-            $this->sucursal = Helper::GetUserSede();
+            $this->sucursal = Helper::GetUserSede()->SedeNombre;
             $this->fin_mir = '';
             $this->proposito_mir = '';
             $this->componente_mir = '';
@@ -155,7 +158,7 @@ class CCMCreate extends Component
             // Search User Data by ID
             $get_user = User::where('id',$this->compra_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
-            $this->sucursal = Helper::GetSpecificUserSede($get_user);
+            $this->sucursal = Helper::GetSpecificUserSede($get_user)->SedeNombre;
 
             // Values that can be set here
             $this->fecha = $this->compra_to_edit->cm_fecha;
@@ -177,6 +180,7 @@ class CCMCreate extends Component
         }
 
         $this->partida_presupuestal = '';
+        $this->partidas_presupuestales = PptoDeEgreso::all();
         $this->fines_mir = Plan1Fin::all();
     }
 
@@ -288,7 +292,7 @@ class CCMCreate extends Component
 
         if(!$this->is_editing){
 
-            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM');
+            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', Helper::GetUserSede()->Serie);
 
             $this->validate();
 
@@ -339,7 +343,8 @@ class CCMCreate extends Component
                 $this->compra_CM->cm_folio = $this->folio;
             } else {
                 if (str_starts_with($this->compra_CM->cm_folio, '&')) {
-                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM');
+                    $get_user = User::where('id', $this->compra_to_edit->solicitante_id)->first();
+                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', Helper::GetSpecificUserSede($get_user)->Serie);
                 }else{
                     $this->compra_CM->cm_folio = $this->folio;
                 }
@@ -359,7 +364,7 @@ class CCMCreate extends Component
 
             foreach ($this->elementosCompraMenor as $item) {
                 $this->item_compra = new CompraMenorList();
-                    $this->item_compra->icm_folio = $this->folio;
+                    $this->item_compra->icm_folio = $this->compra_CM->cm_folio;
                     $this->item_compra->icm_cantidad = $item->icm_cantidad;
                     $this->item_compra->icm_unidad_medida = $item->icm_unidad_medida;
                     $this->item_compra->icm_concepto = $item->icm_concepto;
@@ -376,7 +381,7 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -467,7 +472,7 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';

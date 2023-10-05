@@ -11,6 +11,7 @@ use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
+use App\Models\PptoDeEgreso;
 
 use App\Models\User;
 use App\Models\Memorandum;
@@ -55,6 +56,7 @@ class SolicitudCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
+    public $partidas_presupuestales = [];
 
     // Making Interactions
     public $mir2 = false;
@@ -131,7 +133,7 @@ class SolicitudCreate extends Component
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-MM-00000";
             $this->solicitante = auth()->user()->name;
-            $this->sucursal = Helper::GetUserSede();
+            $this->sucursal = Helper::GetUserSede()->SedeNombre;
             $this->destinatario = '';
             $this->cotizacion = '';
             $this->fin_mir = '';
@@ -166,7 +168,7 @@ class SolicitudCreate extends Component
             $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
 
-            $this->sucursal = Helper::GetSpecificUserSede($get_user);
+            $this->sucursal = Helper::GetSpecificUserSede($get_user)->SedeNombre;
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 
@@ -190,6 +192,7 @@ class SolicitudCreate extends Component
         }
 
         $this->partida_presupuestal = '';
+        $this->partidas_presupuestales = PptoDeEgreso::all();
         $this->fines_mir = Plan1Fin::all();
     }
 
@@ -301,7 +304,7 @@ class SolicitudCreate extends Component
 
         if(!$this->is_editing){
 
-            $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM');
+            $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', Helper::GetUserSede()->Serie);
 
             $this->validate();
 
@@ -352,7 +355,8 @@ class SolicitudCreate extends Component
                 $this->memorandum->memo_folio = $this->folio;
             } else {
                 if (str_starts_with($this->memorandum->memo_folio, '&')) {
-                    $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM');
+                    $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
+                    $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', Helper::GetSpecificUserSede($get_user)->Serie);
                 }else{
                     $this->memorandum->memo_folio = $this->folio;
                 }
@@ -372,7 +376,7 @@ class SolicitudCreate extends Component
 
             foreach ($this->elementosMemorandum as $item) {
                 $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->folio;
+                    $this->memorandum_item->im_folio = $this->memorandum->memo_folio;
                     $this->memorandum_item->im_cantidad = $item->im_cantidad;
                     $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
                     $this->memorandum_item->im_concepto = $item->im_concepto;
@@ -389,7 +393,7 @@ class SolicitudCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-MM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -480,7 +484,7 @@ class SolicitudCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-MM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
