@@ -44,7 +44,18 @@ class Org3Puesto extends Model
      *
      * @var array
      */
-    protected $fillable = ['Puesto','NUP','ClavePuesto','TipoPlaza','SuborDirect','SuborAsig', 'SuborInDirect','Vacante', 'Activo','parent_id','org2_area_id'];
+    protected $fillable = ['Puesto',
+        'NUP',
+        'ClavePuesto',
+        'TipoPlaza',
+        'CorreoInstitucional',
+        'Telefono',
+        'Subordinados',
+        'SuborAsignados',
+        'Vacante',
+        'Activo',
+        'parent_id',
+        'org2_area_id'];
 
 
     /**

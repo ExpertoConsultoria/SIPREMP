@@ -165,3 +165,94 @@
         </div>
     </div>
 </div>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            @if (count($compras))
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th wire:click="ordenaPor('cm_folio')" class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                            Folio
+                            @if ($ordenar == 'cm_folio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-alpha-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-alpha-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
+                            Fecha
+                            @if ($ordenar == 'cm_fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Asunto
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Estado
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($compras as $compra)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-4 py-2"> {{ $compra->cm_folio }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_fecha }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_asunto }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_creation_status }} </td>
+                        <td class="text-center">
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $compra }})">
+                                <i class="fas fa-eye"></i>
+                            </x-button-colors>
+                            <x-button-colors color="yellow" wire:click="goToEdit({{ $compra }})">
+                                <i class="fa fa-print"></i>
+                            </x-button-colors>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($compras->hasPages())
+            <div class="px-6 py-3">
+                {{ $compras->links() }}
+            </div>
+            @endif
+            @else
+            <div class="bg-gray-50 dark:bg-gray-700">
+                <p class="p-4 font-semibold text-center">
+                    !! No existen registros ¡¡
+                </p>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>

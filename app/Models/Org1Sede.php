@@ -54,4 +54,7 @@ class Org1Sede extends Model
         //return $this->hasMany('App\Models\Org2Area', 'org1_sede_id', 'id');
         return $this->hasMany(Org2Area::class); //  Sede -tiene muchas- Areas
     }
+
+
+
 }

@@ -71,4 +71,5 @@ class Org4Empleado extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
+
 }
