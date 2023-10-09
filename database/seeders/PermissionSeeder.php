@@ -13,7 +13,6 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-
         Permission::create(['id' => 1,'guard_name' => 'sanctum','name' => 'ver usuarios'])->syncRoles('admin');
         Permission::create(['id' => 2,'guard_name' => 'sanctum','name' => 'crear usuario'])->syncRoles('admin');
         Permission::create(['id' => 3,'guard_name' => 'sanctum','name' => 'editar usuario'])->syncRoles('admin');
@@ -74,6 +73,5 @@ class PermissionSeeder extends Seeder
         Permission::create(['id' => 58,'guard_name' => 'sanctum','name' => 'revisar adecuaciones'])->syncRoles('admin');
         Permission::create(['id' => 59,'guard_name' => 'sanctum','name' => 'vobo adecuaciones'])->syncRoles('admin');
         Permission::create(['id' => 60,'guard_name' => 'sanctum','name' => 'autorizar adecuaciones'])->syncRoles('admin');
-
     }
 }
