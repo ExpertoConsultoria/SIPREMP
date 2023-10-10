@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
                     {{ __('Compras en Borrador | Caja menor') }}
                 </h2>
             </div>
@@ -35,7 +35,7 @@
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
@@ -49,57 +49,57 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if (count($drafts))
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
-                                Fecha
-                                @if ($ordenar == 'cm_fecha')
-                                @if ($direccion == 'asc')
-                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                                @else
-                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                                @endif
-                                @else
-                                <i class="float-right mt-1 fas fa-sort"></i>
-                                @endif
-                            </th>
-                            <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
-                                Asunto
-                                @if ($ordenar == 'cm_asunto')
-                                @if ($direccion == 'asc')
-                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                                @else
-                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                                @endif
-                                @else
-                                <i class="float-right mt-1 fas fa-sort"></i>
-                                @endif
-                            </th>
-                            <th class="px-4 py-2 text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($drafts as $draft)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-4 py-2"> {{ $draft->cm_fecha }} </td>
-                            <td class="px-4 py-2"> {{ $draft->cm_asunto }} </td>
-                            <td class="px-4 py-2 text-center">
-                                <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
-                                    <i class="fa fa-fw fa-edit"></i>
-                                </x-button-colors>
-                                <x-button-colors color="red" class="ml-2" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
-                                    <i class="fas fa-trash"></i>
-                                </x-button-colors>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
+                            Fecha
+                            @if ($ordenar == 'cm_fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Asunto
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($drafts as $draft)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-4 py-2"> {{ $draft->cm_fecha }} </td>
+                        <td class="px-4 py-2"> {{ $draft->cm_asunto }} </td>
+                        <td class="text-center">
+                            <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </x-button-colors>
+                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
+                                <i class="fas fa-trash"></i>
+                            </x-button-colors>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
             @if ($drafts->hasPages())
-                <div class="px-6 py-3">
-                    {{ $drafts->links() }}
-                </div>
+            <div class="px-6 py-3">
+                {{ $drafts->links() }}
+            </div>
             @endif
             @else
             <div class="bg-gray-50 dark:bg-gray-700">
@@ -130,5 +130,7 @@
                 });
             });
     </script>
+
+</div>
 
 </div>

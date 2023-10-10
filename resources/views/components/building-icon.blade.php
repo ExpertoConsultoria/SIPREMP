@@ -1,6 +1,6 @@
-<div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+<div class="flex items-center">
 
-    <div class="grid justify-end ">
+    <div>
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="edificio 1">
                 <g id="Group">
@@ -12,8 +12,8 @@
         </svg>
     </div>
 
-    <div class="grid justify-end">
-        <p class="px-3 text-base">
+    <div>
+        <p class="px-2 text-base">
             {{ Auth::user()->name }}
         </p>
     </div>

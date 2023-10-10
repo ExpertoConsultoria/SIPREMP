@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
                     {{ __('Estatus | Solicitud | #') }} {{ $details_of_folio }}
                 </h2>
             </div>
@@ -20,7 +20,151 @@
 
         </div>
     </x-slot>
+    <div class="py-8">
+        <div class="max-w-screen-xl mx-auto">
+            {{-- status --}}
+            <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <div class="container mx-auto px-4">
+                    <div class="mb-3">
+                        <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
+                    </div>
+                    <div class="relative h-8 mb-4">
+                        {{-- Línea base de la barra de progreso  --}}
+                        <div class="h-1 w-[82%] sm:w-[85%] md:w-[89%] lg:w-[92%] xl:w-[93%] bg-gray-300 absolute top-3 left-0 right-0 mx-4"></div>
+            
+                        {{-- Círculos y etiquetas --}}
+                        <div class="flex justify-between items-center">
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
+                                <p class="text-xs mt-1">Enviado</p>
+                            </div>
+            
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
+                                <p class="text-xs mt-1">Filtrado</p>
+                            </div>
+            
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
+                                <p class="text-xs mt-1">Servicios Generales</p>
+                            </div>
+            
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
+                                <p class="text-xs mt-1">Unidad Técnica</p>
+                            </div>
+            
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
+                                <p class="text-xs mt-1">Control Presupuestal</p>
+                            </div>
+            
+                            <div class="relative flex flex-col items-center">
+                                <div class="w-6 h-6 bg-green-400 rounded-full "></div>
+                                <p class="text-xs mt-1">Dirección Administrativa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {{-- Datos --}}
+            <div class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                <div class="container px-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-6">
+                        <div>
+                            <x-label for="fecha" value="{{ __('Fecha') }}"/>
+                            <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-200">07/10/2023</p>
+                        </div>
+                        <div>
+                            <x-label for="folio" value="{{ __('Folio') }}"/>
+                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">MPEO/CM/A001/2023</p>
+                        </div>
+                        <div>
+                            <x-label for="solicitante" value="{{ __('Solicitante') }}"/>
+                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Contador/gerente</p>
+                        </div>
+                        <div>
+                            <x-label for="lugar" value="{{ __('Lugar') }}"/>
+                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Lejos</p>
+                        </div>
+                        <div>
+                            <x-label for="destinatario" value="{{ __('Destinatario') }}"/>
+                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Lejos</p>
+                        </div>
+                        <div>
+                            <x-label for="mir" value="{{ __('MIR') }}"/>
+                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">00001010</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <x-label for="a sunto" value="{{ __('Asunto') }}"/>
+                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus atque maxime blanditiis nam error magni enim. Ex facere atque neque unde error culpa, iste quam voluptatibus labore saepe ea? Iste.</p>
+                    </div>
+                </div>
+            </div>
 
-    <p>Fecha</p>
+            {{-- Table --}}
+            <div class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Cantidad
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Unidad de medida
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Concepto
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Partida presupuestal
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="px-6 py-3">
+                                    10
+                                </th>
+                                <th class="px-6 py-3">
+                                    Lt
+                                </th>
+                                <th class="px-6 py-3">
+                                    sisi
+                                </th>
+                                <th class="px-6 py-3">
+                                    $28
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{-- Buttons --}}
+            <div class="mt-4 ">
+                <div class="container">
+                    <div class="grid grid-cols-2 gap-10">
+                        <div class="text-start">
+                            <button type="button"
+                                class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                Cotización
+                            </button>
+                        </div>
+                        <div class="text-end">
+                            <button type="button"
+                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                Imprimir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>

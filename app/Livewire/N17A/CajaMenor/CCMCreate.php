@@ -67,7 +67,6 @@ class CCMCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
-    public $partidas_presupuestales = [];
 
     // Making Interactions
         public $mir2 = false;
@@ -209,7 +208,6 @@ class CCMCreate extends Component
         }
 
         $this->partida_presupuestal = '';
-        $this->partidas_presupuestales = PptoDeEgreso::all();
         $this->fines_mir = Plan1Fin::all();
     }
 

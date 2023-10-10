@@ -23,23 +23,23 @@ switch ($color) {
         $darkFocus  =   'dark:hover:bg-white dark:focus:ring-offset-gray-800';
         break;
     case 'red':
-        $bg         =   'bg-red-600';
+        $bg         =   'bg-red-500';
         $text       =   'text-white';
-        $hoverActive=   'hover:bg-red-500 active:bg-red-700';
+        $hoverActive=   'hover:bg-red-700 active:bg-red-700';
         $focus      =   'focus:ring-red-500';
         $darkFocus  =   'dark:focus:ring-offset-gray-800';
         break;
     case 'yellow':
-        $bg         =   'bg-yellow-600';
+        $bg         =   'bg-yellow-500';
         $text       =   'text-white dark:text-gray-300';
-        $hoverActive=   'hover:bg-yellow-500 active:bg-yellow-700';
+        $hoverActive=   'hover:bg-yellow-700 active:bg-yellow-700';
         $focus      =   'focus:ring-yellow-500';
         $darkFocus  =   'dark:focus:ring-offset-gray-800';
         break;
     case 'green':
-        $bg         =   'bg-green-600';
+        $bg         =   'bg-green-500';
         $text       =   'text-white';
-        $hoverActive=   'hover:bg-green-500 active:bg-green-700';
+        $hoverActive=   'hover:bg-green-700 active:bg-green-700';
         $focus      =   'focus:ring-green-500';
         $darkFocus  =   'dark:text-gray-300 dark:focus:ring-offset-gray-300';
         break;
@@ -58,9 +58,9 @@ switch ($color) {
         $darkFocus  =   'dark:text-gray-300 dark:focus:ring-offset-gray-800';
         break;
     case 'indigo':
-        $bg         =   'bg-indigo-600';
+        $bg         =   'bg-indigo-500';
         $text       =   'text-white dark:text-gray-300';
-        $hoverActive=   'hover:bg-indigo-500 active:bg-indigo-700';
+        $hoverActive=   'hover:bg-indigo-700 active:bg-indigo-700';
         $focus      =   'focus:ring-indigo-500';
         $darkFocus  =   'dark:focus:ring-offset-gray-800';
         break;
@@ -82,7 +82,7 @@ switch ($color) {
 
 <button {{ $attributes->merge([
     'type' => 'button', 
-    'class' => 'inline-flex items-center justify-center px-4 py-2 '
+    'class' => 'transition-all active:translate-y-1 inline-flex items-center justify-center px-4 py-2 '
                 .$bg.' border border-transparent rounded-md font-semibold text-xs '
                 .$text.' uppercase tracking-widest '
                 .$hoverActive.' focus:outline-none focus:ring-2 '

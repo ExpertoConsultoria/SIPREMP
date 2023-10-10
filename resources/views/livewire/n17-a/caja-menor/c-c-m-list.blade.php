@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('compras_list | Caja menor') }}
+                    {{ __('Compras | Caja menor') }}
                 </h2>
             </div>
 
@@ -21,21 +21,43 @@
         </div>
     </x-slot>
 
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
+    <div class="max-w-screen-xl p-4 mx-auto sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-6 py-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-7 xl:grid-cols-7 ">
+
             <select wire:model.live="mostrar"
-                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="10">Mostrar: 10</option>
                 <option value="25">Mostrar: 25</option>
                 <option value="50">Mostrar: 50</option>
             </select>
 
-            <div class="relative w-full">
+            <select wire:model.live="ejercicio"
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option>Ejercicio</option>
+                <option>Ejercicio</option>
+                <option>Ejercicio</option>
+            </select>
+
+            <select wire:model.live="fechas"
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option>07/10/2023</option>
+                <option>07/10/2023</option>
+                <option>07/10/2023</option>
+            </select>
+
+            <select wire:model.live="partida_presupuestal"
+                class="block col-span-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="10">Partida presupuestal</option>
+                <option value="25">Partida presupuestal</option>
+                <option value="50">Partida presupuestal</option>
+            </select>
+
+            <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="ejercicio" placeholder="Buscar usuario..." autofocus
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
@@ -45,6 +67,12 @@
                 </button>
             </div>
 
+            <div class="lg:col-span-2 ">
+                <button type="submit" wire:loading.attr="disabled"
+                    class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                    GENERAR REPORTE
+                </button>
+            </div>
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -110,12 +138,12 @@
                         <td class="px-4 py-2"> {{ $compra->cm_fecha }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_asunto }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_creation_status }} </td>
-                        <td class="px-4 py-2 text-center">
-                            <x-button-colors color="indigo" class="ml-2" wire:click="getDetails({{ $compra }})">
+                        <td class="text-center">
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $compra }})">
                                 <i class="fas fa-eye"></i>
                             </x-button-colors>
-                            <x-button-colors color="green" wire:click="goToEdit({{ $compra }})">
-                                <i class="fa fa-fw fa-edit"></i>
+                            <x-button-colors color="yellow" wire:click="goToEdit({{ $compra }})">
+                                <i class="fa fa-print"></i>
                             </x-button-colors>
                         </td>
                     </tr>
@@ -125,6 +153,97 @@
             @if ($compras_enviadas?->hasPages())
             <div class="px-6 py-3">
                 {{ $compras_enviadas?->links() }}
+            </div>
+            @endif
+            @else
+            <div class="bg-gray-50 dark:bg-gray-700">
+                <p class="p-4 font-semibold text-center">
+                    !! No existen registros ¡¡
+                </p>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            @if (count($compras))
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th wire:click="ordenaPor('cm_folio')" class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                            Folio
+                            @if ($ordenar == 'cm_folio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-alpha-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-alpha-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
+                            Fecha
+                            @if ($ordenar == 'cm_fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Asunto
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Estado
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($compras as $compra)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-4 py-2"> {{ $compra->cm_folio }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_fecha }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_asunto }} </td>
+                        <td class="px-4 py-2"> {{ $compra->cm_creation_status }} </td>
+                        <td class="text-center">
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $compra }})">
+                                <i class="fas fa-eye"></i>
+                            </x-button-colors>
+                            <x-button-colors color="yellow" wire:click="goToEdit({{ $compra }})">
+                                <i class="fa fa-print"></i>
+                            </x-button-colors>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($compras->hasPages())
+            <div class="px-6 py-3">
+                {{ $compras->links() }}
             </div>
             @endif
             @else

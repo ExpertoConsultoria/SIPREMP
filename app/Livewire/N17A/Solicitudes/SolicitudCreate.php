@@ -11,7 +11,6 @@ use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
-use App\Models\PptoDeEgreso;
 
 use App\Models\User;
 use App\Models\Memorandum;
@@ -56,7 +55,6 @@ class SolicitudCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
-    public $partidas_presupuestales = [];
 
     // Making Interactions
     public $mir2 = false;
@@ -205,7 +203,6 @@ class SolicitudCreate extends Component
         }
 
         $this->partida_presupuestal = '';
-        $this->partidas_presupuestales = PptoDeEgreso::all();
         $this->fines_mir = Plan1Fin::all();
     }
 
@@ -388,7 +385,7 @@ class SolicitudCreate extends Component
 
             foreach ($this->elementosMemorandum as $item) {
                 $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->memorandum->memo_folio;
+                    $this->memorandum_item->im_folio = $this->folio;
                     $this->memorandum_item->im_cantidad = $item->im_cantidad;
                     $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
                     $this->memorandum_item->im_concepto = $item->im_concepto;
