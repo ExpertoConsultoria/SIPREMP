@@ -37,7 +37,17 @@ return new class extends Migration
 
             $table->string('cm_creation_status');
 
-            // $table->text('token_solicitud')->nullable();
+            // XML
+            // $table->foreignId('factura_cm_id')->nullable()->constrained()->restrictOnDelete();
+            $table->unsignedBigInteger('factura_cm_id');
+            $table->foreign('factura_cm_id')
+                ->references('id')->on('facturas_cm')
+                ->onDelete('cascade');
+
+
+            $table->foreignId('empresa_id')->nullable()->constrained()->restrictOnDelete();
+
+            // Tokens
             $table->text('token_aceptacion')->nullable();
 
 

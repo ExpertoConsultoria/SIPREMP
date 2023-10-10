@@ -71,6 +71,11 @@ class SolicitudCreate extends Component
     public $memorandum_item;
     public $is_editing = false;
 
+    public $userSede;
+    public $userSedeCode;
+    public $specificUserSede;
+    public $specificUserSedeCode;
+
     protected function rules() {
         return [
             'fecha'   => 'required|date',
@@ -130,10 +135,14 @@ class SolicitudCreate extends Component
         // Default Input Data
 
         if ($this->edit_to_folio == '') {
+
+            $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+            $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
+
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-MM-00000";
             $this->solicitante = auth()->user()->name;
-            $this->sucursal = Helper::GetUserSede()->SedeNombre;
+            $this->sucursal = $this->userSede;
             $this->destinatario = '';
             $this->cotizacion = '';
             $this->fin_mir = '';
@@ -167,6 +176,10 @@ class SolicitudCreate extends Component
             // Search User Data by ID
             $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
+
+            $this->specificUserSede = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+            $this->specificUserSedeCode = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->Serie;
+            $this->sucursal = $this->specificUserSede;
 
             $this->sucursal = Helper::GetSpecificUserSede($get_user)->SedeNombre;
             $this->destinatario = $this->memo_to_edit->destinatario;
@@ -304,7 +317,7 @@ class SolicitudCreate extends Component
 
         if(!$this->is_editing){
 
-            $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', Helper::GetUserSede()->Serie);
+            $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSedeCode);
 
             $this->validate();
 
@@ -355,8 +368,7 @@ class SolicitudCreate extends Component
                 $this->memorandum->memo_folio = $this->folio;
             } else {
                 if (str_starts_with($this->memorandum->memo_folio, '&')) {
-                    $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
-                    $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', Helper::GetSpecificUserSede($get_user)->Serie);
+                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->specificUserSedeCode);
                 }else{
                     $this->memorandum->memo_folio = $this->folio;
                 }
@@ -393,7 +405,7 @@ class SolicitudCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-MM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede()->SedeNombre;
+        $this->sucursal = $this->userSede;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -484,7 +496,7 @@ class SolicitudCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-MM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede()->SedeNombre;
+        $this->sucursal = $this->userSede;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';

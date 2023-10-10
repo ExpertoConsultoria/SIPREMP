@@ -102,7 +102,7 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($fines_mir as $fin_mir)
-                                            <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
+                                            <option value="{{ $fin_mir->id }}">{{ $fin_mir->DescFin }}</option>
                                             @endforeach
                                         </select>
                                         @error('fin_mir') <span class="text-xs text-rose-600">{{ $message }}</span>
@@ -117,7 +117,7 @@
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
-                                            <option value="{{ $proposito_mir['NoProposito'] }}">{{
+                                            <option value="{{ $proposito_mir['id'] }}">{{
                                                 $proposito_mir['DescProposito'] }}</option>
                                             @endforeach
                                         </select>
@@ -135,7 +135,7 @@
                                             class="@if(!$mir3) bg-gray-200 @else bg-gray-50 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
-                                            <option value="{{ $componete_mir['NoComponente'] }}">{{
+                                            <option value="{{ $componete_mir['id'] }}">{{
                                                 $componete_mir['DescComponente'] }}</option>
                                             @endforeach
                                         </select>
@@ -149,7 +149,7 @@
                                             class="@if(!$mir4) bg-gray-200 @else bg-gray-50 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
-                                            <option value="{{ $actividad_mir['NoActividad'] }}">{{
+                                            <option value="{{ $actividad_mir['id'] }}">{{
                                                 $actividad_mir['DescActividad'] }}</option>
                                             @endforeach
                                         </select>

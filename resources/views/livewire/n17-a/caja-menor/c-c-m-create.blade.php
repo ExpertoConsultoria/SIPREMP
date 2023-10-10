@@ -84,7 +84,7 @@
                                         <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)" name="fin_mir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($fines_mir as $fin_mir)
-                                                <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
+                                                <option value="{{ $fin_mir->id }}">{{ $fin_mir->DescFin }}</option>
                                             @endforeach
                                         </select>
                                         @error('fin_mir') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
@@ -96,7 +96,7 @@
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
-                                                <option value="{{ $proposito_mir['NoProposito'] }}">{{ $proposito_mir['DescProposito'] }}</option>
+                                                <option value="{{ $proposito_mir['id'] }}">{{ $proposito_mir['DescProposito'] }}</option>
                                                 @endforeach
                                         </select>
                                         @error('proposito_mir') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
@@ -110,7 +110,7 @@
                                             class="@if(!$mir3) bg-gray-200 @else bg-gray-50 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
-                                                <option value="{{ $componete_mir['NoComponente'] }}">{{ $componete_mir['DescComponente'] }}</option>
+                                                <option value="{{ $componete_mir['id'] }}">{{ $componete_mir['DescComponente'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('componente_mir') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
@@ -121,7 +121,7 @@
                                             class="@if(!$mir4) bg-gray-200 @else bg-gray-50 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
-                                                <option value="{{ $actividad_mir['NoActividad'] }}">{{ $actividad_mir['DescActividad'] }}</option>
+                                                <option value="{{ $actividad_mir['id'] }}">{{ $actividad_mir['DescActividad'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('actividad_mir') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
@@ -134,74 +134,77 @@
 
                     {{-- Add Items to List --}}
                     <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-
-                        <div class="container px-4">
-                            <div class="grid gap-3 mb-6 lg:grid-cols-12">
-                                <div class="col-span-2">
-                                    <x-label for="cantidad" value="{{ __('Cantidad') }}" />
-                                    <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number" name="cantidad" step="0.01" placeholder="0.00"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('cantidad') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-span-2">
-                                    <x-label for="unidad_medida" value="{{ __('Unidad de medida') }}" />
-                                    <input wire:model.blur="unidad_medida" type="text" name="unidad_medida" placeholder="Unidad de Medida"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('unidad_medida') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-span-4">
-                                    <x-label for="concepto" value="{{ __('Concepto') }}" />
-                                    <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('concepto') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-span-2">
-                                    <x-label for="p_u" value="{{ __('P/U') }}" />
-                                    <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number" step="0.001" placeholder="0.00" name="p_u"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('p_u') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-span-2">
-                                    <x-label for="importe" value="{{ __('Importe') }}" />
-                                    <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00" readonly
-                                        class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        value="23">
-                                    @error('importe') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                        {{--
+                            <div class="container px-4">
+                                <div class="grid gap-3 mb-6 lg:grid-cols-12">
+                                    <div class="col-span-2">
+                                        <x-label for="cantidad" value="{{ __('Cantidad') }}" />
+                                        <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number" name="cantidad" step="0.01"
+                                            placeholder="0.00"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @error('cantidad') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <x-label for="unidad_medida" value="{{ __('Unidad de medida') }}" />
+                                        <input wire:model.blur="unidad_medida" type="text" name="unidad_medida" placeholder="Unidad de Medida"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @error('unidad_medida') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-4">
+                                        <x-label for="concepto" value="{{ __('Concepto') }}" />
+                                        <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @error('concepto') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <x-label for="p_u" value="{{ __('P/U') }}" />
+                                        <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number" step="0.001" placeholder="0.00"
+                                            name="p_u"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @error('p_u') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <x-label for="importe" value="{{ __('Importe') }}" />
+                                        <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00" readonly
+                                            class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            value="23">
+                                        @error('importe') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="container px-4">
-                            <div class="grid grid-cols-12 gap-2 mb-1">
-                                <div class="col-span-2">
-                                    <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
-                                </div>
+                            <div class="container px-4">
+                                <div class="grid grid-cols-12 gap-2 mb-1">
+                                    <div class="col-span-2">
+                                        <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
+                                    </div>
 
-                                <div class="col-span-4">
-                                    <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected disabled value="">Selecciona una Opción</option>
-                                        @foreach ($partidas_presupuestales as $pp)
+                                    <div class="col-span-4">
+                                        <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected disabled value="">Selecciona una Opción</option>
+                                            @foreach ($partidas_presupuestales as $pp)
                                             <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
+                                            @endforeach
+                                        </select>
+                                        @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                    </div>
 
-                                <div class="col-span-2">
-                                    <button type="button" wire:click='AddToList'
-                                        class="w-4/5 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                        Registrar
-                                    </button>
-                                </div>
+                                    <div class="col-span-2">
+                                        <button type="button" wire:click='AddToList'
+                                            class="w-4/5 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                            Registrar
+                                        </button>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
+                        --}}
 
+                        <input wire:model.blur="factura_id" type="hidden" name="factura_id">
+                        @error('factura_id') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+
+                        @livewire('n17-a.caja-menor.add-xml')
                     </div>
 
                     {{-- Table --}}

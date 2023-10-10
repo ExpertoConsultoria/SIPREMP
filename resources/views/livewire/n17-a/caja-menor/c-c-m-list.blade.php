@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Compras | Caja menor') }}
+                    {{ __('compras_list | Caja menor') }}
                 </h2>
             </div>
 
@@ -35,11 +35,11 @@
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
+                <x-input type="text" wire:model.live="ejercicio" placeholder="Buscar usuario..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
-                <button type="button" wire:click="$set('buscar','')"
+                <button type="button" wire:click="$set('ejercicio','')"
                     class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
                     <i class="fa-solid fa-delete-left"></i>
                 </button>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if (count($compras))
+            @if (count($compras_enviadas))
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -104,7 +104,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($compras as $compra)
+                    @foreach ($compras_enviadas as $compra)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-4 py-2"> {{ $compra->cm_folio }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_fecha }} </td>
@@ -122,9 +122,9 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($compras->hasPages())
+            @if ($compras_enviadas?->hasPages())
             <div class="px-6 py-3">
-                {{ $compras->links() }}
+                {{ $compras_enviadas?->links() }}
             </div>
             @endif
             @else
