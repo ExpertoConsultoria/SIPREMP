@@ -155,22 +155,13 @@
 
                     </div>
                     {{-- Buttons --}}
-                    <div
-                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
-                            <div class="grid grid-cols-2 gap-10">
-                                <div class="text-end">
-                                    <button type="button"
-                                        class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                        ADJUNTAR XML
-                                    </button>
-                                </div>
-                                <div class="text-start">
-                                    <button type="button"
-                                        class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                        CARGAR DATOS
-                                    </button>
-                                </div>
+                            <div class="grid grid-cols-1">
+                                <input wire:model.blur="factura_id" type="hidden" name="factura_id">
+                                @error('factura_id') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                    
+                                @livewire('n17-a.caja-menor.add-xml')
                             </div>
                         </div>
                     </div>
@@ -330,7 +321,5 @@
             </div>
         </div>
     </div>
-
-</div>
 
 </div>

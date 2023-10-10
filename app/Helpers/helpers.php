@@ -45,12 +45,12 @@ class Helper {
         return '&'.$prefix.'-'.$random_folio;
     }
 
-    public static function FakeFolioGenerator($length, $prefix){
+    // public static function FakeFolioGenerator($length, $prefix){
 
-        $random_folio = Str::random($length);
-        $random_folio = strtoupper($random_folio);;
-        return '&'.$prefix.'-'.$random_folio;
-    }
+    //     $random_folio = Str::random($length);
+    //     $random_folio = strtoupper($random_folio);;
+    //     return '&'.$prefix.'-'.$random_folio;
+    // }
 
     public static function GetUserSede(){
         $sede = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'N/D';
