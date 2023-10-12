@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Livewire\N17A\Solicitudes;
+namespace App\Livewire\N6\BienesServ;
 
 use Livewire\Component;
+
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -11,9 +12,10 @@ use App\Models\Memorandum;
 use App\Models\MemorandumList;
 use Illuminate\Support\Facades\Auth;
 
-class SolicitudBorradores extends Component
+
+class Borradores extends Component
 {
-use WithPagination;
+    use WithPagination;
 
     public $cargarLista = true;
     public $mostrar = '10';
@@ -55,9 +57,9 @@ use WithPagination;
                 ->paginate($this->mostrar);
 
         }
-
-        return view('livewire.n17-a.solicitudes.solicitud-borradores', compact('drafts'));
+        return view('livewire.n6.bienes-serv.borradores', compact('drafts'));
     }
+
 
     #[On('deleteDraft')]
     public function deleteDraft($id){
@@ -77,6 +79,7 @@ use WithPagination;
 
     public function goToEdit($memorandum)
     {
-        return redirect()->to(route("solicitudes.edit", ['edit_to_folio'=>$memorandum['memo_folio']]));
+        return redirect()->to(route("solicitudBienes.edit", ['edit_to_folio'=>$memorandum['memo_folio']]));
     }
+
 }

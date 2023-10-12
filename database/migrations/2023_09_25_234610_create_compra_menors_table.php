@@ -35,6 +35,7 @@ return new class extends Migration
             $table->text('cm_iva');
             $table->text('cm_total');
 
+            // Borrador ||
             $table->string('cm_creation_status');
 
             // $table->text('token_solicitud')->nullable();

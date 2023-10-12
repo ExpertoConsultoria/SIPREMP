@@ -14,13 +14,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Emilli Rodriguez Reyes',
-            'username' => 'Depinazul',
-            'phone' => '00011112233',
-            'email' => 'emilli@gmail.com',
-            'password' => Hash::make('holamundo')
-            ])
-        ->assignRole('admin');
+        User::create(
+        // [
+        //     'name' => 'Emilli Rodriguez Reyes',
+        //     'username' => 'Depinazul',
+        //     'phone' => '00011112233',
+        //     'email' => 'emilli@gmail.com',
+        //     'password' => Hash::make('holamundo')
+        // ],
+        [
+            'name' => 'Luis Lopez Rios',
+            'username' => 'Esteban',
+            'phone' => '951-321-7674',
+            'email' => 'esteban123@gmail.com',
+            'password' => Hash::make('esteban')
+        ])
+        ->assignRole('N6:17A');
     }
 }

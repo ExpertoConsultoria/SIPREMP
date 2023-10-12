@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Livewire\N17A\Solicitudes;
+namespace App\Livewire\N6\BienesServ;
 
 use Livewire\Component;
 
-use Livewire\Redirector;
 use App\Models\Memorandum;
 use App\Models\MemorandumList;
 
-use Illuminate\Contracts\Support\Renderable;
-
-class SolicitudStatus extends Component
+class Status extends Component
 {
-
     public $details_of_folio = '';
     public $memorandum_details;
     public $memoList = [];

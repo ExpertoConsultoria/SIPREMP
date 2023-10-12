@@ -14,7 +14,7 @@
 
     <div class="grid justify-end">
         <p class="px-3 text-base">
-            {{ Auth::user()->name }}
+            {{ Auth::user() -> roles[0] -> name }}
         </p>
     </div>
 

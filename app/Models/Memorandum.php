@@ -41,4 +41,11 @@ class Memorandum extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function solicitante() {
+        return $this -> belongsTo(User::class, 'solicitante_id');
+    }
+    public function memorandumList() {
+        return $this -> belongsTo(User::class, 'im_folio');
+    }
 }

@@ -11,6 +11,10 @@ use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
 use App\Livewire\N17A\Solicitudes\SolicitudList;
 use App\Livewire\N17A\Solicitudes\SolicitudStatus;
 
+use App\Livewire\N6\BienesServ\SolicitudesCreate;
+use App\Livewire\N6\BienesServ\borradores;
+use App\Livewire\N6\BienesServ\lista;
+use App\Livewire\N6\BienesServ\status;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +65,11 @@ Route::middleware([
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudCreate::class)->name('solicitudes.edit');
 
+    //  Solicitudes del nivel N617A
+    Route::get('/solicitud-bienes', SolicitudesCreate::class)->name('solicitudBienes.create');
+    Route::get('/solicitudes-bienes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudBienes.edit');
+    Route::get('/borradores-solicitudes', borradores::class)->name('solicitudBienes.borradores');
+    Route::get('/lista-solicitudes', lista::class)->name('solicitudBienes.list');
+    Route::get('/solicitud-bienes/{details_of_folio}', status::class)->name('solicitudBienes.show');
 
 });
