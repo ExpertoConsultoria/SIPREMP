@@ -4,6 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
+                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
                     {{ __('Estatus | Solicitud | #') }} {{ $details_of_folio }}
                 </h2>
             </div>

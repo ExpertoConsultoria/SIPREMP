@@ -52,4 +52,8 @@ class Empresa extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
+    public function compraMenor(): BelongsTo
+    {
+        return $this->belongsTo(CompraMenor::class);
+    }
 }

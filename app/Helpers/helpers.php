@@ -2,10 +2,11 @@
 // @Depinazul
 namespace App\Helpers;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
-class Helper {
+class Helper
+{
 
     // We use this Helper to format the IDs of our documents.
 
@@ -66,12 +67,16 @@ class Helper {
         return $folio;
     }
 
-
+    public static function GetUserArea()
+    {
+        $area = Auth::user()?->org4empleado?->org3Puesto?->org2Area ? Auth::user()?->org4empleado?->org3Puesto?->org2Area : 'Sin Cargo';
+        return $area;
+    }
 
     public static function FakeFolioGenerator($length, $prefix){
         $random_folio = Str::random($length);
-        $random_folio = strtoupper($random_folio);;
-        return '&'.$prefix.'-'.$random_folio;
+        $random_folio = strtoupper($random_folio);
+        return '&' . $prefix . '-' . $random_folio;
     }
 
     public static function GetUserSede(){
@@ -85,5 +90,3 @@ class Helper {
     }
 
 }
-
-?>

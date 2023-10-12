@@ -88,8 +88,7 @@
                             <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
                                 <i class="fa fa-fw fa-edit"></i>
                             </x-button-colors>
-                            <x-button-colors color="red" class="ml-2"
-                                wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
+                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
                                 <i class="fas fa-trash"></i>
                             </x-button-colors>
                         </td>
@@ -131,5 +130,7 @@
                 });
             });
     </script>
+
+</div>
 
 </div>

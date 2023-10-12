@@ -35,7 +35,7 @@
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                     dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
@@ -111,12 +111,9 @@
                         <td class="px-4 py-2"> {{ $memo->memo_asunto }} </td>
                         <td class="px-4 py-2"> {{ $memo->memo_creation_status }} </td>
                         <td class="px-4 py-2 text-center">
-                            <x-button-colors color="indigo" class="ml-2" wire:click="getDetails({{ $memo }})">
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $memo }})">
                                 <i class="fas fa-eye"></i>
                             </x-button-colors>
-                            <!-- <x-button-colors color="green" wire:click="goToEdit({{ $memo }})">
-                                <i class="fa fa-fw fa-edit"></i>
-                            </x-button-colors> -->
                         </td>
                     </tr>
                     @endforeach

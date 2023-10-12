@@ -26,10 +26,10 @@ return new class extends Migration
 
             $table->string('cm_asunto');
 
-            $table->text('mir_id_fin');
-            $table->text('mir_id_proposito');
-            $table->text('mir_id_componente');
-            $table->text('mir_id_actividad');
+            $table->text('mir_id_fin')->nullable();
+            $table->text('mir_id_proposito')->nullable();
+            $table->text('mir_id_componente')->nullable();
+            $table->text('mir_id_actividad')->nullable();
 
             $table->text('cm_subtotal');
             $table->text('cm_iva');
@@ -38,7 +38,17 @@ return new class extends Migration
             // Borrador ||
             $table->string('cm_creation_status');
 
-            // $table->text('token_solicitud')->nullable();
+            // XML
+            // $table->foreignId('factura_cm_id')->nullable()->constrained()->restrictOnDelete();
+            $table->unsignedBigInteger('factura_cm_id')->nullable();
+            $table->foreign('factura_cm_id')
+                ->references('id')->on('facturas_cm')
+                ->onDelete('cascade');
+
+
+            $table->foreignId('empresa_id')->nullable()->constrained()->restrictOnDelete();
+
+            // Tokens
             $table->text('token_aceptacion')->nullable();
 
 

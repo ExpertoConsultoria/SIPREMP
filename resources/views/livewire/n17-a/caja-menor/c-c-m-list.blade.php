@@ -21,34 +21,54 @@
         </div>
     </x-slot>
 
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
+    <div class="max-w-screen-xl p-4 mx-auto sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 gap-6 py-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-7 xl:grid-cols-7 ">
+
             <select wire:model.live="mostrar"
-                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="10">Mostrar: 10</option>
                 <option value="25">Mostrar: 25</option>
                 <option value="50">Mostrar: 50</option>
             </select>
 
-            <div class="relative w-full">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
-                </div>
+            <select wire:model.live="ejercicio"
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected disabled value="">Ejercicio</option>
+                @foreach ($ejercicios as $ejercicio)
+                    <option>{{ $ejercicio }}</option>
+                @endforeach
+            </select>
+            @error('ejercicio') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <input wire:model.live="fecha_inicio" type="date" name="fecha_inicio"
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @error('fecha_inicio') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
 
-                <button type="button" wire:click="$set('buscar','')"
-                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
-                    <i class="fa-solid fa-delete-left"></i>
-                </button>
+            <input wire:model.live="fecha_fin" type="date" name="fecha_fin"
+                class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @error('fecha_fin') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+
+            <select wire:model.live="partida_presupuestal"
+                class="block col-span-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="" selected disabled>Partida Presupuestal</option>
+                @foreach ($partidas_presupuestales as $partida_presupuestal)
+                    <option value="{{ $partida_presupuestal->CvePptal }}">{{ $partida_presupuestal->PartidaEspecifica }}</option>
+                @endforeach
+            </select>
+            @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+
+            <div class="lg:col-span-2">
+                <form wire:submit.prevent="forgeReport" autocomplete="off">
+                    <button type="sumit" wire:loading.attr="disabled" @if(count($compras_enviadas)== 0) disabled @endif
+                        class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                        GENERAR REPORTE
+                    </button>
+                </form>
             </div>
-
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if (count($compras))
+            @if (count($compras_enviadas))
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -104,27 +124,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($compras as $compra)
+                    @foreach ($compras_enviadas as $compra)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-4 py-2"> {{ $compra->cm_folio }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_fecha }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_asunto }} </td>
                         <td class="px-4 py-2"> {{ $compra->cm_creation_status }} </td>
-                        <td class="px-4 py-2 text-center">
-                            <x-button-colors color="indigo" class="ml-2" wire:click="getDetails({{ $compra }})">
+                        <td class="text-center">
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $compra }})">
                                 <i class="fas fa-eye"></i>
                             </x-button-colors>
-                            <x-button-colors color="green" wire:click="goToEdit({{ $compra }})">
-                                <i class="fa fa-fw fa-edit"></i>
+                            <x-button-colors color="yellow" wire:click="printData({{ $compra }})">
+                                <i class="fa fa-print"></i>
                             </x-button-colors>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            @if ($compras->hasPages())
+            @if ($compras_enviadas?->hasPages())
             <div class="px-6 py-3">
-                {{ $compras->links() }}
+                {{ $compras_enviadas?->links() }}
             </div>
             @endif
             @else
@@ -137,3 +157,4 @@
         </div>
     </div>
 </div>
+

@@ -28,7 +28,8 @@ class UserSeeder extends Seeder
             'phone' => '951-321-7674',
             'email' => 'esteban123@gmail.com',
             'password' => Hash::make('esteban')
-        ])
+        ]
+        )
         ->assignRole('N6:17A');
     }
 }

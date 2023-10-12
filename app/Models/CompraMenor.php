@@ -26,7 +26,10 @@ class CompraMenor extends Model
         'cm_total',
         'token_solicitud',
         'token_aceptacion',
-        'cm_creation_status'
+        'cm_creation_status',
+
+        'factura_cm_id',
+        'empresa_id',
     ];
 
     protected $casts = [
@@ -44,4 +47,13 @@ class CompraMenor extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function empresa(): HasOne
+    {
+        return $this->hasOne(Empresa::class, 'id', 'empresa_id');
+    }
+
+    public function factura() {
+        return $this->hasOne(FacturaCM::class, 'id', 'factura_cm_id');
+    }
 }

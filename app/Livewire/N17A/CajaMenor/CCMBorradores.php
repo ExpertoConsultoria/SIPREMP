@@ -4,9 +4,10 @@ namespace App\Livewire\N17A\CajaMenor;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Crypt;
 
+use File;
+
+use App\Models\FacturaCM;
 use App\Models\CompraMenor;
 use App\Models\CompraMenorList;
 
@@ -62,14 +63,28 @@ class CCMBorradores extends Component
         $compra_menor = CompraMenor::findOrFail($id);
         $allItems = CompraMenorList::where('icm_folio',$compra_menor->cm_folio)->get();
 
+        if($compra_menor->factura_cm_id != null){
+            $factura = FacturaCM::find($compra_menor->factura_cm_id);
+
+            File::delete(public_path($factura->fcm_xml_ruta));
+
+            if($factura->fcm_pdf_ruta != null){
+                File::delete(public_path($factura->fcm_pdf_ruta));
+            }
+
+            $factura->delete();
+        }
+
+
         foreach ($allItems as $item) {
             $item->delete();
         }
         $compra_menor->delete();
-        $this->dispatch('simpleAlert',
-            title: '¡Solicitud Eliminada!',
-            message: 'El borrador ha sido elimnado',
-            icon: 'success'
+
+        $this->dispatch('alertCRUD',
+            '¡Solicitud Eliminada!',
+            'El borrador ha sido elimnado',
+            'success'
         );
     }
 

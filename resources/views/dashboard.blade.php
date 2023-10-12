@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
                     {{ __('Dashboard') }}
                 </h2>
             </div>
@@ -149,10 +149,10 @@
                         <div class="grid justify-start">
                             <x-user-icon class="block w-auto h-9" />
                         </div>
-                        <div class="grid justify-start">
+                        <div class="grid justify-center">
                             <x-building-icon class="block w-auto h-9" />
                         </div>
-                        <div class="grid justify-start">
+                        <div class="grid justify-end">
                             <x-localization-icon class="block w-auto h-9" />
                         </div>
 
@@ -160,11 +160,10 @@
                 </div>
 
                 <div class="grid justify-center">
-                    <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                    <div class="grid grid-cols-1 gap-5 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-3">
 
-                        <div
-                            class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                            <a href="{{ route('cajamenor') }}" class="grid text-center justify-items-center">
+                        <div class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                            <a href="{{ route('cajamenor') }}" class="p-5 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid text-center justify-items-center">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="83" height="83" viewBox="0 0 83 83"
                                     fill="none">
@@ -288,11 +287,10 @@
                                 <p class="mt-2">Solcitudes de bienes/servicios</p>
                             </a>
                         </div>
-
                     </div>
                 </div>
-
             </div>
+            
         </div>
     </div>
 
