@@ -1,10 +1,10 @@
-<div wire:init="loadDrafts">
+<div wire:init="loadReports">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Compras en Borrador | Caja menor') }}
+                    {{ __('Reportes de Compra | Caja menor') }}
                 </h2>
             </div>
 
@@ -48,13 +48,13 @@
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if (count($drafts))
+            @if (count($reports))
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
-                            Fecha
-                            @if ($ordenar == 'cm_fecha')
+                        <th wire:click="ordenaPor('id')" class="px-4 py-2 cursor-pointer">
+                            #ID
+                            @if ($ordenar == 'id')
                             @if ($direccion == 'asc')
                             <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
                             @else
@@ -64,9 +64,45 @@
                             <i class="float-right mt-1 fas fa-sort"></i>
                             @endif
                         </th>
-                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
-                            Asunto
-                            @if ($ordenar == 'cm_asunto')
+                        <th wire:click="ordenaPor('rcm_ejercicio')" class="px-4 py-2 cursor-pointer">
+                            Ejercicio
+                            @if ($ordenar == 'rcm_ejercicio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_inicio')" class="px-4 py-2 cursor-pointer">
+                            Desde
+                            @if ($ordenar == 'rcm_inicio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_fin')" class="px-4 py-2 cursor-pointer">
+                            Hasta
+                            @if ($ordenar == 'rcm_fin')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_partida_presupuestal')" class="px-4 py-2 cursor-pointer">
+                            Partida Presupuestal
+                            @if ($ordenar == 'rcm_partida_presupuestal')
                             @if ($direccion == 'asc')
                             <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
                             @else
@@ -80,15 +116,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($drafts as $draft)
+                    @foreach ($reports as $report)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-4 py-2"> {{ $draft->cm_fecha }} </td>
-                        <td class="px-4 py-2"> {{ $draft->cm_asunto }} </td>
+                        <td class="px-4 py-2"> {{ $report->id }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_ejercicio }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_inicio }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_fin }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_partida_presupuestal }} </td>
                         <td class="text-center">
-                            <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
-                                <i class="fa fa-fw fa-edit"></i>
+                            <x-button-colors color="indigo" wire:click="reportDetails({{ $report }})">
+                                <i class="fas fa-eye"></i>
                             </x-button-colors>
-                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
+                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $report->id }} })">
                                 <i class="fas fa-trash"></i>
                             </x-button-colors>
                         </td>
@@ -96,9 +135,9 @@
                     @endforeach
                 </tbody>
             </table>
-            @if ($drafts->hasPages())
+            @if ($reports->hasPages())
             <div class="px-6 py-3">
-                {{ $drafts->links() }}
+                {{ $reports->links() }}
             </div>
             @endif
             @else
@@ -124,7 +163,7 @@
                         confirmButtonText: '¡Si, Eliminalo!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            Livewire.dispatch('deleteDraft', {id: event.id});
+                            Livewire.dispatch('deleteReport', {id: event.id});
                         }
                     })
                 });

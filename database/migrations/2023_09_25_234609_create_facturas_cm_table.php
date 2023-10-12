@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('fcm_nombre');
             $table->text('fcm_extension');
-            $table->string('fcm_ruta');
+            $table->string('fcm_xml_ruta');
+            $table->string('fcm_pdf_ruta')->nullable();
 
             $table->timestamps();
         });

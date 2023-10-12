@@ -1,18 +1,7 @@
-@REM Ante Errores, ver
-@REM https://platzi.com/tutoriales/1272-sql-mysql/2256-como-arreglar-mysql-no-se-reconoce-como-un-comando-interno-o-externo-programa-o-archivo-por-lotes-ejecutable/
-
-@REM/ / / Entramos al administrador de BD
-mysql -u root -p -h  127.0.0.1
-
-@REM/ / / Pedira la contraseña, es la contraseña con que ustedes ingresan a sus bases de datos; si no existe solo den Enter
-
-@REM/ / / Mostramos todas nuestras BD
 show databases;
 
-@REM/ / / Usamos la BD creada para el proyecto
 use sipremp;
 
-@REM / / / Añadimos las MIR Tables
 CREATE TABLE `plan1_fins` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `Ejercicio` mediumint(9) NOT NULL,
@@ -57,7 +46,6 @@ CREATE TABLE `plan4_actividads` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-@REM Índices para tablas volcadas
 
 ALTER TABLE `plan1_fins`
   ADD PRIMARY KEY (`id`),
@@ -82,7 +70,6 @@ ALTER TABLE `plan4_actividads`
   ADD KEY `plan4_actividads_plan1_fin_id_foreign` (`plan1_fin_id`),
   ADD KEY `plan4_actividads_user_id_foreign` (`user_id`);
 
-@REM AUTO_INCREMENT de las tablas volcadas
 
 ALTER TABLE `plan1_fins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
@@ -96,7 +83,6 @@ ALTER TABLE `plan3_componentes`
 ALTER TABLE `plan4_actividads`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
-@REM Restricciones para tablas volcadas
 
 ALTER TABLE `plan1_fins`
   ADD CONSTRAINT `plan1_fins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
@@ -114,10 +100,6 @@ ALTER TABLE `plan4_actividads`
   ADD CONSTRAINT `plan4_actividads_ibfk_2` FOREIGN KEY (`plan2_proposito_id`) REFERENCES `plan2_propositos` (`id`),
   ADD CONSTRAINT `plan4_actividads_ibfk_3` FOREIGN KEY (`plan3_componente_id`) REFERENCES `plan3_componentes` (`id`);
 
-@REM / / / Agregamos la Informacion de las tablas
-@REM Empresas, Org1, Org2, Org3, Org4, Ppto1, Ppto2, Ppto3, Ppto4, PptoEgresos
-
-@REM Empresas
 INSERT INTO `empresas` (`id`, `RFC`, `RazonSocial`, `Persona`, `Nombre`, `Telefono`, `Regimen`, `Direccion`, `CodigoPostal`, `DatosContacto`, `DatosBanco`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'MPE3302119UA', 'MONTE DE PIEDAD DEL ESTADO DE OAXACA', 'M', 'MONTE DE PIEDAD DEL ESTADO DE OAXACA', NULL, 0, 'Avenida Morelos 703, Col. Centro, Oaxaca. CP. 68000.', 68000, NULL, NULL, 1, '2023-06-26 15:33:13', '2023-07-27 19:15:57'),
 (2, 'BBA830831LJ2', 'BBVA MEXICO, S.A., INSTITUCION DE BANCA MULTIPLE, GRUPO FINANCIERO BBVA MEXICO.', 'M', NULL, NULL, 601, NULL, 6600, NULL, NULL, 1, '2023-06-26 15:33:13', '2023-06-26 15:33:13'),
@@ -582,7 +564,6 @@ INSERT INTO `empresas` (`id`, `RFC`, `RazonSocial`, `Persona`, `Nombre`, `Telefo
 (470, 'GANG791029', 'NARCISO ARTURO GARCIA GUZMAN', 'M', 'NARCISO ARTURO GARCIA GUZMAN', NULL, 0, NULL, 68000, NULL, NULL, 1, '2023-08-15 12:16:15', '2023-08-15 12:16:15'),
 (471, 'RAGE651029BK3', 'GEORGINA REFUGIO RAMOS', 'M', NULL, NULL, 612, NULL, 68000, NULL, NULL, 1, '2023-08-22 14:13:07', '2023-08-22 14:13:07');
 
-@REM ORG1 Sedes
 
 INSERT INTO `org1_sedes` (`id`, `Clave`, `SedeNombre`, `Serie`, `Region`, `Direccion`, `Telefono`, `Horario`, `Activa`, `id_gerencia`, `created_at`, `updated_at`) VALUES
 (1, '000', 'Matriz', 'A', 'Valles Centrales', 'Avenida Morelos 703, Col. Centro, Oaxaca. CP. 68000.', '9515016267', 'Lunes a Viernes 8:30 a 16:00 | Sábados 9:00 a 13:00', 1, NULL, '2023-03-22 09:54:36', '2023-03-28 10:07:38'),
@@ -610,7 +591,6 @@ INSERT INTO `org1_sedes` (`id`, `Clave`, `SedeNombre`, `Serie`, `Region`, `Direc
 (23, '023', 'Morelos', 'Y', 'Valles Centrales', 'Avenida Morelos 703, Col. Centro, Oaxaca. CP. 68000.', '9515016267', 'Lunes a Viernes 8:30 a 16:00 | Sábados 9:00 a 13:00', 1, NULL, '2023-04-01 05:04:07', '2023-04-01 05:04:07'),
 (24, '024', 'GERENCIA MATRIZ', 'Z', 'Valles Centrales', 'Avenida Morelos 703, Col. Centro, Oaxaca. CP. 68000.', '9515016267', 'Lunes a Viernes 8:30 a 16:00 | Sábados 9:00 a 13:00', 1, NULL, '2023-04-01 05:04:58', '2023-04-01 05:04:58');
 
-@REM ORG2 Areas
 
 INSERT INTO `org2_areas` (`id`, `AreaNombre`, `strNivel`, `SubAreas`, `SubAreasAsignadas`, `Activa`, `parent_id`, `org1_sede_id`, `created_at`, `updated_at`) VALUES
 (1, 'Consejo de Administración', '25A', 1, 1, 1, NULL, NULL, '2023-06-26 18:26:32', '2023-06-26 14:39:38'),
@@ -658,7 +638,6 @@ INSERT INTO `org2_areas` (`id`, `AreaNombre`, `strNivel`, `SubAreas`, `SubAreasA
 (44, 'Secretario Particular', '16B', 0, 0, 1, NULL, NULL, '2023-06-26 18:26:32', '2023-06-26 18:26:32'),
 (45, 'Asesor', '16B', 0, 0, 1, 2, 1, '2023-06-26 18:26:32', '2023-08-30 12:53:49');
 
-@REM ORG3 Puestos
 
 INSERT INTO `org3_puestos` (`id`, `Puesto`, `NUP`, `ClavePuesto`, `TipoPlaza`, `CorreoInstitucional`, `Telefono`, `Subordinados`, `SuborAsignados`, `Vacante`, `Activo`, `parent_id`, `org2_area_id`, `created_at`, `updated_at`) VALUES
 (1, 'Director General', NULL, '22A', 'MMyS', NULL, NULL, 3, 1, 1, 1, NULL, 2, '2023-06-26 18:26:49', '2023-06-26 14:45:55'),
@@ -706,58 +685,7 @@ INSERT INTO `org3_puestos` (`id`, `Puesto`, `NUP`, `ClavePuesto`, `TipoPlaza`, `
 (43, 'Secretario Particular', NULL, '16B', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
 (44, 'Asesor', NULL, '16B', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49');
 
-@REM ORG4 Empleados
-
-INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES
-(1, 'VECD', NULL, NULL, NULL, 'DAVID', 'VELÁSQUEZ', 'CRUZ', 'davidantoniovc@gmail.com', NULL, '9511185029', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-12-03', NULL, NULL, 1, 45, NULL, '2023-08-07 12:40:38'),
-(2, 'JUJO950317APA', 'JUJO950317HOCLLM07', 1728, NULL, 'OMAR', 'JULIAN', 'JULIAN', 'direccion@montedepiedad.gob.mx', NULL, '5016267 Ext.: 135', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-12-03', NULL, NULL, 18, 1, NULL, '2023-08-11 15:12:38'),
-(3, 'RULD660103Q86', 'RULD660103MQTZNR15', 1751, NULL, 'DORA LIGIA', 'RUÍZ', 'LEÓN', 'dir-administrativa@montedepiedad.gob.mx', NULL, '5016267 Ext.: 133', NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-06-01', NULL, NULL, NULL, NULL, NULL, '2023-08-31 09:51:42'),
-(4, 'MAEF760906HY3', 'MAEF760906HDFRNS00', 1743, NULL, 'FAUSTO ADALBERTO', 'MARTÍNEZ', 'ENRÍQUEZ', 'usucursales@montedepiedad.gob.mx', NULL, '5016267 Ext.: 105', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-08-11 14:14:10'),
-(5, 'PEBR820910SF6', 'PEBR820910HGTRSC01', 1744, NULL, 'RICARDO', 'PEREZ', 'BASILIO', 'controlinterno@montedepiedad.gob.mx', NULL, '5016267 Ext.: 116', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-16', NULL, NULL, NULL, NULL, NULL, '2023-08-30 14:05:33'),
-(6, 'CUZM880209S71', 'CUZM880209HOCRRG09', 1736, NULL, 'MIGUEL RICARDO', 'CRUZ', 'ZARATE', 'utecnica-jefatura@montedepiedad.gob.mx', NULL, '5016267 Ext.: 110', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:40:49'),
-(7, 'MOCJ781008G94', 'MOCJ781008HOCRRQ00', 1735, NULL, 'JOAQUIN', 'MORA', 'CRUZ', 'planeacion@montedepiedad.gob.mx', NULL, '5016267 Ext.: 131', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:41:16'),
-(8, 'RALI841027QU1', 'RALI841027HOCMPR00', 1737, NULL, 'IRVIN', 'RAMOS', 'LOPEZ', 'tesoreria@montedepiedad.gob.mx', NULL, '5016267 Ext.: 122', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-08-11 13:57:09'),
-(9, 'VAJR740711J55', 'VAJR740711MOCLMY03', 14605, NULL, 'REYNA', 'VALDIVIEZO', 'JIMENEZ', 'juchitan13@montedepiedad.gob.mx', NULL, '7113289 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2009-01-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:45:58'),
-(10, 'CACF720909AF5', 'CACF720909HDFNRR05', 1742, NULL, 'FRANCISCO DE JESUS', 'CANCINO', 'CARRANZA', 'matriz@montedepiedad.gob.mx', NULL, '5016267 Ext.: 118', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:46:27'),
-(11, 'MARL781213RD2', 'MARL781213MOCLMC06', 1745, NULL, 'LUCIA', 'MALDONADO ', 'RAMOS ', 'n_d@montedepiedad.gob.mx', NULL, '7131567 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:47:07'),
-(12, 'MAHA940425EN9', 'MAHA940425MOCRRD01', 12612, NULL, 'AIDEE', 'MARTINEZ', 'HERNANDEZ', 'moduloazul@montedepiedad.gob.mx', NULL, '5187204 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:47:37'),
-(13, 'SACP9209021S2', 'SACP920902HOCNRD08', 14606, NULL, 'PEDRO ANTOIO', 'SANCHEZ', 'CRUZ', 'juchitan14@montedepiedad.gob.mx', NULL, '2810862 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:49:17'),
-(14, 'MEPS830225CW6', 'MEPS830225MTCNRN03', 15602, NULL, 'SONIA', 'MENDEZ', 'PEREZ', 'matiasromero@montedepiedad.gob.mx', NULL, '7220972 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:50:16'),
-(15, 'VIOD800824UM0', 'VIOD800824HOCLRM01', 1746, NULL, 'DAMIAN ENRIQUE', 'VILLALOBOS', 'ORTIZ', 'planeacion@montedepiedad.gob.mx', NULL, '5016267 Ext.: 132', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:50:42'),
-(16, 'LURA811115BKA', 'LURA811115MDFNMN05', 1731, NULL, 'ANA LAURA', 'LUNA', 'RAMIREZ', 'juridico-jefatura@montedepiedad.gob.mx', NULL, '5016267 Ext.: 124', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-12-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 12:51:03'),
-(17, NULL, NULL, NULL, NULL, 'vacante', 'vacante', '', 'sgrales@montedepiedad.gob.mx', NULL, '5016267 Ext.: 113', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-12-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:22:53'),
-(18, 'LUEJ801007F70', 'LUEJ801007HCSSSV08', 16607, NULL, 'JAVIER', 'LUIS', 'ESQUINCA', 'reforma@montedepiedad.gob.mx', NULL, '5025219 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:08:16'),
-(19, 'PALM991205BS7', 'PALM991205MOCZPR03', 17612, NULL, 'MARLENE', 'DE LA PAZ', 'LOPEZ', 'sanblasatempa@montedepiedad.gob.mx', NULL, '7152720 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:09:59'),
-(20, 'CAAV741207GE0', 'CAAV741207HDFRYC04', 12611, NULL, 'IGNACIO', 'CARRASCO', 'AYALA', 'cdjudicial@montedepiedad.gob.mx', NULL, '5016900 Ext.: 27024', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:10:42'),
-(21, 'BOBS790224BB7', 'BOBS790224MDFLLR03', 1157, NULL, 'SARA', 'BOLAÑOS', 'BOLAÑOS', 'rhumanos@montedepiedad.gob.mx', NULL, '5016267 Ext.: 109', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-11-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:11:08'),
-(22, 'OIAM8504274R9', 'OIAM850427MOCRGR09', 20604, NULL, 'MARIBEL', 'ORTIZ', 'AGUILAR', 'tlaxiaco@montedepiedad.gob.mx', NULL, '5521173 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:11:37'),
-(23, 'MAGE781120512', 'MAGE781120HOCRND09', 21611, NULL, 'EDMUNDO', 'MARTINEZ', 'GONZALEZ', 'tlacolula@montedepiedad.gob.mx', NULL, '5620309 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:12:02'),
-(24, 'SIMS760720K99', 'SIMS760720MOCLXN09', 19606, NULL, 'SONIA', 'SILVA ', 'MUÑOS ', 'pochutla@montedepiedad.gob.mx', NULL, '5840370 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2014-09-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:12:36'),
-(25, 'EUAA911106FL2', 'EUAA911106MVZSLR06', 1741, NULL, 'ARACELI', 'EUSEBIO', 'ALEJANDRO', 'donaciones@montedepiedad.gob.mx', NULL, '5016267 Ext.: 107', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-08-11 14:13:44'),
-(26, 'LOHC821031EH8', 'LOHC821031HOCPRR07', 1749, NULL, 'CARLOS ALFONSO', 'LOPEZ', 'HERNANDEZ', 'informatica@montedepiedad.gob.mx', NULL, '5016267 Ext.: 136', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-16', NULL, NULL, NULL, NULL, NULL, '2023-08-21 20:25:07'),
-(27, 'VACA871207BN1', 'VXCA871207HOCLRL01', 1740, NULL, 'ALBERTO', 'VALLEJO', 'CRUZ', 'contabilidad@montedepiedad.gob.mx', NULL, '5016267 Ext.: 117', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:13:59'),
-(28, 'MEAM700224LN7', 'MEAM700224MDFDLN05', 1672, NULL, 'MONICA', 'MEDINA', 'ALCAYDE', 'archivogeneral@montedepiedad.gob.mx', NULL, '5016267 Ext.: 121', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2015-09-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:14:20'),
-(29, 'BARC790517E55', 'BARC790517HOCLSR03', 1739, NULL, 'CARLOS ALBERTO', 'BALDIVIEZO', 'ROSAS', 'controlpresupuestal@montedepiedad.gob.mx', NULL, '5016267 Ext.: 126', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-08-24 11:19:39'),
-(30, 'LOLC821118L40', 'LOLC821118MOCPGL08', 1748, NULL, 'CLAUDIA ELENA', 'LOPEZ', 'LAGUNAS', 'transparencia@montedepiedad.gob.mx', NULL, '5016267 Ext.: 124', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:15:08'),
-(31, 'CAVA950305BU8', 'CAVA950305MOCHLM05', 1747, NULL, 'AMARANTA THELMA', 'CHAVEZ', 'VILLAVICENCIO', 'mercadotecnia@montedepiedad.gob.mx', NULL, '5016267 Ext.: 132', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:15:37'),
-(32, 'VERG850614L2A', 'VERG850614HOCLMV07', 1738, NULL, 'GEOVANNY', 'VELASCO', 'RAMOS', 'tesoreria@montedepiedad.gob.mx', NULL, '5016267 Ext.: 126', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:16:03'),
-(33, 'IULP890510PQ0', 'IULP890510MPLHPL03', 5612, NULL, 'PAOLA BERENICE', 'IHUITL ', 'LOPEZ ', 'puertoescondido@montedepiedad.gob.mx', NULL, '5016267 Ext.: 116', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:16:45'),
-(34, 'HERA780119NC3', 'HERA780119MOCRSM09', 23604, NULL, 'AMADITA', 'HERRERA', 'RIOS', 'ucreditos@montedepiedad.gob.mx', NULL, '5142495 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:17:08'),
-(35, 'MAAO8307121V6', 'MAAO830712HOCTCR08', 1610, NULL, 'ORLANDO', 'MATUS', 'ACEVEDO', 'tehuantepec@montedepiedad.gob.mx', NULL, '7150082 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:17:26'),
-(36, 'LEMA760416IY7', 'LEMA760416HPLNRL04', 2612, NULL, 'ALVARO', 'LEON', 'MARQUEZ', 'abastos@montedepiedad.gob.mx', NULL, '5165071 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:17:50'),
-(37, 'CAEC820916RV0', 'CAEC820916MOCSSN06', 3607, NULL, 'CONSUELO MONICA', 'CASTELLANOS', 'ESCOBAR', 'huajuapan@montedepiedad.gob.mx', NULL, '5321624 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:18:16'),
-(38, 'HETF910615TM2', 'HETF910615HDFRRR08', 4606, NULL, 'FRANCISCO', 'HERRERA ', 'TORRES ', 'tuxtepec@montedepiedad.gob.mx', NULL, '8754055 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:18:36'),
-(39, 'GAHA971029SI7', 'GAHA971029SI7', 6503, NULL, 'ALEJANDRA', 'GARCIA', ' HERNANDEZ ', 'xococotlan@montedepiedad.gob.mx', NULL, '5172850 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:18:56'),
-(40, 'FEOI9307121T4', 'FEOI930712MOCRRN08', 7611, NULL, 'INGRID HEIDI', 'FERMIN', 'ORTEGA', 'salinacruz@montedepiedad.gob.mx', NULL, '7203026 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-02-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:19:11'),
-(41, 'AACM821214ET4', 'AACM821214MOCLLG00', 8613, NULL, 'MAGDA LILIANA', 'ALTAMIRANO', 'CALDERON', '20denoviembre@montedepiedad.gob.mx', NULL, '5144059 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-03-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:19:35'),
-(42, NULL, NULL, NULL, NULL, '', '', '', 'lomabonita@montedepiedad.gob.mx', NULL, '8720003 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, NULL),
-(43, 'FEBR740825N57', 'FEBR740825HOCRXY09', 10608, NULL, 'REYNALDO EDGAR', 'FERNANDEZ', 'BAÑOS', 'pinotepa@montedepiedad.gob.mx', NULL, '5432702 Ext.: 0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2019-07-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:20:08'),
-(44, 'MEGM890124KX1', 'MEGM890124HOCRRR05', 1734, NULL, 'MARCELINO ILDEFONSO', 'MERINO', 'GARCIA', 'srioparticular@montedepiedad.gob.mx', NULL, '5016267 Ext.: 129', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-01-01', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:20:31'),
-(45, 'CEOR640919F30', 'CEOR640919HOCRRF00', 1750, NULL, 'RAFAEL EDELMIRO', 'CERVANTES', 'ORTEGA', 'asesor@montedepiedad.gob.mx', NULL, '5016267 Ext.: 133', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-16', NULL, NULL, NULL, NULL, NULL, '2023-07-13 13:20:47');
-
-INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES (NULL, 'EUAA911106FL2', 'EUAA911106MVZSLR06', '1741', NULL, 'Emili', 'Rodríguez', 'Reyes', 'emilli@gmail.com', '9514590568', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2023-10-09', '2023-10-31', NULL, '1', NULL, NULL, NULL);
-
-@REM PTTO1 Capitulos
+INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES (NULL, 'EUAA911106FL2', 'EUAA911106MVZSLR06', '1741', NULL, 'Emili', 'Rodríguez', 'Reyes', 'emilli@gmail.com', '9514590568', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2023-10-09', '2023-10-31', NULL, '1', '1', NULL, NULL);
 
 INSERT INTO `ppto1_capitulos` (`id`, `Capitulo`, `CapituloNombre`, `created_at`, `updated_at`) VALUES
 (1, 1000, 'SERVICIOS PERSONALES', '2023-03-22 10:23:04', '2023-03-22 10:23:04'),
@@ -770,7 +698,6 @@ INSERT INTO `ppto1_capitulos` (`id`, `Capitulo`, `CapituloNombre`, `created_at`,
 (8, 8000, 'PARTICIPACIONES Y APORTACIONES', '2023-03-22 10:23:04', '2023-03-22 10:23:04'),
 (9, 9000, 'DEUDA PUBLICA', '2023-03-22 10:23:04', '2023-03-22 10:23:04');
 
-@REM PTTO2 Conceptos
 
 INSERT INTO `ppto2_conceptos` (`id`, `Concepto`, `ConceptoNombre`, `created_at`, `updated_at`, `ppto1_capitulo_id`) VALUES
 (1, 1100, 'SUELDO BASE AL PERSONAL DE CARACTER PERMANENTE / REMUNERACIONES AL PERSONAL DE CARACTER  PERMANENTE', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 1),
@@ -836,8 +763,6 @@ INSERT INTO `ppto2_conceptos` (`id`, `Concepto`, `ConceptoNombre`, `created_at`,
 (61, 9500, 'COSTO POR COBERTURAS', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 9),
 (62, 9600, 'APOYOS FINANCIEROS', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 9),
 (63, 9900, 'ADEUDOS DE EJERCICIOS FISCALES ANTERIORES (ADEFAS)', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 9);
-
-@REM PTTO3 Partes Genericas
 
 INSERT INTO `ppto3_part_genericas` (`id`, `PartidaGenerica`, `PartidaGenericaNombre`, `created_at`, `updated_at`, `ppto2_concepto_id`) VALUES
 (1, 111, 'DIETAS', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 1),
@@ -1188,7 +1113,6 @@ INSERT INTO `ppto3_part_genericas` (`id`, `PartidaGenerica`, `PartidaGenericaNom
 (346, 991, 'ADEFAS', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 63),
 (347, 320, 'SERVICIOS DE INTERNET', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 17);
 
-@REM PTTO4
 
 INSERT INTO `ppto4_part_especificas` (`id`, `PartidaEspecifica`, `PartidaEspecificaNombre`, `PartidaEspecificaDescripcion`, `created_at`, `updated_at`, `ppto3_part_generica_id`) VALUES
 (1, 1, 'DIETAS (INHABILITADA)', 'ASIGNACIONES DESTINADAS A CUBRIR REMUNERACIONES A LOS MIEMBROS DEL HONORABLE CONGRESO DEL ESTADO E INSTITUTO ESTATAL ELECTORAL Y DE PARTICIPACION CIUDADANA.', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 1),
@@ -3352,7 +3276,6 @@ INSERT INTO `ppto4_part_especificas` (`id`, `PartidaEspecifica`, `PartidaEspecif
 (2143, 4, 'INCENTIVO PERSONAL DE CONRATO', 'AGREGADO POR EL CATALOGO DE RH.  ESTA EN OTRA PARTIDA ESPECIFICA EN CONAC', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 28),
 (2144, 5, 'ESTIMULO PERSONAL DE CONFIANZA', 'AGREGADO POR EL CATALOGO DE RH.  ESTA EN OTRA PARTIDA ESPECIFICA EN CONAC', '2023-03-22 10:23:04', '2023-03-22 10:23:04', 28);
 
-@REM PTTO Egresos
 
 INSERT INTO `ppto_de_egresos` (`id`, `Ejercicio`, `CvePptal`, `PartidaEspecifica`, `Movimiento`, `Presupuesto`, `Enero`, `Febrero`, `Marzo`, `Abril`, `Mayo`, `Junio`, `Julio`, `Agosto`, `Septiembre`, `Octubre`, `Noviembre`, `Diciembre`, `AutorizacionConsejo`, `Nota`, `user_id`, `org1_sede_id`, `ppto1_capitulo_id`, `ppto2_concepto_id`, `ppto3_part_generica_id`, `ppto4_part_especifica_id`, `created_at`, `updated_at`) VALUES
 (1, 2023, '1000-1100-113-001', 'SUELDOS PARA BASE', 0, 32255372.440000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 1, NULL, 1, NULL, 1, 1, 3, 2094, '2023-03-22 10:23:04', '2023-03-22 10:23:04'),
@@ -3492,17 +3415,14 @@ INSERT INTO `ppto_de_egresos` (`id`, `Ejercicio`, `CvePptal`, `PartidaEspecifica
 (135, 2023, '5000-5900-597-555', 'LICENCIAS INFORMÁTICAS INTELECTUALES\r\n', 0, 50000.000000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 1, NULL, 1, 7, 5, 43, 248, 1791, '2023-07-07 15:57:53', '2023-08-29 15:41:29');
 
 
-@REM MIR FIN
 INSERT INTO `plan1_fins` (`id`, `Ejercicio`, `NoFin`, `DescFin`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 2023, 1, 'Contribuir en el Bienestar de las Familias oaxaqueñas, a través del préstamo prendario y la asistencia social.', 1, '2023-09-22 17:05:34', '2023-09-23 11:19:55');
 
-@REM MIR Propositos
 INSERT INTO `plan2_propositos` (`id`, `NoProposito`, `DescProposito`, `plan1_fin_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'La asistencia social se cumple oportunamente al brindar Préstamos Prendarios con tasas de interés mas bajos del mercado.', 1, 1, '2023-09-23 10:28:23', '2023-09-23 11:20:38'),
 (2, 2, 'La asistencia social se cumple oportunamente al brindar aportaciones vía Donativos para obras o beneficencia.', 1, 1, '2023-09-23 11:21:01', '2023-09-23 11:21:01'),
 (3, 3, 'El Monte de Piedad opera con eficiencia, eficacia y oportunidad.', 1, 1, '2023-09-23 12:33:07', '2023-09-23 12:33:07');
 
-@REM MIR Components
 INSERT INTO `plan3_componentes` (`id`, `NoComponente`, `DescComponente`, `plan2_proposito_id`, `plan1_fin_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Préstamos otorgados', 1, 1, 1, '2023-09-23 12:19:33', '2023-09-23 12:19:33'),
 (2, 2, 'Acciones de gestión para la administración eficiente los bienes empeñados o documentos quirografarios, realizadas', 1, 1, 1, '2023-09-23 12:26:39', '2023-09-23 12:26:39'),
@@ -3522,7 +3442,6 @@ INSERT INTO `plan3_componentes` (`id`, `NoComponente`, `DescComponente`, `plan2_
 (18, 12, 'Estudios de Mercado aplicados', 3, 1, 1, '2023-09-25 13:58:19', '2023-09-25 13:58:19'),
 (19, 13, 'Representación legal del Monte de Piedad atendida', 3, 1, 1, '2023-09-25 13:58:35', '2023-09-25 13:58:35');
 
-@REM MIR Actividades
 INSERT INTO `plan4_actividads` (`id`, `NoActividad`, `DescActividad`, `org2_area_id`, `plan3_componente_id`, `plan2_proposito_id`, `plan1_fin_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Efectuar préstamos Prendarios Otorgados en Unidades de Motor', 6, 1, 1, 1, 1, '2023-09-23 14:02:04', '2023-09-23 14:02:04'),
 (2, 2, 'Efectuar Préstamos Quirografarios', 6, 1, 1, 1, 1, '2023-09-23 14:16:20', '2023-09-23 14:16:20'),
@@ -3645,4 +3564,4 @@ INSERT INTO `plan4_actividads` (`id`, `NoActividad`, `DescActividad`, `org2_area
 (120, 2, 'Realizar estudio de mercado enfocado oferta', 13, 18, 3, 1, 1, '2023-09-25 14:18:55', '2023-09-25 14:18:55'),
 (121, 1, 'Solicitudes de representación legal atendidas', 9, 19, 3, 1, 1, '2023-09-25 14:19:21', '2023-09-25 14:19:21');
 
-exit
+-- exit

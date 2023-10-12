@@ -23,43 +23,50 @@
             {{-- Datos --}}
             <div class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="container px-4">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6">
+                    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}"/>
-                            <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-200">07/10/2023</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $fecha }}</p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">MPEO/CM/A001/2023</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $details_of_folio }}</p>
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Contador/gerente</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $solictante }}</p>
                         </div>
                         <div>
                             <x-label for="sucursal" value="{{ __('Sucursal') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Matriz</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $sucursal }}</p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">00001010</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $MIR }}</p>
                         </div>
                     </div>
                     <div class="mt-3">
                         <x-label for="justificacion" value="{{ __('Justificación') }}"/>
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus atque maxime blanditiis nam error magni enim. Ex facere atque neque unde error culpa, iste quam voluptatibus labore saepe ea? Iste.</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $justificacion }}</p>
                     </div>
                 </div>
             </div>
 
             {{-- Buttons --}}
-            <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <div class="container px-4">
                         <div class="text-center">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                VER FACTURA
-                            </button>
+                            @if (!$is_pdf)
+                                <button type="button" wire:click="getFactura"
+                                    class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                    GENERAR FACTURA (PDF)
+                                </button>
+                            @else
+                                <a type="button" href="{{ asset($factura->fcm_pdf_ruta) }}" target="_blank"
+                                    class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                    VISUALIZAR FACTURA (PDF)
+                                </a>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -67,31 +74,31 @@
             {{-- Proveedor --}}
             <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="container px-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                         <div class="flex items-center">
-                            <label class="block text-lg font-bold text-start text-gray-900 dark:text-white">Proveedor</label>
+                            <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                         </div>
                         <div>
                             <x-label for="razon_social" value="{{ __('Razón Social') }}"/>
-                            <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-200">WALTMART</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $razon_social }}</p>
                         </div>
                         <div>
                             <x-label for="rfc" value="{{ __('RFC') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">HHH00032121</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $RFC }}</p>
                         </div>
                         <div>
                             <x-label for="telefono" value="{{ __('Teléfono') }}"/>
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">951111111</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $telefono }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             {{-- Table --}}
             <div class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Cantidad
@@ -111,23 +118,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th class="px-6 py-3">
-                                    1
-                                </th>
-                                <th class="px-6 py-3">
-                                    Coca Cola 3lt
-                                </th>
-                                <th class="px-6 py-3">
-                                    sisi
-                                </th>
-                                <th class="px-6 py-3">
-                                    $28
-                                </th>
-                                <th class="px-6 py-3">
-                                    $29
-                                </th>
-                            </tr>
+                            @foreach ($elementos as $elemento)
+                                <tr>
+                                    <th class="px-6 py-3">
+                                        {{ $elemento->icm_cantidad }}
+                                    </th>
+                                    <th class="px-6 py-3">
+                                        {{ $elemento->icm_concepto }}
+                                    </th>
+                                    <th class="px-6 py-3">
+                                        {{ $elemento->icm_partida_presupuestal }}
+                                    </th>
+                                    <th class="px-6 py-3">
+                                        {{ $elemento->icm_precio_u }}
+                                    </th>
+                                    <th class="px-6 py-3">
+                                        {{ $elemento->icm_importe }}
+                                    </th>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -141,21 +150,21 @@
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Subtotal:</p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$20
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $subtotal }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:</p>
                         </div>
                         <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$16
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $iva }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:</p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$36
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $total }}
                             </p>
                         </div>
                     </div>

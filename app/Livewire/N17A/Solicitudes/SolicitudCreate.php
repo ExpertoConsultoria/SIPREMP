@@ -240,9 +240,13 @@ class SolicitudCreate extends Component
     public function CalculateAmount(){
         if ($this->cantidad != "") {
             $this->cantidad = number_format($this->cantidad, 2, '.', '');
+        }else{
+            $this->cantidad = 0.00;
         }
         if ($this->p_u != "") {
             $this->p_u = number_format($this->p_u, 3, '.', '');
+        }else{
+            $this->p_u = 0.00;
         }
 
         $importe = $this->cantidad * $this->p_u;

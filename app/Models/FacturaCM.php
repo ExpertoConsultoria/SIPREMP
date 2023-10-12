@@ -16,13 +16,13 @@ class FacturaCM extends Model
     protected $fillable = [
         'fcm_nombre',
         'fcm_extension',
-        'fcm_ruta',
+        'fcm_xml_ruta',
+        'fcm_pdf_ruta',
     ];
 
     protected $encryptable  = [
         'fcm_nombre',
         'fcm_extension',
-        // 'fcm_ruta',
     ];
 
 

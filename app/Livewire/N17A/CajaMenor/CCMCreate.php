@@ -30,6 +30,7 @@ class CCMCreate extends Component
     // Edit Class
     public $edit_to_folio = '';
     public $compra_to_edit;
+    public $add_xml;
 
     // Fields
     public $fecha;
@@ -57,7 +58,6 @@ class CCMCreate extends Component
     // Table Data
         public $elementosCompraMenor = [];
 
-        public $proveedor;
         public $razon_social;
         public $RFC;
         public $telefono;
@@ -67,6 +67,7 @@ class CCMCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
+    public $partidas_presupuestales = [];
 
     // Making Interactions
         public $mir2 = false;
@@ -130,7 +131,7 @@ class CCMCreate extends Component
         'factura_id.required' => 'No has adjuntado ninguna Factura.',
     ];
 
-    protected $listeners = ['loadDataXML'];
+    protected $listeners = ['loadDataXML','setPartidaP'];
 
     public function mount()
     {
@@ -149,6 +150,13 @@ class CCMCreate extends Component
             $this->proposito_mir = '';
             $this->componente_mir = '';
             $this->actividad_mir = '';
+
+            $this->razon_social = "-- -- --";
+            $this->RFC = "-- -- --";
+            $this->telefono  = "-- -- --";
+
+            $this->add_xml  = true;
+
         } else {
             // Search CompraMenor
             $this->compra_to_edit = CompraMenor::where('cm_folio', $this->edit_to_folio)->first();
@@ -197,18 +205,26 @@ class CCMCreate extends Component
             $this->GetActivities($this->componente_mir);
             $this->actividad_mir = $this->compra_to_edit->mir_id_actividad;
 
-            $this->factura_id = $this->compra_to_edit->empresa_id;
-            $this->empresa_id = $this->compra_to_edit->factura_cm_id;
-            $empresa = FacturaCM::findOrFail($xml_id);
+            if ($this->compra_to_edit->empresa_id != null) {
+                $this->empresa_id = $this->compra_to_edit->empresa_id;
+                $empresa = Empresa::findOrFail($this->empresa_id);
 
-            $this->proveedor = $empresa?->Nombre ? $empresa->Nombre : $empresa->RazonSocial;
-            $this->razon_social = $empresa->RazonSocial;
-            $this->RFC = $empresa->RFC;
-            $this->telefono  = $empresa?->Telefono ? $empresa->Telefono : 'Ninguno';
+                $this->razon_social = $empresa->RazonSocial;
+                $this->RFC = $empresa->RFC;
+                $this->telefono  = $empresa?->Telefono ? $empresa->Telefono : 'Ninguno';
+            }
+
+            if ($this->compra_to_edit->factura_cm_id == null) {
+                $this->add_xml  = true;
+            }else{
+                $this->factura_id = $this->compra_to_edit->factura_cm_id;
+                $this->add_xml  = false;
+            }
         }
 
         $this->partida_presupuestal = '';
         $this->fines_mir = Plan1Fin::all();
+        $this->partidas_presupuestales = PptoDeEgreso::all();
     }
 
     public function render()
@@ -254,7 +270,7 @@ class CCMCreate extends Component
         // Obtenemos la factura registrada y extraemos su infromacion
         $factura = FacturaCM::findOrFail($xml_id);
 
-        $factura_contents = file_get_contents($factura->fcm_ruta);
+        $factura_contents = file_get_contents($factura->fcm_xml_ruta);
         $factura_json = JsonConverter::convertToJson($factura_contents);
         $factura_json = json_decode($factura_json, true);
 
@@ -275,7 +291,6 @@ class CCMCreate extends Component
 
         $this->factura_id = $factura->id;
         $this->empresa_id = $empresaData->id;
-        $this->proveedor = $empresaData?->Nombre ? $empresaData->Nombre : $empresaData->RazonSocial;
         $this->razon_social = $empresaData->RazonSocial;
         $this->RFC = $empresaData->RFC;
         $this->telefono  = $empresaData?->Telefono ? $empresaData->Telefono : 'Ninguno';
@@ -324,10 +339,14 @@ class CCMCreate extends Component
         $this->total = number_format($this->total, 2, '.', '');
     }
 
+    public function setPartidaP($value,$id)
+    {
+        $this->elementosCompraMenor[$id]->icm_partida_presupuestal = $value;
+    }
+
     // Ways of Save
     public function Save()
     {
-
         if (!$this->is_editing) {
 
             $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->userSedeCode);
@@ -383,8 +402,9 @@ class CCMCreate extends Component
                 $this->compra_CM->cm_folio = $this->folio;
             } else {
                 if (str_starts_with($this->compra_CM->cm_folio, '&')) {
-                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->specificUserSedeCode);
-                } else {
+                    $get_user = User::where('id', $this->compra_to_edit->solicitante_id)->first();
+                    $this->compra_CM->cm_folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', Helper::GetSpecificUserSede($get_user)->Serie);
+                }else{
                     $this->compra_CM->cm_folio = $this->folio;
                 }
             }
@@ -394,8 +414,12 @@ class CCMCreate extends Component
             $this->compra_CM->mir_id_proposito = $this->proposito_mir;
             $this->compra_CM->mir_id_componente = $this->componente_mir;
             $this->compra_CM->mir_id_actividad = $this->actividad_mir;
-            $this->compra_CM->factura_cm_id = $this->factura_id;
-            $this->compra_CM->empresa_id = $this->empresa_id;
+            if($this->compra_CM->factura_cm_id == ''){
+                $this->compra_CM->factura_cm_id = $this->factura_id;
+            }
+            if($this->compra_CM->empresa_id == ''){
+                $this->compra_CM->empresa_id = $this->empresa_id;
+            }
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
@@ -405,13 +429,13 @@ class CCMCreate extends Component
 
             foreach ($this->elementosCompraMenor as $item) {
                 $this->item_compra = new CompraMenorList();
-                $this->item_compra->icm_folio = $this->compra_CM->cm_folio;
-                $this->item_compra->icm_cantidad = $item->icm_cantidad;
-                $this->item_compra->icm_unidad_medida = $item->icm_unidad_medida;
-                $this->item_compra->icm_concepto = $item->icm_concepto;
-                $this->item_compra->icm_partida_presupuestal = $item->icm_partida_presupuestal;
-                $this->item_compra->icm_precio_u = $item->icm_precio_u;
-                $this->item_compra->icm_importe = $item->icm_importe;
+                    $this->item_compra->icm_folio = $this->compra_CM->cm_folio;
+                    $this->item_compra->icm_cantidad = $item->icm_cantidad;
+                    $this->item_compra->icm_unidad_medida = $item->icm_unidad_medida;
+                    $this->item_compra->icm_concepto = $item->icm_concepto;
+                    $this->item_compra->icm_partida_presupuestal = $item->icm_partida_presupuestal;
+                    $this->item_compra->icm_precio_u = $item->icm_precio_u;
+                    $this->item_compra->icm_importe = $item->icm_importe;
                 $this->item_compra->save();
             }
 
@@ -422,7 +446,7 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = $this->userSede;
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -439,13 +463,14 @@ class CCMCreate extends Component
         if (!$this->is_editing) {
 
             $this->folio = Helper::FakeFolioGenerator(5, 'DRAFT');
-            $this->validate();
+            $this->validateOnly($this->asunto);
 
             $this->compra_CM = new CompraMenor();
             $this->compra_CM->cm_fecha = $this->fecha;
             $this->compra_CM->cm_folio = $this->folio;
             $this->compra_CM->solicitante_id = Auth::user()->id;
             $this->compra_CM->sucursal = $this->sucursal;
+
             $this->compra_CM->cm_asunto = $this->asunto;
             $this->compra_CM->mir_id_fin = $this->fin_mir;
             $this->compra_CM->mir_id_proposito = $this->proposito_mir;
@@ -475,7 +500,7 @@ class CCMCreate extends Component
             $this->dispatch('alertCRUD', 'Exito!', 'Guardado correctamente', 'success');
         } else {
 
-            $this->validate();
+            $this->validateOnly($this->asunto);
 
             // Search CompraMenor
             $this->compra_CM = CompraMenor::where('cm_folio', $this->edit_to_folio)->first();
@@ -492,8 +517,12 @@ class CCMCreate extends Component
             $this->compra_CM->mir_id_proposito = $this->proposito_mir;
             $this->compra_CM->mir_id_componente = $this->componente_mir;
             $this->compra_CM->mir_id_actividad = $this->actividad_mir;
-            $this->compra_CM->factura_cm_id = $this->factura_id;
-            $this->compra_CM->empresa_id = $this->empresa_id;
+            if($this->compra_CM->factura_cm_id == ''){
+                $this->compra_CM->factura_cm_id = $this->factura_id;
+            }
+            if($this->compra_CM->empresa_id == ''){
+                $this->compra_CM->empresa_id = $this->empresa_id;
+            }
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
@@ -520,12 +549,11 @@ class CCMCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-CM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = $this->userSede;
+        $this->sucursal = Helper::GetUserSede()->SedeNombre;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
         $this->actividad_mir = '';
         return redirect()->route('cajamenor');
     }
-
 }

@@ -3,13 +3,15 @@
 namespace App\Livewire\N17A\CajaMenor;
 
 use Livewire\Component;
+use App\Helpers\Helper;
 use Livewire\WithPagination;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-use App\Models\PptoDeEgreso;
+use App\Models\ReporteCM;
 use App\Models\CompraMenor;
+use App\Models\PptoDeEgreso;
 use App\Models\CompraMenorList;
 
 class CCMList extends Component
@@ -24,8 +26,8 @@ class CCMList extends Component
     public $fecha_inicio;
     public $fecha_fin;
     public $ejercicio;
-    public $partida_especifica; //Para el buscador
     public $partida_presupuestal; //Para la consulta
+    public $compras_filtradas = []; //Para el buscador
 
     public $ejercicios = [];
 
@@ -66,11 +68,11 @@ class CCMList extends Component
 
     public function mount()
     {
-        $this->fecha_inicio = date('Y-m-1');
+        $this->fecha_inicio = date('Y-m-01');
         $this->fecha_fin = date('Y-m-t');
 
-        $this->ejercicio = '';
-        $this->partida_especifica = '';
+        $this->ejercicio = date('Y');
+        // $this->partida_especifica = '';
         $this->partida_presupuestal = '';
 
         $this->ejercicios = ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
@@ -82,7 +84,8 @@ class CCMList extends Component
         $partidas_presupuestales = [];
 
         if($this->cargarLista){
-            $partidas_presupuestales = PptoDeEgreso::where('PartidaEspecifica','like','%'.$this->partida_especifica.'%')->get();
+            // $partidas_presupuestales = PptoDeEgreso::where('PartidaEspecifica','like','%'.$this->partida_especifica.'%')->get();
+            $partidas_presupuestales = PptoDeEgreso::all();
 
 
             if($this->partida_presupuestal == ''){
@@ -92,6 +95,7 @@ class CCMList extends Component
                                                 ->where('cm_folio','like','%'.$this->ejercicio.'%')
                                                 ->orderby($this->ordenar, $this->direccion)
                                                 ->paginate($this->mostrar);
+
             }else{
 
                 $objetos_cmm = CompraMenorList::where('icm_partida_presupuestal',$this->partida_presupuestal)->get();
@@ -103,6 +107,8 @@ class CCMList extends Component
                         array_push($folios, $objeto->icm_folio);
                     }
                 }
+
+                $this->compras_filtradas = $folios;
 
                 $compras_enviadas = CompraMenor::select('id','cm_fecha','cm_folio','cm_asunto','cm_creation_status')
                                                 ->where('cm_creation_status', 'Enviado')
@@ -141,11 +147,39 @@ class CCMList extends Component
         return redirect()->to(route("cajamenor.print", ['print_folio'=>$compra['cm_folio']]));
     }
 
-    public function forgeReport($compras_filtradas){
+    public function forgeReport(){
 
         $this->validate();
 
-        dd($compras_filtradas);
+        $monto_general = 0;
+        $userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+        $userArea = is_string(Helper::GetUserArea()) ? Helper::GetUserArea() : Helper::GetUserArea()->AreaNombre;
+
+        foreach ($this->compras_filtradas as $folio) {
+            $items = CompraMenorList::where('icm_folio',$folio)
+                                ->where('icm_partida_presupuestal', $this->partida_presupuestal)
+                                ->get();
+
+            foreach ($items as $item) {
+                $monto_general += $item->icm_importe;
+            }
+
+        }
+
+        $monto_general = number_format($monto_general, 2, '.', '');
+
+        $reporte = new ReporteCM();
+            $reporte->rcm_ejercicio = $this->ejercicio;
+            $reporte->rcm_inicio = $this->fecha_inicio;
+            $reporte->rcm_fin = $this->fecha_fin;
+            $reporte->rcm_partida_presupuestal = $this->partida_presupuestal;
+            $reporte->rcm_folios_cm = $this->compras_filtradas;
+            $reporte->rcm_area = $userArea;
+            $reporte->rcm_sucursal = $userSede;
+            $reporte->rcm_monto_gral = $monto_general;
+        $reporte->save();
+
+        return redirect()->to(route("cajamenor.reportData", ['id_of_report' => $reporte->id]));
 
     }
 

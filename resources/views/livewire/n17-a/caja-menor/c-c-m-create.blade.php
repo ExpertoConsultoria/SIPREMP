@@ -94,7 +94,7 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($fines_mir as $fin_mir)
-                                                <option value="{{ $fin_mir->id }}">{{ $fin_mir->DescFin }}</option>
+                                            <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
                                             @endforeach
                                         </select>
                                         @error('fin_mir') <span class="text-xs text-rose-600">{{ $message }}</span>
@@ -105,12 +105,13 @@
                                         <select wire:model.blur="proposito_mir"
                                             wire:change="GetComponents($event.target.value)" name="proposito_mir"
                                             @if(!$mir2) disabled @endif
-                                            class="@if(!$mir2) bg-gray-200 @else bg-gray-500 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir2) bg-gray-300 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
-                                                <option value="{{ $proposito_mir['id'] }}">{{ $proposito_mir['DescProposito'] }}</option>
-                                                @endforeach
+                                            <option value="{{ $proposito_mir['NoProposito'] }}">{{
+                                                $proposito_mir['DescProposito'] }}</option>
+                                            @endforeach
                                         </select>
                                         @error('proposito_mir') <span class="text-xs text-rose-600">{{ $message
                                             }}</span> @enderror
@@ -123,10 +124,11 @@
                                         <select wire:model.blur="componente_mir"
                                             wire:change="GetActivities($event.target.value)" name="componente_mir"
                                             @if(!$mir3) disabled @endif
-                                            class="@if(!$mir3) bg-gray-200 @else bg-gray-500 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir3) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
-                                                <option value="{{ $componete_mir['id'] }}">{{ $componete_mir['DescComponente'] }}</option>
+                                            <option value="{{ $componete_mir['NoComponente'] }}">{{
+                                                $componete_mir['DescComponente'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('componente_mir') <span class="text-xs text-rose-600">{{ $message
@@ -136,10 +138,11 @@
                                         <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
                                         <select wire:model.blur="actividad_mir" name="actividad_mir" @if(!$mir4)
                                             disabled @endif
-                                            class="@if(!$mir4) bg-gray-200 @else bg-gray-500 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir4) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
-                                                <option value="{{ $actividad_mir['id'] }}">{{ $actividad_mir['DescActividad'] }}</option>
+                                            <option value="{{ $actividad_mir['NoActividad'] }}">{{
+                                                $actividad_mir['DescActividad'] }}</option>
                                             @endforeach
                                         </select>
                                         @error('actividad_mir') <span class="text-xs text-rose-600">{{ $message
@@ -151,77 +154,53 @@
                         </div>
 
                     </div>
-
-                    {{-- Add Items to List --}}
-                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-
+                    {{-- Buttons --}}
+                    <div
+                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
-                            <div class="grid gap-3 mb-6 lg:grid-cols-12">
-                                <div class="col-span-2">
-                                    <x-label for="cantidad" value="{{ __('Cantidad') }}" />
-                                    <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number" name="cantidad" step="0.01" placeholder="0.00"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('cantidad') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                            <div class="grid grid-cols-1">
+                                <input wire:model.blur="factura_id" type="hidden" name="factura_id">
+                                @error('factura_id') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                @if ($add_xml)
+                                    @livewire('n17-a.caja-menor.add-xml')
+                                @else
+                                    <div class="text-center">
+                                        <p class="block text-lg font-bold text-gray-900 text-start dark:text-white">
+                                            ! Factura almacenada Correctamente !
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Provedor --}}
+                    <div
+                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md text dark:bg-gray-800 dark:border-gray-700">
+                        <div class="container px-4">
+                            <div
+                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+                                <div class="flex items-center">
+                                    <label
+                                        class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                                 </div>
-                                <div class="col-span-2">
-                                    <x-label for="unidad_medida" value="{{ __('Unidad de medida') }}" />
-                                    <input wire:model.blur="unidad_medida" type="text" name="unidad_medida" placeholder="Unidad de Medida"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('unidad_medida') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                <div>
+                                    <x-label for="razon_social" value="{{ __('Razón Social') }}" />
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $razon_social }}</p>
                                 </div>
-                                <div class="col-span-4">
-                                    <x-label for="concepto" value="{{ __('Concepto') }}" />
-                                    <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('concepto') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                <div>
+                                    <x-label for="rfc" value="{{ __('RFC') }}" />
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $RFC }}</p>
                                 </div>
-                                <div class="col-span-2">
-                                    <x-label for="p_u" value="{{ __('P/U') }}" />
-                                    <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number" step="0.001" placeholder="0.00" name="p_u"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        >
-                                    @error('p_u') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-span-2">
-                                    <x-label for="importe" value="{{ __('Importe') }}" />
-                                    <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00" readonly
-                                        class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        value="23">
-                                    @error('importe') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                <div>
+                                    <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $telefono }}</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="container px-4">
-                            <div class="grid grid-cols-12 gap-2 mb-1">
-                                <div class="col-span-2">
-                                    <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
-                                </div>
-
-                                <div class="col-span-4">
-                                    <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected disabled value="">Selecciona una Opción</option>
-                                        @foreach ($partidas_presupuestales as $pp)
-                                            <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
-                                </div>
-
-                                <div class="col-span-2">
-                                    <button type="button" wire:click='AddToList'
-                                        class="w-4/5 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                        Registrar
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
 
                     {{-- Table --}}
@@ -261,9 +240,16 @@
                                             {{ $elemento->icm_concepto }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            <select>
-                                                <option value="{{ $elemento->icm_partida_presupuestal }}">{{
-                                                    $elemento->icm_partida_presupuestal }}</option>
+                                            <select wire:change="setPartidaP($event.target.value, {{ $loop->index }})" required
+                                                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                                <option value="" disabled selected> Partida Presupuestal</option>
+
+                                                @foreach ($partidas_presupuestales as $partida_presupuestal )
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal->PartidaEspecifica }}
+                                                    </option>
+                                                @endforeach
                                                 {{-- opciones --}}
                                             </select>
                                         </td>

@@ -5,7 +5,8 @@ use App\Livewire\N17A\CajaMenor\CCMCreate;
 use App\Livewire\N17A\CajaMenor\CCMBorradores;
 use App\Livewire\N17A\CajaMenor\CCMList;
 use App\Livewire\N17A\CajaMenor\CCMDetalles;
-use App\Livewire\N17A\CajaMenor\CCMReportes;
+use App\Livewire\N17A\CajaMenor\CCMListaReportes;
+use App\Livewire\N17A\CajaMenor\CCMReportData;
 
 use App\Livewire\N17A\Solicitudes\SolicitudCreate;
 use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
@@ -49,7 +50,8 @@ Route::middleware([
 
     // Reactive Pages
     // Caja Menor
-    Route::get('/caja-menor/reportes', CCMReportes::class)->name('cajamenor.reportes');
+    Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
+    Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
     Route::get('/caja-menor/create', CCMCreate::class)->name('cajamenor.create');
     Route::get('/caja-menor/borradores', CCMBorradores::class)->name('cajamenor.borradores');
     Route::get('/caja-menor/list', CCMList::class)->name('cajamenor.compras');

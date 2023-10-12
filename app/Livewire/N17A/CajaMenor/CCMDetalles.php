@@ -6,8 +6,11 @@ use Livewire\Component;
 
 use Livewire\Redirector;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
+use App\Models\Empresa;
+use App\Models\FacturaCM;
 use App\Models\CompraMenor;
 use App\Models\CompraMenorList;
 
@@ -15,6 +18,12 @@ use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
+
+use PhpCfdi\CfdiCleaner\Cleaner;
+use CfdiUtils\Nodes\XmlNodeUtils;
+use PhpCfdi\CfdiToPdf\CfdiDataBuilder;
+use PhpCfdi\CfdiToPdf\Converter;
+use PhpCfdi\CfdiToPdf\Builders\Html2PdfBuilder;
 
 class CCMDetalles extends Component
 {
@@ -39,6 +48,9 @@ class CCMDetalles extends Component
         public $elementos = [];
         public $compra_data;
 
+        public $factura;
+        public $is_pdf;
+
     public function mount()
     {
         // Search CompraMenor
@@ -47,6 +59,8 @@ class CCMDetalles extends Component
         $this->elementos = CompraMenorList::where('icm_folio', $this->details_of_folio)->get();
         // Get Solicitante
         $get_user = User::where('id',$this->compra_data->solicitante_id)->first();
+        // Get Proveedor
+        $this->proveedor = Empresa::where('id',$this->compra_data->empresa_id)->first();
 
         // Forge Mir
         $fin = Plan1Fin::where('id',$this->compra_data->mir_id_fin)->first();
@@ -66,10 +80,14 @@ class CCMDetalles extends Component
         $this->iva = $this->compra_data->cm_iva;
         $this->total = $this->compra_data->cm_total;
 
-        $this->proveedor = '';
-        $this->razon_social = '';
-        $this->RFC = '';
-        $this->telefono = '';
+        $this->razon_social = $this->proveedor->RazonSocial;
+        $this->RFC = $this->proveedor->RFC;
+        $this->telefono = $this->proveedor->Telefono ? $this->proveedor->Telefono : 'Ninguno';
+
+        $this->factura = FacturaCM::find($this->compra_data->factura_cm_id);
+
+        $this->is_pdf = $this->factura->fcm_pdf_ruta != '' ? true : false;
+
     }
 
     public function render()
@@ -79,5 +97,30 @@ class CCMDetalles extends Component
 
     public function getFactura(){
 
+        $xml = file_get_contents($this->factura->fcm_xml_ruta);
+
+        // clean cfdi
+        $xml = Cleaner::staticClean($xml);
+
+        // create the main node structure
+        $comprobante = XmlNodeUtils::nodeFromXmlString($xml);
+
+        // create the CfdiData object, it contains all the required information
+        $cfdiData = (new CfdiDataBuilder())->build($comprobante);
+
+        // create the converter
+        $converter = new Converter(
+            new Html2PdfBuilder()
+        );
+
+        $route = 'storage/files/FacturasCM/PDF/'.$this->details_of_folio.'.pdf';
+        // create the invoice as output.pdf
+        $converter->createPdfAs($cfdiData, $route);
+
+        $this->factura->fcm_pdf_ruta = $route;
+        $this->factura->save();
+        $this->is_pdf=true;
+
+        $this->dispatch('simpleAlert','Archivo Generado Correctamente','success');
     }
 }
