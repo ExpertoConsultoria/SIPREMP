@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compra_menors', function (Blueprint $table) {
+        Schema::create('compra_menor', function (Blueprint $table) {
             $table->id();
 
             // cm = Compra Menor
             $table->date('cm_fecha');
             $table->text('cm_folio')->unique();
-
             $table->unsignedBigInteger('solicitante_id');
-            $table->foreign('solicitante_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->foreign('solicitante_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('sucursal');
-
-            $table->string('cm_asunto');
+            $table->text('cm_asunto');
 
             $table->text('mir_id_fin')->nullable();
             $table->text('mir_id_proposito')->nullable();
@@ -35,21 +31,16 @@ return new class extends Migration
             $table->text('cm_iva');
             $table->text('cm_total');
 
-            // Borrador ||
-            $table->string('cm_creation_status');
+            $table->string('cm_creation_status'); 
 
-            // XML
-            // $table->foreignId('factura_cm_id')->nullable()->constrained()->restrictOnDelete();
-            $table->unsignedBigInteger('factura_cm_id')->nullable();
-            $table->foreign('factura_cm_id')
-                ->references('id')->on('facturas_cm')
-                ->onDelete('cascade');
-
-
+            $table->unsignedBigInteger('factura_cms_id')->nullable();
+            $table->foreign('factura_cms_id')->references('id')->on('factura_cms')->onDelete('cascade');
             $table->foreignId('empresa_id')->nullable()->constrained()->restrictOnDelete();
 
-            // Tokens
+            // $table->text('token_solicitud')->nullable();
             $table->text('token_aceptacion')->nullable();
+
+            $table->text('info_extra')->nullable();
 
 
             $table->timestamps();
@@ -61,7 +52,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compra_menors');
+        Schema::dropIfExists('compra_menor');
     }
 };
-
