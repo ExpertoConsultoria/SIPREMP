@@ -69,9 +69,9 @@ use WithPagination;
         }
         $memorandum->delete();
         $this->dispatch('simpleAlert',
-            title: '¡Solicitud Eliminada!',
-            message: 'El borrador ha sido elimnado',
-            icon: 'success'
+            '¡Solicitud Eliminada!',
+            'El borrador ha sido elimnado',
+            'success'
         );
     }
 

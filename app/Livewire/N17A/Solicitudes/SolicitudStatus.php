@@ -18,7 +18,7 @@ class SolicitudStatus extends Component
     public $memoList = [];
     public function render()
     {
-        return view('livewire.n6.bienes-serv.status');
+        return view('livewire.n17-a.solicitudes.solicitud-status');
     }
 
     public function mount() {
