@@ -352,7 +352,7 @@ class SolicitudCreate extends Component
                 }
 
                 $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-                return redirect()->route('dashboard');
+                return redirect()->route('solicitudes');
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -416,7 +416,7 @@ class SolicitudCreate extends Component
                 $this->actividad_mir = '';
                 $this->destinatario = '';
                 $this->cotizacion = '';
-                return redirect()->route('dashboard');
+                return redirect()->route('solicitudes');
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -515,6 +515,6 @@ class SolicitudCreate extends Component
         $this->actividad_mir = '';
         $this->destinatario = '';
         $this->cotizacion = '';
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

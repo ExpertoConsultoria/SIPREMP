@@ -31,28 +31,33 @@ class CompraMenor extends Model
         'token_solicitud',
         'token_aceptacion',
         'cm_creation_status',
+
+        'factura_cm_id',
+        'empresa_id',
     ];
 
-    protected $encryptable  = [
-        'cm_folio',
-        'cm_asunto',
-        'mir_id_fin',
-        'mir_id_proposito',
-        'mir_id_componente',
-        'mir_id_actividad',
-        'lista_cotizacion',
-        'cm_subtotal',
-        'cm_iva',
-        'cm_total',
-        'token_solicitud',
-        'token_aceptacion'
+    protected $casts = [
+        'sucursal' => 'encrypted',
+
+        'mir_id_fin' => 'encrypted',
+        'mir_id_proposito' => 'encrypted',
+        'mir_id_componente' => 'encrypted',
+        'mir_id_actividad' => 'encrypted',
+
+        'cm_subtotal' => 'encrypted',
+        'cm_iva' => 'encrypted',
+        'cm_total' => 'encrypted',
+        'token_aceptacion' => 'encrypted',
     ];
 
+    protected $primaryKey = 'id';
 
-    protected $primaryKey = 'cm_folio';
+    public function empresa(): HasOne
+    {
+        return $this->hasOne(Empresa::class, 'id', 'empresa_id');
+    }
 
-    // RELACION UNO A UNO
-    public function ComparaMenorList(){
-        return $this->hasOne(CompraMenorList::class);
+    public function factura() {
+        return $this->hasOne(FacturaCM::class, 'id', 'factura_cm_id');
     }
 }

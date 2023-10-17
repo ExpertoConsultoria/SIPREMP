@@ -462,7 +462,9 @@ class CCMCreate extends Component
         if (!$this->is_editing) {
 
             $this->folio = Helper::FakeFolioGenerator(5, 'DRAFT');
-            $this->validateOnly($this->asunto);
+            // $this->validateOnly($this->asunto);
+            $this->validate();
+
 
             $this->compra_CM = new CompraMenor();
             $this->compra_CM->cm_fecha = $this->fecha;
