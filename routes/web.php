@@ -18,6 +18,11 @@ use App\Livewire\N6\BienesServ\Borradores;
 use App\Livewire\N6\BienesServ\Lista;
 use App\Livewire\N6\BienesServ\Status;
 
+use App\Livewire\N5\BandejaEntrada\BENew;
+use App\Livewire\N5\BandejaEntrada\BERechazada;
+use App\Livewire\N5\BandejaEntrada\BEList;
+use App\Livewire\N5\BandejaEntrada\BEStatus;
+use App\Livewire\N5\BandejaEntrada\BEDetalles;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,8 +56,18 @@ Route::middleware([
     Route::get('/solicitudes', function () {
         return view('17A.solicitudes.main');
     })->name('solicitudes');
+    Route::get('/Bandeja-entrada', function () {
+        return view('N5.main');
+    })->name('bandejaentrada');
 
     // Reactive Pages
+    //Bandeja Entrada
+    Route::get('/bandeja-entrada/new', BENew::class)->name('bandejaentrada.new');
+    Route::get('/bandeja-entrada/rechazadas', BERechazada::class)->name('bandejaentrada.rechazada');
+    Route::get('/bandeja-entrada/list', BEList::class)->name('bandejaentrada.list');
+    Route::get('/bandeja-entrada/status', BEStatus::class)->name('bandejaentrada.status');
+    Route::get('/bandeja-entrada/details', BEDetalles::class)->name('bandejaentrada.details');
+
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
     Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
