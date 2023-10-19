@@ -175,10 +175,10 @@ class SolicitudCreate extends Component
             $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
 
-            $this->specificUserSede = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+            $this->specificUserSede = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+
             $this->sucursal = $this->specificUserSede;
 
-            $this->sucursal = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'ND';
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 

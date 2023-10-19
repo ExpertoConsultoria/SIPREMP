@@ -178,7 +178,6 @@ class SolicitudesCreate extends Component
             $this->specificUserSede = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
             $this->sucursal = $this->specificUserSede;
 
-            $this->sucursal = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'ND';
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 

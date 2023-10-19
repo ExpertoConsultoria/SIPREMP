@@ -66,7 +66,7 @@ class Helper
 
     public static function GetSpecificUserSede($user)
     {
-        $sede = $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'N/D';
+        $sede = $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'N/D';
         return $sede;
     }
 
