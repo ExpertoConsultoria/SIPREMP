@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('plan3_componentes', function (Blueprint $table) {
             $table->id();
-
-            $table->smallInteger("NoComponente");
-            $table->text("DesComponente");
-            $table->bigInteger("plan2_proposito_id");
-            $table->bigInteger("plan1_fin_id");
-
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-
+            $table->smallInteger('NoComponente');
+            $table->string('DescComponente', 255);
+            $table->foreignId('plan2_proposito_id')->constrained()->restrictOnDelete();
+            $table->foreignId('plan1_fin_id')->constrained()->restrictOnDelete();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

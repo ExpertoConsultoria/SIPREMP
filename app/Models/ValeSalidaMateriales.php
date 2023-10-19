@@ -10,21 +10,28 @@ class ValeSalidaMateriales extends Model
 {
     use HasFactory, EncryptableDbAttribute;
 
-    protected $table = 'vale_salida_materiales';
+    protected $table = 'vale_salida_materials';
+
     protected $fillable = [
+        'folio',
         'fecha',
         'lugar',
         'encargado_entrega',
-        'id_solicitante',
-
-        'info_extra',
+        'solicitante',
+        'mat_entregado',
+        'token_solicitante',
+        'token_entrega',
+        'estatus_SG',
     ];
-    protected $encryptable  = [
+
+    protected $encryptable = [
         'folio',
         'token_solicitante',
         'token_entrega',
-        'estatus_SG'
+        'estatus_SG',
     ];
 
-    protected $primaryKey = 'id';
+    public function Materiales_entregados(){
+        return $this->hasOne(Materiales_entregados::class);
+    }
 }

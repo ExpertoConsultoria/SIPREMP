@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plan4_actividad', function (Blueprint $table) {
+        Schema::create('plan4_actividads', function (Blueprint $table) {
             $table->id();
-
-            $table->smallInteger("NoActiviadad");
-            $table->text("DescActividad");
-            $table->bigInteger("org2_area_id");
-            $table->bigInteger("plan3_componente_id");
-            $table->bigInteger("plan2_proposito_id");
-            $table->bigInteger("plan1_fin_id");
-
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-
+            $table->smallInteger('NoActividad');
+            $table->string('DescActividad', 255);
+            $table->foreignId('plan3_componente_id')->constrained()->restrictOnDelete();
+            $table->foreignId('plan2_proposito_id')->constrained()->restrictOnDelete();
+            $table->foreignId('plan1_fin_id')->constrained()->restrictOnDelete();
+            $table->foreignId('org2_area_id')->constrained()->restrictOnDelete();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plan4_actividad');
+        Schema::dropIfExists('plan4_actividads');
     }
 };

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text("token_solicitante");
             $table->text("token_entrega");
             $table->text("estatus_SG");
-            $table->text("info_extra")-> nullable();
+            // $table->text("info_extra")-> nullable();
 
             $table->timestamps();
         });

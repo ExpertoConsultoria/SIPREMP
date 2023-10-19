@@ -18,13 +18,13 @@ return new class extends Migration
             $table->text("unidad_medida");
             $table->text("concepto");
             $table->float("precio_unitario");
-            $table->text("info_extra")->nullable();
+            // $table->text("info_extra")->nullable();
 
             $table->unsignedBigInteger('vale_salida_materials_id')->unique();
             $table->unsignedBigInteger('partidas_presupuestales_id')->unique();
 
             $table->foreign('vale_salida_materials_id')->references('id')->on('vale_salida_materials')->onDelete('cascade');//folio_vale
-            $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');//id_par_ppta
+            // $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');//id_par_ppta
 
             $table->timestamps();
         });
