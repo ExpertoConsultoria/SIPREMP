@@ -12,7 +12,7 @@
 
     <!-- {{Auth::user() -> roles[0]}} -->
 
-    @if ( Auth::user() -> roles[0] -> name === 'N6:17A' )
+    @if (Auth::user()->roles[0]->name === 'N6:17A' )
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-    @elseif( Auth::user() -> roles[0] -> name === 'N5:18A:F')
+    @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -310,7 +310,7 @@
             </div>
         </div>
 
-    @elseif(Auth::user() -> roles[0] -> name == 'admin' || Auth::user() -> roles[0] -> name == 'N7:GS:17A')
+    @elseif(Auth::user()->roles[0]->name == 'N7:GS:17A')
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -406,5 +406,167 @@
         </div>
 
     @endif
+
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                @endif
+            });
+
+            // On window load
+            window.onload = function () {
+                localStorage.setItem("rejectionAlert", '');
+                localStorage.setItem("acceptanceAlert", '');
+                localStorage.setItem("approvedAlert", '');
+                @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    localStorage.setItem("trayAlert", '');
+                    getTrayAlert();
+                @endif
+                getRejectionAlert();
+                getAcceptanceAlert();
+                getApprovedAlert();
+            }
+
+            // On window unload
+            window.onbeforeunload = function () {
+                localStorage.removeItem("rejectionAlert");
+                localStorage.removeItem("acceptanceAlert");
+                @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    localStorage.removeItem("trayAlert");
+                @endif
+            };
+
+            function getRejectionAlert() {
+
+                var rejectionAlert = localStorage.getItem("rejectionAlert");
+
+                $.get('api/rejectionAlert/{{ Auth::user()->id }}', function (data) {
+
+                    if (rejectionAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != rejectionAlert) {
+
+                            data = JSON.parse(data);
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Rechazadas`, `/solicitudes`, '#F05252',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlert", data);
+                        }
+
+                    } else {
+
+                        if(data.folios.length > 0){
+                            Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Rechazadas`, `/solicitudes`, '#F05252',10000,'bottom','center']);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("rejectionAlert", data);
+                    }
+
+                });
+            }
+
+            function getAcceptanceAlert() {
+
+                var acceptanceAlert = localStorage.getItem("acceptanceAlert");
+
+                $.get('api/acceptanceAlert/{{ Auth::user()->id }}', function (data) {
+
+                    if (acceptanceAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != acceptanceAlert) {
+
+                            data = JSON.parse(data);
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Validadas`, `/solicitudes`, '#5682C2',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlert", data);
+                        }
+
+                    } else {
+
+                        if(data.folios.length > 0){
+                            Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Validadas`, `/solicitudes`, '#5682C2',10000,'bottom','center']);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("acceptanceAlert", data);
+                    }
+
+                });
+            }
+
+            function getApprovedAlert() {
+
+                var approvedAlert = localStorage.getItem("approvedAlert");
+
+                $.get('api/approvedAlert/{{ Auth::user()->id }}', function (data) {
+
+                    if (approvedAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != approvedAlert) {
+
+                            data = JSON.parse(data);
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Aprobadas`, `/solicitudes`, '#0b8750',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("approvedAlert", data);
+                        }
+
+                    } else {
+
+                        if(data.folios.length > 0){
+                            Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Aprobadas`, `/solicitudes`, '#0b8750',10000,'bottom','center']);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("approvedAlert", data);
+                    }
+
+                });
+            }
+
+            function getTrayAlert() {
+
+                var trayAlert = localStorage.getItem("trayAlert");
+
+                $.get('api/trayAlert/{{ Auth::user()->roles[0]->name }}', function (data) {
+
+                    if (trayAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != trayAlert) {
+
+                            data = JSON.parse(data);
+                            if(data != ''){
+                                Livewire.dispatch('toastifyAlert', [data, `/bandeja-entrada/pendientes`, '#d97706',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("trayAlert", data);
+                        }
+
+                    } else {
+
+                        if(data != ''){
+                            Livewire.dispatch('toastifyAlert', [data, `/bandeja-entrada/pendientes`, '#d97706',10000,'bottom','center']);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("trayAlert", data);
+                    }
+
+                });
+            }
+        </script>
+    @endpush
 
 </x-app-layout>

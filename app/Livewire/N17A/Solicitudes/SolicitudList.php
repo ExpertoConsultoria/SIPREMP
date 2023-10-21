@@ -42,7 +42,7 @@ class SolicitudList extends Component
 
         if($this->cargarLista){
             $memorandums = Memorandum::select('id','memo_fecha','memo_folio','memo_asunto','memo_creation_status')
-                ->where('memo_creation_status','Enviado')
+                ->where('memo_creation_status','not like','Borrador')
                 ->where('solicitante_id', Auth::user() -> id)
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)

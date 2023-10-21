@@ -27,8 +27,8 @@
 
                 <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                     <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('bandejaentrada.new') }}" class="text-right">
+                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-60 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <a href="{{ route('bandejaentrada.pendientes') }}" class="text-right">
 
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M25.9184 21.6603L22.5683 25.0217C21.2098 26.385 18.8195 26.4143 17.4316 25.0217L14.0814 21.6603L2.04889 33.7318C2.49678 33.9389 2.99061 34.0625 3.51561 34.0625H36.4844C37.0094 34.0625 37.503 33.9391 37.9508 33.7319L25.9184 21.6603Z" fill="#515151"/>
@@ -36,15 +36,15 @@
                                 <path d="M0.373906 7.90723C0.142187 8.37582 0 8.89598 0 9.45316V30.5469C0 31.1041 0.142031 31.6243 0.373828 32.0928L12.4272 20.0004L0.373906 7.90723Z" fill="#515151"/>
                                 <path d="M39.6261 7.90698L27.5729 20.0003L39.6261 32.0929C39.8578 31.6243 40 31.1042 40 30.5468V9.45308C40 8.89573 39.8578 8.37558 39.6261 7.90698Z" fill="#515151"/>
                             </svg>
-                                
 
-                            <p class="text-lg mt-32">Solicitudes nuevas <br /> por revisar </p>
+
+                            <p class="mt-32 text-lg">Solicitudes nuevas <br /> por revisar </p>
                         </a>
                     </div>
 
                     <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('bandejaentrada.rechazada') }}" class="text-right">
+                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-60 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <a href="{{ route('bandejaentrada.rechazadas') }}" class="text-right">
 
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_79_2825)">
@@ -58,13 +58,13 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-32">Solicitudes rechazadas </p>
+                            <p class="mt-32 text-lg">Solicitudes rechazadas </p>
                         </a>
                     </div>
 
                     <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('bandejaentrada.list') }}" class="text-right">
+                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-60 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <a href="{{ route('bandejaentrada.aprobadas') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                 fill="none">
@@ -83,7 +83,7 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-32">Estatus de solicitudes <br/>autorizadas</p>
+                            <p class="mt-32 text-lg">Estatus de solicitudes <br/>autorizadas</p>
                         </a>
                     </div>
 

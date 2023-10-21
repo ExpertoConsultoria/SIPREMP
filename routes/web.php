@@ -18,10 +18,11 @@ use App\Livewire\N6\BienesServ\Borradores;
 use App\Livewire\N6\BienesServ\Lista;
 use App\Livewire\N6\BienesServ\Status;
 
-use App\Livewire\N5\BandejaEntrada\BENew;
-use App\Livewire\N5\BandejaEntrada\BERechazada;
-use App\Livewire\N5\BandejaEntrada\BEList;
-use App\Livewire\N5\BandejaEntrada\BEStatus;
+use App\Livewire\N5\BandejaEntrada\BEPendientes;
+use App\Livewire\N5\BandejaEntrada\BERechazadas;
+use App\Livewire\N5\BandejaEntrada\BEAprobadas;
+use App\Livewire\N5\BandejaEntrada\SolicitudRechazada;
+use App\Livewire\N5\BandejaEntrada\SolicitudAceptada;
 use App\Livewire\N5\BandejaEntrada\BEDetalles;
 /*
 |--------------------------------------------------------------------------
@@ -62,11 +63,12 @@ Route::middleware([
 
     // Reactive Pages
     //Bandeja Entrada
-    Route::get('/bandeja-entrada/new', BENew::class)->name('bandejaentrada.new');
-    Route::get('/bandeja-entrada/rechazadas', BERechazada::class)->name('bandejaentrada.rechazada');
-    Route::get('/bandeja-entrada/list', BEList::class)->name('bandejaentrada.list');
-    Route::get('/bandeja-entrada/status', BEStatus::class)->name('bandejaentrada.status');
-    Route::get('/bandeja-entrada/details', BEDetalles::class)->name('bandejaentrada.details');
+    Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
+    Route::get('/bandeja-entrada/rechazadas', BERechazadas::class)->name('bandejaentrada.rechazadas');
+    Route::get('/bandeja-entrada/aprobadas', BEAprobadas::class)->name('bandejaentrada.aprobadas');
+    Route::get('/bandeja-entrada/{details_of_folio}/rechazada', SolicitudRechazada::class)->name('bandejaentrada.rechazada');
+    Route::get('/bandeja-entrada/{details_of_folio}/aprobada', SolicitudAceptada::class)->name('bandejaentrada.aprobada');
+    Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
 
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
