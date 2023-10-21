@@ -43,27 +43,22 @@
                                 <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                                 <p class="text-xs mt-1">Enviado</p>
                             </div>
-
                             <div class="relative flex flex-col items-center">
                                 <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                                 <p class="text-xs mt-1">Filtrado</p>
                             </div>
-
                             <div class="relative flex flex-col items-center">
                                 <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                                 <p class="text-xs mt-1">Servicios Generales</p>
                             </div>
-
                             <div class="relative flex flex-col items-center">
                                 <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                                 <p class="text-xs mt-1">Unidad Técnica</p>
                             </div>
-
                             <div class="relative flex flex-col items-center">
                                 <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                                 <p class="text-xs mt-1">Control Presupuestal</p>
                             </div>
-
                             <div class="relative flex flex-col items-center">
                                 <div class="w-6 h-6 bg-green-400 rounded-full "></div>
                                 <p class="text-xs mt-1">Dirección Administrativa</p>
