@@ -50,59 +50,58 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if (count($drafts))
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
-                                Fecha
-                                @if ($ordenar == 'cm_fecha')
-                                    @if ($direccion == 'asc')
-                                        <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                                    @else
-                                        <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                                    @endif
-                                @else
-                                    <i class="float-right mt-1 fas fa-sort"></i>
-                                @endif
-                            </th>
-                            <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
-                                Asunto
-                                @if ($ordenar == 'cm_asunto')
-                                    @if ($direccion == 'asc')
-                                        <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                                    @else
-                                        <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                                    @endif
-                                @else
-                                    <i class="float-right mt-1 fas fa-sort"></i>
-                                @endif
-                            </th>
-                            <th class="px-4 py-2 text-center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($drafts as $draft)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="px-4 py-2"> {{ $draft->cm_fecha }} </td>
-                                <td class="px-4 py-2"> {{ $draft->cm_asunto }} </td>
-                                <td class="text-center">
-                                    <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
-                                        <i class="fa fa-fw fa-edit"></i>
-                                    </x-button-colors>
-                                    <x-button-colors color="red"
-                                        wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
-                                        <i class="fas fa-trash"></i>
-                                    </x-button-colors>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @if ($drafts->hasPages())
-                    <div class="px-6 py-3">
-                        {{ $drafts->links() }}
-                    </div>
-                @endif
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th wire:click="ordenaPor('cm_fecha')" class="px-4 py-2 cursor-pointer">
+                            Fecha
+                            @if ($ordenar == 'cm_fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('cm_asunto')" class="px-4 py-2 cursor-pointer">
+                            Asunto
+                            @if ($ordenar == 'cm_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($drafts as $draft)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-4 py-2"> {{ $draft->cm_fecha }} </td>
+                        <td class="px-4 py-2"> {{ $draft->cm_asunto }} </td>
+                        <td class="text-center">
+                            <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </x-button-colors>
+                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
+                                <i class="fas fa-trash"></i>
+                            </x-button-colors>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($drafts->hasPages())
+            <div class="px-6 py-3">
+                {{ $drafts->links() }}
+            </div>
+            @endif
             @else
                 <div class="bg-gray-50 dark:bg-gray-700">
                     <p class="p-4 font-semibold text-center">
@@ -134,7 +133,5 @@
             });
         });
     </script>
-
-</div>
 
 </div>

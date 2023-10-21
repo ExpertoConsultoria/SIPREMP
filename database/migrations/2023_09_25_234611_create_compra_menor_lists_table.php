@@ -35,3 +35,4 @@ return new class extends Migration
         Schema::dropIfExists('compra_menor_lists');
     }
 };
+

@@ -5,12 +5,18 @@ use App\Livewire\N17A\CajaMenor\CCMCreate;
 use App\Livewire\N17A\CajaMenor\CCMBorradores;
 use App\Livewire\N17A\CajaMenor\CCMList;
 use App\Livewire\N17A\CajaMenor\CCMDetalles;
-use App\Livewire\N17A\CajaMenor\CCMReportes;
+use App\Livewire\N17A\CajaMenor\CCMListaReportes;
+use App\Livewire\N17A\CajaMenor\CCMReportData;
 
 use App\Livewire\N17A\Solicitudes\SolicitudCreate;
 use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
 use App\Livewire\N17A\Solicitudes\SolicitudList;
 use App\Livewire\N17A\Solicitudes\SolicitudStatus;
+
+use App\Livewire\N6\BienesServ\SolicitudesCreate;
+use App\Livewire\N6\BienesServ\Borradores;
+use App\Livewire\N6\BienesServ\Lista;
+use App\Livewire\N6\BienesServ\Status;
 
 use App\Livewire\N5\BandejaEntrada\BENew;
 use App\Livewire\N5\BandejaEntrada\BERechazada;
@@ -63,7 +69,8 @@ Route::middleware([
     Route::get('/bandeja-entrada/details', BEDetalles::class)->name('bandejaentrada.details');
 
     // Caja Menor
-    Route::get('/caja-menor/reportes', CCMReportes::class)->name('cajamenor.reportes');
+    Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
+    Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
     Route::get('/caja-menor/create', CCMCreate::class)->name('cajamenor.create');
     Route::get('/caja-menor/borradores', CCMBorradores::class)->name('cajamenor.borradores');
     Route::get('/caja-menor/list', CCMList::class)->name('cajamenor.compras');
@@ -76,4 +83,12 @@ Route::middleware([
     Route::get('/solicitudes/list', SolicitudList::class)->name('solicitudes.list');
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudCreate::class)->name('solicitudes.edit');
+
+    //  Solicitudes del nivel N617A
+    Route::get('/solicitud-bienes', SolicitudesCreate::class)->name('solicitudBienes.create');
+    Route::get('/solicitudes-bienes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudBienes.edit');
+    Route::get('/borradores-solicitudes', Borradores::class)->name('solicitudBienes.borradores');
+    Route::get('/lista-solicitudes', Lista::class)->name('solicitudBienes.list');
+    Route::get('/solicitud-bienes/{details_of_folio}', Status::class)->name('solicitudBienes.show');
+
 });

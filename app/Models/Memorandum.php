@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use betterapp\LaravelDbEncrypter\Traits\EncryptableDbAttribute;
+use App\Models\Expediente;
 
 class Memorandum extends Model
 {
@@ -41,4 +43,11 @@ class Memorandum extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function solicitante() {
+        return $this -> belongsTo(User::class, 'solicitante_id');
+    }
+    public function memorandumList() {
+        return $this -> belongsTo(User::class, 'im_folio');
+    }
 }

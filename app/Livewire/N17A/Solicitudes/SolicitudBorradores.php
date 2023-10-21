@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 
 use App\Models\Memorandum;
 use App\Models\MemorandumList;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitudBorradores extends Component
 {
@@ -20,9 +21,9 @@ use WithPagination;
     public $ordenar = 'memo_folio';
     public $direccion='asc';
 
-    protected $listeners = ['deleteDraft']; // metodo usado con evento -emitTo- delete para eliminar
+    protected $listeners = ['deleteDraft'];
 
-    public function ordenaPor($ordenar) {    // Ordena la columna seleccionada de la tabla
+    public function ordenaPor($ordenar) {
         if($this->ordenar==$ordenar){
             if($this->direccion == 'desc')
                 $this->direccion = 'asc';
@@ -48,6 +49,7 @@ use WithPagination;
 
             $drafts = Memorandum::select('id','memo_folio','memo_fecha','memo_asunto')
                 ->where('memo_creation_status','Borrador')
+                ->where('solicitante_id', Auth::user() -> id)
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
@@ -67,9 +69,9 @@ use WithPagination;
         }
         $memorandum->delete();
         $this->dispatch('simpleAlert',
-            title: '¡Solicitud Eliminada!',
-            message: 'El borrador ha sido elimnado',
-            icon: 'success'
+            '¡Solicitud Eliminada!',
+            'El borrador ha sido elimnado',
+            'success'
         );
     }
 

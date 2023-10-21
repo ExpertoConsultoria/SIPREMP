@@ -11,10 +11,15 @@
             </g>
         </svg>
     </div>
+    <!-- // todo CAMBIAR EL ROL POR LA SUCURSAL -->
+    <div class="grid justify-end">
 
-    <div>
-        <p class="px-2 text-base">
-            {{ Auth::user()->name }}
+        @php
+            $area = Auth::user()?->org4empleado?->org3Puesto?->org2Area ? Auth::user()?->org4empleado?->org3Puesto?->org2Area->AreaNombre : 'Sin Cargo';
+        @endphp
+
+        <p class="px-3 text-base">
+            {{ $area }}
         </p>
     </div>
 

@@ -17,7 +17,7 @@
                     </x-nav-link> --}}
                 </div>
             </div>
-
+<!-- // ! Cambios del Carlos
             <div class="flex text-center items-center lg:gap-10 text-xs md:text-sm lg:text-base">
                 <div class="p-3">
                     <h1>BANDEJA DE ENTRADA</h1>
@@ -26,17 +26,7 @@
                     <h1>SOLICITUDES</h1>
                 </div>
             </div>
-
-
-            <div class="flex text-center items-center lg:gap-10 text-xs md:text-sm lg:text-base">
-                <div class="p-3">
-                    <h1>BANDEJA DE ENTRADA</h1>
-                </div>
-                <div class="p-3">
-                    <h1>SOLICITUDES</h1>
-                </div>
-            </div>
-            
+-->
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->

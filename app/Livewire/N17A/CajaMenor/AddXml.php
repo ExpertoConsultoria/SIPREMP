@@ -18,6 +18,7 @@ class AddXml extends Component
     // Interactions
     public $is_loading_xml;
     public $is_valid_xml;
+    public $is_done;
     public $xml_message = '';
 
     public $nombreXML = '';
@@ -41,6 +42,7 @@ class AddXml extends Component
     {
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
+        $this->is_done = false;
     }
 
     public function render()
@@ -69,12 +71,13 @@ class AddXml extends Component
         $this->factura_CM = new FacturaCM();
         $this->factura_CM->fcm_nombre = $this->nombreXML;
         $this->factura_CM->fcm_extension = $this->extensionFile;
-        $this->factura_CM->fcm_ruta = 'storage/'.$this->factura_XML->store('files/FacturasCM','public');
+        $this->factura_CM->fcm_xml_ruta = 'storage/'.$this->factura_XML->store('files/FacturasCM/XML','public');
 
         $this->factura_CM->save();
 
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
+        $this->is_done = true;
 
         $this->dispatch('loadDataXML', $this->factura_CM->id);
     }

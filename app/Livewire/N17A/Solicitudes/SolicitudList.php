@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\Memorandum;
+use Illuminate\Support\Facades\Auth;
 
 class SolicitudList extends Component
 {
@@ -40,13 +41,12 @@ class SolicitudList extends Component
         $memorandums = [];
 
         if($this->cargarLista){
-
             $memorandums = Memorandum::select('id','memo_fecha','memo_folio','memo_asunto','memo_creation_status')
                 ->where('memo_creation_status','Enviado')
+                ->where('solicitante_id', Auth::user() -> id)
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
-
         }
         return view('livewire.n17-a.solicitudes.solicitud-list',compact('memorandums'));
     }

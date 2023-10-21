@@ -15,10 +15,10 @@ use App\Models\Plan4Actividad;
 use App\Models\User;
 use App\Models\Memorandum;
 use App\Models\MemorandumList;
+use App\Models\PptoDeEgreso;
 
 class SolicitudCreate extends Component
 {
-
     // Edit Class
     public $edit_to_folio = '';
     public $memo_to_edit;
@@ -55,6 +55,7 @@ class SolicitudCreate extends Component
     public $propositos_mir = [];
     public $componetes_mir = [];
     public $actividades_mir = [];
+    public $partidas_presupuestales = [];
 
     // Making Interactions
     public $mir2 = false;
@@ -69,14 +70,17 @@ class SolicitudCreate extends Component
     public $memorandum_item;
     public $is_editing = false;
 
+    public $userSede;
+    public $specificUserSede;
+
     protected function rules() {
         return [
-            'fecha'   => 'required|date',
-            'folio'   => 'required|string',
-            'solicitante'   => 'required|string',
+            'fecha' => 'required|date',
+            'folio' => 'required|string',
+            'solicitante' => 'required|string',
 
-            'sucursal'   => 'required',
-            'destinatario'   => 'required',
+            'sucursal' => 'required',
+            'destinatario' => 'required',
 
             'asunto'   => 'required|string',
             'fin_mir'   => 'required',
@@ -109,7 +113,7 @@ class SolicitudCreate extends Component
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
 
         'cantidad.required' => 'Este campo es Obligatorio.',
-        'cantidad.numeric' => 'No es un número.',
+        'cantidad.numeric' => 'No es un nÃºmero.',
 
         'unidad_medida.required' => 'Este campo es Obligatorio.',
         'unidad_medida.string' => 'Texto Invalido.',
@@ -123,15 +127,20 @@ class SolicitudCreate extends Component
         'importe.string' => 'Texto Invalido.',
     ];
 
-    public function mount()
+    public function render()
     {
-        // Default Input Data
+        return view('livewire.n6.bienes-serv.solicitudes-create');
+    }
 
+    public function mount() {
         if ($this->edit_to_folio == '') {
+
+            $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-MM-00000";
             $this->solicitante = auth()->user()->name;
-            $this->sucursal = Helper::GetUserSede();
+            $this->sucursal = $this->userSede;
             $this->destinatario = '';
             $this->cotizacion = '';
             $this->fin_mir = '';
@@ -140,19 +149,19 @@ class SolicitudCreate extends Component
             $this->actividad_mir = '';
         } else {
             // Search CompraMenor
-            $this->memo_to_edit = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
+            $this->memo_to_edit = Memorandum::where('memo_folio', $this->edit_to_folio)->first();
 
             // Get item list
             $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
 
             foreach ($all_items as $item_list) {
                 $item = new stdClass;
-                    $item->im_cantidad = $item_list->im_cantidad;
-                    $item->im_unidad_medida = $item_list->im_unidad_medida;
-                    $item->im_concepto = $item_list->im_concepto;
-                    $item->im_precio_u = $item_list->im_precio_u;
-                    $item->im_importe = $item_list->im_importe;
-                    $item->im_partida_presupuestal = $item_list->im_partida_presupuestal;
+                $item->im_cantidad = $item_list->im_cantidad;
+                $item->im_unidad_medida = $item_list->im_unidad_medida;
+                $item->im_concepto = $item_list->im_concepto;
+                $item->im_precio_u = $item_list->im_precio_u;
+                $item->im_importe = $item_list->im_importe;
+                $item->im_partida_presupuestal = $item_list->im_partida_presupuestal;
 
                 array_push($this->elementosMemorandum, $item);
             }
@@ -166,7 +175,10 @@ class SolicitudCreate extends Component
             $get_user = User::where('id',$this->memo_to_edit->solicitante_id)->first();
             $this->solicitante = $get_user->name;
 
-            $this->sucursal = Helper::GetSpecificUserSede($get_user);
+            $this->specificUserSede = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+
+            $this->sucursal = $this->specificUserSede;
+
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 
@@ -190,15 +202,10 @@ class SolicitudCreate extends Component
         }
 
         $this->partida_presupuestal = '';
+        $this->partidas_presupuestales = PptoDeEgreso::all();
         $this->fines_mir = Plan1Fin::all();
     }
 
-    public function render()
-    {
-        return view('livewire.n17-a.solicitudes.solicitud-create');
-    }
-
-    // Forge MIR
     public function GetProposes($value){
         $this->mir2 = true;
         $this->propositos_mir = Plan2Proposito::where('plan1_fin_id', $value)->get()->toArray();
@@ -224,19 +231,30 @@ class SolicitudCreate extends Component
     }
 
     // Table Interactions
+    // public function CalculateAmount(){
+    //     if ($this->cantidad != "") {
+    //         $this->cantidad = number_format($this->cantidad, 2, '.', '');
+    //     }
+    //     if ($this->p_u != "") {
+    //         $this->p_u = number_format($this->p_u, 3, '.', '');
+    //     }
+
+    //     $importe = $this->cantidad * $this->p_u;
+    //     $this->importe = number_format($importe, 2, '.', '');
+    // }
     public function CalculateAmount(){
-        if ($this->cantidad != "") {
-            $this->cantidad = number_format($this->cantidad, 2, '.', '');
+        if (is_numeric($this->cantidad) && is_numeric($this->p_u)) {
+            $cantidad = floatval($this->cantidad);
+            $p_u = floatval($this->p_u);
+
+            $importe = $cantidad * $p_u;
+
+            $this->importe = number_format($importe, 2, '.', '');
+        } else {
+            $this->importe = 0;
         }
-        if ($this->p_u != "") {
-            $this->p_u = number_format($this->p_u, 3, '.', '');
-        }
-
-        $importe = $this->cantidad * $this->p_u;
-
-        $this->importe = number_format($importe, 2, '.', '');
-
     }
+
 
     public function AddToList(){
 
@@ -279,7 +297,7 @@ class SolicitudCreate extends Component
     }
 
     // Get Totals
-    public function CalculateTotals(){
+    public function CalculateTotals() {
         $this->subtotal = 0;
         $items = $this->elementosMemorandum;
         $this->elementosMemorandum = [];
@@ -296,16 +314,15 @@ class SolicitudCreate extends Component
         $this->total = number_format($this->total, 2, '.', '');
     }
 
-    // Ways of Save
+
     public function Save(){
 
-        if(!$this->is_editing){
-
-            $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM');
-
+        if(!$this->is_editing) {
             $this->validate();
+            if(count($this->elementosMemorandum)){
+                $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSede);
 
-            $this->memorandum = new Memorandum();
+                $this->memorandum = new Memorandum();
                 $this->memorandum->memo_fecha = $this->fecha;
                 $this->memorandum->memo_folio = $this->folio;
                 $this->memorandum->solicitante_id = Auth::user()->id;
@@ -320,10 +337,10 @@ class SolicitudCreate extends Component
 
                 $this->memorandum->memo_creation_status = 'Enviado';
 
-            $this->memorandum->save();
+                $this->memorandum->save();
 
-            foreach ($this->elementosMemorandum as $item) {
-                $this->memorandum_item = new MemorandumList();
+                foreach ($this->elementosMemorandum as $item) {
+                    $this->memorandum_item = new MemorandumList();
                     $this->memorandum_item->im_folio = $this->folio;
                     $this->memorandum_item->im_cantidad = $item->im_cantidad;
                     $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
@@ -331,75 +348,86 @@ class SolicitudCreate extends Component
                     $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
                     $this->memorandum_item->im_precio_u = $item->im_precio_u;
                     $this->memorandum_item->im_importe = $item->im_importe;
-                $this->memorandum_item->save();
-            }
-
-            $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-        } else{
-
-            $this->validate();
-
-            // Search CompraMenor
-            $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
-            // Get item list
-            $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
-
-            foreach ($all_items as $item_list) {
-                $item_list->delete();
-            }
-
-            if ($this->memorandum->memo_creation_status == 'Enviado') {
-                $this->memorandum->memo_folio = $this->folio;
-            } else {
-                if (str_starts_with($this->memorandum->memo_folio, '&')) {
-                    $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM');
-                }else{
-                    $this->memorandum->memo_folio = $this->folio;
+                    $this->memorandum_item->save();
                 }
+
+                $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
+                return redirect()->route('solicitudes');
+            } else {
+                $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
+                return;
             }
+        } else {
+            $this->validate();
+            if ( count($this->elementosMemorandum ) ) {
 
-            $this->memorandum->memo_asunto = $this->asunto;
-            $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
-            $this->memorandum->mir_id_proposito = $this->proposito_mir;
-            $this->memorandum->mir_id_componente = $this->componente_mir;
-            $this->memorandum->mir_id_actividad =  $this->actividad_mir;
-            $this->memorandum->memo_sucursal = $this->sucursal;
-            $this->memorandum->destinatario = $this->destinatario;
-            $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-            $this->memorandum->memo_creation_status = 'Enviado';
+                // Search CompraMenor
+                $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
+                // Get item list
+                $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
 
-            $this->memorandum->save();
+                foreach ($all_items as $item_list) {
+                    $item_list->delete();
+                }
 
-            foreach ($this->elementosMemorandum as $item) {
-                $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->folio;
+                if ($this->memorandum->memo_creation_status == 'Enviado') {
+                    $this->memorandum->memo_folio = $this->folio;
+                } else {
+                    if (str_starts_with($this->memorandum->memo_folio, '&')) {
+                        $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->specificUserSede);
+                    }else{
+                        $this->memorandum->memo_folio = $this->folio;
+                    }
+                }
+
+                $this->memorandum->memo_asunto = $this->asunto;
+                $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
+                $this->memorandum->mir_id_proposito = $this->proposito_mir;
+                $this->memorandum->mir_id_componente = $this->componente_mir;
+                $this->memorandum->mir_id_actividad =  $this->actividad_mir;
+                $this->memorandum->memo_sucursal = $this->sucursal;
+                $this->memorandum->destinatario = $this->destinatario;
+                $this->memorandum->memo_id_cotizacion = $this->cotizacion;
+                $this->memorandum->memo_creation_status = 'Enviado';
+
+                $this->memorandum->save();
+
+                foreach ($this->elementosMemorandum as $item) {
+                    $this->memorandum_item = new MemorandumList();
+                    $this->memorandum_item->im_folio = $this->memorandum->memo_folio;
                     $this->memorandum_item->im_cantidad = $item->im_cantidad;
                     $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
                     $this->memorandum_item->im_concepto = $item->im_concepto;
                     $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
                     $this->memorandum_item->im_precio_u = $item->im_precio_u;
                     $this->memorandum_item->im_importe = $item->im_importe;
-                $this->memorandum_item->save();
+                    $this->memorandum_item->save();
+                }
+
+                $this->dispatch('alertCRUD','Exito!', 'Actualizado correctamente', 'success');
+                $this->reset('asunto');
+                $this->fecha = date("Y-m-d");
+                $this->folio = 'MPEO-MM-00000';
+                $this->solicitante = auth()->user()->name;
+                $this->sucursal = $this->userSede;
+                $this->fin_mir = '';
+                $this->proposito_mir = '';
+                $this->componente_mir = '';
+                $this->actividad_mir = '';
+                $this->destinatario = '';
+                $this->cotizacion = '';
+                return redirect()->route('solicitudes');
+            } else {
+                $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
+                return;
             }
 
-            $this->dispatch('alertCRUD','Exito!', 'Actualizado correctamente', 'success');
         }
-
-        $this->reset('asunto');
-        $this->fecha = date("Y-m-d");
-        $this->folio = 'MPEO-MM-00000';
-        $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
-        $this->fin_mir = '';
-        $this->proposito_mir = '';
-        $this->componente_mir = '';
-        $this->actividad_mir = '';
-        $this->destinatario = '';
-        $this->cotizacion = '';
-        return redirect()->route('solicitudes');
 
     }
 
+
+    // Ways of Save
     public function SaveAsDraft(){
 
         if (!$this->is_editing) {
@@ -425,13 +453,13 @@ class SolicitudCreate extends Component
 
             foreach ($this->elementosMemorandum as $item) {
                 $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->folio;
-                    $this->memorandum_item->im_cantidad = $item->im_cantidad;
-                    $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
-                    $this->memorandum_item->im_concepto = $item->im_concepto;
-                    $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
-                    $this->memorandum_item->im_precio_u = $item->im_precio_u;
-                    $this->memorandum_item->im_importe = $item->im_importe;
+                $this->memorandum_item->im_folio = $this->folio;
+                $this->memorandum_item->im_cantidad = $item->im_cantidad;
+                $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
+                $this->memorandum_item->im_concepto = $item->im_concepto;
+                $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
+                $this->memorandum_item->im_precio_u = $item->im_precio_u;
+                $this->memorandum_item->im_importe = $item->im_importe;
                 $this->memorandum_item->save();
             }
 
@@ -463,13 +491,13 @@ class SolicitudCreate extends Component
 
             foreach ($this->elementosMemorandum as $item) {
                 $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->folio;
-                    $this->memorandum_item->im_cantidad = $item->im_cantidad;
-                    $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
-                    $this->memorandum_item->im_concepto = $item->im_concepto;
-                    $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
-                    $this->memorandum_item->im_precio_u = $item->im_precio_u;
-                    $this->memorandum_item->im_importe = $item->im_importe;
+                $this->memorandum_item->im_folio = $this->folio;
+                $this->memorandum_item->im_cantidad = $item->im_cantidad;
+                $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
+                $this->memorandum_item->im_concepto = $item->im_concepto;
+                $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
+                $this->memorandum_item->im_precio_u = $item->im_precio_u;
+                $this->memorandum_item->im_importe = $item->im_importe;
                 $this->memorandum_item->save();
             }
 
@@ -480,7 +508,7 @@ class SolicitudCreate extends Component
         $this->fecha = date("Y-m-d");
         $this->folio = 'MPEO-MM-00000';
         $this->solicitante = auth()->user()->name;
-        $this->sucursal = Helper::GetUserSede();
+        $this->sucursal = $this->userSede;
         $this->fin_mir = '';
         $this->proposito_mir = '';
         $this->componente_mir = '';
@@ -489,5 +517,4 @@ class SolicitudCreate extends Component
         $this->cotizacion = '';
         return redirect()->route('solicitudes');
     }
-
 }

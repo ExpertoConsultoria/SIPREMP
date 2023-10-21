@@ -9,7 +9,8 @@ class CompraMenor extends Model
 {
     use HasFactory;
 
-    protected $table = 'compra_menors';
+    // Relacion explicita debido al nombre "compra_menors"
+    protected $table = 'compra_menor';
 
     protected $fillable = [
         'cm_fecha',
@@ -21,12 +22,18 @@ class CompraMenor extends Model
         'mir_id_proposito',
         'mir_id_componente',
         'mir_id_actividad',
+        'lista_compra',
+        'lista_cotizacion',
         'cm_subtotal',
         'cm_iva',
         'cm_total',
+        'cm_creation_status',
         'token_solicitud',
         'token_aceptacion',
-        'cm_creation_status'
+        'cm_creation_status',
+
+        'factura_cm_id',
+        'empresa_id',
     ];
 
     protected $casts = [
@@ -44,4 +51,13 @@ class CompraMenor extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function empresa(): HasOne
+    {
+        return $this->hasOne(Empresa::class, 'id', 'empresa_id');
+    }
+
+    public function factura() {
+        return $this->hasOne(FacturaCM::class, 'id', 'factura_cm_id');
+    }
 }

@@ -25,7 +25,7 @@
 
     <div class="py-8">
         <div class="max-w-screen-xl mx-auto">
-            <div class="container  mx-auto">
+            <div class="container mx-auto">
                 <form wire:submit.prevent="Save" autocomplete="off">
 
                     {{-- Basic Data --}}
@@ -35,7 +35,7 @@
                         {{-- Defualt --}}
                         <div class="container px-4">
                             <div
-                                class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-3 mb-6">
+                                class="grid grid-cols-2 gap-3 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6">
                                 <div>
                                     <x-label for="fecha" value="{{ __('Fecha') }}" />
                                     <input wire:model.blur="fecha" type="date" name="fecha" readonly
@@ -67,7 +67,7 @@
                         {{-- MIR --}}
                         <div class="container px-4">
                             <div
-                                class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 gap-2 mb-1">
+                                class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
 
                                 <div class="col-span-3">
                                     <x-label for="asunto" value="{{ __('Asunto *') }}" />
@@ -79,7 +79,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mt-6 mx-2 w-auto h-36">
+                                <div class="w-auto mx-2 mt-6 h-36">
                                     <div
                                         class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                         <p
@@ -107,8 +107,8 @@
                                         <x-label for="proposito_mir" value="{{ __('Proposito *') }}" />
                                         <select wire:model.blur="proposito_mir"
                                             wire:change="GetComponents($event.target.value)" name="proposito_mir"
-                                            @if (!$mir2) disabled @endif
-                                            class="@if (!$mir2) bg-gray-200 @else bg-gray-500 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @if(!$mir2) disabled @endif
+                                            class="@if(!$mir2) bg-gray-300 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
@@ -127,8 +127,8 @@
                                         <x-label for="componente_mir" value="{{ __('Componente *') }}" />
                                         <select wire:model.blur="componente_mir"
                                             wire:change="GetActivities($event.target.value)" name="componente_mir"
-                                            @if (!$mir3) disabled @endif
-                                            class="@if (!$mir3) bg-gray-200 @else bg-gray-500 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @if(!$mir3) disabled @endif
+                                            class="@if(!$mir3) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
                                                 <option value="{{ $componete_mir['NoComponente'] }}">
@@ -141,9 +141,9 @@
                                     </div>
                                     <div class="mt-4">
                                         <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
-                                        <select wire:model.blur="actividad_mir" name="actividad_mir"
-                                            @if (!$mir4) disabled @endif
-                                            class="@if (!$mir4) bg-gray-200 @else bg-gray-500 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <select wire:model.blur="actividad_mir" name="actividad_mir" @if(!$mir4)
+                                            disabled @endif
+                                            class="@if(!$mir4) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
                                                 <option value="{{ $actividad_mir['NoActividad'] }}">
@@ -162,15 +162,20 @@
                     </div>
                     {{-- Buttons --}}
                     <div
-                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md  dark:bg-gray-800 dark:border-gray-700">
+                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
                             <div class="grid grid-cols-1">
                                 <input wire:model.blur="factura_id" type="hidden" name="factura_id">
-                                @error('factura_id')
-                                    <span class="text-xs text-rose-600">{{ $message }}</span>
-                                @enderror
-
-                                @livewire('n17-a.caja-menor.add-xml')
+                                @error('factura_id') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
+                                @if ($add_xml)
+                                    @livewire('n17-a.caja-menor.add-xml')
+                                @else
+                                    <div class="text-center">
+                                        <p class="block text-lg font-bold text-gray-900 text-start dark:text-white">
+                                            ! Factura almacenada Correctamente !
+                                        </p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -180,25 +185,25 @@
                         class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md text dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
                             <div
-                                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                                 <div class="flex items-center">
                                     <label
-                                        class="block text-lg font-bold text-start text-gray-900 dark:text-white">Proveedor</label>
+                                        class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                                 </div>
                                 <div>
                                     <x-label for="razon_social" value="{{ __('Razón Social') }}" />
-                                    <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-200">
-                                        WALTMART</p>
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $razon_social }}</p>
                                 </div>
                                 <div>
                                     <x-label for="rfc" value="{{ __('RFC') }}" />
-                                    <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
-                                        HHH00032121</p>
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $RFC }}</p>
                                 </div>
                                 <div>
                                     <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                                    <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
-                                        951111111</p>
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{ $telefono }}</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +215,7 @@
                         <div class="relative overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead
-                                    class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                                    class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             Cantidad
@@ -231,29 +236,36 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($elementosCompraMenor as $elemento)
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <td class="px-6 py-4">
-                                                {{ $elemento->icm_cantidad }}
-                                            </td>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $elemento->icm_concepto }}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                <select>
-                                                    <option value="{{ $elemento->icm_partida_presupuestal }}">
-                                                        {{ $elemento->icm_partida_presupuestal }}</option>
-                                                    {{-- opciones --}}
-                                                </select>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{ $elemento->icm_precio_u }}
-                                            </td>
-                                            <th
-                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $elemento->icm_importe }}
-                                            </th>
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td class="px-6 py-4">
+                                            {{ $elemento->icm_cantidad }}
+                                        </td>
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $elemento->icm_concepto }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <select wire:change="setPartidaP($event.target.value, {{ $loop->index }})" required
+                                                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                                <option value="" disabled selected> Partida Presupuestal</option>
+
+                                                @foreach ($partidas_presupuestales as $partida_presupuestal )
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal->PartidaEspecifica }}
+                                                    </option>
+                                                @endforeach
+                                                {{-- opciones --}}
+                                            </select>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $elemento->icm_precio_u }}
+                                        </td>
+                                        <th
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $elemento->icm_importe }}
+                                        </th>
 
                                         </tr>
                                     @endforeach
