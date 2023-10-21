@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N6\BienesServ;
+namespace App\Livewire\Shared\Solicitud;
 
 use Livewire\Component;
 
@@ -12,8 +12,8 @@ use App\Models\Memorandum;
 use App\Models\MemorandumList;
 use Illuminate\Support\Facades\Auth;
 
-
-class Borradores extends Component
+use App\Helpers\Helper;
+class SolicitudesBorradores extends Component
 {
     use WithPagination;
 
@@ -22,6 +22,9 @@ class Borradores extends Component
     public $buscar = '';
     public $ordenar = 'memo_folio';
     public $direccion='asc';
+
+    // backButtonRoute
+    public $backButton;
 
     protected $listeners = ['deleteDraft'];
 
@@ -48,21 +51,19 @@ class Borradores extends Component
         $drafts = [];
 
         if($this->cargarLista){
-
             $drafts = Memorandum::select('id','memo_folio','memo_fecha','memo_asunto')
                 ->where('memo_creation_status','Borrador')
                 ->where('solicitante_id', Auth::user() -> id)
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
-
         }
-        return view('livewire.n6.bienes-serv.borradores', compact('drafts'));
+        $this -> backButton = Helper::backButton();
+        return view('livewire.shared.solicitud.solicitudes-borradores', compact('drafts'));
     }
 
-
     #[On('deleteDraft')]
-    public function deleteDraft($id){
+    public function deleteDraft($id) {
         $memorandum = Memorandum::findOrFail($id);
         $allItems = MemorandumList::where('im_folio',$memorandum->memo_folio)->get();
 
@@ -70,7 +71,7 @@ class Borradores extends Component
             $item->delete();
         }
         $memorandum->delete();
-        $this->dispatch('simpleAlert',
+        $this->dispatch('alertCRUD',
             '¡Solicitud Eliminada!',
             'El borrador ha sido elimnado',
             'success'
@@ -79,7 +80,8 @@ class Borradores extends Component
 
     public function goToEdit($memorandum)
     {
-        return redirect()->to(route("solicitudBienes.edit", ['edit_to_folio'=>$memorandum['memo_folio']]));
+        return redirect()->to(route("solicitudes.edit", ['edit_to_folio'=>$memorandum['memo_folio']]));
     }
 
 }
+

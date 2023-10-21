@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\Solicitudes;
+namespace App\Livewire\Shared\Solicitud;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -8,7 +8,9 @@ use Livewire\WithPagination;
 use App\Models\Memorandum;
 use Illuminate\Support\Facades\Auth;
 
-class SolicitudList extends Component
+use App\Helpers\Helper;
+
+class SolicitudesList extends Component
 {
     use WithPagination;
 
@@ -18,7 +20,9 @@ class SolicitudList extends Component
     public $ordenar = 'memo_folio';
     public $direccion='asc';
 
-    public function ordenaPor($ordenar) {    // Ordena la columna seleccionada de la tabla
+    public $backButton;
+
+    public function ordenaPor($ordenar) {
         if($this->ordenar==$ordenar){
             if($this->direccion == 'desc')
                 $this->direccion = 'asc';
@@ -31,7 +35,7 @@ class SolicitudList extends Component
         }
     }
 
-    public function loadDrafts() {     // Indica cuando esta lista la carga de los componentes
+    public function loadDrafts() {
         $this->cargarLista = true;
     }
 
@@ -42,13 +46,14 @@ class SolicitudList extends Component
 
         if($this->cargarLista){
             $memorandums = Memorandum::select('id','memo_fecha','memo_folio','memo_asunto','memo_creation_status')
-                ->where('memo_creation_status','Enviado')
-                ->where('solicitante_id', Auth::user() -> id)
-                ->where('memo_asunto','like','%'.$this->buscar.'%')
-                ->orderby($this->ordenar, $this->direccion)
-                ->paginate($this->mostrar);
+            ->where('memo_creation_status','not like','Borrador')
+            ->where('solicitante_id', Auth::user() -> id)
+            ->where('memo_asunto','like','%'.$this->buscar.'%')
+            ->orderby($this->ordenar, $this->direccion)
+            ->paginate($this->mostrar);
         }
-        return view('livewire.n17-a.solicitudes.solicitud-list',compact('memorandums'));
+        $this -> backButton = Helper::backButton();
+        return view('livewire.shared.solicitud.solicitudes-list', compact('memorandums'));
     }
 
     public function getDetails($memorandum)
@@ -60,4 +65,5 @@ class SolicitudList extends Component
     {
         return redirect()->to(route("solicitudes.edit", ['edit_to_folio'=>$memorandum['memo_folio']]));
     }
+
 }

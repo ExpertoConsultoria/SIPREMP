@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Livewire\N6\BienesServ;
+namespace App\Livewire\Shared\Solicitud;
+
+use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use App\Helpers\Helper;
 use stdClass;
 
@@ -16,6 +17,7 @@ use App\Models\User;
 use App\Models\Memorandum;
 use App\Models\MemorandumList;
 use App\Models\PptoDeEgreso;
+
 
 class SolicitudesCreate extends Component
 {
@@ -73,6 +75,10 @@ class SolicitudesCreate extends Component
     public $userSede;
     public $specificUserSede;
 
+    // Redireccionamiento
+    public $redirecTo;
+    public $backButton;
+
     protected function rules() {
         return [
             'fecha' => 'required|date',
@@ -129,13 +135,15 @@ class SolicitudesCreate extends Component
 
     public function render()
     {
-        return view('livewire.n6.bienes-serv.solicitudes-create');
+        $this -> backButton = Helper::backButton();
+        return view('livewire.shared.solicitud.solicitudes-create');
     }
 
     public function mount() {
         if ($this->edit_to_folio == '') {
 
             $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+            $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
 
             $this->fecha = date("Y-m-d");
             $this->folio = "MPEO-MM-00000";
@@ -176,9 +184,10 @@ class SolicitudesCreate extends Component
             $this->solicitante = $get_user->name;
 
             $this->specificUserSede = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->SedeNombre;
+            $this->specificUserSedeCode = $this->sucursal = is_string(Helper::GetSpecificUserSede($get_user)) ? Helper::GetSpecificUserSede($get_user) : Helper::GetSpecificUserSede($get_user)->Serie;
             $this->sucursal = $this->specificUserSede;
 
-            $this->sucursal = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'ND';
+            $this->sucursal = Helper::GetSpecificUserSede($get_user)->SedeNombre;
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 
@@ -231,7 +240,7 @@ class SolicitudesCreate extends Component
     }
 
     // Table Interactions
-    // public function CalculateAmount(){
+    // public function CalculateAmount() {
     //     if ($this->cantidad != "") {
     //         $this->cantidad = number_format($this->cantidad, 2, '.', '');
     //     }
@@ -254,7 +263,6 @@ class SolicitudesCreate extends Component
             $this->importe = 0;
         }
     }
-
 
     public function AddToList(){
 
@@ -314,7 +322,6 @@ class SolicitudesCreate extends Component
         $this->total = number_format($this->total, 2, '.', '');
     }
 
-
     public function Save(){
 
         if(!$this->is_editing) {
@@ -352,7 +359,7 @@ class SolicitudesCreate extends Component
                 }
 
                 $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-                return redirect()->route('dashboard');
+                return redirect()->route($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -416,7 +423,7 @@ class SolicitudesCreate extends Component
                 $this->actividad_mir = '';
                 $this->destinatario = '';
                 $this->cotizacion = '';
-                return redirect()->route('dashboard');
+                return redirect()->route($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -514,6 +521,25 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
         $this->destinatario = '';
         $this->cotizacion = '';
-        return redirect()->route('dashboard');
+        return redirect()->route($this -> redirectTo());
+    }
+
+    public function redirectTo() {
+        $user = Auth::user() -> roles[0] -> name;
+        if ( $user === 'N6:17A' ) {
+            return 'dashboard';
+        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
+            return 'solicitudes';
+        }
+    }
+
+    public function backButton() {
+        $user = Auth::user() -> roles[0] -> name;
+        if ( $user === 'N6:17A' ) {
+            $this -> backButton = 'dashboard';
+        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
+            $this -> backButton = 'solicitudes';
+        }
     }
 }
+
