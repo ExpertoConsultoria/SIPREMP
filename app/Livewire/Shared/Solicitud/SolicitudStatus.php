@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\Solicitudes;
+namespace App\Livewire\Shared\Solicitud;
 
 use Livewire\Component;
 
@@ -10,15 +10,19 @@ use App\Models\MemorandumList;
 
 use Illuminate\Contracts\Support\Renderable;
 
+use App\Helpers\Helper;
+
 class SolicitudStatus extends Component
 {
-
     public $details_of_folio = '';
     public $memorandum_details;
     public $memoList = [];
+
+    public $backButton;
     public function render()
     {
-        return view('livewire.n17-a.solicitudes.solicitud-status');
+        $this -> backButton = Helper::backButton();
+        return view('livewire.shared.solicitud.solicitud-status');
     }
 
     public function mount() {
