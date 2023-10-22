@@ -29,6 +29,7 @@ class Memorandum extends Model
 
         'token_aceptacion',
         'memo_creation_status',
+        'pass_filter',
         'motivo_rechazo',
         'pending_review',
     ];

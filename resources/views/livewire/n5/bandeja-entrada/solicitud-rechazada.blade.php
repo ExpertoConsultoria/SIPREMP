@@ -23,50 +23,7 @@
     <div class="py-8">
         <div class="max-w-screen-xl mx-auto">
             {{-- status --}}
-            <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <div class="container px-4 mx-auto">
-                    <div class="mb-3">
-                        <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
-                    </div>
-                    <div class="relative h-8 mb-4">
-                        {{-- Línea base de la barra de progreso  --}}
-                        <div class="h-1 w-[82%] sm:w-[85%] md:w-[89%] lg:w-[92%] xl:w-[93%] bg-gray-300 absolute top-3 left-0 right-0 mx-4"></div>
-
-                        {{-- Círculos y etiquetas --}}
-                        <div class="flex items-center justify-between">
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                                <p class="mt-1 text-xs">Enviado</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 bg-red-500 rounded-full"></div>
-                                <p class="mt-1 text-xs">Filtrado</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 rounded-full bg-stone-600"></div>
-                                <p class="mt-1 text-xs">Servicios Generales</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 rounded-full bg-stone-600"></div>
-                                <p class="mt-1 text-xs">Unidad Técnica</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 rounded-full bg-stone-600"></div>
-                                <p class="mt-1 text-xs">Control Presupuestal</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div class="w-6 h-6 rounded-full bg-stone-600 "></div>
-                                <p class="mt-1 text-xs">Dirección Administrativa</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-memorandum-status memorandum_id="{{$memorandum_details->id}}" />
 
             {{-- Datos --}}
             <div class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">

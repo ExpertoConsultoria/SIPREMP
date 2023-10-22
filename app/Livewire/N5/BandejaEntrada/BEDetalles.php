@@ -57,6 +57,7 @@ class BEDetalles extends Component
         $memorandum = Memorandum::where('memo_folio', $this->details_of_folio)->first();
         $memorandum->memo_creation_status = 'Validado';
         $memorandum->pending_review = 1;
+        $memorandum->pass_filter = 1;
         $memorandum->save();
 
         $this->panel = false;
@@ -74,6 +75,7 @@ class BEDetalles extends Component
         $memorandum->memo_creation_status = 'Rechazado';
         $memorandum->motivo_rechazo = $reason;
         $memorandum->pending_review = 1;
+        $memorandum->pass_filter = 0;
         $memorandum->save();
 
         $this->panel = false;

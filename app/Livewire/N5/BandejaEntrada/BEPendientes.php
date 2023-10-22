@@ -52,6 +52,7 @@ class BEPendientes extends Component
             $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
             ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->where('memo_creation_status','Enviado')
+                ->where('pass_filter',0)
                 ->whereNull('token_aceptacion')
                 ->whereNull('motivo_rechazo')
                 ->get();

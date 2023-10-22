@@ -111,18 +111,19 @@
                         <td class="px-4 py-2"> {{ $memo->memo_asunto }} </td>
                         <td class="px-4 py-2"> {{ $memo->memo_creation_status }} </td>
                         <td class="px-4 py-2 text-center">
-
                             @if ($memo->memo_creation_status === 'Rechazado')
                                 <x-button-colors color="green" wire:click="goToEdit({{ $memo }})">
                                     <i class="fa fa-fw fa-edit"></i>
-                                </x-button-colors>
-                                <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $memo->id }} })">
-                                    <i class="fas fa-trash"></i>
                                 </x-button-colors>
                             @endif
                             <x-button-colors color="indigo" wire:click="getDetails({{ $memo }})">
                                 <i class="fas fa-eye"></i>
                             </x-button-colors>
+                            @if ($memo->memo_creation_status === 'Rechazado')
+                                <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $memo->id }} })">
+                                    <i class="fas fa-trash"></i>
+                                </x-button-colors>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

@@ -52,6 +52,7 @@ class BEAprobadas extends Component
             $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->where('memo_creation_status','Validado')
+                ->where('pass_filter',1)
                 ->whereNull('motivo_rechazo')
                 ->whereNull('token_aceptacion')
                 ->get();

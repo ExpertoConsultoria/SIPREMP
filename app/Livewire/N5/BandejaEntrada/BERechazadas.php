@@ -52,6 +52,7 @@ class BERechazadas extends Component
             $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->where('memo_creation_status','Rechazado')
+                ->where('pass_filter',0)
                 ->whereNotNull('motivo_rechazo')
                 ->whereNull('token_aceptacion')
                 ->get();
