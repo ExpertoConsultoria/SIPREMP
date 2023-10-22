@@ -585,7 +585,10 @@ INSERT INTO `org3_puestos` (`id`, `Puesto`, `NUP`, `ClavePuesto`, `TipoPlaza`, `
 (43, 'Secretario Particular', NULL, '16B', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
 (44, 'Asesor', NULL, '16B', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49');
 
-INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES (NULL, 'EUAA911106FL2', 'EUAA911106MVZSLR06', '1741', NULL, 'Emili', 'Rodríguez', 'Reyes', 'emilli@gmail.com', '9514590568', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2023-10-09', '2023-10-31', NULL, '1', '1', NULL, NULL);
+INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES
+(1, 'EUAA911106FL2', 'EUAA911106MVZSLR06', 1741, NULL, 'Emili', 'Rodríguez', 'Reyes', 'emilli@gmail.com', '9514590568', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-09', '2023-10-31', NULL, 1, 21, NULL, NULL),
+(2, NULL, NULL, NULL, NULL, 'Luis Esteban', 'Lopez ', 'Rios ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 2, 2, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
+(3, NULL, NULL, NULL, NULL, 'Carlos Emanuel', 'Almaraz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 3, 5, '2023-10-19 19:28:11', '2023-10-19 19:28:11');
 
 INSERT INTO `ppto1_capitulos` (`id`, `Capitulo`, `CapituloNombre`, `created_at`, `updated_at`) VALUES
 (1, 1000, 'SERVICIOS PERSONALES', '2023-03-22 10:23:04', '2023-03-22 10:23:04'),
