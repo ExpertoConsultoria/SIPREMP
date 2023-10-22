@@ -1,10 +1,10 @@
-<div>
+<div wire:init="loadApproved">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Solicitudes Rechazadas') }}
+                    {{ __('Estatus de Solicitudes Autorizadas') }}
                 </h2>
             </div>
 
@@ -45,41 +45,90 @@
                 </button>
             </div>
 
-        </div>
-
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        </div><div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            @if (count($aprobadas))
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                        <th wire:click="ordenaPor('memo_folio')" class="px-4 py-2 cursor-pointer">
                             Folio
+                            @if ($ordenar == 'memo_folio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th wire:click="ordenaPor('memo_fecha')" class="px-4 py-2 cursor-pointer">
                             Fecha de creación
+                            @if ($ordenar == 'memo_fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th wire:click="ordenaPor('memo_asunto')" class="px-4 py-2 cursor-pointer">
                             Asunto
+                            @if ($ordenar == 'memo_asunto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th wire:click="ordenaPor('solicitante_id')" class="px-4 py-2 cursor-pointer">
                             Solicitante
+                            @if ($ordenar == 'solicitante_id')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
                         </th>
                         <th class="px-4 py-2 text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($aprobadas as $aprobada)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-4 py-2"> #88898</td>
-                        <td class="px-4 py-2"> 14/09/2023 </td>
-                        <td class="px-4 py-2"> Solicitud de computadoras</td>
-                        <td class="px-4 py-2"> Usuario del que proviene</td>
+                        <td class="px-4 py-2">{{ $aprobada->memo_folio }}</td>
+                        <td class="px-4 py-2">{{ $aprobada->memo_fecha }}</td>
+                        <td class="px-4 py-2">{{ $aprobada->memo_asunto }}</td>
+                        <td class="px-4 py-2">{{ $aprobada->solicitante->name }}</td>
                         <td class="px-4 py-2 text-center">
-                            <x-button-colors color="indigo"  wire:click="getDetails()">
-                                <i class="fas fa-eye"></i>
+                            <x-button-colors color="indigo" wire:click="getDetails({{ $aprobada }})">
+                                <i class="fa fa-fw fa-eye"></i>
                             </x-button-colors>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
+            @if ($aprobadas->hasPages())
+            <div class="px-6 py-3">
+                {{ $aprobadas->links() }}
+            </div>
+            @endif
+            @else
+            <div class="bg-gray-50 dark:bg-gray-700">
+                <p class="p-4 font-semibold text-center">
+                    !! No existen registros ¡¡
+                </p>
+            </div>
+            @endif
         </div>
     </div>
 </div>

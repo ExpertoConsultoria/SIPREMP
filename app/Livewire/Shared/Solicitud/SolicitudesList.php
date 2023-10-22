@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\Memorandum;
+use App\Models\MemorandumList;
 use Illuminate\Support\Facades\Auth;
 
 use App\Helpers\Helper;
@@ -21,6 +22,8 @@ class SolicitudesList extends Component
     public $direccion='asc';
 
     public $backButton;
+
+    protected $listeners = ['deleteDraft'];
 
     public function ordenaPor($ordenar) {
         if($this->ordenar==$ordenar){
@@ -59,6 +62,22 @@ class SolicitudesList extends Component
     public function getDetails($memorandum)
     {
         return redirect()->to(route("solicitudes.show", ['details_of_folio'=>$memorandum['memo_folio']]));
+    }
+
+    #[On('deleteDraft')]
+    public function deleteDraft($id) {
+        $memorandum = Memorandum::findOrFail($id);
+        $allItems = MemorandumList::where('im_folio',$memorandum->memo_folio)->get();
+
+        foreach ($allItems as $item) {
+            $item->delete();
+        }
+        $memorandum->delete();
+        $this->dispatch('alertCRUD',
+            '¡Solicitud Eliminada!',
+            'La Solicitud ha sido elimnada',
+            'success'
+        );
     }
 
     public function goToEdit($memorandum)

@@ -18,15 +18,19 @@ class SolicitudStatus extends Component
     public $memorandum_details;
     public $memoList = [];
 
-    public $backButton;
     public function render()
     {
-        $this -> backButton = Helper::backButton();
         return view('livewire.shared.solicitud.solicitud-status');
     }
 
     public function mount() {
-        $this -> memorandum_details = Memorandum::where('memo_folio', $this -> details_of_folio) -> first();
+        $this-> memorandum_details= Memorandum::where('memo_folio', $this -> details_of_folio) -> first();
+
+        if($this->memorandum_details->pending_review === 1){
+            $this->memorandum_details->pending_review = 0;
+            $this->memorandum_details->save();
+        }
+
         $this -> memorandum_details -> load('solicitante');
         // $this -> memorandum_details -> load('memorandumList');
         $this -> memoList = MemorandumList::where('im_folio', $this -> memorandum_details -> memo_folio) -> get();;

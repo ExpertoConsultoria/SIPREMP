@@ -21,9 +21,16 @@
         <link href="{{ asset('fontawesome/css/brands.css') }}" rel="stylesheet">
         <link href="{{ asset('fontawesome/css/solid.css') }}" rel="stylesheet">
 
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
         <!-- Styles -->
         @stack('css')
         @livewireStyles
+        <style>
+            .toastify {
+                border-radius: 10px;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         <x-banner />
@@ -53,6 +60,8 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
         <script>
             Livewire.on('simpleAlert', ([title,icon]) => {
                 Swal.fire({
@@ -68,6 +77,22 @@
 
             Livewire.on('alertCRUD', ([title,message,icon]) => {
                 Swal.fire(title,message,icon)
+            });
+
+            Livewire.on('toastifyAlert', ([title,route,color,duration,gravity,position]) => {
+                Toastify({
+                    text: title,
+                    duration: duration,
+                    destination: route,
+                    newWindow: false,
+                    // close: true,
+                    gravity: gravity, // `top` or `bottom`
+                    position: position, // `left`, `center` or `right`
+                    stopOnFocus: true,
+                    style: {
+                        background: ` linear-gradient(to right, ${color} , ${color})`,
+                    },
+                }).showToast();
             });
         </script>
     </body>

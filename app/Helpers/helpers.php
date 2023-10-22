@@ -71,11 +71,14 @@ class Helper
         return $sede;
     }
 
+    // For Solicitud Module
     public static function backButton() {
-        $user = Auth::user() -> roles[0] -> name;
+        $user = Auth::user()->roles[0]->name;
+
         if ( $user === 'N6:17A' ) {
+            // Check the dashboard of this user for understand
             return 'dashboard';
-        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
+        } else {
             return 'solicitudes';
         }
     }

@@ -239,18 +239,6 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
     }
 
-    // Table Interactions
-    // public function CalculateAmount() {
-    //     if ($this->cantidad != "") {
-    //         $this->cantidad = number_format($this->cantidad, 2, '.', '');
-    //     }
-    //     if ($this->p_u != "") {
-    //         $this->p_u = number_format($this->p_u, 3, '.', '');
-    //     }
-
-    //     $importe = $this->cantidad * $this->p_u;
-    //     $this->importe = number_format($importe, 2, '.', '');
-    // }
     public function CalculateAmount(){
         if (is_numeric($this->cantidad) && is_numeric($this->p_u)) {
             $cantidad = floatval($this->cantidad);
@@ -533,13 +521,5 @@ class SolicitudesCreate extends Component
         }
     }
 
-    public function backButton() {
-        $user = Auth::user() -> roles[0] -> name;
-        if ( $user === 'N6:17A' ) {
-            $this -> backButton = 'dashboard';
-        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
-            $this -> backButton = 'solicitudes';
-        }
-    }
 }
 

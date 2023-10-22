@@ -10,9 +10,7 @@
         </div>
     </x-slot>
 
-    <!-- {{Auth::user() -> roles[0]}} -->
-
-    @if ( Auth::user() -> roles[0] -> name === 'N6:17A' )
+    @if (Auth::user()->roles[0]->name === 'N6:17A' )
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -45,6 +43,7 @@
                 <div class="grid justify-center">
                     <div
                         class="container grid grid-cols-1 gap-6 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+
                         <div
                             class="w-64 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
                             <a href="{{ route('solicitudes.create') }}" class="text-right">
@@ -72,7 +71,7 @@
 
                             <div
                                 class="w-64 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                                <a href="{{ route('solicitudBienes.borradores') }}" class="text-right">
+                                <a href="{{ route('solicitudes.borradores') }}" class="text-right">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                     fill="none">
@@ -130,7 +129,7 @@
             </div>
         </div>
 
-    @elseif( Auth::user() -> roles[0] -> name === 'N5:18A:F')
+    @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -230,7 +229,7 @@
             </div>
         </div>
 
-    @elseif(Auth::user() -> roles[0] -> name == 'admin' || Auth::user() -> roles[0] -> name == 'N7:GS:17A')
+    @elseif(Auth::user()->roles[0]->name == 'N7:GS:17A')
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -326,5 +325,292 @@
         </div>
 
     @endif
+
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+
+            @if (Auth::user()->roles[0]->name === 'N6:17A')
+                $(document).ready(function () {
+                    setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                });
+
+                // On window load
+                window.onload = function () {
+                    localStorage.setItem("rejectionAlert", '');
+                    localStorage.setItem("acceptanceAlert", '');
+                    localStorage.setItem("approvedAlert", '');
+                    getRejectionAlert();
+                    getAcceptanceAlert();
+                    getApprovedAlert();
+                }
+
+                // On window unload
+                window.onbeforeunload = function () {
+                    localStorage.removeItem("rejectionAlert");
+                    localStorage.removeItem("acceptanceAlert");
+                    localStorage.removeItem("approvedAlert");
+                };
+
+                function getRejectionAlert() {
+
+                    var rejectionAlert = localStorage.getItem("rejectionAlert");
+
+                    $.get('api/rejectionAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (rejectionAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != rejectionAlert) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`, `/solicitudes/${data.folios[i]}`, '#F05252',10000,'bottom','right']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rejectionAlert", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`, `/solicitudes/${data.folios[i]}`, '#F05252',10000,'bottom','right']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlert", data);
+                        }
+
+                    });
+                }
+
+                function getAcceptanceAlert() {
+
+                    var acceptanceAlert = localStorage.getItem("acceptanceAlert");
+
+                    $.get('api/acceptanceAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (acceptanceAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlert) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                        Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
+                                    @endif
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlert", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+
+                                @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                    Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
+                                @endif
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlert", data);
+                        }
+
+                    });
+                }
+
+                function getApprovedAlert() {
+
+                    var approvedAlert = localStorage.getItem("approvedAlert");
+
+                    $.get('api/approvedAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (approvedAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != approvedAlert) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Aprobada por Servicos Generales`, `/solicitudes/${data.folios[i]}`, '#0b8750',10000,'bottom','right']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("approvedAlert", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Aprobada por Servicos Generales`, `/solicitudes/${data.folios[i]}`, '#0b8750',10000,'bottom','right']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("approvedAlert", data);
+                        }
+
+                    });
+                }
+            @else
+
+                $(document).ready(function () {
+                    setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                        setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @endif
+                });
+
+                // On window load
+                window.onload = function () {
+                    localStorage.setItem("rejectionAlert", '');
+                    localStorage.setItem("acceptanceAlert", '');
+                    localStorage.setItem("approvedAlert", '');
+                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                        localStorage.setItem("trayAlert", '');
+                        getTrayAlert();
+                    @endif
+                    getRejectionAlert();
+                    getAcceptanceAlert();
+                    getApprovedAlert();
+                }
+
+                // On window unload
+                window.onbeforeunload = function () {
+                    localStorage.removeItem("rejectionAlert");
+                    localStorage.removeItem("acceptanceAlert");
+                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                        localStorage.removeItem("trayAlert");
+                    @endif
+                };
+
+                function getRejectionAlert() {
+
+                    var rejectionAlert = localStorage.getItem("rejectionAlert");
+
+                    $.get('api/rejectionAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (rejectionAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != rejectionAlert) {
+
+                                data = JSON.parse(data);
+                                if(data.folios.length > 0){
+                                    Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Rechazadas`, `/solicitudes`, '#F05252',10000,'bottom','center']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rejectionAlert", data);
+                            }
+
+                        } else {
+
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Rechazadas`, `/solicitudes`, '#F05252',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlert", data);
+                        }
+
+                    });
+                }
+
+                function getAcceptanceAlert() {
+
+                    var acceptanceAlert = localStorage.getItem("acceptanceAlert");
+
+                    $.get('api/acceptanceAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (acceptanceAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlert) {
+
+                                data = JSON.parse(data);
+                                if(data.folios.length > 0){
+                                    Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Validadas`, `/solicitudes`, '#5682C2',10000,'bottom','center']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlert", data);
+                            }
+
+                        } else {
+
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Validadas`, `/solicitudes`, '#5682C2',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlert", data);
+                        }
+
+                    });
+                }
+
+                function getApprovedAlert() {
+
+                    var approvedAlert = localStorage.getItem("approvedAlert");
+
+                    $.get('api/approvedAlert/{{ Auth::user()->id }}', function (data) {
+
+                        if (approvedAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != approvedAlert) {
+
+                                data = JSON.parse(data);
+                                if(data.folios.length > 0){
+                                    Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Aprobadas`, `/solicitudes`, '#0b8750',10000,'bottom','center']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("approvedAlert", data);
+                            }
+
+                        } else {
+
+                            if(data.folios.length > 0){
+                                Livewire.dispatch('toastifyAlert', [`Tienes solicitudes Aprobadas`, `/solicitudes`, '#0b8750',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("approvedAlert", data);
+                        }
+
+                    });
+                }
+
+                function getTrayAlert() {
+
+                    var trayAlert = localStorage.getItem("trayAlert");
+
+                    $.get('api/trayAlert/{{ Auth::user()->roles[0]->name }}', function (data) {
+
+                        if (trayAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != trayAlert) {
+
+                                data = JSON.parse(data);
+                                if(data != ''){
+                                    Livewire.dispatch('toastifyAlert', [data, `/bandeja-entrada/pendientes`, '#d97706',10000,'bottom','center']);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("trayAlert", data);
+                            }
+
+                        } else {
+
+                            if(data != ''){
+                                Livewire.dispatch('toastifyAlert', [data, `/bandeja-entrada/pendientes`, '#d97706',10000,'bottom','center']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("trayAlert", data);
+                        }
+
+                    });
+                }
+            @endif
+
+        </script>
+    @endpush
 
 </x-app-layout>
