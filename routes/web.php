@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\N17A\CajaMenor\CCMCreate;
-use App\Livewire\N17A\CajaMenor\CCMBorradores;
-use App\Livewire\N17A\CajaMenor\CCMList;
-use App\Livewire\N17A\CajaMenor\CCMDetalles;
-use App\Livewire\N17A\CajaMenor\CCMListaReportes;
-use App\Livewire\N17A\CajaMenor\CCMReportData;
+use App\Livewire\Shared\CajaMenor\CCMCreate;
+use App\Livewire\Shared\CajaMenor\CCMBorradores;
+use App\Livewire\Shared\CajaMenor\CCMList;
+use App\Livewire\Shared\CajaMenor\CCMDetalles;
+use App\Livewire\Shared\CajaMenor\CCMListaReportes;
+use App\Livewire\Shared\CajaMenor\CCMReportData;
 
-use App\Livewire\N5\BandejaEntrada\BEPendientes;
-use App\Livewire\N5\BandejaEntrada\BERechazadas;
-use App\Livewire\N5\BandejaEntrada\BEAprobadas;
-use App\Livewire\N5\BandejaEntrada\SolicitudRechazada;
-use App\Livewire\N5\BandejaEntrada\SolicitudAceptada;
-use App\Livewire\N5\BandejaEntrada\BEDetalles;
+use App\Livewire\Shared\BandejaEntrada\BEPendientes;
+use App\Livewire\Shared\BandejaEntrada\BERechazadas;
+use App\Livewire\Shared\BandejaEntrada\BEAprobadas;
+use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
+use App\Livewire\Shared\BandejaEntrada\SolicitudAceptada;
+use App\Livewire\Shared\BandejaEntrada\BEDetalles;
 
 // Shared Components
 use App\Livewire\Shared\Solicitud\SolicitudesCreate;
