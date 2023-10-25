@@ -139,7 +139,7 @@ class CCMList extends Component
 
     public function getDetails($compra)
     {
-        return redirect()->to(route("cajamenor.create", ['details_of_folio'=>$compra['cm_folio']]));
+        return redirect()->to(route("cajamenor.show", ['details_of_folio'=>$compra['cm_folio']]));
     }
 
     public function printData($compra)

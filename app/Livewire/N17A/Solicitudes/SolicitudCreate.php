@@ -317,104 +317,113 @@ class SolicitudCreate extends Component
         // Ways of Save
         public function Save(){
     
-            if(!$this->is_editing){
+            if(!$this->is_editing) {
+                if(count($this->elementosMemorandum)){
+                    $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSede);
     
-                $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSede);
-    
-                $this->validate();
-    
-                $this->memorandum = new Memorandum();
-                $this->memorandum->memo_fecha = $this->fecha;
-                $this->memorandum->memo_folio = $this->folio;
-                $this->memorandum->solicitante_id = Auth::user()->id;
-                $this->memorandum->memo_sucursal = $this->sucursal;
-                $this->memorandum->destinatario = $this->destinatario;
-                $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                $this->memorandum->memo_asunto = $this->asunto;
-                $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
-                $this->memorandum->mir_id_proposito = $this->proposito_mir;
-                $this->memorandum->mir_id_componente = $this->componente_mir;
-                $this->memorandum->mir_id_actividad =  $this->actividad_mir;
-    
-                $this->memorandum->memo_creation_status = 'Enviado';
-    
-                $this->memorandum->save();
-    
-                foreach ($this->elementosMemorandum as $item) {
-                    $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->folio;
-                    $this->memorandum_item->im_cantidad = $item->im_cantidad;
-                    $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
-                    $this->memorandum_item->im_concepto = $item->im_concepto;
-                    $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
-                    $this->memorandum_item->im_precio_u = $item->im_precio_u;
-                    $this->memorandum_item->im_importe = $item->im_importe;
-                    $this->memorandum_item->save();
-                }
-    
-                $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-            } else {
-    
-                $this->validate();
-    
-                // Search CompraMenor
-                $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
-                // Get item list
-                $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
-    
-                foreach ($all_items as $item_list) {
-                    $item_list->delete();
-                }
-    
-                if ($this->memorandum->memo_creation_status == 'Enviado') {
+                    $this->validate();
+        
+                    $this->memorandum = new Memorandum();
+                    $this->memorandum->memo_fecha = $this->fecha;
                     $this->memorandum->memo_folio = $this->folio;
-                } else {
-                    if (str_starts_with($this->memorandum->memo_folio, '&')) {
-                        $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->specificUserSede);
-                    }else{
-                        $this->memorandum->memo_folio = $this->folio;
+                    $this->memorandum->solicitante_id = Auth::user()->id;
+                    $this->memorandum->memo_sucursal = $this->sucursal;
+                    $this->memorandum->destinatario = $this->destinatario;
+                    $this->memorandum->memo_id_cotizacion = $this->cotizacion;
+                    $this->memorandum->memo_asunto = $this->asunto;
+                    $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
+                    $this->memorandum->mir_id_proposito = $this->proposito_mir;
+                    $this->memorandum->mir_id_componente = $this->componente_mir;
+                    $this->memorandum->mir_id_actividad =  $this->actividad_mir;
+        
+                    $this->memorandum->memo_creation_status = 'Enviado';
+        
+                    $this->memorandum->save();
+        
+                    foreach ($this->elementosMemorandum as $item) {
+                        $this->memorandum_item = new MemorandumList();
+                        $this->memorandum_item->im_folio = $this->folio;
+                        $this->memorandum_item->im_cantidad = $item->im_cantidad;
+                        $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
+                        $this->memorandum_item->im_concepto = $item->im_concepto;
+                        $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
+                        $this->memorandum_item->im_precio_u = $item->im_precio_u;
+                        $this->memorandum_item->im_importe = $item->im_importe;
+                        $this->memorandum_item->save();
                     }
+        
+                    $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
+                    return redirect()->route('solicitudes');
+                } else {
+                    $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
+                    return;
                 }
-    
-                $this->memorandum->memo_asunto = $this->asunto;
-                $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
-                $this->memorandum->mir_id_proposito = $this->proposito_mir;
-                $this->memorandum->mir_id_componente = $this->componente_mir;
-                $this->memorandum->mir_id_actividad =  $this->actividad_mir;
-                $this->memorandum->memo_sucursal = $this->sucursal;
-                $this->memorandum->destinatario = $this->destinatario;
-                $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                $this->memorandum->memo_creation_status = 'Enviado';
-    
-                $this->memorandum->save();
-    
-                foreach ($this->elementosMemorandum as $item) {
-                    $this->memorandum_item = new MemorandumList();
-                    $this->memorandum_item->im_folio = $this->memorandum->memo_folio;
-                    $this->memorandum_item->im_cantidad = $item->im_cantidad;
-                    $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
-                    $this->memorandum_item->im_concepto = $item->im_concepto;
-                    $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
-                    $this->memorandum_item->im_precio_u = $item->im_precio_u;
-                    $this->memorandum_item->im_importe = $item->im_importe;
-                    $this->memorandum_item->save();
+            } else {
+                if ( count($this->elementosMemorandum ) ) {
+                    $this->validate();
+        
+                    // Search CompraMenor
+                    $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
+                    // Get item list
+                    $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
+        
+                    foreach ($all_items as $item_list) {
+                        $item_list->delete();
+                    }
+        
+                    if ($this->memorandum->memo_creation_status == 'Enviado') {
+                        $this->memorandum->memo_folio = $this->folio;
+                    } else {
+                        if (str_starts_with($this->memorandum->memo_folio, '&')) {
+                            $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->specificUserSede);
+                        }else{
+                            $this->memorandum->memo_folio = $this->folio;
+                        }
+                    }
+        
+                    $this->memorandum->memo_asunto = $this->asunto;
+                    $this->memorandum->mir_id_fin = $this->fin_mir; $this->fin_mir;
+                    $this->memorandum->mir_id_proposito = $this->proposito_mir;
+                    $this->memorandum->mir_id_componente = $this->componente_mir;
+                    $this->memorandum->mir_id_actividad =  $this->actividad_mir;
+                    $this->memorandum->memo_sucursal = $this->sucursal;
+                    $this->memorandum->destinatario = $this->destinatario;
+                    $this->memorandum->memo_id_cotizacion = $this->cotizacion;
+                    $this->memorandum->memo_creation_status = 'Enviado';
+        
+                    $this->memorandum->save();
+        
+                    foreach ($this->elementosMemorandum as $item) {
+                        $this->memorandum_item = new MemorandumList();
+                        $this->memorandum_item->im_folio = $this->memorandum->memo_folio;
+                        $this->memorandum_item->im_cantidad = $item->im_cantidad;
+                        $this->memorandum_item->im_unidad_medida = $item->im_unidad_medida;
+                        $this->memorandum_item->im_concepto = $item->im_concepto;
+                        $this->memorandum_item->im_partida_presupuestal = $item->im_partida_presupuestal;
+                        $this->memorandum_item->im_precio_u = $item->im_precio_u;
+                        $this->memorandum_item->im_importe = $item->im_importe;
+                        $this->memorandum_item->save();
+                    }
+        
+                    $this->dispatch('alertCRUD','Exito!', 'Actualizado correctamente', 'success');
+                    $this->reset('asunto');
+                    $this->fecha = date("Y-m-d");
+                    $this->folio = 'MPEO-MM-00000';
+                    $this->solicitante = auth()->user()->name;
+                    $this->sucursal = $this->userSede;
+                    $this->fin_mir = '';
+                    $this->proposito_mir = '';
+                    $this->componente_mir = '';
+                    $this->actividad_mir = '';
+                    $this->destinatario = '';
+                    $this->cotizacion = '';
+                    return redirect()->route('solicitudes');
+                } else {
+                    $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
+                    return;
                 }
-    
-                $this->dispatch('alertCRUD','Exito!', 'Actualizado correctamente', 'success');
+
             }
-    
-            $this->reset('asunto');
-            $this->fecha = date("Y-m-d");
-            $this->folio = 'MPEO-MM-00000';
-            $this->solicitante = auth()->user()->name;
-            $this->sucursal = $this->userSede;
-            $this->fin_mir = '';
-            $this->proposito_mir = '';
-            $this->componente_mir = '';
-            $this->actividad_mir = '';
-            $this->destinatario = '';
-            $this->cotizacion = '';
-            return redirect()->route('dashboard');
     
         }
     
