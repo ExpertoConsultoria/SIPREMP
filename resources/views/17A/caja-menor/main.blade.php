@@ -26,11 +26,10 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div
-                    class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mb-6">
 
                     <div
-                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('cajamenor.create') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 45"
@@ -44,8 +43,7 @@
                         </a>
                     </div>
 
-                    <div
-                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('cajamenor.borradores') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49"
@@ -72,8 +70,7 @@
                         </a>
                     </div>
 
-                    <div
-                        class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('cajamenor.compras') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="49" viewBox="0 0 50 47"
@@ -100,8 +97,7 @@
                         </a>
                     </div>
 
-                    <div
-                        class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('cajamenor.reportes') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="49" viewBox="0 0 50 47"
@@ -123,7 +119,6 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-
                             <p class="text-lg mt-24">Reportes </p>
                         </a>
                     </div>

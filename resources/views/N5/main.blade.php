@@ -25,9 +25,9 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mb-6">
                     <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('bandejaentrada.new') }}" class="text-right">
 
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,8 +42,7 @@
                         </a>
                     </div>
 
-                    <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('bandejaentrada.rechazada') }}" class="text-right">
 
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +62,7 @@
                     </div>
 
                     <div
-                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('bandejaentrada.list') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"

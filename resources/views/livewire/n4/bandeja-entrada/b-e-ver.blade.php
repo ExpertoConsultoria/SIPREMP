@@ -29,9 +29,9 @@
                 <div class="container">
                     <div class="grid grid-cols-3 gap-10">
                         <div class="text-center">
-                            <button type="button"
+                            <button type="button" wire:click="ValeCreate()"
                                 class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                APROBAR Y ENVIAR SOLICITUD
+                                CREAR VALE
                             </button>
                         </div>
                         <div class="text-center">

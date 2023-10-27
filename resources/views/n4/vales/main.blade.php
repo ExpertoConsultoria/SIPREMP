@@ -3,8 +3,8 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Solicitudes') }}
+                <h2 class="text-xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
+                    {{ __('Vales') }}
                 </h2>
             </div>
 
@@ -26,10 +26,10 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mb-6">
+                <div class="container grid grid-cols-5 gap-6 px-8 m-auto justify-content-center mb-6">
                     <div
                         class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('solicitudes.create') }}" class="text-right">
+                        <a href="{{ route('vales.createnew') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="53" viewBox="0 0 40 53"
                                 fill="none">
@@ -48,13 +48,13 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-20">Nueva Solicitud de <br /> Bienes/Servicios</p>
+                            <p class="text-lg mt-24">Crear nuevo vale</p>
                         </a>
                     </div>
 
                     <div
                         class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <a href="{{ route('solicitudes.borradores') }}" class="text-right">
+                        <a href="{{ route('vales.borradores') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                 fill="none">
@@ -75,13 +75,33 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-20">Borradores </p>
+                            <p class="text-lg mt-24">Vales en borrador </p>
                         </a>
                     </div>
 
                     <div
                         class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                         <a href="{{ route('solicitudes.list') }}" class="text-right">
+
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_99_10923)">
+                                <path d="M20 0C8.97156 0 0 8.97156 0 20C0 31.0284 8.97156 40 20 40C31.0284 40 40 31.0284 40 20C40 8.97156 31.0284 0 20 0Z" fill="#F44336"/>
+                                <path d="M27.3649 25.0082C28.0164 25.6601 28.0164 26.7133 27.3649 27.3651C27.0399 27.6901 26.6132 27.8534 26.1863 27.8534C25.7597 27.8534 25.333 27.6901 25.008 27.3651L19.9998 22.3566L14.9915 27.3651C14.6665 27.6901 14.2399 27.8534 13.8132 27.8534C13.3863 27.8534 12.9597 27.6901 12.6347 27.3651C11.9831 26.7133 11.9831 25.6601 12.6347 25.0082L17.6432 20L12.6347 14.9918C11.9831 14.3399 11.9831 13.2867 12.6347 12.6349C13.2865 11.9833 14.3397 11.9833 14.9915 12.6349L19.9998 17.6434L25.008 12.6349C25.6599 11.9833 26.713 11.9833 27.3649 12.6349C28.0164 13.2867 28.0164 14.3399 27.3649 14.9918L22.3563 20L27.3649 25.0082Z" fill="#FAFAFA"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_99_10923">
+                                <rect width="40" height="40" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+
+                            <p class="text-lg mt-24">Solicitudes <br> rechazadas</p>
+                        </a>
+                    </div>
+
+                    <div
+                        class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <a href="{{ route('vales.list') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                 fill="none">
@@ -100,7 +120,26 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-20">Estatus de <br /> Solicitudes</p>
+                            <p class="text-lg mt-24">Vales revisados <br> y enviados</p>
+                        </a>
+                    </div>
+
+                    <div
+                        class="w-52 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <a href="{{ route('vales.aprobados') }}" class="text-right">
+
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_156_4721)">
+                                <path d="M34.107 5.89312C26.3157 -1.89813 13.6845 -1.89813 5.89324 5.89312C-1.89801 13.6844 -1.89801 26.3156 5.89324 34.1069C13.6845 41.8981 26.3157 41.8981 34.107 34.1069C41.8982 26.3156 41.8982 13.6831 34.107 5.89312ZM16.8695 30.3094L7.81449 21.2544L11.3495 17.7194L16.8695 23.2394L28.6495 11.4581L32.1845 14.9931L16.8695 30.3094Z" fill="#515151"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_156_4721">
+                                <rect width="40" height="40" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+
+                            <p class="text-lg mt-24">Vales aprobados</p>
                         </a>
                     </div>
 
