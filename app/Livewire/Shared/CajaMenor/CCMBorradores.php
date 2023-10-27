@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -55,7 +55,7 @@ class CCMBorradores extends Component
 
         }
 
-        return view('livewire.n17-a.caja-menor.c-c-m-borradores',compact('drafts'));
+        return view('livewire.shared.caja-menor.c-c-m-borradores',compact('drafts'));
     }
 
     #[On('deleteDraft')]

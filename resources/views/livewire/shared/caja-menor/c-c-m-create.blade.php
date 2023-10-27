@@ -162,7 +162,7 @@
                                 <input wire:model.blur="factura_id" type="hidden" name="factura_id">
                                 @error('factura_id') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
                                 @if ($add_xml)
-                                    @livewire('n17-a.caja-menor.add-xml')
+                                    @livewire('shared.caja-menor.add-xml')
                                 @else
                                     <div class="text-center">
                                         <p class="block text-lg font-bold text-gray-900 text-start dark:text-white">

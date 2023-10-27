@@ -26,7 +26,7 @@
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $fecha }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_fecha }}</p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}"/>
@@ -34,11 +34,11 @@
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $solictante }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->solicitante->name }}</p>
                         </div>
                         <div>
                             <x-label for="sucursal" value="{{ __('Sucursal') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $sucursal }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->solicitante->sucursal }}</p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}"/>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="mt-3">
                         <x-label for="justificacion" value="{{ __('Justificación') }}"/>
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $justificacion }}</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_asunto }}</p>
                     </div>
                 </div>
             </div>
@@ -150,21 +150,21 @@
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Subtotal:</p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $subtotal }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_subtotal }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:</p>
                         </div>
                         <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $iva }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_iva }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
                             <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:</p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $total }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_total }}
                             </p>
                         </div>
                     </div>

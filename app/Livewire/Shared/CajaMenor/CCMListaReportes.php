@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -49,7 +49,7 @@ class CCMListaReportes extends Component
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
         }
-        return view('livewire.n17-a.caja-menor.c-c-m-lista-reportes',compact('reports'));
+        return view('livewire.shared.caja-menor.c-c-m-lista-reportes',compact('reports'));
     }
 
     #[On('deleteReport')]

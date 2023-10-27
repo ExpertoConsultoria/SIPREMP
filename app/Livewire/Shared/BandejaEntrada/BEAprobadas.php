@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N5\BandejaEntrada;
+namespace App\Livewire\Shared\BandejaEntrada;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -72,7 +72,7 @@ class BEAprobadas extends Component
             $aprobadas = new LengthAwarePaginator($aprobadas->forPage($page, $this->mostrar), $aprobadas->count(), $this->mostrar, $page);
         }
 
-        return view('livewire.n5.bandeja-entrada.b-e-aprobadas', compact('aprobadas'));
+        return view('livewire.shared.bandeja-entrada.b-e-aprobadas', compact('aprobadas'));
     }
 
     public function getDetails($memorandum)

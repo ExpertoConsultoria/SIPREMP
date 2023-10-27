@@ -70,5 +70,10 @@ class User extends Authenticatable
     public function org4empleado(): HasOne
     {
         return $this->hasOne(Org4Empleado::class);
+
+    }
+    public function ccm(): HasOne
+    {
+        return $this->hasOne(CompraMenor::class);
     }
 }

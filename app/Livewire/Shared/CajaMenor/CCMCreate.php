@@ -2,7 +2,7 @@
 
 //ToDo https://github.com/phpcfdi/cfdi-to-json#convirtiendo-de-domdocument-a-array
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 use App\Helpers\Helper;
 use App\Models\CompraMenor;
@@ -47,11 +47,8 @@ class CCMCreate extends Component
     public $componente_mir;
     public $actividad_mir;
 
-    // public $cantidad;
-    // public $unidad_medida;
-    // public $concepto;
-    // public $p_u;
-    // public $importe;
+    public $fecha_entrega;
+    public $sede_entrega;
 
     public $partida_presupuestal;
 
@@ -102,6 +99,8 @@ class CCMCreate extends Component
             'proposito_mir' => 'required',
             'componente_mir' => 'required',
             'actividad_mir' => 'required',
+            'sede_entrega' => 'required',
+            'fecha_entrega' => 'required',
         ];
     }
 
@@ -129,6 +128,9 @@ class CCMCreate extends Component
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
 
         'factura_id.required' => 'No has adjuntado ninguna Factura.',
+
+        'fecha_entrega.required' => 'Este campo es Obligatorio.',
+        'sede_entrega.required' => 'Este campo es Obligatorio.',
     ];
 
     protected $listeners = ['loadDataXML','setPartidaP'];
@@ -150,6 +152,14 @@ class CCMCreate extends Component
             $this->proposito_mir = '';
             $this->componente_mir = '';
             $this->actividad_mir = '';
+
+            if(Auth::user()->roles[0]->name === 'N7:GS:17A'){
+                $this->sede_entrega = 'Ninguno';
+                $this->fecha_entrega = 'Ninguno';
+            }else{
+                $this->sede_entrega = '';
+                $this->fecha_entrega = '';
+            }
 
             $this->razon_social = "-- -- --";
             $this->RFC = "-- -- --";
@@ -197,6 +207,9 @@ class CCMCreate extends Component
             $this->iva = number_format($this->compra_to_edit->cm_iva, 2, '.', '');
             $this->total = number_format($this->compra_to_edit->cm_total, 2, '.', '');
 
+            $this->sede_entrega = $this->compra_to_edit->cm_entrega_sede;
+            $this->fecha_entrega = $this->compra_to_edit->cm_entrega_fecha;
+
             $this->fin_mir = $this->compra_to_edit->mir_id_fin;
             $this->GetProposes($this->fin_mir);
             $this->proposito_mir = $this->compra_to_edit->mir_id_proposito;
@@ -229,7 +242,7 @@ class CCMCreate extends Component
 
     public function render()
     {
-        return view('livewire.n17-a.caja-menor.c-c-m-create');
+        return view('livewire.shared.caja-menor.c-c-m-create');
     }
 
     // Forge MIR
@@ -368,6 +381,8 @@ class CCMCreate extends Component
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
+            $this->compra_CM->cm_entrega_fecha = $this->fecha_entrega;
+            $this->compra_CM->cm_entrega_sede = $this->sede_entrega;
             $this->compra_CM->cm_creation_status = 'Enviado';
 
             $this->compra_CM->save();
@@ -423,6 +438,8 @@ class CCMCreate extends Component
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
+            $this->compra_CM->cm_entrega_fecha = $this->fecha_entrega;
+            $this->compra_CM->cm_entrega_sede = $this->sede_entrega;
             $this->compra_CM->cm_creation_status = 'Enviado';
 
             $this->compra_CM->save();
@@ -481,6 +498,8 @@ class CCMCreate extends Component
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
+            $this->compra_CM->cm_entrega_fecha = $this->fecha_entrega;
+            $this->compra_CM->cm_entrega_sede = $this->sede_entrega;
             $this->compra_CM->cm_creation_status = 'Borrador';
 
             $this->compra_CM->save();
@@ -526,6 +545,8 @@ class CCMCreate extends Component
             $this->compra_CM->cm_subtotal = $this->subtotal;
             $this->compra_CM->cm_iva = $this->iva;
             $this->compra_CM->cm_total = $this->total;
+            $this->compra_CM->cm_entrega_fecha = $this->fecha_entrega;
+            $this->compra_CM->cm_entrega_sede = $this->sede_entrega;
             $this->compra_CM->cm_creation_status = 'Borrador';
 
             $this->compra_CM->save();

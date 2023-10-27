@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 
 use Livewire\Component;
@@ -47,7 +47,7 @@ class AddXml extends Component
 
     public function render()
     {
-        return view('livewire.n17-a.caja-menor.add-xml');
+        return view('livewire.shared.caja-menor.add-xml');
     }
 
     public function validateXML()

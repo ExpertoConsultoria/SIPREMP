@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Livewire\Shared\CajaMenor\CCMCreate;
 use App\Livewire\Shared\CajaMenor\CCMBorradores;
 use App\Livewire\Shared\CajaMenor\CCMList;

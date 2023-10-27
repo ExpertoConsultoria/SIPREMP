@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 use App\Helpers\Helper;
 use App\Models\CompraMenor;
@@ -141,7 +141,7 @@ class CCMList extends Component
 
         }
 
-        return view('livewire.n17-a.caja-menor.c-c-m-list', compact(['compras_enviadas', 'partidas_presupuestales']));
+        return view('livewire.shared.caja-menor.c-c-m-list', compact(['compras_enviadas', 'partidas_presupuestales']));
     }
 
     public function getDetails($compra)

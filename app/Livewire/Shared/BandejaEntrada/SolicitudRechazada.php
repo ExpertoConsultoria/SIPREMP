@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N5\BandejaEntrada;
+namespace App\Livewire\Shared\BandejaEntrada;
 
 use Livewire\Component;
 
@@ -38,6 +38,6 @@ class SolicitudRechazada extends Component
 
     public function render()
     {
-        return view('livewire.n5.bandeja-entrada.solicitud-rechazada');
+        return view('livewire.shared.bandeja-entrada.solicitud-rechazada');
     }
 }

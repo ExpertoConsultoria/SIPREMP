@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N5\BandejaEntrada;
+namespace App\Livewire\Shared\BandejaEntrada;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -72,7 +72,7 @@ class BEPendientes extends Component
             $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
         }
 
-        return view('livewire.n5.bandeja-entrada.b-e-pendientes',compact('pendientes'));
+        return view('livewire.shared.bandeja-entrada.b-e-pendientes',compact('pendientes'));
     }
 
     public function getDetails($memorandum)

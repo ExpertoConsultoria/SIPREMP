@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N17A\CajaMenor;
+namespace App\Livewire\Shared\CajaMenor;
 
 use Livewire\Component;
 
@@ -32,18 +32,12 @@ class CCMDetalles extends Component
     public $details_of_folio = '';
 
     // Data
-        public $fecha;
-        public $solictante;
-        public $sucursal;
+
         public $MIR;
-        public $justificacion;
         public $proveedor;
         public $razon_social;
         public $RFC;
         public $telefono;
-        public $subtotal;
-        public $iva;
-        public $total;
 
         public $elementos = [];
         public $compra_data;
@@ -57,8 +51,6 @@ class CCMDetalles extends Component
         $this->compra_data = CompraMenor::where('cm_folio',$this->details_of_folio)->first();
         // Get item list
         $this->elementos = CompraMenorList::where('icm_folio', $this->details_of_folio)->get();
-        // Get Solicitante
-        $get_user = User::where('id',$this->compra_data->solicitante_id)->first();
         // Get Proveedor
         $this->proveedor = Empresa::where('id',$this->compra_data->empresa_id)->first();
         // Forge Mir
@@ -70,14 +62,7 @@ class CCMDetalles extends Component
         $mir =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
 
         // Asignar Datos
-        $this->fecha = $this->compra_data->cm_fecha;
-        $this->solictante = $get_user->name;
-        $this->sucursal = $this->compra_data->sucursal;
         $this->MIR = $mir;
-        $this->justificacion = $this->compra_data->cm_asunto;
-        $this->subtotal = $this->compra_data->cm_subtotal;
-        $this->iva = $this->compra_data->cm_iva;
-        $this->total = $this->compra_data->cm_total;
 
         $this->razon_social = $this->proveedor->RazonSocial ? $this->proveedor->RazonSocial : 'ND';
         $this->RFC = $this->proveedor->RFC;
@@ -91,7 +76,7 @@ class CCMDetalles extends Component
 
     public function render()
     {
-        return view('livewire.n17-a.caja-menor.c-c-m-detalles');
+        return view('livewire.shared.caja-menor.c-c-m-detalles');
     }
 
     public function getFactura(){
