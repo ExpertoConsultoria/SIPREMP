@@ -49,13 +49,13 @@ Route::middleware([
 
     // Rest Screens
     Route::get('/caja-menor', function () {
-        return view('17A.caja-menor.main');
+        return view('shared.caja-menor.main');
     })->name('cajamenor');
     Route::get('/solicitudes', function () {
-        return view('17A.solicitudes.main');
+        return view('shared.solicitudes.main');
     })->name('solicitudes');
     Route::get('/Bandeja-entrada', function () {
-        return view('N5.main');
+        return view('shared.bandeja-entrada.main');
     })->name('bandejaentrada');
 
     // Reactive Pages
@@ -75,8 +75,6 @@ Route::middleware([
     Route::get('/caja-menor/list', CCMList::class)->name('cajamenor.compras');
     Route::get('/caja-menor/{details_of_folio}', CCMDetalles::class)->name('cajamenor.show');
     Route::get('/caja-menor/{edit_to_folio}/edit', CCMCreate::class)->name('cajamenor.edit');
-
-  //Shared Routes
 
     // Solicitud
     Route::get('/solicitudes/create', SolicitudesCreate::class)->name('solicitudes.create');
