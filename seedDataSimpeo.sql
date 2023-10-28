@@ -511,7 +511,7 @@ INSERT INTO `org2_areas` (`id`, `AreaNombre`, `strNivel`, `SubAreas`, `SubAreasA
 (16, 'Departamento de Control Presupuestal', '17A', 0, 0, 1, 7, 1, '2023-06-26 18:26:32', '2023-06-26 14:44:47'),
 (17, 'Departamento de Contabilidad', '17A', 0, 0, 1, 7, 1, '2023-06-26 18:26:32', '2023-06-26 14:44:54'),
 (18, 'Departamento de Informatica', '17A', 0, 1, 1, 8, 1, '2023-06-26 18:26:32', '2023-06-30 14:42:09'),
-(19, 'Departamento de Servicios Generales', '17A', 0, 0, 1, NULL, NULL, '2023-06-26 18:26:32', '2023-06-26 18:26:32'),
+(19, 'Departamento de Servicios Generales', '17A', 0, 0, 1, NULL, 1, '2023-06-26 18:26:32', '2023-06-26 18:26:32'),
 (20, 'Departamento de Supervisión', '17A', 0, 0, 1, NULL, NULL, '2023-06-26 18:26:32', '2023-06-26 18:26:32'),
 (21, 'Departamento de Información y Estadística', '17A', 0, 0, 1, NULL, NULL, '2023-06-26 18:26:32', '2023-06-26 18:26:32'),
 (22, 'Gerente de Sucursal A', '17A', 0, 0, 1, 6, 1, '2023-06-26 18:26:32', '2023-06-26 14:49:55'),
@@ -557,7 +557,7 @@ INSERT INTO `org3_puestos` (`id`, `Puesto`, `NUP`, `ClavePuesto`, `TipoPlaza`, `
 (15, 'Jefe del Departamento de Control Presupuestal', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, 6, 16, '2023-06-26 18:26:49', '2023-06-26 14:47:52'),
 (16, 'Jefa del Departamento de Contabilidad', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, 6, 17, '2023-06-26 18:26:49', '2023-06-26 14:48:13'),
 (17, 'Jefe del Departamento de Informatica', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, 7, 18, '2023-06-26 18:26:49', '2023-06-26 14:48:25'),
-(18, 'Jefe del Departamento de Servicios Generales', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
+(18, 'Jefe del Departamento de Servicios Generales', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, 19, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
 (19, 'Jefa del Departamento de Supervisión', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
 (20, 'Jefa del Departamento de Información y Estadística', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, NULL, NULL, '2023-06-26 18:26:49', '2023-06-26 18:26:49'),
 (21, 'Gerente de Sucursal A', NULL, '17A', 'MMyS', NULL, NULL, 0, 0, 1, 1, 5, 22, '2023-06-26 18:26:49', '2023-06-26 14:49:11'),
@@ -588,7 +588,9 @@ INSERT INTO `org3_puestos` (`id`, `Puesto`, `NUP`, `ClavePuesto`, `TipoPlaza`, `
 INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `ApellidoPaterno`, `ApellidoMaterno`, `Correo`, `Celular`, `Telefono`, `Direccion1`, `Direccion2`, `Direccion3`, `NoIMSS`, `DatoEmergencia`, `Foto`, `Activo`, `fechaAlta`, `fechaBaja`, `MotivoBaja`, `user_id`, `org3_puesto_id`, `created_at`, `updated_at`) VALUES
 (1, 'EUAA911106FL2', 'EUAA911106MVZSLR06', 1741, NULL, 'Emili', 'Rodríguez', 'Reyes', 'emilli@gmail.com', '9514590568', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-10-09', '2023-10-31', NULL, 1, 21, NULL, NULL),
 (2, NULL, NULL, NULL, NULL, 'Luis Esteban', 'Lopez ', 'Rios ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 2, 2, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
-(3, NULL, NULL, NULL, NULL, 'Carlos Emanuel', 'Almaraz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 3, 5, '2023-10-19 19:28:11', '2023-10-19 19:28:11');
+(3, NULL, NULL, NULL, NULL, 'Carlos Emanuel', 'Almaraz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 3, 5, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
+(4, NULL, NULL, NULL, NULL, 'Victor Gabriel', 'Valencia', 'Garcia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 4, 18, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
+(5, NULL, NULL, NULL, NULL, 'Iver Ivan', 'Cruz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 5, 7, '2023-10-19 19:28:11', '2023-10-19 19:28:11');
 
 INSERT INTO `ppto1_capitulos` (`id`, `Capitulo`, `CapituloNombre`, `created_at`, `updated_at`) VALUES
 (1, 1000, 'SERVICIOS PERSONALES', '2023-03-22 10:23:04', '2023-03-22 10:23:04'),
