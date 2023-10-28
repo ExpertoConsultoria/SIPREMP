@@ -57,8 +57,50 @@ Route::middleware([
     Route::get('/Bandeja-entrada', function () {
         return view('shared.bandeja-entrada.main');
     })->name('bandejaentrada');
+    Route::get('/vales', function () {
+        return view('n4.vales.main');
+    })->name('vales');
+    Route::get('/expedientes', function () {
+        return view('n4.expedientes.main');
+    })->name('expedientes');
+    Route::get('/inventario', function () {
+        return view('n4.inventario.main');
+    })->name('inventario');
+    Route::get('/compras-consolidadas', function(){
+        return view('N3.compras-consolidadas.main');
+    })->name('compraconsolidada');
+    Route::get('/Solicitudes', function(){
+        return view('N3.solicitudes.main');
+    })->name('solicitudescompra');
 
     // Reactive Pages
+
+    //Expedientes
+    Route::get('/expediente/list',EList::class)->name('expediente.list');
+    Route::get('/expediente/list/detalles',EDetalles::class)->name('expediente.detalles');
+
+    //Vales
+    Route::get('/vales/create',VCreate::class)->name('vale.create');
+    Route::get('/vales/create-new',VCreateNew::class)->name('vales.createnew');
+    Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
+    Route::get('/vales/list',VList::class)->name('vales.list');
+    Route::get('/vales/list/detalles',VDetalles::class)->name('vales.detalles');
+    Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
+    Route::get('/vales/aprobados/ver',VVer::class)->name('vales.view');
+    Route::get('/vales/aprobados/agregar',VAgregar::class)->name('vales.agregar');
+    Route::get('/vales/aprobados/imprimir',VImprimir::class)->name('vales.imprimir');
+    Route::get('/vales/aprobados/expediente',VExpediente::class)->name('vales.expediente');
+
+    // compra consolidada
+    Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
+    Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidadaBorrador.borradorCompra');
+    Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidadaBorrador.guardado');
+    Route::get('/bandeja-entrada-compra',CSBandejaEntrada::class)->name('bandejaEntradaCompra');
+    Route::get('/bandeja-entrada-compra/valeServicio',CSValeServicio::class)->name('bandejaEntradaCompra.valeServicio');
+    Route::get('/solicitudes/vale',CSValeSolicitud::class)->name('solicitudes.vale');
+    Route::get('/solicitudes/rechazadas',CSSolicitudesRechazadas::class)->name('solicitudes.rechazadas');
+    Route::get('/solicitudes/revisado-validado',CSValeValidado::class)->name('solicitudes.revisadoValidado');
+
     //Bandeja Entrada
     Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
     Route::get('/bandeja-entrada/rechazadas', BERechazadas::class)->name('bandejaentrada.rechazadas');

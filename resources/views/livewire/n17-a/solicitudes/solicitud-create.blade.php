@@ -4,13 +4,13 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Nueva Compra | Caja menor') }}
+                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                    {{ __('Nueva Solicitud') }}
                 </h2>
             </div>
 
             <div class="grid" style="justify-content: end; padding-right: 5.5rem">
-                <a href="{{ route('cajamenor') }}">
+                <a href="{{ route('solicitudes') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40"
                         fill="">
                         <path
@@ -24,32 +24,31 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-screen-xl mx-auto">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="container mx-auto">
                 <form wire:submit.prevent="Save" autocomplete="off">
 
                     {{-- Basic Data --}}
                     <div
-                        class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        class="p-6 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
 
                         {{-- Defualt --}}
                         <div class="container px-4">
-                            <div
-                                class="grid grid-cols-2 gap-3 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6">
-                                <div>
+                            <div class="grid gap-3 mb-6 lg:grid-cols-12">
+                                <div class="col-span-2">
                                     <x-label for="fecha" value="{{ __('Fecha') }}" />
                                     <input wire:model.blur="fecha" type="date" name="fecha" readonly
                                         class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required max="2100-12-31" step="1">
                                 </div>
 
-                                <div>
+                                <div class="col-span-3">
                                     <x-label for="folio" value="{{ __('Folio') }}" />
                                     <input wire:model.blur="folio" type="text" name="folio" readonly
                                         class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-3">
                                     <x-label for="solicitante" value="{{ __('Solicitante') }}" />
                                     <input wire:model.blur="solicitante" type="text" name="solicitante" readonly
                                         class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -61,15 +60,25 @@
                                         class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
                                 </div>
+                                <div class="col-span-2">
+                                    <x-label for="destinatario" value="{{ __('Destinatario') }}" />
+                                    <select wire:model.blur="destinatario" name="destinatario"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        <option value="Unidad Tecnica">Unidad Tecnica</option>
+                                        <option value="Servicos Generales">Servicos Generales</option>
+                                    </select>
+                                    @error('destinatario')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
                         {{-- MIR --}}
                         <div class="container px-4">
-                            <div
-                                class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
-
-                                <div class="col-span-3">
+                            <div class="grid grid-cols-12 gap-2 mb-1">
+                                <div class="col-span-6">
                                     <x-label for="asunto" value="{{ __('Asunto *') }}" />
                                     <textarea wire:model.blur="asunto" name="asunto" rows="6" placeholder="Describe el motivo de la compra"
                                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -79,9 +88,9 @@
                                     @enderror
                                 </div>
 
-                                <div class="w-auto mx-2 mt-6 h-36">
+                                <div class="col-span-2 px-6">
                                     <div
-                                        class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                        class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                         <p
                                             class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
                                             MIR</p>
@@ -108,7 +117,7 @@
                                         <select wire:model.blur="proposito_mir"
                                             wire:change="GetComponents($event.target.value)" name="proposito_mir"
                                             @if (!$mir2) disabled @endif
-                                            class="@if (!$mir2) bg-gray-300 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if (!$mir2) bg-gray-200 @else @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
@@ -128,7 +137,7 @@
                                         <select wire:model.blur="componente_mir"
                                             wire:change="GetActivities($event.target.value)" name="componente_mir"
                                             @if (!$mir3) disabled @endif
-                                            class="@if (!$mir3) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if (!$mir3) bg-gray-200 @else @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
                                                 <option value="{{ $componete_mir['NoComponente'] }}">
@@ -143,7 +152,7 @@
                                         <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
                                         <select wire:model.blur="actividad_mir" name="actividad_mir"
                                             @if (!$mir4) disabled @endif
-                                            class="@if (!$mir4) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if (!$mir4) bg-gray-200 @else @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
                                                 <option value="{{ $actividad_mir['NoActividad'] }}">
@@ -155,76 +164,109 @@
                                         @enderror
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
                     </div>
 
-                    <div>
-                        
-                    </div>
-                    {{-- Buttons --}}
                     <div
-                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="container px-4">
-                            <div class="grid grid-cols-1">
-                                <input wire:model.blur="factura_id" type="hidden" name="factura_id">
-                                @error('factura_id')
-                                    <span class="text-xs text-rose-600">{{ $message }}</span>
-                                @enderror
-                                @if ($add_xml)
-                                    @livewire('shared.caja-menor.add-xml')
-                                @else
-                                    <div class="text-center">
-                                        <p class="block text-lg font-bold text-gray-900 text-start dark:text-white">
-                                            ! Factura almacenada Correctamente !
-                                        </p>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
+                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
 
-                    {{-- Provedor --}}
-                    <div
-                        class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md text dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
-                            <div
-                                class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
-                                <div class="flex items-center">
-                                    <label
-                                        class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
+                            <div class="grid gap-3 mb-6 lg:grid-cols-12">
+                                <div class="col-span-2">
+                                    <x-label for="cantidad" value="{{ __('Cantidad') }}" />
+                                    <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number"
+                                        name="cantidad" step="0.01" placeholder="0.00"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('cantidad')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <x-label for="razon_social" value="{{ __('Razón Social') }}" />
-                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $razon_social }}</p>
+                                <div class="col-span-2">
+                                    <x-label for="unidad_medida" value="{{ __('Unidad de medida') }}" />
+                                    <input wire:model.blur="unidad_medida" type="text" name="unidad_medida"
+                                        placeholder="Unidad de Medida"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('unidad_medida')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <x-label for="rfc" value="{{ __('RFC') }}" />
-                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $RFC }}</p>
+                                <div class="col-span-4">
+                                    <x-label for="concepto" value="{{ __('Concepto') }}" />
+                                    <input wire:model.blur="concepto" type="text" name="concepto"
+                                        placeholder="Concepto"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('concepto')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $telefono }}</p>
+                                <div class="col-span-2">
+                                    <x-label for="p_u" value="{{ __('P/U') }}" />
+                                    <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number"
+                                        step="0.001" placeholder="0.00" name="p_u"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('p_u')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-span-2">
+                                    <x-label for="importe" value="{{ __('Importe') }}" />
+                                    <input wire:model.blur="importe" type="number" name="importe" step="0.01"
+                                        placeholder="0.00" readonly
+                                        class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        value="23">
+                                    @error('importe')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
+
+                        <div class="container px-4">
+                            <div class="grid grid-cols-12 gap-2 mb-1">
+                                <div class="col-span-2">
+                                    <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
+                                </div>
+
+                                <div class="col-span-4">
+                                    <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        @foreach ($partidas_presupuestales as $pp)
+                                            <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('partida_presupuestal')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-span-2">
+                                    <button type="button" wire:click='AddToList'
+                                        class="w-4/5 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                        Registrar
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
 
                     {{-- Table --}}
                     <div
-                        class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <div class="relative overflow-x-auto">
+                        class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                        <div class="relative overflow-x-auto sm:rounded-lg">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead
-                                    class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             Cantidad
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Unidad de medida
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Concepto
@@ -238,44 +280,42 @@
                                         <th scope="col" class="px-6 py-3">
                                             Importe
                                         </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($elementosCompraMenor as $elemento)
+                                    @foreach ($elementosMemorandum as $elemento)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4">
-                                                {{ $elemento->icm_cantidad }}
+                                                {{ $elemento->im_cantidad }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $elemento->im_unidad_medida }}
                                             </td>
                                             <th scope="row"
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $elemento->icm_concepto }}
+                                                {{ $elemento->im_concepto }}
                                             </th>
                                             <td class="px-6 py-4">
-                                                <select
-                                                    wire:change="setPartidaP($event.target.value, {{ $loop->index }})"
-                                                    required
-                                                    class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-                                                    <option value="" disabled selected> Partida Presupuestal
-                                                    </option>
-
-                                                    @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                        <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                            {{ $partida_presupuestal->PartidaEspecifica }}
-                                                        </option>
-                                                    @endforeach
-                                                    {{-- opciones --}}
-                                                </select>
+                                                {{ $elemento->im_partida_presupuestal }}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $elemento->icm_precio_u }}
+                                                {{ $elemento->im_precio_u }}
                                             </td>
                                             <th
                                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $elemento->icm_importe }}
+                                                {{ $elemento->im_importe }}
                                             </th>
-
+                                            <td class="px-6 py-4">
+                                                <button type="button"
+                                                    wire:click="RemoveFromList({{ $loop->index }})"
+                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                                    Eliminar
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -285,7 +325,9 @@
 
                     {{-- Totals --}}
                     <div class="mt-5">
+
                         <div class="container px-4">
+
                             <div class="grid grid-cols-12 gap-2 mb-1">
                                 <div class="col-span-10 text-end">
                                     <p
@@ -304,7 +346,7 @@
                                         class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                         I.V.A:</p>
                                 </div>
-                                <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
+                                <div class="col-span-2 px-3 border rounded-lg text-end">
                                     <p
                                         class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                         $
@@ -324,30 +366,44 @@
                                     </p>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
 
+                    {{-- Hidden Fields --}}
+                    <input wire:model.blur="cotizacion" type="hidden" name="cotizacion">
+
                     {{-- Buttons --}}
-                    <div class="mt-4 ">
-                        <div class="container">
-                            <div class="grid grid-cols-2 gap-10">
-                                <div class="text-start">
+                    <div class="mt-5">
+
+                        <div class="container px-4">
+
+                            <div class="grid grid-cols-12 gap-2 mb-1">
+                                <div class="col-span-10 text-end">
                                     <button type="button" wire:click="SaveAsDraft"
-                                        class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                        class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Guardar borrador
                                     </button>
                                 </div>
-                                <div class="text-end">
+                                <div class="col-span-2 text-end">
                                     <button type="submit" wire:loading.attr="disabled"
-                                        class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                        Crear compra
+                                        class="disabled:opacity-25 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                        Firmar y enviar solicitud
                                     </button>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
+
 </div>
+
+</div>
+
