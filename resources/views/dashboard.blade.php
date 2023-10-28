@@ -310,7 +310,7 @@
                             <div>
                                 <div
                                     class="p-2 mb-6 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="{{ route('bandejaentrada.lista') }}"
+                                    <a href="{{ route('bandejaentrada.pendientes') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"

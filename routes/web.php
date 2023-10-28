@@ -21,6 +21,33 @@ use App\Livewire\Shared\Solicitud\SolicitudesCreate;
 use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
 use App\Livewire\Shared\Solicitud\SolicitudesList;
 use App\Livewire\Shared\Solicitud\SolicitudStatus;
+
+// Pendiente
+use App\Livewire\N4\Expediente\EList;
+use App\Livewire\N4\Expediente\EDetalles;
+
+use App\Livewire\N4\Vales\VCreate;
+use App\Livewire\N4\Vales\VCreateNew;
+use App\Livewire\N4\Vales\VBorradores;
+use App\Livewire\N4\Vales\VList;
+use App\Livewire\N4\Vales\VDetalles;
+use App\Livewire\N4\Vales\VAprobados;
+use App\Livewire\N4\Vales\VVer;
+use App\Livewire\N4\Vales\VAgregar;
+use App\Livewire\N4\Vales\VImprimir;
+use App\Livewire\N4\Vales\VExpediente;
+
+use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
+use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
+use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
+
+use App\Livewire\N3\BandejaEntrada\CSBandejaEntrada;
+use App\Livewire\N3\BandejaEntrada\CSValeServicio;
+
+use App\Livewire\N3\Solicitudes\CSValeSolicitud;
+use App\Livewire\N3\Solicitudes\CSSolicitudesRechazadas;
+use App\Livewire\N3\Solicitudes\CSValeValidado;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
