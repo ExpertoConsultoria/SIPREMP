@@ -19,6 +19,7 @@ class SolicitudStatus extends Component
     public $memoList = [];
 
     public $backButton;
+    
     public function render()
     {
         $this -> backButton = Helper::backButton();

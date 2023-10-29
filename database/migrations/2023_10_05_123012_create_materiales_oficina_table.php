@@ -18,13 +18,13 @@ return new class extends Migration
             $table->text("unidad_medida");
             $table->integer("cantidad");
             $table->text("concepto");
-            $table->text("info_extra")->nullable();
+            // $table->text("info_extra")->nullable();
 
             $table->unsignedBigInteger('memoranda_id')->unique();//folio_memorandum
             $table->unsignedBigInteger('partidas_presupuestales_id')->unique();//id_par_ppta
 
             $table->foreign('memoranda_id')->references('id')->on('memoranda')->onDelete('cascade');
-            $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');
+            // $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');
 
 
             $table->timestamps();

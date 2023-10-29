@@ -25,7 +25,12 @@
 
     <div>
         <p class="px-2 text-base">
-            {{ Auth::user()->name }}
+
+            @php
+                $sede = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede->SedeNombre : 'N/D';
+            @endphp
+
+            {{ $sede }}
         </p>
     </div>
 

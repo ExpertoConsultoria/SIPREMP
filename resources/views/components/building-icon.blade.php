@@ -13,8 +13,13 @@
     </div>
     <!-- // todo CAMBIAR EL ROL POR LA SUCURSAL -->
     <div class="grid justify-end">
+
+        @php
+            $area = Auth::user()?->org4empleado?->org3Puesto?->org2Area ? Auth::user()?->org4empleado?->org3Puesto?->org2Area->AreaNombre : 'Sin Cargo';
+        @endphp
+
         <p class="px-3 text-base">
-            {{ Auth::user() -> roles[0] -> name }}
+            {{ $area }}
         </p>
     </div>
 

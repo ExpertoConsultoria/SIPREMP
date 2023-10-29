@@ -8,16 +8,6 @@ use App\Livewire\N17A\CajaMenor\CCMDetalles;
 use App\Livewire\N17A\CajaMenor\CCMListaReportes;
 use App\Livewire\N17A\CajaMenor\CCMReportData;
 
-// use App\Livewire\N17A\Solicitudes\SolicitudCreate;
-// use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
-// use App\Livewire\N17A\Solicitudes\SolicitudList;
-// use App\Livewire\N17A\Solicitudes\SolicitudStatus;
-
-// use App\Livewire\N6\BienesServ\SolicitudesCreate;
-// use App\Livewire\N6\BienesServ\Borradores;
-// use App\Livewire\N6\BienesServ\Lista;
-// use App\Livewire\N6\BienesServ\Status;
-
 use App\Livewire\N5\BandejaEntrada\BENew;
 use App\Livewire\N5\BandejaEntrada\BERechazada;
 use App\Livewire\N5\BandejaEntrada\BEList;
@@ -89,14 +79,5 @@ Route::middleware([
     Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
-
-    //  Solicitudes del nivel N617A
-    // Route::get('/solicitud-bienes/create', SolicitudesCreate::class)->name('solicitudBienes.create');
-    // Route::get('/solicitudes-bienes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudBienes.edit');
-    // Route::get('/borradores-solicitudes', SolicitudesBorradores::class)->name('solicitudBienes.borradores');
-    // Route::get('/lista-solicitudes', SolicitudesList::class)->name('solicitudBienes.list');
-    // Route::get('/solicitud-bienes/{details_of_folio}', SolicitudStatus::class)->name('solicitudBienes.show');
-
-    //Shared Routes
 
 });

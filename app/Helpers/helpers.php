@@ -8,56 +8,54 @@ use Illuminate\Support\Str;
 class Helper
 {
 
-    // public static function FolioGenerator($model, $trow, $length = 4, $prefix, $branchKey)
-    // {
+    // We use this Helper to format the IDs of our documents.
 
-    //     $data = $model::orderBy($trow, 'desc')->first(); //Get the last Record
-
-    //     if (!$data) {
-    //         $folio_length = $length - 1;
-    //         $last_folio = '1';
-    //     } else {
-
-    //         $prefixLength = 7 + strlen($prefix) + strlen($branchKey);
-    //         $suffixLength = -5; // -20XX
-
-    //         $code = substr($data->$trow, $prefixLength, $suffixLength); //Get the last code, WITHOUT all the code extra
-    //         $code = intval($code);
-    //         $actual_last_number = ($code * 1) / 1; // Delete the 0 in the Code
-    //         $increment_last_number = $actual_last_number + 1;
-    //         $last_number_length = strlen($increment_last_number);
-
-    //         $folio_length = $length - $last_number_length;
-    //         $last_folio = $increment_last_number;
-    //     }
-
-    //     $zeros = '';
-    //     for ($i = 0; $i < $folio_length; $i++) {
-    //         $zeros .= '0';
-    //     }
-
-    //     $actualYear = date("Y");
-
-    //     // MPEO-CM-SUC1-000000-2023
-    //     return 'MPEO-' . $prefix . '-' . $branchKey . '-' . $zeros . $last_folio . '-' . $actualYear;
-    // }
-    public static function FolioGenerator($model, $trow, $length = 5, $prefix, $branchKey)
+    public static function FolioGenerator($model, $trow, $length = 4, $prefix, $branchKey)
     {
-        $data = $model::orderBy($trow, 'desc')->first(); // Obtener el último registro
+
+        $data = $model::orderBy($trow, 'desc')->first(); //Get the last Record
 
         if (!$data) {
-            $last_folio = 1;
+            $folio_length = $length - 1;
+            $last_folio = '1';
         } else {
-            $code = intval(substr($data->$trow, -5)); // Obtener los últimos 5 caracteres como número
-            $last_folio = $code + 1;
+
+            $prefixLength = 7 + strlen($prefix) + strlen($branchKey);
+            $suffixLength = -5; // -20XX
+
+            $code = substr($data->$trow, $prefixLength, $suffixLength); //Get the last code, WITHOUT all the code extra
+            $code = intval($code);
+            $actual_last_number = ($code * 1) / 1; // Delete the 0 in the Code
+            $increment_last_number = $actual_last_number + 1;
+            $last_number_length = strlen($increment_last_number);
+
+            $folio_length = $length - $last_number_length;
+            $last_folio = $increment_last_number;
         }
 
-        $zeros = str_pad($last_folio, $length, '0', STR_PAD_LEFT); // Agregar ceros a la izquierda
+        $zeros = '';
+        for ($i = 0; $i < $folio_length; $i++) {
+            $zeros .= '0';
+        }
 
         $actualYear = date("Y");
 
-        // MPEO-MM-Matriz-00005-2023
-        return 'MPEO-' . $prefix . '-' . $branchKey . '-' . $zeros . '-' . $actualYear;
+        // MPEO-CM-SUC1-000000-2023
+        return 'MPEO-' . $prefix . '-' . $branchKey . '-' . $zeros . $last_folio . '-' . $actualYear;
+    }
+
+    public static function FakeFolioGenerator($length, $prefix)
+    {
+
+        $random_folio = Str::random($length);
+        $random_folio = strtoupper($random_folio);
+        return '&' . $prefix . '-' . $random_folio;
+    }
+
+    public static function GetUserSede()
+    {
+        $sede = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'N/D';
+        return $sede;
     }
 
 
@@ -67,19 +65,9 @@ class Helper
         return $area;
     }
 
-    public static function FakeFolioGenerator($length, $prefix){
-        $random_folio = Str::random($length);
-        $random_folio = strtoupper($random_folio);
-        return '&' . $prefix . '-' . $random_folio;
-    }
-
-    public static function GetUserSede(){
-        $sede = Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'ND';
-        return $sede;
-    }
-
-    public static function GetSpecificUserSede($user){
-        $sede = $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? Auth::user()?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'ND';
+    public static function GetSpecificUserSede($user)
+    {
+        $sede = $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede ? $user?->org4empleado?->org3Puesto?->org2Area?->org1Sede : 'N/D';
         return $sede;
     }
 
@@ -91,5 +79,4 @@ class Helper
             return 'solicitudes';
         }
     }
-
 }
