@@ -62,6 +62,43 @@
                                         required>
                                 </div>
                             </div>
+
+                            @if (Auth::user()->roles[0]->name != 'N7:GS:17A')
+                                <div
+                                    class="grid grid-cols-2 gap-3 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-9">
+                                    <div class="flex items-center justify-center col-span-2">
+                                        <p class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">Condiciones de entrega:</p>
+                                    </div>
+
+                                    <div class="flex items-center justify-end col-span-1 me-3">
+                                        <p class="content-center font-semibold leading-tight text-gray-800 text-end font dark:text-gray-200">
+                                            Sede
+                                        </p>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input wire:model.blur="sede_entrega" type="text" name="sede_entrega" placeholder="Lugar de Entrega"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            >
+                                        @error('sede_entrega')
+                                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="flex items-center justify-end col-span-1 me-3">
+                                        <p class="content-center font-semibold leading-tight text-gray-800 text-end font dark:text-gray-200">
+                                            Fecha
+                                        </p>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input wire:model.blur="fecha_entrega" type="date" name="fecha_entrega"
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            >
+                                        @error('fecha_entrega')
+                                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         {{-- MIR --}}
@@ -70,7 +107,7 @@
                                 class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
 
                                 <div class="col-span-3">
-                                    <x-label for="asunto" value="{{ __('Asunto *') }}" />
+                                    <x-label for="asunto" value="{{ __('Justificación *') }}" />
                                     <textarea wire:model.blur="asunto" name="asunto" rows="6" placeholder="Describe el motivo de la compra"
                                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
@@ -162,7 +199,7 @@
                     </div>
 
                     <div>
-                        
+
                     </div>
                     {{-- Buttons --}}
                     <div

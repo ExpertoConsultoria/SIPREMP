@@ -7,9 +7,12 @@ use App\Models\CompraMenor;
 use App\Models\CompraMenorList;
 use App\Models\PptoDeEgreso;
 use App\Models\ReporteCM;
+
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -94,6 +97,7 @@ class CCMList extends Component
             if ($this->partida_presupuestal == '') {
                 $compras_enviadas = CompraMenor::select('id', 'cm_fecha', 'cm_folio', 'cm_asunto', 'cm_creation_status')
                     ->where('cm_creation_status', 'Enviado')
+                    ->where('solicitante_id', Auth::user()->id)
                     ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
                     ->where('cm_folio', 'like', '%' . $this->ejercicio . '%')
                     ->orderby($this->ordenar, $this->direccion)
@@ -114,6 +118,7 @@ class CCMList extends Component
 
                 $compras_enviadas = CompraMenor::select('id', 'cm_fecha', 'cm_folio', 'cm_asunto', 'cm_creation_status')
                     ->where('cm_creation_status', 'Enviado')
+                    ->where('solicitante_id', Auth::user()->id)
                     ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
                     ->where('cm_folio', 'like', '%' . $this->ejercicio . '%')
                     ->get();
@@ -176,12 +181,16 @@ class CCMList extends Component
 
         $monto_general = number_format($monto_general, 2, '.', '');
 
+        $userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
+
         $reporte = new ReporteCM();
+        $reporte->rcm_folio = Helper::FolioGenerator(new ReporteCM, 'rcm_folio', 5, 'RCM', $userSedeCode);
         $reporte->rcm_ejercicio = $this->ejercicio;
         $reporte->rcm_inicio = $this->fecha_inicio;
         $reporte->rcm_fin = $this->fecha_fin;
         $reporte->rcm_partida_presupuestal = $this->partida_presupuestal;
         $reporte->rcm_folios_cm = $this->folios_filtrados;
+        $reporte->solicitante_id = Auth::user()->id;
         $reporte->rcm_area = $userArea;
         $reporte->rcm_sucursal = $userSede;
         $reporte->rcm_monto_gral = $monto_general;

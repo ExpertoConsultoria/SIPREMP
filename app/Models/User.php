@@ -76,4 +76,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(CompraMenor::class);
     }
+    public function reportCCM(): HasOne
+    {
+        return $this->hasOne(ReporteCM::class);
+    }
 }

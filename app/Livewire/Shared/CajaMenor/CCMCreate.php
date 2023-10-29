@@ -158,7 +158,7 @@ class CCMCreate extends Component
                 $this->fecha_entrega = 'Ninguno';
             }else{
                 $this->sede_entrega = '';
-                $this->fecha_entrega = '';
+                $this->fecha_entrega = date('Y-m-d');;
             }
 
             $this->razon_social = "-- -- --";
@@ -362,9 +362,8 @@ class CCMCreate extends Component
     {
         if (!$this->is_editing) {
 
-            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->userSedeCode);
-
             $this->validate();
+            $this->folio = Helper::FolioGenerator(new CompraMenor, 'cm_folio', 5, 'CM', $this->userSedeCode);
 
             $this->compra_CM = new CompraMenor();
             $this->compra_CM->cm_fecha = $this->fecha;

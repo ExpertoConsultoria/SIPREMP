@@ -35,7 +35,7 @@
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar por fecha de inicio..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
@@ -52,9 +52,9 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th wire:click="ordenaPor('id')" class="px-4 py-2 cursor-pointer">
-                            #ID
-                            @if ($ordenar == 'id')
+                        <th wire:click="ordenaPor('rcm_folio')" class="px-4 py-2 cursor-pointer">
+                            Folio
+                            @if ($ordenar == 'rcm_folio')
                             @if ($direccion == 'asc')
                             <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
                             @else
@@ -118,7 +118,7 @@
                 <tbody>
                     @foreach ($reports as $report)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-4 py-2"> {{ $report->id }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_folio }} </td>
                         <td class="px-4 py-2"> {{ $report->rcm_ejercicio }} </td>
                         <td class="px-4 py-2"> {{ $report->rcm_inicio }} </td>
                         <td class="px-4 py-2"> {{ $report->rcm_fin }} </td>

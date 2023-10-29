@@ -13,11 +13,13 @@ class ReporteCM extends Model
     protected $table = 'reportes_cm';
 
     protected $fillable = [
+        'rcm_folio',
         'rcm_ejercicio',
         'rcm_inicio',
         'rcm_fin',
         'rcm_partida_presupuestal',
         'rcm_folios_cm',
+        'solicitante_id',
 
         'rcm_area',
         'rcm_sucursal',
@@ -34,6 +36,10 @@ class ReporteCM extends Model
         'rcm_monto_gral',
     ];
 
-
     protected $primaryKey = 'id';
+
+    public function solicitante()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'solicitante_id');
+    }
 }
