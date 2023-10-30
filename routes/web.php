@@ -8,16 +8,27 @@ use App\Livewire\N17A\CajaMenor\CCMDetalles;
 use App\Livewire\N17A\CajaMenor\CCMListaReportes;
 use App\Livewire\N17A\CajaMenor\CCMReportData;
 
-use App\Livewire\N17A\Solicitudes\SolicitudCreate;
-use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
-use App\Livewire\N17A\Solicitudes\SolicitudList;
-use App\Livewire\N17A\Solicitudes\SolicitudStatus;
+// use App\Livewire\N17A\Solicitudes\SolicitudCreate;
+// use App\Livewire\N17A\Solicitudes\SolicitudBorradores;
+// use App\Livewire\N17A\Solicitudes\SolicitudList;
+// use App\Livewire\N17A\Solicitudes\SolicitudStatus;
 
-use App\Livewire\N6\BienesServ\SolicitudesCreate;
-use App\Livewire\N6\BienesServ\borradores;
-use App\Livewire\N6\BienesServ\lista;
-use App\Livewire\N6\BienesServ\status;
+// use App\Livewire\N6\BienesServ\SolicitudesCreate;
+// use App\Livewire\N6\BienesServ\Borradores;
+// use App\Livewire\N6\BienesServ\Lista;
+// use App\Livewire\N6\BienesServ\Status;
 
+use App\Livewire\N5\BandejaEntrada\BENew;
+use App\Livewire\N5\BandejaEntrada\BERechazada;
+use App\Livewire\N5\BandejaEntrada\BEList;
+use App\Livewire\N5\BandejaEntrada\BEStatus;
+use App\Livewire\N5\BandejaEntrada\BEDetalles;
+
+// Shared Components
+use App\Livewire\Shared\Solicitud\SolicitudesCreate;
+use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
+use App\Livewire\Shared\Solicitud\SolicitudesList;
+use App\Livewire\Shared\Solicitud\SolicitudStatus;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,8 +62,18 @@ Route::middleware([
     Route::get('/solicitudes', function () {
         return view('17A.solicitudes.main');
     })->name('solicitudes');
+    Route::get('/Bandeja-entrada', function () {
+        return view('N5.main');
+    })->name('bandejaentrada');
 
     // Reactive Pages
+    //Bandeja Entrada
+    Route::get('/bandeja-entrada/new', BENew::class)->name('bandejaentrada.new');
+    Route::get('/bandeja-entrada/rechazadas', BERechazada::class)->name('bandejaentrada.rechazada');
+    Route::get('/bandeja-entrada/list', BEList::class)->name('bandejaentrada.list');
+    Route::get('/bandeja-entrada/status', BEStatus::class)->name('bandejaentrada.status');
+    Route::get('/bandeja-entrada/details', BEDetalles::class)->name('bandejaentrada.details');
+
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
     Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
@@ -63,17 +84,19 @@ Route::middleware([
     Route::get('/caja-menor/{edit_to_folio}/edit', CCMCreate::class)->name('cajamenor.edit');
 
     // Solicitud
-    Route::get('/solicitudes/create', SolicitudCreate::class)->name('solicitudes.create');
-    Route::get('/solicitudes/borradores', SolicitudBorradores::class)->name('solicitudes.borradores');
-    Route::get('/solicitudes/list', SolicitudList::class)->name('solicitudes.list');
+    Route::get('/solicitudes/create', SolicitudesCreate::class)->name('solicitudes.create');
+    Route::get('/solicitudes/borradores', SolicitudesBorradores::class)->name('solicitudes.borradores');
+    Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
-    Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudCreate::class)->name('solicitudes.edit');
+    Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
 
     //  Solicitudes del nivel N617A
-    Route::get('/solicitud-bienes', SolicitudesCreate::class)->name('solicitudBienes.create');
-    Route::get('/solicitudes-bienes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudBienes.edit');
-    Route::get('/borradores-solicitudes', borradores::class)->name('solicitudBienes.borradores');
-    Route::get('/lista-solicitudes', lista::class)->name('solicitudBienes.list');
-    Route::get('/solicitud-bienes/{details_of_folio}', status::class)->name('solicitudBienes.show');
+    // Route::get('/solicitud-bienes/create', SolicitudesCreate::class)->name('solicitudBienes.create');
+    // Route::get('/solicitudes-bienes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudBienes.edit');
+    // Route::get('/borradores-solicitudes', SolicitudesBorradores::class)->name('solicitudBienes.borradores');
+    // Route::get('/lista-solicitudes', SolicitudesList::class)->name('solicitudBienes.list');
+    // Route::get('/solicitud-bienes/{details_of_folio}', SolicitudStatus::class)->name('solicitudBienes.show');
+
+    //Shared Routes
 
 });

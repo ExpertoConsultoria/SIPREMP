@@ -22,14 +22,21 @@ class UserSeeder extends Seeder
         //     'email' => 'emilli@gmail.com',
         //     'password' => Hash::make('holamundo')
         // ],
+        // [
+        //     'name' => 'Luis Lopez Rios',
+        //     'username' => 'Esteban',
+        //     'phone' => '951-321-7674',
+        //     'email' => 'esteban123@gmail.com',
+        //     'password' => Hash::make('esteban')
+        // ],
         [
-            'name' => 'Luis Lopez Rios',
-            'username' => 'Esteban',
-            'phone' => '951-321-7674',
-            'email' => 'esteban123@gmail.com',
-            'password' => Hash::make('esteban')
+            'name' => 'Carlos Almaraz Perez',
+            'username' => 'Ayken',
+            'phone' => '951-454-3456',
+            'email' => 'CarlosFront@gmail.com',
+            'password' => Hash::make('carlos')
         ]
         )
-        ->assignRole('N6:17A');
+        ->assignRole('N5:18A:F');
     }
 }

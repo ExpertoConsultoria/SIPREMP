@@ -9,7 +9,8 @@ class CompraMenor extends Model
 {
     use HasFactory;
 
-    protected $table = 'compra_menors';
+    // Relacion explicita debido al nombre "compra_menors"
+    protected $table = 'compra_menor';
 
     protected $fillable = [
         'cm_fecha',
@@ -21,9 +22,12 @@ class CompraMenor extends Model
         'mir_id_proposito',
         'mir_id_componente',
         'mir_id_actividad',
+        'lista_compra',
+        'lista_cotizacion',
         'cm_subtotal',
         'cm_iva',
         'cm_total',
+        'cm_creation_status',
         'token_solicitud',
         'token_aceptacion',
         'cm_creation_status',

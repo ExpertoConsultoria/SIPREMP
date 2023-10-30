@@ -11,7 +11,7 @@
             </g>
         </svg>
     </div>
-
+    <!-- // todo CAMBIAR EL ROL POR LA SUCURSAL -->
     <div class="grid justify-end">
         <p class="px-3 text-base">
             {{ Auth::user() -> roles[0] -> name }}

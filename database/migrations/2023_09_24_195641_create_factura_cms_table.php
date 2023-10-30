@@ -1,5 +1,5 @@
 <?php
-// !
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('facturas_cm', function (Blueprint $table) {
+        Schema::create('factura_cms', function (Blueprint $table) {
             $table->id();
             $table->text('fcm_nombre');
             $table->text('fcm_extension');
             $table->string('fcm_xml_ruta');
-            $table->string('fcm_pdf_ruta')->nullable();
+            $table->string('fcm_dpf_ruta');
 
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('facturas_cm');
+        Schema::dropIfExists('factura_cms');
     }
 };

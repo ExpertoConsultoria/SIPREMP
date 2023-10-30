@@ -4,8 +4,6 @@
 @REM/ / / Entramos al administrador de BD
 mysql -u root -p -h  127.0.0.1
 
-@REM/ / / Pedira la contraseña, es la contraseña con que ustedes ingresan a sus bases de datos; si no existe solo den Enter
-
 @REM/ / / Mostramos todas nuestras BD
 show databases;
 

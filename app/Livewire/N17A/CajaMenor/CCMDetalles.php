@@ -61,7 +61,6 @@ class CCMDetalles extends Component
         $get_user = User::where('id',$this->compra_data->solicitante_id)->first();
         // Get Proveedor
         $this->proveedor = Empresa::where('id',$this->compra_data->empresa_id)->first();
-
         // Forge Mir
         $fin = Plan1Fin::where('id',$this->compra_data->mir_id_fin)->first();
         $proposito = Plan2Proposito::where('id',$this->compra_data->mir_id_proposito)->first();
@@ -80,7 +79,7 @@ class CCMDetalles extends Component
         $this->iva = $this->compra_data->cm_iva;
         $this->total = $this->compra_data->cm_total;
 
-        $this->razon_social = $this->proveedor->RazonSocial;
+        $this->razon_social = $this->proveedor->RazonSocial ? $this->proveedor->RazonSocial : 'ND';
         $this->RFC = $this->proveedor->RFC;
         $this->telefono = $this->proveedor->Telefono ? $this->proveedor->Telefono : 'Ninguno';
 
