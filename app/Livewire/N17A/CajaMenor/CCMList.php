@@ -2,17 +2,16 @@
 
 namespace App\Livewire\N17A\CajaMenor;
 
-use Livewire\Component;
 use App\Helpers\Helper;
-use Livewire\WithPagination;
+use App\Models\CompraMenor;
+use App\Models\CompraMenorList;
+use App\Models\PptoDeEgreso;
+use App\Models\ReporteCM;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-
-use App\Models\ReporteCM;
-use App\Models\CompraMenor;
-use App\Models\PptoDeEgreso;
-use App\Models\CompraMenorList;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class CCMList extends Component
 {
@@ -21,22 +20,24 @@ class CCMList extends Component
     public $cargarLista = true;
     public $mostrar = '10';
     public $ordenar = 'cm_folio';
-    public $direccion='asc';
+    public $direccion = 'asc';
 
     public $fecha_inicio;
     public $fecha_fin;
     public $ejercicio;
     public $partida_presupuestal; //Para la consulta
     public $compras_filtradas = []; //Para el buscador
+    public $folios_filtrados = []; //Para el buscador
 
     public $ejercicios = [];
 
-    protected function rules() {
+    protected function rules()
+    {
         return [
-            'fecha_inicio'   => 'required | date',
-            'fecha_fin'   => 'required | date',
-            'ejercicio'   => 'required',
-            'partida_presupuestal'   => 'required',
+            'fecha_inicio' => 'required | date',
+            'fecha_fin' => 'required | date',
+            'ejercicio' => 'required',
+            'partida_presupuestal' => 'required',
         ];
     }
 
@@ -49,20 +50,23 @@ class CCMList extends Component
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
     ];
 
-    public function ordenaPor($ordenar) {    // Ordena la columna seleccionada de la tabla
-        if($this->ordenar==$ordenar){
-            if($this->direccion == 'desc')
+    public function ordenaPor($ordenar)
+    { // Ordena la columna seleccionada de la tabla
+        if ($this->ordenar == $ordenar) {
+            if ($this->direccion == 'desc') {
                 $this->direccion = 'asc';
-            else
+            } else {
                 $this->direccion = 'desc';
-        }
-        else{
+            }
+
+        } else {
             $this->direccion = 'asc';
             $this->ordenar = $ordenar;
         }
     }
 
-    public function loadList() {     // Indica cuando esta lista la carga de los componentes
+    public function loadList()
+    { // Indica cuando esta lista la carga de los componentes
         $this->cargarLista = true;
     }
 
@@ -83,22 +87,21 @@ class CCMList extends Component
         $compras_enviadas = [];
         $partidas_presupuestales = [];
 
-        if($this->cargarLista){
+        if ($this->cargarLista) {
             // $partidas_presupuestales = PptoDeEgreso::where('PartidaEspecifica','like','%'.$this->partida_especifica.'%')->get();
             $partidas_presupuestales = PptoDeEgreso::all();
 
+            if ($this->partida_presupuestal == '') {
+                $compras_enviadas = CompraMenor::select('id', 'cm_fecha', 'cm_folio', 'cm_asunto', 'cm_creation_status')
+                    ->where('cm_creation_status', 'Enviado')
+                    ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
+                    ->where('cm_folio', 'like', '%' . $this->ejercicio . '%')
+                    ->orderby($this->ordenar, $this->direccion)
+                    ->paginate($this->mostrar);
 
-            if($this->partida_presupuestal == ''){
-                $compras_enviadas = CompraMenor::select('id','cm_fecha','cm_folio','cm_asunto','cm_creation_status')
-                                                ->where('cm_creation_status', 'Enviado')
-                                                ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
-                                                ->where('cm_folio','like','%'.$this->ejercicio.'%')
-                                                ->orderby($this->ordenar, $this->direccion)
-                                                ->paginate($this->mostrar);
+            } else {
 
-            }else{
-
-                $objetos_cmm = CompraMenorList::where('icm_partida_presupuestal',$this->partida_presupuestal)->get();
+                $objetos_cmm = CompraMenorList::where('icm_partida_presupuestal', $this->partida_presupuestal)->get();
                 $folios = [];
                 $compras_by_folio = [];
 
@@ -108,21 +111,25 @@ class CCMList extends Component
                     }
                 }
 
-                $this->compras_filtradas = $folios;
 
-                $compras_enviadas = CompraMenor::select('id','cm_fecha','cm_folio','cm_asunto','cm_creation_status')
-                                                ->where('cm_creation_status', 'Enviado')
-                                                ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
-                                                ->where('cm_folio','like','%'.$this->ejercicio.'%')
-                                                ->get();
+                $compras_enviadas = CompraMenor::select('id', 'cm_fecha', 'cm_folio', 'cm_asunto', 'cm_creation_status')
+                    ->where('cm_creation_status', 'Enviado')
+                    ->whereBetween('cm_fecha', [$this->fecha_inicio, $this->fecha_fin])
+                    ->where('cm_folio', 'like', '%' . $this->ejercicio . '%')
+                    ->get();
+
+                $this->folios_filtrados = [];
 
                 foreach ($compras_enviadas as $compra) {
                     foreach ($folios as $folio) {
-                        if($compra->cm_folio == $folio){
+                        if ($compra->cm_folio == $folio) {
                             array_push($compras_by_folio, $compra);
+                            array_push($this->folios_filtrados, $compra->cm_folio);
                         }
                     }
                 }
+                $this->compras_filtradas = $compras_by_folio;
+
                 $compras_enviadas = Collection::make($compras_by_folio);
 
                 $page = 0;
@@ -134,20 +141,21 @@ class CCMList extends Component
 
         }
 
-        return view('livewire.n17-a.caja-menor.c-c-m-list',compact(['compras_enviadas','partidas_presupuestales']));
+        return view('livewire.n17-a.caja-menor.c-c-m-list', compact(['compras_enviadas', 'partidas_presupuestales']));
     }
 
     public function getDetails($compra)
     {
-        return redirect()->to(route("cajamenor.show", ['details_of_folio'=>$compra['cm_folio']]));
+        return redirect()->to(route("cajamenor.show", ['details_of_folio' => $compra['cm_folio']]));
     }
 
     public function printData($compra)
     {
-        return redirect()->to(route("cajamenor.print", ['print_folio'=>$compra['cm_folio']]));
+        return redirect()->to(route("cajamenor.print", ['print_folio' => $compra['cm_folio']]));
     }
 
-    public function forgeReport(){
+    public function forgeReport()
+    {
 
         $this->validate();
 
@@ -155,10 +163,10 @@ class CCMList extends Component
         $userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
         $userArea = is_string(Helper::GetUserArea()) ? Helper::GetUserArea() : Helper::GetUserArea()->AreaNombre;
 
-        foreach ($this->compras_filtradas as $folio) {
-            $items = CompraMenorList::where('icm_folio',$folio)
-                                ->where('icm_partida_presupuestal', $this->partida_presupuestal)
-                                ->get();
+        foreach ($this->folios_filtrados as $folio) {
+            $items = CompraMenorList::where('icm_folio', $folio)
+                ->where('icm_partida_presupuestal', $this->partida_presupuestal)
+                ->get();
 
             foreach ($items as $item) {
                 $monto_general += $item->icm_importe;
@@ -169,14 +177,14 @@ class CCMList extends Component
         $monto_general = number_format($monto_general, 2, '.', '');
 
         $reporte = new ReporteCM();
-            $reporte->rcm_ejercicio = $this->ejercicio;
-            $reporte->rcm_inicio = $this->fecha_inicio;
-            $reporte->rcm_fin = $this->fecha_fin;
-            $reporte->rcm_partida_presupuestal = $this->partida_presupuestal;
-            $reporte->rcm_folios_cm = $this->compras_filtradas;
-            $reporte->rcm_area = $userArea;
-            $reporte->rcm_sucursal = $userSede;
-            $reporte->rcm_monto_gral = $monto_general;
+        $reporte->rcm_ejercicio = $this->ejercicio;
+        $reporte->rcm_inicio = $this->fecha_inicio;
+        $reporte->rcm_fin = $this->fecha_fin;
+        $reporte->rcm_partida_presupuestal = $this->partida_presupuestal;
+        $reporte->rcm_folios_cm = $this->folios_filtrados;
+        $reporte->rcm_area = $userArea;
+        $reporte->rcm_sucursal = $userSede;
+        $reporte->rcm_monto_gral = $monto_general;
         $reporte->save();
 
         return redirect()->to(route("cajamenor.reportData", ['id_of_report' => $reporte->id]));

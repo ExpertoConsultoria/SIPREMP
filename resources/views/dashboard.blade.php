@@ -13,6 +13,7 @@
     <!-- {{Auth::user() -> roles[0]}} -->
 
     @if ( Auth::user() -> roles[0] -> name === 'N6:17A' )
+
     <div class="py-12">
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="overflow-hidden bg-transparent">
@@ -167,7 +168,7 @@
                         <div
                             class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                             <a href="{{ route('bandejaentrada') }}"
-                                class="p-5 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid text-center justify-items-center">
+                                class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
 
                                 <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -196,7 +197,7 @@
                         <div
                             class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                             <a href="{{ route('solicitudes') }}"
-                                class="p-5 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid text-center justify-items-center">
+                                class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
                                 <svg width="66" height="83" viewBox="0 0 66 83" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_51_1154)">
@@ -228,7 +229,6 @@
             </div>
 
         </div>
-    </div>
     </div>
 
     @elseif(Auth::user() -> roles[0] -> name == 'admin' || Auth::user() -> roles[0] -> name == 'N7:GS:17A')
@@ -267,7 +267,7 @@
                         <div
                             class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                             <a href="{{ route('cajamenor') }}"
-                                class="p-5 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid text-center justify-items-center">
+                                class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 90 90"
                                     fill="none">
@@ -293,7 +293,7 @@
                         <div
                             class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
                             <a href="{{ route('solicitudes') }}"
-                                class="p-5 sm:p-8 md:p-12 lg:p-16 xl:p-20 grid text-center justify-items-center">
+                                class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
                                 <svg width="66" height="83" viewBox="0 0 66 83" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_51_1154)">
@@ -326,10 +326,236 @@
         </div>
     </div>
 
+    @elseif( Auth::user() -> roles[0] -> name === 'N4:SEGE' )
+    <div class="py-12">
+        <div class="mx-auto max-w-7xl lg:px-8">
+            <div class="overflow-hidden bg-transparent">
+
+                <div
+                    class="p-6 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <p class="mb-3 text-lg font-semibold text-center text-gray-700 text dark:text-gray-400">¡HOLA,
+                        {{ strtoupper(Auth::user () -> username)}}! BIENVENIDO AL SIPREMP</p>
+                </div>
+
+
+                <div
+                    class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
+
+                        <div class="grid justify-start">
+                            <x-user-icon class="block w-auto h-9" />
+                        </div>
+                        <div class="grid justify-start">
+                            <x-building-icon class="block w-auto h-9" />
+                        </div>
+                        <div class="grid justify-start">
+                            <x-localization-icon class="block w-auto h-9" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="grid justify-center">
+                    <div
+                        class="grid grid-cols-1 gap-5 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-6">
+                        <div>
+                            <div
+                                class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-6">
+                                <a
+                                    class="p-10  grid grid-cols-3 text-start justify-items-start ">
+                                    <div>
+                                        <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M53.7812 44.9449L46.8298 51.9199C44.0109 54.7487 39.051 54.8096 36.1711 51.9199L29.2194 44.9449L4.25195 69.9934C5.18133 70.4232 6.20602 70.6796 7.29539 70.6796H75.7056C76.7949 70.6796 77.8193 70.4235 78.7483 69.9936L53.7812 44.9449Z"
+                                                fill="#515151" />
+                                            <path
+                                                d="M75.7052 12.3203H7.29507C6.2057 12.3203 5.181 12.5768 4.25195 13.0065L30.9314 39.7745C30.9332 39.7763 30.9353 39.7766 30.9371 39.7784C30.9389 39.7802 30.9392 39.7826 30.9392 39.7826L39.6142 48.4863C40.5356 49.4077 42.465 49.4077 43.3865 48.4863L52.0596 39.7841C52.0596 39.7841 52.0617 39.7802 52.0635 39.7784C52.0635 39.7784 52.0674 39.7763 52.0692 39.7745L78.748 13.0064C77.819 12.5764 76.7946 12.3203 75.7052 12.3203Z"
+                                                fill="#515151" />
+                                            <path
+                                                d="M0.775855 16.4075C0.295039 17.3798 0 18.4591 0 19.6153V63.3848C0 64.541 0.294715 65.6203 0.775693 66.5926L25.7864 41.5009L0.775855 16.4075Z"
+                                                fill="#515151" />
+                                            <path
+                                                d="M82.2243 16.4071L57.2139 41.5008L82.2243 66.5929C82.7051 65.6206 83.0001 64.5413 83.0001 63.3848V19.6152C83.0001 18.4588 82.7051 17.3794 82.2243 16.4071Z"
+                                                fill="#515151" />
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            BANDEJA DE ENTRADA
+                                        </p>
+                                        <p class="mt-2">Solicitudes por revisar</p>
+                                    </div>
+                                </a>
+                            </div>
+
+
+
+                            <div
+                                class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-6">
+                                <a href="{{ route('inventario') }}"
+                                    class=" p-10  grid grid-cols-3 text-start justify-items-start ">
+                                    <div>
+                                        <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_99_10360)">
+                                                <path
+                                                    d="M38.0417 47.5521C38.0417 46.1238 36.8728 44.9583 35.4479 44.9583H22.4792V55.3333C22.4792 57.2423 20.9298 58.7917 19.0208 58.7917C17.1118 58.7917 15.5625 57.2423 15.5625 55.3333V44.9583H2.59375C1.16546 44.9583 0 46.1238 0 47.5521V80.4063C0 81.8346 1.16546 83 2.59375 83H35.4479C36.8728 83 38.0417 81.8346 38.0417 80.4063V47.5521Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M83 47.5521C83 46.1238 81.8311 44.9583 80.4063 44.9583H67.4375V55.3333C67.4375 57.2423 65.8882 58.7917 63.9792 58.7917C62.0702 58.7917 60.5208 57.2423 60.5208 55.3333V44.9583H47.5521C46.1238 44.9583 44.9583 46.1238 44.9583 47.5521V80.4063C44.9583 81.8346 46.1238 83 47.5521 83H80.4063C81.8311 83 83 81.8346 83 80.4063V47.5521Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M60.5208 2.59375C60.5208 1.16892 59.3519 0 57.9271 0H44.9583V10.375C44.9583 12.284 43.409 13.8333 41.5 13.8333C39.591 13.8333 38.0417 12.284 38.0417 10.375V0H25.0729C23.6446 0 22.4792 1.16892 22.4792 2.59375V35.4479C22.4792 36.8762 23.6446 38.0417 25.0729 38.0417H57.9271C59.3519 38.0417 60.5208 36.8762 60.5208 35.4479V2.59375Z"
+                                                    fill="#515151" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_99_10360">
+                                                    <rect width="83" height="83" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            INVENTARIO
+                                        </p>
+                                        <p class="mt-2">Recursos</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+
+
+                            <div
+                                class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-2">
+                                <a class=" p-5  grid grid-cols-3 text-start">
+                                    <div class="px-5">
+                                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_99_10280)">
+                                                <path
+                                                    d="M45.6461 10.2448C45.6461 8.83711 45.0967 7.51195 44.1011 6.51633L39.1297 1.545C38.1479 0.563086 36.7542 0 35.3672 0H35.0651V10.5469H45.6462L45.6461 10.2448Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M32.102 36.2739C32.4384 35.2525 33.0256 34.3015 33.7911 33.5307L45.6929 21.6769V14.0625H33.3414C32.3698 14.0625 31.6406 13.2763 31.6406 12.3047V0H5.27344C2.36555 0 0 2.36555 0 5.27344V54.7266C0 57.6345 2.36555 60 5.27344 60H40.3726C43.2805 60 45.6929 57.6345 45.6929 54.7266V41.6073L43.7612 43.4921C42.9785 44.268 42.0619 44.8328 41.0284 45.1779L35.4391 47.0439L34.5877 47.0903C33.18 47.0903 31.8479 46.4053 31.0206 45.2586C30.2 44.1171 29.9769 42.6374 30.4232 41.3002L32.102 36.2739ZM8.78906 31.6406H26.3101C27.2817 31.6406 28.0679 32.4268 28.0679 33.3984C28.0679 34.37 27.2817 35.1562 26.3101 35.1562H8.78906C7.81746 35.1562 7.03125 34.37 7.03125 33.3984C7.03125 32.4268 7.81746 31.6406 8.78906 31.6406ZM7.03125 26.3672C7.03125 25.3956 7.81746 24.6094 8.78906 24.6094H26.3101C27.2817 24.6094 28.0679 25.3956 28.0679 26.3672C28.0679 27.3388 27.2817 28.125 26.3101 28.125H8.78906C7.81746 28.125 7.03125 27.3388 7.03125 26.3672ZM7.03125 40.4297C7.03125 39.4581 7.81746 38.6719 8.78906 38.6719H26.3101C27.2817 38.6719 28.0679 39.4581 28.0679 40.4297C28.0679 41.4013 27.2817 42.1875 26.3101 42.1875H8.78906C7.81746 42.1875 7.03125 41.4013 7.03125 40.4297ZM33.3414 49.2188C34.313 49.2188 35.0992 50.005 35.0992 50.9766C35.0992 51.9482 34.3131 52.7344 33.3414 52.7344H22.7945C21.8229 52.7344 21.0367 51.9482 21.0367 50.9766C21.0367 50.005 21.8229 49.2188 22.7945 49.2188H33.3414ZM8.78906 21.0938C7.81746 21.0938 7.03125 20.3075 7.03125 19.3359C7.03125 18.3643 7.81746 17.5781 8.78906 17.5781H33.3414C34.313 17.5781 35.0992 18.3643 35.0992 19.3359C35.0992 20.3075 34.313 21.0938 33.3414 21.0938H8.78906Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M35.2864 37.8291L33.7572 42.4171C33.5279 43.1044 34.182 43.7582 34.8693 43.5286L39.4546 41.9972L35.2864 37.8291Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M48.9386 23.3563L37.3617 34.9331L42.3545 39.9259C44.9711 37.3089 50.0623 32.217 53.9307 28.3485L48.9386 23.3563Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M58.967 18.3145C58.3491 17.6931 57.4392 17.3378 56.4744 17.3378C55.5096 17.3378 54.5999 17.6931 53.9784 18.3163L51.4241 20.8706L56.4161 25.8626C57.8145 24.4641 58.781 23.4975 58.9706 23.308C60.3437 21.9328 60.3436 19.6929 58.967 18.3145Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M58.9705 23.3081L58.9707 23.3079C58.9752 23.3034 58.9772 23.3014 58.9808 23.2978C58.9772 23.3016 58.9752 23.3036 58.9705 23.3081Z"
+                                                    fill="black" />
+                                                <path
+                                                    d="M58.9808 23.2978C58.9864 23.2922 58.993 23.2856 58.9964 23.2822C58.9929 23.2857 58.9864 23.2922 58.9808 23.2978Z"
+                                                    fill="black" />
+                                                <path
+                                                    d="M58.9964 23.2822C59.0078 23.2709 59.008 23.2706 58.9964 23.2822V23.2822Z"
+                                                    fill="black" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_99_10280">
+                                                    <rect width="60" height="60" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            VALES
+                                        </p>
+                                        <p class="mt-2">Generación de vales, borradores, estatus</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div
+                                class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-2">
+                                <a class=" p-5  grid grid-cols-3 text-start">
+                                    <div class="px-5">
+                                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_99_10364)">
+                                                <path
+                                                    d="M20.3572 48.2144H5.35721V54.6428H20.3572V48.2144ZM11.7856 52.5H8.57162C7.97974 52.5 7.5 52.0203 7.5 51.4284C7.5 50.8369 7.97974 50.3572 8.57162 50.3572H11.7856C12.3775 50.3572 12.8572 50.8369 12.8572 51.4284C12.8572 52.0203 12.3775 52.5 11.7856 52.5ZM17.1428 52.5H16.0716C15.4797 52.5 15 52.0203 15 51.4284C15 50.8369 15.4797 50.3572 16.0716 50.3572H17.1428C17.7347 50.3572 18.2144 50.8369 18.2144 51.4284C18.2144 52.0203 17.7347 52.5 17.1428 52.5Z"
+                                                    fill="#515151" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M37.7335 8.93555L42.1573 0.0750732C42.0392 0.0274658 41.9133 0.00228881 41.7856 0H1.07162C0.943909 0.00228881 0.818024 0.0274658 0.699463 0.0750732L5.12558 8.94012C5.6781 10.0227 6.78818 10.7071 8.00354 10.7144H20.3572V8.37433C18.8814 7.85248 17.9961 6.34323 18.2607 4.80011C18.5252 3.25745 19.8633 2.12952 21.4284 2.12952C22.9939 2.12952 24.332 3.25745 24.5966 4.80011C24.8611 6.34323 23.9758 7.85248 22.5 8.37433V10.7144H34.8537C36.0709 10.7066 37.1819 10.0204 37.7335 8.93555Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M58.9284 3.21442H45V19.2856H54.6428C55.2347 19.2856 55.7144 19.7653 55.7144 20.3572C55.7144 20.9491 55.2347 21.4284 54.6428 21.4284H45V30H54.6428C55.2347 30 55.7144 30.4797 55.7144 31.0716C55.7144 31.6631 55.2347 32.1428 54.6428 32.1428H45V35.3572H46.0716C46.6631 35.3572 47.1428 35.8369 47.1428 36.4284C47.1428 37.0203 46.6631 37.5 46.0716 37.5H45V40.7144H54.6428C55.2347 40.7144 55.7144 41.1942 55.7144 41.7856C55.7144 42.3775 55.2347 42.8572 54.6428 42.8572H45V56.7856H58.9284C59.5203 56.7856 60 56.3058 60 55.7144V4.28558C60 3.69415 59.5203 3.21442 58.9284 3.21442ZM54.6428 37.5H51.4284C50.8369 37.5 50.3572 37.0203 50.3572 36.4284C50.3572 35.8369 50.8369 35.3572 51.4284 35.3572H54.6428C55.2347 35.3572 55.7144 35.8369 55.7144 36.4284C55.7144 37.0203 55.2347 37.5 54.6428 37.5ZM54.6428 26.7856H49.2856C48.6942 26.7856 48.2144 26.3058 48.2144 25.7144C48.2144 25.1225 48.6942 24.6428 49.2856 24.6428H54.6428C55.2347 24.6428 55.7144 25.1225 55.7144 25.7144C55.7144 26.3058 55.2347 26.7856 54.6428 26.7856Z"
+                                                    fill="#515151" />
+                                                <path
+                                                    d="M1.07162 60H41.7856C42.3775 60 42.8572 59.5203 42.8572 58.9284V3.46939L39.6483 9.89777C38.7296 11.7036 36.8797 12.8458 34.8537 12.8572H22.5V15.1973C23.9758 15.7191 24.8611 17.2284 24.5966 18.7711C24.332 20.3142 22.9939 21.4421 21.4284 21.4421C19.8633 21.4421 18.5252 20.3142 18.2607 18.7711C17.9961 17.2284 18.8814 15.7191 20.3572 15.1973V12.8572H8.00354C5.97977 12.8444 4.13223 11.7036 3.21442 9.90005L0 3.47122V58.9284C0 59.5203 0.479736 60 1.07162 60ZM3.21442 48.2144C3.21442 47.0306 4.17389 46.0716 5.35721 46.0716H20.3572C21.5405 46.0716 22.5 47.0306 22.5 48.2144V54.6428C22.5 55.8261 21.5405 56.7856 20.3572 56.7856H5.35721C4.17389 56.7856 3.21442 55.8261 3.21442 54.6428V48.2144Z"
+                                                    fill="#515151" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M22.5 5.35721C22.5 5.9491 22.0203 6.42838 21.4284 6.42838C20.8369 6.42838 20.3572 5.9491 20.3572 5.35721C20.3572 4.76532 20.8369 4.28558 21.4284 4.28558C22.0203 4.28558 22.5 4.76532 22.5 5.35721Z"
+                                                    fill="#515151" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M22.5 18.2144C22.5 18.8058 22.0203 19.2856 21.4284 19.2856C20.8369 19.2856 20.3572 18.8058 20.3572 18.2144C20.3572 17.6225 20.8369 17.1428 21.4284 17.1428C22.0203 17.1428 22.5 17.6225 22.5 18.2144Z"
+                                                    fill="#515151" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_99_10364">
+                                                    <rect width="60" height="60" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            EXPEDIENTES
+                                        </p>
+                                        <p class="mt-2">Contiene los expedientes completos</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div
+                                class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-6">
+                                <a href="{{ route('cajamenor') }}" class=" p-5  grid grid-cols-3 text-start">
+                                    <div class="px-5">
+                                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_193_583)">
+                                                <path
+                                                    d="M59.4782 13.4636C59.0113 12.8655 58.2947 12.516 57.5359 12.516H10.6223L9.92498 4.74724C9.81093 3.4768 8.74618 2.50334 7.4707 2.50334H2.46414C1.10323 2.50334 0 3.60657 0 4.96748C0 6.3284 1.10323 7.43163 2.46414 7.43163H5.21788L7.91882 37.5222C7.9194 37.5577 7.91764 37.5925 7.91964 37.6282C7.92515 37.7227 7.93747 37.8152 7.9532 37.9063L8.052 39.0065C8.05388 39.0272 8.05599 39.048 8.05845 39.0685C8.3579 41.6629 9.68373 43.9108 11.601 45.4295C10.6075 46.6982 10.0131 48.2935 10.0131 50.026C10.0131 54.1453 13.3645 57.4967 17.4837 57.4967C21.603 57.4967 24.9544 54.1453 24.9544 50.026C24.9544 49.1336 24.7966 48.2776 24.5084 47.4836H37.995C37.7067 48.2776 37.549 49.1336 37.549 50.026C37.549 54.1453 40.9003 57.4967 45.0197 57.4967C49.139 57.4967 52.4904 54.1453 52.4904 50.026C52.4904 45.9066 49.139 42.5553 45.0197 42.5553H17.5003C15.6285 42.5553 13.9974 41.426 13.2933 39.7807L52.6736 37.4662C53.7487 37.4031 54.6583 36.6488 54.9196 35.6041L59.9266 15.5776C60.1104 14.8417 59.9451 14.0618 59.4782 13.4636Z"
+                                                    fill="#515151" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_193_583">
+                                                    <rect width="60" height="60" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            CAJA MENOR
+                                        </p>
+                                        <p class="mt-2">Movimientos de caja menor</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     @endif
-
-    <!-- {{ Auth::user() -> roles[0] -> name }} -->
-
 </x-app-layout>

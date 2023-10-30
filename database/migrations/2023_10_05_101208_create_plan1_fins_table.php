@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('plan1_fins', function (Blueprint $table) {
             $table->id();
-
-            $table->mediumInteger("Ejercicio");
-            $table->smallInteger("NoFin");
-            $table->text("DescFin");
-
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-
+            $table->mediumInteger('Ejercicio');
+            $table->smallInteger('NoFin');
+            $table->string('DescFin', 255);
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

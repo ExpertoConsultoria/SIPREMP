@@ -33,4 +33,13 @@ class MemorandumList extends Model
 
 
     protected $primaryKey = 'id';
+
+    // RELACION UNO A UNO (INVERSO)
+    public function Memorandum(){
+        return $this->belongsTo(Memorandum::class);
+    }
+
+    public function Partidas_presupuestales(){
+        return $this->belongsTo(Partidas_presupuestales::class);
+    }
 }
