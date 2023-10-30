@@ -14,6 +14,9 @@ use App\Livewire\N5\BandejaEntrada\BEList;
 use App\Livewire\N5\BandejaEntrada\BEStatus;
 use App\Livewire\N5\BandejaEntrada\BEDetalles;
 
+use App\Livewire\N4\Inventario\EntradaInventario;
+
+
 // Shared Components
 use App\Livewire\Shared\Solicitud\SolicitudesCreate;
 use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
@@ -55,6 +58,9 @@ Route::middleware([
     Route::get('/Bandeja-entrada', function () {
         return view('N5.main');
     })->name('bandejaentrada');
+    Route::get('/inventario', function () {
+        return view('N4.Inventario.main');
+    })->name('inventario');
 
     // Reactive Pages
     //Bandeja Entrada
@@ -79,5 +85,8 @@ Route::middleware([
     Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
+
+    // Inventario
+    Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
 
 });
