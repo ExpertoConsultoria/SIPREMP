@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+// Shared Components
 use App\Livewire\Shared\CajaMenor\CCMCreate;
 use App\Livewire\Shared\CajaMenor\CCMBorradores;
 use App\Livewire\Shared\CajaMenor\CCMList;
@@ -15,21 +17,24 @@ use App\Livewire\Shared\BandejaEntrada\BEAprobadas;
 use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
 use App\Livewire\Shared\BandejaEntrada\SolicitudAceptada;
 use App\Livewire\Shared\BandejaEntrada\BEDetalles;
+use App\Livewire\Shared\BandejaEntrada\BEAdvancedDetails;
+use App\Livewire\Shared\BandejaEntrada\BEValeServicio;
 
-// Shared Components
 use App\Livewire\Shared\Solicitud\SolicitudesCreate;
 use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
 use App\Livewire\Shared\Solicitud\SolicitudesList;
 use App\Livewire\Shared\Solicitud\SolicitudStatus;
 
+// For Specific Users
+
 // Pendiente
 use App\Livewire\N4\Expediente\EList;
 use App\Livewire\N4\Expediente\EDetalles;
 
+use App\Livewire\N4\Vales\VCreateFromMemo;
 use App\Livewire\N4\Vales\VCreate;
-use App\Livewire\N4\Vales\VCreateNew;
 use App\Livewire\N4\Vales\VBorradores;
-use App\Livewire\N4\Vales\VList;
+use App\Livewire\N4\Vales\VSentAndRevised;
 use App\Livewire\N4\Vales\VDetalles;
 use App\Livewire\N4\Vales\VAprobados;
 use App\Livewire\N4\Vales\VVer;
@@ -41,12 +46,8 @@ use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 
-use App\Livewire\N3\BandejaEntrada\CSBandejaEntrada;
-use App\Livewire\N3\BandejaEntrada\CSValeServicio;
-
-use App\Livewire\N3\Solicitudes\CSValeSolicitud;
-use App\Livewire\N3\Solicitudes\CSSolicitudesRechazadas;
-use App\Livewire\N3\Solicitudes\CSValeValidado;
+use App\Livewire\N3\SolicitudesVales\VSRechazadas;
+use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,35 +71,32 @@ Route::middleware([
 ])->group(function () {
 
     // DashBoard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
 
     // Rest Screens
-    Route::get('/caja-menor', function () {
-        return view('shared.caja-menor.main');
-    })->name('cajamenor');
-    Route::get('/solicitudes', function () {
-        return view('shared.solicitudes.main');
-    })->name('solicitudes');
-    Route::get('/Bandeja-entrada', function () {
-        return view('shared.bandeja-entrada.main');
-    })->name('bandejaentrada');
-    Route::get('/vales', function () {
-        return view('n4.vales.main');
-    })->name('vales');
-    Route::get('/expedientes', function () {
-        return view('n4.expedientes.main');
-    })->name('expedientes');
-    Route::get('/inventario', function () {
-        return view('n4.inventario.main');
-    })->name('inventario');
-    Route::get('/compras-consolidadas', function(){
-        return view('N3.compras-consolidadas.main');
-    })->name('compraconsolidada');
-    Route::get('/Solicitudes', function(){
-        return view('N3.solicitudes.main');
-    })->name('solicitudescompra');
+        Route::get('/caja-menor', function () {
+            return view('shared.caja-menor.main');
+        })->name('cajamenor');
+        Route::get('/solicitudes', function () {
+            return view('shared.solicitudes.main');
+        })->name('solicitudes');
+        Route::get('/Bandeja-entrada', function () {
+            return view('shared.bandeja-entrada.main');
+        })->name('bandejaentrada');
+        Route::get('/vales', function () {
+            return view('SG.vales.main');
+        })->name('vales');
+        Route::get('/expedientes', function () {
+            return view('SG.expedientes.main');
+        })->name('expedientes');
+        Route::get('/inventario', function () {
+            return view('SG.inventario.main');
+        })->name('inventario');
+        Route::get('/compras-consolidadas', function(){
+            return view('UT.compras-consolidadas.main');
+        })->name('compraconsolidada');
 
     // Reactive Pages
 
@@ -107,26 +105,25 @@ Route::middleware([
     Route::get('/expediente/list/detalles',EDetalles::class)->name('expediente.detalles');
 
     //Vales
-    Route::get('/vales/create',VCreate::class)->name('vale.create');
-    Route::get('/vales/create-new',VCreateNew::class)->name('vales.createnew');
+    Route::get('/vales/create-from-memorandum/{details_of_folio}',VCreateFromMemo::class)->name('vale.create-from-memo');
+    Route::get('/vales/create',VCreate::class)->name('vales.create');
+    Route::get('/vales/edit/{edit_to_folio}',VCreate::class)->name('vales.edit');
     Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
-    Route::get('/vales/list',VList::class)->name('vales.list');
-    Route::get('/vales/list/detalles',VDetalles::class)->name('vales.detalles');
+    Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
+    Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
     Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
     Route::get('/vales/aprobados/ver',VVer::class)->name('vales.view');
     Route::get('/vales/aprobados/agregar',VAgregar::class)->name('vales.agregar');
     Route::get('/vales/aprobados/imprimir',VImprimir::class)->name('vales.imprimir');
     Route::get('/vales/aprobados/expediente',VExpediente::class)->name('vales.expediente');
 
+    Route::get('/solicitudes-de-vales/rechazadas',VSRechazadas::class)->name('vales-solicitudes.rechazadas');
+    Route::get('/solicitudes-de-vales/rechazadas/{details_of_folio}/detalles',VSRechazado::class)->name('vales-solicitudes.details');
+
     // compra consolidada
     Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
     Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidadaBorrador.borradorCompra');
     Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidadaBorrador.guardado');
-    Route::get('/bandeja-entrada-compra',CSBandejaEntrada::class)->name('bandejaEntradaCompra');
-    Route::get('/bandeja-entrada-compra/valeServicio',CSValeServicio::class)->name('bandejaEntradaCompra.valeServicio');
-    Route::get('/solicitudes/vale',CSValeSolicitud::class)->name('solicitudes.vale');
-    Route::get('/solicitudes/rechazadas',CSSolicitudesRechazadas::class)->name('solicitudes.rechazadas');
-    Route::get('/solicitudes/revisado-validado',CSValeValidado::class)->name('solicitudes.revisadoValidado');
 
     //Bandeja Entrada
     Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
@@ -135,6 +132,9 @@ Route::middleware([
     Route::get('/bandeja-entrada/{details_of_folio}/rechazada', SolicitudRechazada::class)->name('bandejaentrada.rechazada');
     Route::get('/bandeja-entrada/{details_of_folio}/aprobada', SolicitudAceptada::class)->name('bandejaentrada.aprobada');
     Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
+    Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
+    Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
+
 
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');

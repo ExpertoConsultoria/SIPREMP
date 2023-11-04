@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\N4\Vales;
+namespace App\Livewire\N3\SolicitudesVales;
 
 use Livewire\Component;
 
@@ -18,7 +18,7 @@ use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
 
-class VDetalles extends Component
+class VSRechazado extends Component
 {
 
     public $details_of_folio = '';
@@ -33,8 +33,9 @@ class VDetalles extends Component
 
     public function render()
     {
-        return view('livewire.n4.vales.v-detalles');
+        return view('livewire.n3.solicitudes-vales.v-s-rechazado');
     }
+
 
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();

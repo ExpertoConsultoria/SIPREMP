@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Livewire\N4\Vales;
+namespace App\Livewire\Shared\BandejaEntrada;
 
 use Livewire\Component;
 
 use stdClass;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Renderable;
 
 use Livewire\Redirector;
@@ -18,7 +19,7 @@ use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
 
-class VDetalles extends Component
+class BEValeServicio extends Component
 {
 
     public $details_of_folio = '';
@@ -31,9 +32,11 @@ class VDetalles extends Component
     public $MIR;
     public $proveedor;
 
+    protected $listeners = ['approveVale', 'rejectVale'];
+
     public function render()
     {
-        return view('livewire.n4.vales.v-detalles');
+        return view('livewire.shared.bandeja-entrada.b-e-vale-servicio');
     }
 
     public function mount() {
@@ -103,4 +106,47 @@ class VDetalles extends Component
 
         }
     }
+
+    #[On('approveVale')]
+    public function approveVale(){
+
+
+        $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
+        $vale->creation_status = 'Validado';
+        $vale->token_rev_val = strtoupper(Str::random(5));
+        $vale->pending_review = 1;
+        $vale->pass_filter = 1;
+        $vale->save();
+
+        $this->dispatch('simpleAlert',
+            '¡Aprobada y Enviada!',
+            'success'
+        );
+
+        sleep(2);
+        return redirect()->route('vales.send-revised');
+
+    }
+
+    #[On('rejectVale')]
+    public function rejectVale($reason){
+
+        $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
+        $vale->creation_status = 'Rechazado';
+        $vale->motivo_rechazo = $reason;
+        $vale->pending_review = 1;
+        $vale->pass_filter = 0;
+        $vale->save();
+
+        $this->dispatch('simpleAlert',
+            'Rechazada y Retornada',
+            'success'
+        );
+
+        sleep(2);
+        return redirect()->route('bandejaentrada.rechazadas');
+
+    }
+
+
 }

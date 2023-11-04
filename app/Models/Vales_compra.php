@@ -22,24 +22,31 @@ class Vales_compra extends Model
         'NoProposito',
         'NoComponente',
         'NoActividad',
-        'id_arch_cotizacion',
+        'archivos_id',
         'id_proveedor',
         'justificacion',
         'lugar_entrega',
         'fecha_entrega',
-        'lista_compra',
         'subtotal',
         'iva',
         'total_compra',
+
+        'folio_solicitud',
+
         'token_solicitante',
         'token_rev_val',
         'token_disp_ppta',
         'token_autorizacion',
-        'info_extra'
+
+        'creation_status',
+        'pass_filter',
+        'motivo_rechazo',
+        'pending_review',
     ];
 
     protected $encryptable = [
-        'folio',
+        'fecha',
+        'lugar',
         'NoFin',
         'NoProposito',
         'NoActividad',
@@ -52,7 +59,8 @@ class Vales_compra extends Model
         'token_solicitante',
         'token_rev_val',
         'token_disp_ppta',
-        'token_autorizacion'
+        'token_autorizacion',
+        'motivo_rechazo',
     ];
 
     public function expediente(){
@@ -67,5 +75,9 @@ class Vales_compra extends Model
         return $this->hasOne(Elementos_Vales_compra::class);
     }
 
+    public function solicitante()
+    {
+        return $this->hasOne(User::class, 'id', 'id_usuario');
+    }
+
 }
-//

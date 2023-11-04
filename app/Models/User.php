@@ -80,4 +80,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(ReporteCM::class);
     }
+    public function valeCompra(): HasOne
+    {
+        return $this->hasOne(Vales_compra::class);
+    }
 }

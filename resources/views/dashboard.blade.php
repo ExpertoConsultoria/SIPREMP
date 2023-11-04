@@ -137,7 +137,7 @@
                             class="container grid grid-cols-1 gap-6 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                             <div
                                 class="w-64 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                                <a href="{{ route('solicitudBienes.create') }}" class="text-right">
+                                <a href="{{ route('solicitudes.create') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="53" viewBox="0 0 40 53"
                                         fill="none">
@@ -162,7 +162,7 @@
 
                             <div
                                 class="w-64 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                                <a href="{{ route('solicitudBienes.borradores') }}" class="text-right">
+                                <a href="{{ route('solicitudes.borradores') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                         fill="none">
@@ -189,7 +189,7 @@
 
                             <div
                                 class="w-64 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
-                                <a href="{{ route('solicitudBienes.list') }}" class="text-right">
+                                <a href="{{ route('solicitudes.list') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
                                         fill="none">
@@ -352,7 +352,7 @@
                             <div>
                                 <div
                                     class="p-2 mt-8 mb-6 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700">
-                                    <a href="{{ route('bandejaentrada.pendientes') }}"
+                                    <a href="{{ route('bandejaentrada') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
@@ -581,7 +581,7 @@
 
                             <div
                                 class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 ">
-                                <a href="{{ route('bandejaEntradaCompra') }}"
+                                <a href="{{ route('bandejaentrada') }}"
                                     class="grid grid-cols-3 p-5 text-start justify-items-start">
                                     <div>
                                         <svg width="83" height="60" viewBox="0 0 83 83" fill="none"
@@ -612,7 +612,7 @@
 
                             <div
                                 class="p-2 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 ">
-                                <a href="{{ route('solicitudescompra') }}"
+                                <a href="{{ route('vales') }}"
                                     class="grid grid-cols-3 p-5 text-start justify-items-start">
                                     <div>
                                         <svg width="60" height="60" viewBox="0 0 66 83" fill="none"
@@ -635,7 +635,7 @@
                                     <div class="col-span-2 ">
                                         <p
                                             class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                            SOLICITUDES
+                                            SOLICITUDES / VALES
                                         </p>
                                         <p class="mt-2">Rechazadas y aprobadas</p>
                                     </div>

@@ -1,10 +1,10 @@
-<div>
+<div wire:init="loadDrafts">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Vales en borrador')}}
+                    {{_('Vales en Borrador')}}
                 </h2>
             </div>
 
@@ -46,58 +46,124 @@
                 </button>
             </div>
         </div>
-    
 
-    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                <tr class="text-center text-black">
-                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                        Folio
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Fecha de Creación
-                    </th>
-                    <th class="px-16 py-2 cursor-pointer">
-                        Asunto
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Solicitante
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                    <td class="px-4 py-2">
-                        <p>#88898</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>14/09/2023</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Solicitud de computadoras</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Usuario del que proviene</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div>
-                            <x-button-colors color="indigo" wire:click="getDetails()">
-                                <i class="fas fa-eye"></i>
-                            </x-button-colors>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="p-6 bg-white h-96 text dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
+            @if (count($drafts))
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th wire:click="ordenaPor('folio')" class="px-4 py-2 text-center cursor-pointer">
+                                Folio
+                                @if ($ordenar == 'folio')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('fecha')" class="px-4 py-2 text-center cursor-pointer">
+                                Fecha de Creación
+                                @if ($ordenar == 'fecha')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('justificacion')" class="px-4 py-2 text-center cursor-pointer">
+                                Asunto
+                                @if ($ordenar == 'justificacion')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('id_usuario')" class="px-4 py-2 text-center cursor-pointer">
+                                Solicitante
+                                @if ($ordenar == 'id_usuario')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th class="px-4 py-2 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($drafts as $draft)
+                            <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="px-4 py-2">
+                                    <p>{{ $draft->folio }}</p>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <p>{{ $draft->fecha }}</p>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <p>{{ $draft->justificacion }}</p>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <p>{{ $draft->solicitante->name }}</p>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <x-button-colors color="green" wire:click="goToEdit({{ $draft }})">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </x-button-colors>
+                                    <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $draft->id }} })">
+                                        <i class="fas fa-trash"></i>
+                                    </x-button-colors>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @if ($drafts->hasPages())
+                    <div class="px-6 py-3">
+                        {{ $drafts->links() }}
+                    </div>
+                @endif
+            @else
+                <div class="bg-gray-50 dark:bg-gray-700">
+                    <p class="p-4 font-semibold text-center">
+                        !! No existen registros ¡¡
+                    </p>
+                </div>
+            @endif
         </div>
 
-        </div>
     </div>
-    
+
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+                    Livewire.on('delete', (event) => {
+                        Swal.fire({
+                            title: '¿Estas seguro?',
+                            text: "¡Ya no podras revertir esta acción!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '¡Si, Eliminalo!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Livewire.dispatch('deleteDraft', {id: event.id});
+                            }
+                        })
+                    });
+                });
+    </script>
+
 </div>

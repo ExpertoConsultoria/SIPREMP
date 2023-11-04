@@ -25,7 +25,7 @@
         <div class="max-w-screen-xl mx-auto">
             {{-- status --}}
             <x-memorandum-status memorandum_id="{{$memorandum_details->id}}" />
-                
+
             {{-- Datos --}}
             <div
                 class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
@@ -58,7 +58,7 @@
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">00001010</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $MIR }}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-6 mt-7">

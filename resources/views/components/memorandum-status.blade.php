@@ -3,6 +3,10 @@
 @php
     use App\Models\Memorandum;
     $memo = Memorandum::find($memorandum_id);
+
+    use App\Models\Vales_compra;
+    $vale_data = Vales_compra::where('folio_solicitud',$memo->memo_folio)->first();
+
 @endphp
 
 <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -28,7 +32,7 @@
                     <div class="
                         @if($memo->memo_creation_status === 'Validado')
                             w-6 h-6 bg-green-400 rounded-full
-                        @elseif($memo->memo_creation_status === 'Aprobado' && $memo->token_aceptacion!=null && $memo->pass_filter===1)
+                        @elseif((($memo->memo_creation_status === 'Aprobado' && $memo->token_aceptacion!=null) || ($memo->memo_creation_status === 'Rechazado' && $memo->motivo_rechazo != null && $memo->token_aceptacion===null)) && $memo->pass_filter===1)
                             w-6 h-6 bg-green-400 rounded-full
                         @elseif($memo->memo_creation_status === 'Rechazado' && $memo->token_aceptacion===null && $memo->motivo_rechazo != null && $memo->pass_filter===0)
                             w-6 h-6 bg-red-400 rounded-full
@@ -42,7 +46,9 @@
                 <div class="relative flex flex-col items-center">
                     <div class="
                         @if ($memo->memo_creation_status === 'Aprobado' && $memo->token_aceptacion !=  null && $memo->pass_filter===1)
-                            w-6 h-6 bg-green-400 rounded-full
+                            @if ($vale_data != null && $vale_data?->token_solicitante != null)
+                                w-6 h-6 bg-green-400 rounded-full
+                            @endif
                         @elseif($memo->memo_creation_status === 'Rechazado' && $memo->token_aceptacion === null && $memo->motivo_rechazo != null && $memo->pass_filter===1)
                             w-6 h-6 bg-red-400 rounded-full
                         @else
