@@ -482,7 +482,8 @@
 
                             <div
                                 class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg text dark:bg-gray-800 dark:border-gray-700 mb-2">
-                                <a class=" p-5  grid grid-cols-3 text-start">
+                                <a href="{{ route('expedientes') }}"
+                                class="p-5  grid grid-cols-3 text-start">
                                     <div class="px-5">
                                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
