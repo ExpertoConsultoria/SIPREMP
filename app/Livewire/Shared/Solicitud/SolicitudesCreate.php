@@ -314,6 +314,11 @@ class SolicitudesCreate extends Component
 
     public function Save(){
 
+        if($this->total > 10000 ){
+            $this->dispatch('alertCRUD', 'Error!', 'Ha excedido el monto limite ($10,000) para una Compra Extraordinaria', 'error');
+            return;
+        }
+
         if(!$this->is_editing) {
             $this->validate();
             if(count($this->elementosMemorandum)){
