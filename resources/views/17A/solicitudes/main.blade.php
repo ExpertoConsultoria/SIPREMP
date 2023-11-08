@@ -27,6 +27,7 @@
             <div class="grid justify-center overflow-hidden bg-transparent">
 
                 <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mb-6">
+                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mb-6">
                     <div
                         class="w-52 p-6 mt-8 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('solicitudes.create') }}" class="text-right">

@@ -8,6 +8,12 @@
                         Adjuntar XML
                     </button>
                 </div>
+                <div>
+                    <button type="button" wire:click="$toggle('is_loading_xml')"
+                        class="disabled:opacity-25 focus:outline- text-white bg-indigo-500 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 transition-all active:translate-y-1">
+                        Adjuntar XML
+                    </button>
+                </div>
             @endif
         </div>
         <div class="grid grid-cols-3 gap-6 lg:grid-cols-6 xl:grid-cols-6 ">
@@ -38,6 +44,7 @@
                 </div>
 
 
+                {{-- <div class="col-span-8">
                 {{-- <div class="col-span-8">
                 <div class="flex items-center justify-center w-full">
                     <label for="factura_XML"
@@ -89,12 +96,43 @@
                             </div>
                         </div>
                     </div>
+            @if ($is_loading_xml && !$is_valid_xml)
+                <div class="col-span-3">
+                    <div class="text-center">
+
+                        <button type="button" wire:click='validateXML' wire:loading.attr="disabled"
+                            class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                            Validar XML
+                        </button>
+                        <div>
+                            <span class="text-sm text-rose-600">{{ $xml_message }}</span>
+                        </div>
+
+                    </div>
                 </div>
+            @endif
+            @if ($is_valid_xml)
+                <div class="col-span-6">
+                    <div class="text-center items-center">
+                        <div class="fñe items-center text-center">
+                            <button type="button" wire:click='newFactura'
+                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                Cargar Datos
+                            </button>
+                            <div>
+                                <span class="text-sm text-green-600">{{ $xml_message }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @endif
         </div>
     @else
         <div class="text-center items-center">
+        <div class="text-center items-center">
             <div>
+                <p class="text-lg font-bold text-gray-900 dark:text-white">
                 <p class="text-lg font-bold text-gray-900 dark:text-white">
                     Factura Cargada Correctamente!
                 </p>

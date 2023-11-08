@@ -163,6 +163,11 @@
 
                     <div>
                         
+
+                    </div>
+
+                    <div>
+                        
                     </div>
                     {{-- Buttons --}}
                     <div
@@ -170,6 +175,9 @@
                         <div class="container px-4">
                             <div class="grid grid-cols-1">
                                 <input wire:model.blur="factura_id" type="hidden" name="factura_id">
+                                @error('factura_id')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                @enderror
                                 @error('factura_id')
                                     <span class="text-xs text-rose-600">{{ $message }}</span>
                                 @enderror

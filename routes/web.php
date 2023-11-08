@@ -111,6 +111,21 @@ Route::middleware([
     Route::get('/Solicitudes', function(){
         return view('N3.solicitudes.main');
     })->name('solicitudescompra');
+    Route::get('/vales', function () {
+        return view('n4.vales.main');
+    })->name('vales');
+    Route::get('/expedientes', function () {
+        return view('n4.expedientes.main');
+    })->name('expedientes');
+    Route::get('/inventario', function () {
+        return view('n4.inventario.main');
+    })->name('inventario');
+    Route::get('/compras-consolidadas', function(){
+        return view('N3.compras-consolidadas.main');
+    })->name('compraconsolidada');
+    Route::get('/Solicitudes', function(){
+        return view('N3.solicitudes.main');
+    })->name('solicitudescompra');
 
     // Reactive Pages
     //pdf
@@ -153,6 +168,11 @@ Route::middleware([
     Route::get('/solicitudes/revisado-validado',CSValeValidado::class)->name('solicitudes.revisadoValidado');
 
     //Bandeja Entrada
+    //N3
+    Route::get('/bandeja-entrada/lista', BELista::class)->name('bandejaentrada.lista');
+    Route::get('/bandeja-entrada/lista/ver', BEVer::class)->name('bandejaentrada.ver');
+
+
     //N3
     Route::get('/bandeja-entrada/lista', BELista::class)->name('bandejaentrada.lista');
     Route::get('/bandeja-entrada/lista/ver', BEVer::class)->name('bandejaentrada.ver');

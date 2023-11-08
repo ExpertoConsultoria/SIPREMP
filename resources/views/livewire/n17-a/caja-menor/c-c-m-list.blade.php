@@ -24,6 +24,7 @@
 
     <div class="max-w-screen-xl p-4 mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 gap-5 py-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 ">
+        <div class="grid grid-cols-2 gap-5 py-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 ">
 
             <div>
                 <select wire:model.live="mostrar"

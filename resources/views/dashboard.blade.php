@@ -11,7 +11,9 @@
     </x-slot>
 
     <!-- {{ Auth::user()->roles[0] }} -->
+    <!-- {{ Auth::user()->roles[0] }} -->
 
+    @if (Auth::user()->roles[0]->name === 'N6:17A')
     @if (Auth::user()->roles[0]->name === 'N6:17A')
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -154,6 +156,9 @@
                                     <p class="text-lg mt-36">Nueva Solicitud de <br /> Bienes/Servicios</p>
                                 </a>
                             </div>
+                                    <p class="text-lg mt-36">Nueva Solicitud de <br /> Bienes/Servicios</p>
+                                </a>
+                            </div>
 
                             <div
                                 class="w-64 p-6 mt-8 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
@@ -178,6 +183,9 @@
                                         </defs>
                                     </svg>
 
+                                    <p class="text-lg mt-36">Borradores </p>
+                                </a>
+                            </div>
                                     <p class="text-lg mt-36">Borradores </p>
                                 </a>
                             </div>
@@ -206,7 +214,12 @@
                                     <p class="text-lg mt-36">Estatus de <br /> Solicitudes</p>
                                 </a>
                             </div>
+                                    <p class="text-lg mt-36">Estatus de <br /> Solicitudes</p>
+                                </a>
+                            </div>
 
+                        </div>
+                    </div>
                         </div>
                     </div>
 
@@ -214,6 +227,7 @@
                 </div>
             </div>
         </div>
+    @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
     @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
@@ -246,6 +260,7 @@
 
                     <div class="grid justify-center">
                         <div
+                            class="grid grid-cols-1 gap-5 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-6">
                             class="grid grid-cols-1 gap-5 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-6">
 
                             <div
@@ -711,12 +726,16 @@
                     <div class="grid justify-center">
                         <div
                             class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-6">
+                        <div
+                            class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-6">
 
                             <div
                                 class="p-2 mt-8 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('cajamenor') }}"
                                     class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77"
+                                        viewBox="0 0 90 90" fill="none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77"
                                         viewBox="0 0 90 90" fill="none">
                                         <g clip-path="url(#clip0_94_6247)">
