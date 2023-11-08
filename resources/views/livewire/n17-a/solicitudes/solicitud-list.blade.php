@@ -123,8 +123,8 @@
             </div>
             @endif
             @else
-            <div class="bg-gray-50 dark:bg-gray-700">
-                <p class="p-4 font-semibold text-center">
+            <div class="bg-gray-50 dark:bg-zinc-700">
+                <p class="p-4 font-semibold text-center dark:tex">
                     !! No existen registros ¡¡
                 </p>
             </div>

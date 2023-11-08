@@ -111,21 +111,6 @@ Route::middleware([
     Route::get('/Solicitudes', function(){
         return view('N3.solicitudes.main');
     })->name('solicitudescompra');
-    Route::get('/vales', function () {
-        return view('n4.vales.main');
-    })->name('vales');
-    Route::get('/expedientes', function () {
-        return view('n4.expedientes.main');
-    })->name('expedientes');
-    Route::get('/inventario', function () {
-        return view('n4.inventario.main');
-    })->name('inventario');
-    Route::get('/compras-consolidadas', function(){
-        return view('N3.compras-consolidadas.main');
-    })->name('compraconsolidada');
-    Route::get('/Solicitudes', function(){
-        return view('N3.solicitudes.main');
-    })->name('solicitudescompra');
 
     // Reactive Pages
     //pdf
