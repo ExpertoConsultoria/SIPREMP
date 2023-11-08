@@ -72,7 +72,7 @@ class Vales_compra extends Model
     }
 
     public function Elementos_Vales_compra(){
-        return $this->hasOne(Elementos_Vales_compra::class);
+        return $this->hasMany(Elementos_Vale_compra::class);
     }
 
     public function solicitante()

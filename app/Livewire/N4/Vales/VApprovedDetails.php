@@ -18,8 +18,7 @@ use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
 
-
-class VExpediente extends Component
+class VApprovedDetails extends Component
 {
 
     public $details_of_folio = '';
@@ -34,7 +33,7 @@ class VExpediente extends Component
 
     public function render()
     {
-        return view('livewire.n4.vales.v-expediente');
+        return view('livewire.n4.vales.v-approved-details');
     }
 
     public function mount() {

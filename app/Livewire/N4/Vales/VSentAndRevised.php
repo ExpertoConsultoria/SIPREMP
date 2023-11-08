@@ -37,7 +37,7 @@ class VSentAndRevised extends Component
         }
     }
 
-    public function loadDrafts() {
+    public function loadRevised() {
         $this->cargarLista = true;
     }
 

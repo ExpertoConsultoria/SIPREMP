@@ -37,7 +37,7 @@ use App\Livewire\N4\Vales\VBorradores;
 use App\Livewire\N4\Vales\VSentAndRevised;
 use App\Livewire\N4\Vales\VDetalles;
 use App\Livewire\N4\Vales\VAprobados;
-use App\Livewire\N4\Vales\VVer;
+use App\Livewire\N4\Vales\VApprovedDetails;
 use App\Livewire\N4\Vales\VAgregar;
 use App\Livewire\N4\Vales\VImprimir;
 use App\Livewire\N4\Vales\VExpediente;
@@ -111,11 +111,12 @@ Route::middleware([
     Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
     Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
     Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
+
     Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
-    Route::get('/vales/aprobados/ver',VVer::class)->name('vales.view');
-    Route::get('/vales/aprobados/agregar',VAgregar::class)->name('vales.agregar');
-    Route::get('/vales/aprobados/imprimir',VImprimir::class)->name('vales.imprimir');
-    Route::get('/vales/aprobados/expediente',VExpediente::class)->name('vales.expediente');
+    Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
+    Route::get('/vales/aprobados/{details_of_folio}/agregar',VAgregar::class)->name('vales.add-to-approved');
+    Route::get('/vales/aprobados/{details_of_folio}/imprimir',VImprimir::class)->name('vales.print-approved');
+    Route::get('/vales/aprobados/{details_of_folio}/expediente',VExpediente::class)->name('vales.expediente');
 
     Route::get('/solicitudes-de-vales/rechazadas',VSRechazadas::class)->name('vales-solicitudes.rechazadas');
     Route::get('/solicitudes-de-vales/rechazadas/{details_of_folio}/detalles',VSRechazado::class)->name('vales-solicitudes.details');

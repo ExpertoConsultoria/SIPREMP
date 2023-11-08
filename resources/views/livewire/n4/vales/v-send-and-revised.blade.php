@@ -1,4 +1,4 @@
-<div>
+<div wire:init="loadRevised">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
