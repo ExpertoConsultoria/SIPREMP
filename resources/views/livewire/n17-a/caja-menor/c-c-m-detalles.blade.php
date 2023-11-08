@@ -23,7 +23,7 @@
         <div class="max-w-screen-xl mx-auto">
             {{-- Datos --}}
             <div
-                class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 mb-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
@@ -55,7 +55,7 @@
             </div>
 
             {{-- Buttons --}}
-            <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 my-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                         <div class="text-center">
                             @if (!$is_pdf)
@@ -75,7 +75,7 @@
 
             {{-- Proveedor --}}
             <div
-                class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                         <div class="flex items-center">
@@ -99,10 +99,10 @@
 
             {{-- Table --}}
             <div
-                class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="pb-12 mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Cantidad

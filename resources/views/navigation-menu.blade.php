@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white border-gray-100 dark:bg-zinc-800 dark:border-zinc-700">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -42,7 +42,7 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700">
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-zinc-800 hover:text-zinc-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-zinc-700 active:bg-gray-50 dark:active:bg-zinc-700">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -76,6 +76,10 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
+
+                            <x-dropdown-link>
+                                <button id="theme-toggle-button">Cambiar Modo</button>
+                            </x-dropdown-link>                            
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -179,3 +183,28 @@
         </div>
     </div>
 </nav>
+
+<script>
+  // Función para cambiar el tema
+  function toggleTheme() {
+    const currentTheme = localStorage.theme || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    // Cambia el tema en el DOM
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+
+    // Almacena la elección del usuario en localStorage
+    localStorage.theme = newTheme;
+  }
+
+  // Agrega un evento de clic al botón
+  const themeToggleButton = document.getElementById('theme-toggle-button');
+  themeToggleButton.addEventListener('click', toggleTheme);
+
+  // Verifica y aplica el tema al cargar la página
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+
+</script>
+

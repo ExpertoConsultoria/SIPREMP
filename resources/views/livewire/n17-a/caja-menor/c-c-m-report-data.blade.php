@@ -25,10 +25,10 @@
         <div class="max-w-screen-xl mx-auto">
             {{-- Table --}}
             <div
-                class="mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Partida presupuestal
@@ -94,10 +94,9 @@
                             </button>
                         </div>
                         <div class="text-end">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                IMPRIMIR
-                            </button>
+                            <a href="{{ route('pdf.ReporteCM', ['id_of_report' => $report->id]) }}"  target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Imprimir
+                            </a>
                         </div>
                     </div>
                 </div>

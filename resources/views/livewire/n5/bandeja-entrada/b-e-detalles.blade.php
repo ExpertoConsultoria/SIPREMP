@@ -27,7 +27,7 @@
             <div
                 class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <div class="container">
-                    <div class="grid grid-cols-2 gap-10">
+                    <div class="grid grid-cols-3 gap-10">
                         <div class="text-center">
                             <button type="button"
                                 class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
@@ -38,6 +38,12 @@
                             <button type="button"
                                 class="disabled:opacity-25 focus:outline- text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 transition-all active:translate-y-1">
                                 RECHAZAR SOLICITUD
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <button type="button"
+                                class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                EXISTENCIA EN INVENTARIO
                             </button>
                         </div>
                     </div>

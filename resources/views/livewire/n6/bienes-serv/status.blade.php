@@ -168,16 +168,14 @@
                 <div class="container">
                     <div class="grid grid-cols-2 gap-10">
                         <div class="text-start">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                            <a href="{{ route('pdf.Cotizacion') }}" target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Cotización
-                            </button>
+                            </a>
                         </div>
                         <div class="text-end">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                            <a href="{{ route('pdf.Memorandum', ['details_of_folio' => $memorandum_details->memo_folio]) }}"  target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 Imprimir
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

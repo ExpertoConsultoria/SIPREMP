@@ -27,4 +27,5 @@ class SolicitudStatus extends Component
         // $this -> memorandum_details -> load('memorandumList');
         $this -> memoList = MemorandumList::where('im_folio', $this -> memorandum_details -> memo_folio) -> get();;
     }
+
 }

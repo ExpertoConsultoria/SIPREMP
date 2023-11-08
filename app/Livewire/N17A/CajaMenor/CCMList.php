@@ -151,8 +151,9 @@ class CCMList extends Component
 
     public function printData($compra)
     {
-        return redirect()->to(route("cajamenor.print", ['print_folio' => $compra['cm_folio']]));
+        return redirect()->route('pdf.CompraCM', ['folio' => $compra['cm_folio']]);
     }
+    
 
     public function forgeReport()
     {

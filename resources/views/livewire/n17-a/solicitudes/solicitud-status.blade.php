@@ -25,7 +25,7 @@
         <div class="max-w-screen-xl mx-auto">
             {{-- status --}}
             <div
-                class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 my-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container mx-auto px-4">
                     <div class="mb-3">
                         <label
@@ -80,7 +80,7 @@
 
             {{-- Datos --}}
             <div
-                class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 mb-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-6">
                         <div>
@@ -123,10 +123,10 @@
 
             {{-- Table --}}
             <div
-                class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="pb-12 mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Cantidad
@@ -165,22 +165,20 @@
             </div>
 
             {{-- Buttons --}}
-            <div class="mt-4 ">
+            <div class="mt-10 ">
                 <div class="container">
                     <div class="grid grid-cols-2 gap-10">
                         <div class="text-start">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                            <a href="{{ route('pdf.Cotizacion') }}" target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Cotización
-                            </button>
+                            </a>
                         </div>
                         <div class="text-end">
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                            <a href="{{ route('pdf.Memorandum', ['details_of_folio' => $memorandum_details->memo_folio]) }}"  target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 Imprimir
-                            </button>
+                            </a>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
 

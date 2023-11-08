@@ -73,9 +73,7 @@
                         <td class="px-4 py-2"> Solicitud de computadoras</td>
                         <td class="px-4 py-2"> Usuario del que proviene</td>
                         <td class="px-4 py-2 text-center">
-                            <x-button-colors color="indigo" wire:click="getDetails()">
-                                <i class="fas fa-eye"></i>
-                            </x-button-colors>
+                            <x-button-icons icon="eye"  wire:click="getDetails()"/>
                         </td>
                     </tr>
                 </tbody>

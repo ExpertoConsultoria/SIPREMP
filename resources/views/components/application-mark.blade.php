@@ -1,10 +1,5 @@
 <svg width="126" height="33" viewBox="0 0 126 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="126" height="33" fill="#353535" />
     <g id="N7:GS:17A 1 DASHBOARD | VICTOR" clip-path="url(#clip0_0_1)">
-        <rect width="1920" height="1080" transform="translate(-370 -21)" fill="#F3F4F6" />
-        <g id="Rectangle 1" filter="url(#filter0_d_0_1)">
-            <rect x="-370" y="-21" width="1920" height="140" fill="white" />
-        </g>
         <g id="Frame" clip-path="url(#clip1_0_1)">
             <g id="Group">
                 <g id="Group_2">
