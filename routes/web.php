@@ -16,6 +16,13 @@ use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
 use App\Livewire\Shared\BandejaEntrada\SolicitudAceptada;
 use App\Livewire\Shared\BandejaEntrada\BEDetalles;
 
+use App\Livewire\N4\Inventario\EntradaInventario;
+
+
+//
+use App\Livewire\N4\Expediente\ExpedienteCreate;
+
+
 // Shared Components
 use App\Livewire\Shared\Solicitud\SolicitudesCreate;
 use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
@@ -96,9 +103,7 @@ Route::middleware([
     Route::get('/compras-consolidadas', function(){
         return view('N3.compras-consolidadas.main');
     })->name('compraconsolidada');
-    Route::get('/Solicitudes', function(){
-        return view('N3.solicitudes.main');
-    })->name('solicitudescompra');
+
 
     // Reactive Pages
 
@@ -152,4 +157,10 @@ Route::middleware([
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
 
+        // Inventario
+        Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
+    
+        // Expedientes
+        Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');
+    
 });

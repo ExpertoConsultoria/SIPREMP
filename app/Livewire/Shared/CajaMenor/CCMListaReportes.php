@@ -47,7 +47,7 @@ class CCMListaReportes extends Component
             $reports = ReporteCM::select('rcm_folio','rcm_ejercicio','rcm_inicio','rcm_fin','rcm_partida_presupuestal')
                 ->where('rcm_inicio','like','%'.$this->buscar.'%')
                 // ->orWhere('rcm_fin','like','%'.$this->buscar.'%')
-                ->where('solicitante_id', Auth::user()->id)
+                // ->where('solicitante_id', Auth::user()->id)
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
         }

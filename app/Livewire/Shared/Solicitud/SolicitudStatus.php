@@ -18,6 +18,8 @@ class SolicitudStatus extends Component
     public $memorandum_details;
     public $memoList = [];
 
+    public $backButton;
+    
     public function render()
     {
         return view('livewire.shared.solicitud.solicitud-status');

@@ -13,7 +13,7 @@ class Helper
     public static function FolioGenerator($model, $trow, $length = 4, $prefix, $branchKey)
     {
 
-        $data = $model::orderBy($trow,  'desc')->first(); //Get the last Record
+        $data = $model::orderBy($trow, 'desc')->first(); //Get the last Record
 
         if (!$data) {
             $folio_length = $length - 1;
@@ -71,7 +71,6 @@ class Helper
         return $sede;
     }
 
-    // For Solicitud Module
     public static function backButton() {
         $user = Auth::user()->roles[0]->name;
 
@@ -82,5 +81,4 @@ class Helper
             return 'solicitudes';
         }
     }
-
 }
