@@ -12,7 +12,7 @@ use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 use Illuminate\Support\Facades\Auth;
 
-class VBorradores extends Component
+class VSentAndRevised extends Component
 {
     use WithPagination;
 
@@ -37,24 +37,40 @@ class VBorradores extends Component
         }
     }
 
-    public function loadDrafts() {     // Indica cuando esta lista la carga de los componentes
+    public function loadRevised() {
         $this->cargarLista = true;
     }
 
     public function render()
     {
 
-        $drafts = [];
+        $vales = [];
 
         if($this->cargarLista){
-            $drafts = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
-                ->where('creation_status','Borrador')
-                ->where('id_usuario', Auth::user()->id)
-                ->where('justificacion','like','%'.$this->buscar.'%')
-                ->orderby($this->ordenar, $this->direccion)
-                ->paginate($this->mostrar);
+            if(Auth::user()->roles[0]->name === 'N4:SEGE'){
+                $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
+                    ->where('creation_status','not like','Borrador')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->orderby($this->ordenar, $this->direccion)
+                    ->paginate($this->mostrar);
+
+            } elseif (Auth::user()->roles[0]->name === 'N3:UNTE') {
+                $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','not like','Borrador')
+                    ->where('pass_filter',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNotNull('token_rev_val')
+                    ->orderby($this->ordenar, $this->direccion)
+                    ->paginate($this->mostrar);
+            }
         }
-        return view('livewire.n4.vales.v-borradores', compact('drafts'));
+        return view('livewire.n4.vales.v-send-and-revised', compact('vales'));
+    }
+
+    public function getDetails($vale)
+    {
+        return redirect()->to(route("vales.detalles", ['details_of_folio'=>$vale['folio']]));
     }
 
     #[On('deleteDraft')]
@@ -77,5 +93,4 @@ class VBorradores extends Component
     {
         return redirect()->to(route("vales.edit", ['edit_to_folio'=>$vale['folio']]));
     }
-
 }

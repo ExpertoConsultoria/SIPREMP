@@ -14,18 +14,16 @@ return new class extends Migration
         Schema::create('elementos__vale_compras', function (Blueprint $table) {
             $table->id();
 
-            $table->integer("cantidad");
+            $table->text("cantidad");
             $table->text("unidad_medida");
             $table->text("concepto");
-            $table->float("precio_unitario");
-            $table->float("importe");
-            // $table->text("info_extra")->nullable();
+            $table->text("precio_unitario");
+            $table->text("importe");
+            $table->text("partida_presupuestal");
 
-            $table->unsignedBigInteger('vales_compra_id')->unique();//folio_compra
-            $table->unsignedBigInteger('partidas_presupuestales_id')->unique();//id_par_ppta
+            $table->unsignedBigInteger('vales_compra_id');//folio_compra
 
             $table->foreign('vales_compra_id')->references('id')->on('vales_compra')->onDelete('cascade');
-            // $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');
 
             $table->timestamps();
         });

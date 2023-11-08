@@ -63,6 +63,20 @@ class BEAprobadas extends Component
                 }
             }
 
+            $memorandums_rejected = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
+                ->where('memo_asunto','like','%'.$this->buscar.'%')
+                ->where('memo_creation_status','Rechazado')
+                ->where('pass_filter',1)
+                ->whereNotNull('motivo_rechazo')
+                ->whereNull('token_aceptacion')
+                ->get();
+
+            foreach ($memorandums_rejected as $memorandum) {
+                if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                    array_push($filtrados, $memorandum);
+                }
+            }
+
             $aprobadas = Collection::make($filtrados);
 
             $page = 0;

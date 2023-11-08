@@ -63,20 +63,12 @@
         </div>
         <div
             class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="container px-4 ">
+            <div class="container px-4">
                 <div class="text-center">
                     <button type="button"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         COTIZACIÓN
-                    </button>
-                    <button type="button"
-                        class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                        ADJUNTAR FACTURA
-                    </button>
-                    <button type="button"
-                        class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                        ADJUNTAR EVIDENCIAS
                     </button>
                 </div>
             </div>

@@ -13,21 +13,21 @@ class Elementos_Vale_compra extends Model
     // protected $table = 'elementos_vale_compras';
 
     protected $fillable = [
-        'folio_compra',
+        'vales_compra_id',
         'cantidad',
         'unidad_medida',
         'concepto',
-        'id_par_ppta',
+        'partida_presupuestal',
         'precio_unitario',
         'importe',
     ];
 
     protected $encryptable = [
-        'folio_compra',
         'cantidad',
         'unidad_medida',
         'concepto',
         'precio_unitario',
+        'partida_presupuestal',
         'importe'
     ];
 
@@ -40,5 +40,5 @@ class Elementos_Vale_compra extends Model
     }
 
 
-    
+
 }

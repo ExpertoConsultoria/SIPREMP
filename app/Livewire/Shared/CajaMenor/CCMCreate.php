@@ -360,6 +360,12 @@ class CCMCreate extends Component
     // Ways of Save
     public function Save()
     {
+
+        if($this->total > 2000){
+            $this->dispatch('alertCRUD', 'Error!', 'Ha excedido el monto limite ($2,000) para una Compra Menor', 'error');
+            return;
+        }
+
         if (!$this->is_editing) {
 
             $this->validate();
