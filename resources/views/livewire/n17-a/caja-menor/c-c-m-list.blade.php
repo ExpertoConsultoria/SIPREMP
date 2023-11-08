@@ -24,8 +24,6 @@
 
     <div class="max-w-screen-xl p-4 mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 gap-5 py-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 ">
-        <div class="grid grid-cols-2 gap-5 py-4 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 ">
-
             <div>
                 <select wire:model.live="mostrar"
                     class="w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
