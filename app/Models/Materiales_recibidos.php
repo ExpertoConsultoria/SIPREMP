@@ -16,19 +16,14 @@ class Materiales_recibidos extends Model
     protected $fillable = [
         'folio_vale',
         'cantidad',
-        'unidad_medida',
-        'concepto',
-        'id_par_ppta',
+        'partidas_presupuestales_id',
         'precio_unitario',
-        'importe',
     ];
 
     protected $encryptable = [
         'folio_vale',
-        'cantidad',
         'unidad_medida',
         'concepto',
-        'precio_unitario',
         'importe',
     ];
 

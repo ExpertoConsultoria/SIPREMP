@@ -58,32 +58,36 @@
                         <div class="grid grid-cols-3 gap-6 lg:grid-cols-6 xl:grid-cols-6 ">
                             @if ($is_loading_xml && !$is_valid_xml)
                             <div class="col-span-3">
-                                <div class="text-center">
-                                    <input type="file" name="factura_XML" wire:model="factura_XML" accept=".xml"
-                                        class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-                                    <div>
-                                        @error('factura_XML')
-                                        <span class="text-sm text-rose-600">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div wire:loading wire:target="factura_XML">
-                                        <div class="w-80">
-                                            <div class="mb-1 text-center">
-                                                <span
-                                                    class="text-base font-medium text-green-700 dark:text-white">Cargando...</span>
-                                                <span
-                                                    class="text-sm font-medium text-green-700 dark:text-white">75%</span>
-                                            </div>
-                                            <div class=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                                <div class="bg-green-600 h-2 rounded-full w-[75%]"></div>
+                                <div class="flex items-center justify-center space-x-4">
+                                    <div class="text-center">
+                                        <input type="file" name="factura_XML" wire:model="factura_XML" accept=".xml"
+                                            class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                        Cargar inventario
+                                        <div>
+                                            @error('factura_XML')
+                                            <span class="text-sm text-rose-600">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div wire:loading wire:target="factura_XML">
+                                            <div class="w-80">
+                                                <div class="mb-1 text-center">
+                                                    <span
+                                                        class="text-base font-medium text-green-700 dark:text-white">Cargando...</span>
+                                                    <span
+                                                        class="text-sm font-medium text-green-700 dark:text-white">75%</span>
+                                                </div>
+                                                <div class="bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                                    <div class="bg-green-600 h-2 rounded-full w-[75%]"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
 
-                    {{-- <div class="col-span-8">
+                            {{-- <div class="col-span-8">
                         <div class="flex items-center justify-center w-full">
                             <label for="factura_XML"
                                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -120,7 +124,7 @@
                             @endif
 
                             @if ($is_valid_xml)
-                            <button type="button" wire:click='newFactura'
+                            <button type="button" wire:click='loadDataXML'
                                 class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
                                 Cargar Datos
                             </button>
@@ -220,14 +224,38 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
-                    <td class="px-4 py-2"> 1</td>
-                    <td class="px-4 py-2"> 1 Coca </td>
-                    <td class="px-4 py-2">
-                        <input wire:model.blur="concepto" type="text" name="concepto" placeholder=""
-                            class="mx-auto w-3/5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                @foreach ($items_inventario as $item)
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4">
+                        {{ $item -> cantidad }}
                     </td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $item -> concepto }}
+                    </th>
+                    <td class="px-6 py-4">
+                        <select wire:change="setPartidaP($event.target.value, {{ $loop->index }})" required
+                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                            <option value="" disabled selected> Partida Presupuestal</option>
+
+                            @foreach ($partidas_presupuestales as $partida_presupuestal )
+                            <option value="{{ $partida_presupuestal->CvePptal }}">
+                                {{ $partida_presupuestal->PartidaEspecifica }}
+                            </option>
+                            @endforeach
+                            {{-- opciones --}}
+                        </select>
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $item -> precio_unitario }}
+                    </td>
+                    <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $item -> importe }}
+                    </th>
+
                 </tr>
+                @endforeach
             </tbody>
         </table>
 
@@ -238,7 +266,7 @@
 
     <div class="mt-10">
         <div class="text-end">
-            <button type="button"
+            <button type="button" wire:click="saveEntrada"
                 class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
                 AGREGAR AL INVENTARIO
             </button>

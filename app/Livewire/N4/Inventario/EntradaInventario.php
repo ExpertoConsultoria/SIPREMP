@@ -4,17 +4,22 @@ namespace App\Livewire\N4\Inventario;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Vales_entrada_material;
+use App\Models\Materiales_recibidos;
+use PhpCfdi\CfdiToJson\JsonConverter;
+use App\Helpers\Helper;
+
+use App\Models\Plan1Fin;
+use App\Models\Plan2Proposito;
+use App\Models\Plan3Componente;
+use App\Models\Plan4Actividad;
+use App\Models\PptoDeEgreso;
+
+use stdClass;
 
 class EntradaInventario extends Component
 {
     use WithFileUploads;
-
-    public $folio_vale = 'SP-0001';
-    public $unidad_medida;
-    public $cantidad;
-    public $concepto;
-    public $memoranda_id;
-    public $partida_presupuestal;
 
     // Field
     public $factura_XML;
@@ -31,14 +36,54 @@ class EntradaInventario extends Component
     public $factura_CM;
     public $add_xml;
 
+    public $items_inventario = [];
+    public $item_compra;
+    // Vales_entrada_material Table data
+    public $fecha;
+    public $folio;
+    public $id_receptor;
+    public $entrego_material;
+    public $material_recibido = 1;
+    public $token_recepcion = 1;
+    public $token_entrega = 1;
+    public $estatus_SG = 0;
+
+    // materiales_entregados Table data
+    public $cantidad;
+    public $unidad_medida;
+    public $concepto;
+    public $precio_unitario;
+    public $vale_perteneciente;
+    public $partida_presupuestal;
+
+    // Select Data
+    public $fines_mir = [];
+    public $propositos_mir = [];
+    public $componetes_mir = [];
+    public $actividades_mir = [];
+    public $partidas_presupuestales = [];
+
+    public $userSede;
+    public $userSedeCode;
+    public $specificUserSede;
+    public $specificUserSedeCode;
 
     public function render()
     {
         return view('livewire.n4.inventario.entrada-inventario');
     }
 
-    public function saveEntrada() {
+    public function mount()
+    {
+        $this->is_loading_xml = false;
+        $this->is_valid_xml = false;
+        $this->is_done = false;
 
+        $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+        $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
+
+        $this->fines_mir = Plan1Fin::all();
+        $this->partidas_presupuestales = PptoDeEgreso::all();
     }
 
 
@@ -54,12 +99,58 @@ class EntradaInventario extends Component
         'factura_XML.max' => 'El tamaño del archivo es muy grande.',
     ];
 
-    public function mount()
+    public function loadDataXML()
     {
-        $this->is_loading_xml = false;
-        $this->is_valid_xml = false;
-        $this->is_done = false;
+
+        $this->dispatch('simpleAlert','Archivo Cargado Correctamente','success');
+        $xml = file_get_contents('storage\files\FacturasCM\XML\IKYiWyJPzb2UWHAYhi7sAV7x7C1CGeMVR3HOS5hs.xml');
+        $factura_json = JsonConverter::convertToJson($xml);
+        $factura_json = json_decode($factura_json, true);
+        $conceptos = $factura_json['Conceptos']['Concepto'];
+
+        foreach( $conceptos as $concepto ) {
+            $item = new stdClass;
+            $item -> cantidad = $concepto['Cantidad'];
+            $item -> unidad_medida = $concepto['Unidad'];
+            $item -> concepto = $concepto['Descripcion'];
+            $item -> precio_unitario = $concepto['ValorUnitario'];
+            $item -> importe = floatval($concepto['Importe']);
+            $item -> partida_presupuestal = '';
+            array_push($this -> items_inventario, $item);
     }
+        // $this->dispatch('simpleAlert','Datos cargados correctamente','success');
+    }
+
+    public function saveEntrada() {
+        $this->validate();
+        $this -> folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
+
+        $vale_entrada = new Vales_entrada_material();
+        $vale_entrada -> folio = $this -> folio;
+        $vale_entrada -> fecha = date('Y-m-d');
+        $vale_entrada -> lugar = $this -> userSede;
+        $vale_entrada -> id_receptor = 1;
+        $vale_entrada -> entrego_material = 1;
+        $vale_entrada -> material_recibido = 1;
+        $vale_entrada -> estatus_SG = 0;
+        $vale_entrada -> token_recepcion = $this -> token_recepcion;
+        $vale_entrada -> token_entrega = $this -> token_entrega;
+        $vale_entrada -> save();
+
+        foreach ($this -> items_inventario as $item) {
+            $i = 0;
+            $this -> item_compra = new Materiales_recibidos();
+            $this -> item_compra -> vales_entrada_materials_id = 1;
+            $this -> item_compra -> cantidad = $item -> cantidad;
+            $this -> item_compra -> unidad_medida = $item -> unidad_medida;
+            $this -> item_compra -> concepto = $item -> concepto;
+            $this -> item_compra -> precio_unitario = $item -> precio_unitario;
+            $this -> item_compra -> importe = $item -> importe;
+            $this -> item_compra -> partidas_presupuestales_id = $item -> partida_presupuestal;
+            $this -> item_compra -> save();
+        }
+    }
+
 
     public function validateXML()
     {
@@ -71,62 +162,15 @@ class EntradaInventario extends Component
         if (strcmp( $this->extensionFile, 'xml' ) === 0) {
             $this->xml_message = 'Tipo de Archivo Revisado y Aprovado';
             $this->is_valid_xml = true;
+            'storage/'.$this->factura_XML->store('files/FacturasCM/XML','public');
         } else {
             $this->xml_message = 'El archivo que subiste no es XML';
         }
-
     }
 
 
-    public function loadDataXML($xml_id)
+    public function setPartidaP($value, $id)
     {
-
-        $this->dispatch('simpleAlert','Archivo Cargado Correctamente','success');
-
-        // Obtenemos la factura registrada y extraemos su infromacion
-        $factura = FacturaCM::findOrFail($xml_id);
-
-        $factura_contents = file_get_contents($factura->fcm_xml_ruta);
-        $factura_json = JsonConverter::convertToJson($factura_contents);
-        $factura_json = json_decode($factura_json, true);
-
-        //Comprobamos si RFC del proveedor ya existe en la base de datos, de lo contrario creamos el registro
-        $empresaData = Empresa::where('RFC', '=', $factura_json['Emisor']['Rfc'])->first();
-        if(empty($empresaData))
-        {
-            $empresa = new Empresa();
-            $empresa->RFC = $factura_json['Emisor']['Rfc'];
-            $empresa->RazonSocial = str_replace("'","`",$factura_json['Emisor']['Nombre']);
-            $empresa->Regimen = $factura_json['Emisor']['RegimenFiscal'];
-            $empresa->CodigoPostal = $factura_json['LugarExpedicion'];
-            $empresa->user_id = Auth::id();
-            $empresa->save();
-
-            $empresaData = $empresa;
-        }
-
-        $this->factura_id = $factura->id;
-        $this->empresa_id = $empresaData->id;
-        $this->razon_social = $empresaData->RazonSocial;
-        $this->RFC = $empresaData->RFC;
-        $this->telefono  = $empresaData?->Telefono ? $empresaData->Telefono : 'Ninguno';
-
-        $conceptos = $factura_json['Conceptos']['Concepto'];
-
-        foreach ($conceptos as $concepto) {
-            $item = new stdClass;
-                $item->icm_cantidad = $concepto['Cantidad'];
-                $item->icm_unidad_medida = $concepto['Unidad'];
-                $item->icm_concepto = $concepto['Descripcion'];
-                $item->icm_precio_u = $concepto['ValorUnitario'];
-                $item->icm_importe = floatval($concepto['Importe']);
-                $item->icm_partida_presupuestal = '';
-
-            array_push($this->elementosCompraMenor, $item);
-        }
-        // dd($this->elementosCompraMenor);
-
-        $this->CalculateTotals();
-        $this->dispatch('simpleAlert','Datos cargados correctamente','success');
+        $this -> items_inventario[$id] -> partida_presupuestal = $value;
     }
 }
