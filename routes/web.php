@@ -44,6 +44,11 @@ use App\Livewire\N4\Vales\VAgregar;
 use App\Livewire\N4\Vales\VImprimir;
 use App\Livewire\N4\Vales\VExpediente;
 
+use App\Livewire\N4\Inventario\ICrearEntrada;
+use App\Livewire\N4\Inventario\ICrearSalida;
+use App\Livewire\N4\Inventario\IInventario;
+use App\Livewire\N4\Inventario\IHistorial;
+
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
@@ -51,6 +56,10 @@ use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 use App\Livewire\N3\SolicitudesVales\VSRechazadas;
 use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
+use App\Http\Controllers\CompraCMPDF;
+use App\Http\Controllers\ReporteCMPDF;
+use App\Http\Controllers\MemorandumPDF;
+use App\Http\Controllers\CotizacionPDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +116,18 @@ Route::middleware([
         })->name('compraconsolidada');
 
     // Reactive Pages
+    //pdf
+    Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
+    Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
+    Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
+    Route::get('/solicitudes/pdf-cotizacion', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
+
+
+    //Inventario
+    Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');
+    Route::get('/inventario/salida',ICrearSalida::class)->name('inventario.salida');
+    Route::get('/inventario/list',IInventario::class)->name('inventario.list');
+    Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
 
     //Expedientes
     Route::get('/expediente/list',EList::class)->name('expediente.list');

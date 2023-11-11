@@ -16,7 +16,7 @@
                 <div class="col-span-3">
                     <div class="text-center">
                         <input type="file" name="factura_XML" wire:model="factura_XML" accept=".xml"
-                            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400">
                         <div>
                             @error('factura_XML')
                                 <span class="text-sm text-rose-600">{{ $message }}</span>
@@ -29,7 +29,7 @@
                                         class="text-base font-medium text-green-700 dark:text-white">Cargando...</span>
                                     <span class="text-sm font-medium text-green-700 dark:text-white">75%</span>
                                 </div>
-                                <div class=" bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class=" bg-gray-200 rounded-full h-2.5 dark:bg-zinc-700">
                                     <div class="bg-green-600 h-2 rounded-full w-[75%]"></div>
                                 </div>
                             </div>
@@ -38,6 +38,7 @@
                 </div>
 
 
+                {{-- <div class="col-span-8">
                 {{-- <div class="col-span-8">
                 <div class="flex items-center justify-center w-full">
                     <label for="factura_XML"
@@ -89,7 +90,21 @@
                             </div>
                         </div>
                     </div>
+            @if ($is_loading_xml && !$is_valid_xml)
+                <div class="col-span-3">
+                    <div class="text-center">
+
+                        <button type="button" wire:click='validateXML' wire:loading.attr="disabled"
+                            class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                            Validar XML
+                        </button>
+                        <div>
+                            <span class="text-sm text-rose-600">{{ $xml_message }}</span>
+                        </div>
+
+                    </div>
                 </div>
+            @endif
             @endif
         </div>
     @else

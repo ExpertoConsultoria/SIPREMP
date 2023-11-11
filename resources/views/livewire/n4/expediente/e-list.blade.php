@@ -80,9 +80,7 @@
                     </td>
                     <td class="px-4 py-2">
                         <div>
-                            <x-button-colors color="indigo" wire:click="getDetails()">
-                                <i class="fas fa-eye"></i>
-                            </x-button-colors>
+                            <x-button-icons icon="eye" wire:click="getDetails()"/>
                         </div>
                     </td>
                 </tr>
