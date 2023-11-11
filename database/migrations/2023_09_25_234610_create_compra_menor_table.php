@@ -33,6 +33,9 @@ return new class extends Migration
             $table->text('cm_iva');
             $table->text('cm_total');
 
+            $table->text('cm_entrega_sede');
+            $table->text('cm_entrega_fecha');
+
             $table->string('cm_creation_status');
 
             $table->unsignedBigInteger('factura_cm_id')->nullable();

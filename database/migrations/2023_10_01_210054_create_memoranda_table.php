@@ -35,7 +35,17 @@ return new class extends Migration
 
             $table->text('memo_id_cotizacion');
 
-            $table->string('memo_creation_status');
+            $table->enum('memo_creation_status', [
+                'Enviado',
+                'Borrador',
+                'Rechazado',
+                'Aprobado',
+                'Validado',
+            ]);
+
+            $table->boolean('pending_review')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
+            $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
+            $table->text('motivo_rechazo')->nullable();
 
             // $table->text('token_solicitud')->nullable();
             $table->text('token_aceptacion')->nullable();

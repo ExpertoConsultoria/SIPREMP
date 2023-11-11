@@ -4,9 +4,9 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                        {{ __('Estatus | Solicitud | #') }} {{ $details_of_folio }}
-                    </h2>
+                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
+                    {{ __('Estatus | Solicitud | #') }} {{ $details_of_folio }}
+                </h2>
             </div>
 
             <div class="grid" style="justify-content: end; padding-right: 5.5rem">
@@ -24,108 +24,58 @@
     <div class="py-8">
         <div class="max-w-screen-xl mx-auto">
             {{-- status --}}
-            <div
-                class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <div class="container mx-auto px-4">
-                    <div class="mb-3">
-                        <label
-                            class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
-                    </div>
-                    <div class="relative h-8 mb-4">
-                        {{-- Línea base de la barra de progreso  --}}
-                        <div
-                            class="h-1 w-[82%] sm:w-[85%] md:w-[89%] lg:w-[92%] xl:w-[93%] bg-gray-300 absolute top-3 left-0 right-0 mx-4">
-                        </div>
-
-                        {{-- Círculos y etiquetas --}}
-                        <div class="flex justify-between items-center">
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> memo_creation_status === 'Enviado') w-6 h-6 bg-green-400 rounded-full @elseif($memorandum_details -> memo_creation_status === 'Borrador') w-6 h-6 bg-red-400 rounded-full @endif ">
-                                </div>
-                                <p class="text-xs mt-1">Enviado</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> token_aceptacion) w-6 h-6 bg-green-400 rounded-full @elseif($memorandum_details -> token_aceptacion === null) w-6 h-6 bg-red-400 rounded-full @endif">
-                                </div>
-                                <p class="text-xs mt-1">Filtrado</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> token_aceptacion === null) w-6 h-6 bg-red-400 rounded-full @else w-6 h-6 bg-green-400 rounded-full @endif">
-                                </div>
-                                <p class="text-xs mt-1">Servicios Generales</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> token_aceptacion === null) w-6 h-6 bg-red-400 rounded-full @else w-6 h-6 bg-green-400 rounded-full @endif">
-                                </div>
-                                <p class="text-xs mt-1">Unidad Técnica</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> token_aceptacion === null) w-6 h-6 bg-red-400 rounded-full @else w-6 h-6 bg-green-400 rounded-full @endif">
-                                </div>
-                                <p class="text-xs mt-1">Control Presupuestal</p>
-                            </div>
-
-                            <div class="relative flex flex-col items-center">
-                                <div
-                                    class="@if($memorandum_details -> token_aceptacion === null) w-6 h-6 bg-red-400 rounded-full @else w-6 h-6 bg-green-400 rounded-full @endif">
-                                </div>
-                                <p class="text-xs mt-1">Dirección Administrativa</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+            <x-memorandum-status memorandum_id="{{$memorandum_details->id}}" />
 
             {{-- Datos --}}
             <div
                 class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="container px-4">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-6">
+                    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
-                            <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                                 {{$memorandum_details -> memo_fecha}}</p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}" />
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                                 {{$memorandum_details -> memo_folio}}</p>
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}" />
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                                 {{$memorandum_details -> solicitante -> name}}</p>
                         </div>
                         <div>
                             <x-label for="lugar" value="{{ __('Lugar') }}" />
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                                 {{$memorandum_details -> memo_sucursal}}</p>
                         </div>
                         <div>
                             <x-label for="destinatario" value="{{ __('Destinatario') }}" />
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                                 {{$memorandum_details -> destinatario}}</p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}" />
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">00001010</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $MIR }}</p>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <x-label for="a sunto" value="{{ __('Asunto') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-200">
-                            {{$memorandum_details -> memo_asunto}}</p>
+                    <div class="grid grid-cols-2 gap-6 mt-7">
+                        <div>
+                            <x-label for="a sunto" value="{{ __('Asunto') }}" />
+                            <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-200">
+                                {{ $memorandum_details->memo_asunto }}
+                            </p>
+                        </div>
+                        @if ($memorandum_details->motivo_rechazo != null)
+                            <div>
+                                <x-label for="a sunto" value="{{ __('Motivo de Rechazo') }}" />
+                                <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-200">
+                                    {{ $memorandum_details->motivo_rechazo }}
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -135,7 +85,7 @@
                 class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase  bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Cantidad

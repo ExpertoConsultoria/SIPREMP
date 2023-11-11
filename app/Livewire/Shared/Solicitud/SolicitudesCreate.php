@@ -73,7 +73,9 @@ class SolicitudesCreate extends Component
     public $is_editing = false;
 
     public $userSede;
+    public $userSedeCode;
     public $specificUserSede;
+    public $specificUserSedeCode;
 
     // Redireccionamiento
     public $redirecTo;
@@ -312,10 +314,15 @@ class SolicitudesCreate extends Component
 
     public function Save(){
 
+        if($this->total > 10000 ){
+            $this->dispatch('alertCRUD', 'Error!', 'Ha excedido el monto limite ($10,000) para una Compra Extraordinaria', 'error');
+            return;
+        }
+
         if(!$this->is_editing) {
             $this->validate();
             if(count($this->elementosMemorandum)){
-                $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSede);
+                $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSedeCode);
 
                 $this->memorandum = new Memorandum();
                 $this->memorandum->memo_fecha = $this->fecha;
@@ -330,7 +337,12 @@ class SolicitudesCreate extends Component
                 $this->memorandum->mir_id_componente = $this->componente_mir;
                 $this->memorandum->mir_id_actividad =  $this->actividad_mir;
 
-                $this->memorandum->memo_creation_status = 'Enviado';
+                if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+                    $this->memorandum->memo_creation_status = 'Validado';
+                    $this->memorandum->pass_filter = 1;
+                }else{
+                    $this->memorandum->memo_creation_status = 'Enviado';
+                }
 
                 $this->memorandum->save();
 
@@ -369,7 +381,7 @@ class SolicitudesCreate extends Component
                     $this->memorandum->memo_folio = $this->folio;
                 } else {
                     if (str_starts_with($this->memorandum->memo_folio, '&')) {
-                        $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->specificUserSede);
+                        $this->memorandum->memo_folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->specificUserSedeCode);
                     }else{
                         $this->memorandum->memo_folio = $this->folio;
                     }
@@ -383,7 +395,12 @@ class SolicitudesCreate extends Component
                 $this->memorandum->memo_sucursal = $this->sucursal;
                 $this->memorandum->destinatario = $this->destinatario;
                 $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                $this->memorandum->memo_creation_status = 'Enviado';
+                if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+                    $this->memorandum->memo_creation_status = 'Validado';
+                    $this->memorandum->pass_filter = 1;
+                }else{
+                    $this->memorandum->memo_creation_status = 'Enviado';
+                }
 
                 $this->memorandum->save();
 
@@ -462,7 +479,7 @@ class SolicitudesCreate extends Component
 
             $this->validate();
 
-            // Search CompraMenor
+            // Search Memorandum
             $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
             // Get item list
             $all_items = MemorandumList::where('im_folio', $this->edit_to_folio)->get();
@@ -521,13 +538,5 @@ class SolicitudesCreate extends Component
         }
     }
 
-    public function backButton() {
-        $user = Auth::user() -> roles[0] -> name;
-        if ( $user === 'N6:17A' ) {
-            $this -> backButton = 'dashboard';
-        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
-            $this -> backButton = 'solicitudes';
-        }
-    }
 }
 

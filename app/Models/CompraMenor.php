@@ -28,6 +28,9 @@ class CompraMenor extends Model
         'cm_iva',
         'cm_total',
         'cm_creation_status',
+        'cm_entrega_sede',
+        'cm_entrega_fecha',
+
         'token_solicitud',
         'token_aceptacion',
         'cm_creation_status',
@@ -47,6 +50,10 @@ class CompraMenor extends Model
         'cm_subtotal' => 'encrypted',
         'cm_iva' => 'encrypted',
         'cm_total' => 'encrypted',
+
+        'cm_entrega_sede' => 'encrypted',
+        'cm_entrega_fecha' => 'encrypted',
+
         'token_aceptacion' => 'encrypted',
     ];
 
@@ -59,5 +66,10 @@ class CompraMenor extends Model
 
     public function factura() {
         return $this->hasOne(FacturaCM::class, 'id', 'factura_cm_id');
+    }
+
+    public function solicitante()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'solicitante_id');
     }
 }

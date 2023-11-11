@@ -88,9 +88,9 @@
                             <i class="float-right mt-1 fas fa-sort"></i>
                             @endif
                         </th>
-                        <th wire:click="ordenaPor('memo_asunto')" class="px-4 py-2 cursor-pointer">
+                        <th wire:click="ordenaPor('memo_creation_status')" class="px-4 py-2 cursor-pointer">
                             Estado
-                            @if ($ordenar == 'memo_asunto')
+                            @if ($ordenar == 'memo_creation_status')
                             @if ($direccion == 'asc')
                             <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
                             @else
@@ -111,9 +111,19 @@
                         <td class="px-4 py-2"> {{ $memo->memo_asunto }} </td>
                         <td class="px-4 py-2"> {{ $memo->memo_creation_status }} </td>
                         <td class="px-4 py-2 text-center">
+                            @if ($memo->memo_creation_status === 'Rechazado')
+                                <x-button-colors color="green" wire:click="goToEdit({{ $memo }})">
+                                    <i class="fa fa-fw fa-edit"></i>
+                                </x-button-colors>
+                            @endif
                             <x-button-colors color="indigo" wire:click="getDetails({{ $memo }})">
                                 <i class="fas fa-eye"></i>
                             </x-button-colors>
+                            @if ($memo->memo_creation_status === 'Rechazado')
+                                <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $memo->id }} })">
+                                    <i class="fas fa-trash"></i>
+                                </x-button-colors>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -133,4 +143,24 @@
             @endif
         </div>
     </div>
+
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+                    Livewire.on('delete', (event) => {
+                        Swal.fire({
+                            title: '¿Estas seguro?',
+                            text: "¡Ya no podras revertir esta acción!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '¡Si, Eliminalo!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Livewire.dispatch('deleteDraft', {id: event.id});
+                            }
+                        })
+                    });
+                });
+    </script>
 </div>

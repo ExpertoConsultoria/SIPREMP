@@ -53,7 +53,7 @@ class SolicitudesBorradores extends Component
         if($this->cargarLista){
             $drafts = Memorandum::select('id','memo_folio','memo_fecha','memo_asunto')
                 ->where('memo_creation_status','Borrador')
-                ->where('solicitante_id', Auth::user() -> id)
+                ->where('solicitante_id', Auth::user()->id)
                 ->where('memo_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);

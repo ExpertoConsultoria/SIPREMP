@@ -28,7 +28,10 @@ class Memorandum extends Model
         'memo_id_cotizacion',
 
         'token_aceptacion',
-        'memo_creation_status'
+        'memo_creation_status',
+        'pass_filter',
+        'motivo_rechazo',
+        'pending_review',
     ];
 
     protected $casts = [
@@ -40,6 +43,7 @@ class Memorandum extends Model
         'mir_id_componente' => 'encrypted',
         'mir_id_actividad' => 'encrypted',
         'token_aceptacion' => 'encrypted',
+        'motivo_rechazo' => 'encrypted',
     ];
 
     protected $primaryKey = 'id';
