@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vales_compra', function (Blueprint $table) {
             $table->id();
 
-            $table->text("folio");
+            $table->string("folio", 100);
             $table->text("fecha");
 
             $table->unsignedBigInteger('id_usuario');

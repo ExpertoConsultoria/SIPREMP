@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->date('memo_fecha');
-            $table->text('memo_folio')->unique();
+            $table->string('memo_folio', 100)->unique();
 
             $table->unsignedBigInteger('solicitante_id');
             $table->foreign('solicitante_id')

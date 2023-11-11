@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reportes_cm', function (Blueprint $table) {
             $table->id();
 
-            $table->text('rcm_folio')->unique();
+            $table->string('rcm_folio', 100)->unique();
 
             $table->string('rcm_ejercicio');
             $table->date('rcm_inicio');

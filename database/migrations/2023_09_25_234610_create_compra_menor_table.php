@@ -16,7 +16,7 @@ return new class extends Migration
 
             // cm = Compra Menor
             $table->date('cm_fecha');
-            $table->text('cm_folio')->unique();
+            $table->string('cm_folio', 100)->unique();
 
             $table->unsignedBigInteger('solicitante_id');
             $table->foreign('solicitante_id')->references('id')->on('users')->onDelete('cascade');
