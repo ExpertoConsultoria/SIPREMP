@@ -44,7 +44,7 @@ class CCMListaReportes extends Component
 
         if($this->cargarLista){
 
-            $reports = ReporteCM::select('rcm_folio','rcm_ejercicio','rcm_inicio','rcm_fin','rcm_partida_presupuestal')
+            $reports = ReporteCM::select('id','rcm_folio','rcm_ejercicio','rcm_inicio','rcm_fin','rcm_partida_presupuestal')
                 ->where('rcm_inicio','like','%'.$this->buscar.'%')
                 // ->orWhere('rcm_fin','like','%'.$this->buscar.'%')
                 ->where('solicitante_id', Auth::user()->id)
