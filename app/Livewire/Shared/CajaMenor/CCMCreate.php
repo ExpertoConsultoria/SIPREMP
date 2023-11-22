@@ -60,11 +60,11 @@ class CCMCreate extends Component
         public $telefono;
 
     // Select Data
-    public $fines_mir = [];
-    public $propositos_mir = [];
-    public $componetes_mir = [];
-    public $actividades_mir = [];
-    public $partidas_presupuestales = [];
+        public $fines_mir = [];
+        public $propositos_mir = [];
+        public $componetes_mir = [];
+        public $actividades_mir = [];
+        public $partidas_presupuestales = [];
 
     // Making Interactions
         public $mir2 = false;
@@ -133,7 +133,7 @@ class CCMCreate extends Component
         'sede_entrega.required' => 'Este campo es Obligatorio.',
     ];
 
-    protected $listeners = ['loadDataXML','setPartidaP'];
+    protected $listeners = ['loadDataXML','setPartidaP', 'cleanDataXML'];
 
     public function mount()
     {
@@ -325,6 +325,16 @@ class CCMCreate extends Component
 
         $this->CalculateTotals();
         $this->dispatch('simpleAlert','Datos cargados correctamente','success');
+    }
+
+    public function cleanDataXML(){
+        $this->factura_id = '';
+        $this->elementosCompraMenor = [];
+        $this->razon_social = "-- -- --";
+        $this->RFC = "-- -- --";
+        $this->telefono  = "-- -- --";
+        $this->CalculateTotals();
+        $this->dispatch('simpleAlert','Datos Borrados Correctamente','success');
     }
 
     public function RemoveFromList($id){
