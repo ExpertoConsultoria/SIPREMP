@@ -13,6 +13,7 @@ use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
 use App\Models\Empresa;
+use App\Models\proveedores_temporales;
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
@@ -105,6 +106,17 @@ class VCreate extends Component
         public $actividad_mir;
         public $vale_item_compra;
 
+        // ? ATRIBUTOS PROVEEDOR_TEMPORAL
+        public $new_nombre;
+        public $new_telefono;
+        public $new_persona;
+        public $new_direccion;
+        public $new_codigo_postal;
+        public $new_razon_social;
+        public $new_RFC;
+        public $new_regimen;
+        public $new_datos_banco;
+
     protected function rules() {
         return [
             'NoFin' => 'required',
@@ -116,6 +128,16 @@ class VCreate extends Component
             'justificacion'   => 'required|string',
             'lugar_entrega'   => 'required|string',
             'fecha_entrega' => 'required|date',
+
+            'new_nombre' => 'required',
+            'new_telefono' => 'required',
+            'new_persona' => 'required',
+            'new_direccion' => 'required',
+            'new_codigo_postal' => 'required',
+            'new_razon_social' => 'required',
+            'new_RFC' => 'required',
+            'new_regimen' => 'required',
+            'new_datos_banco' => 'required',
         ];
     }
 
@@ -152,6 +174,16 @@ class VCreate extends Component
         'importe.string' => 'Texto Invalido.',
 
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
+
+        'new_nombre.required' => 'Este campo es Obligatorio',
+        'new_telefono.required' => 'Este campo es Obligatorio',
+        'new_persona.required' => 'Este campo es Obligatorio',
+        'new_direccion.required' => 'Este campo es Obligatorio',
+        'new_codigo_postal.required' => 'Este campo es Obligatorio',
+        'new_razon_social.required' => 'Este campo es Obligatorio',
+        'new_RFC.required' => 'Este campo es Obligatorio',
+        'new_regimen.required' => 'Este campo es Obligatorio',
+        'new_datos_banco.required' => 'Este campo es Obligatorio',
     ];
 
     public function mount()
@@ -251,18 +283,18 @@ class VCreate extends Component
 
     // Buscar Proveedor
         public function searchProveedor(){
-            if(!empty($this->buscar)){
-                $this->resultados = Empresa::orderby('RazonSocial', 'asc')
+            if(!empty($this->buscar)) {
+                $this->resultados = proveedores_temporales::orderby('RazonSocial', 'asc')
                     ->where('RazonSocial', 'like', '%' . $this->buscar . '%')
                     ->get();
                 $this->showResults = true;
-            }else{
+            } else {
                 $this->showResults = false;
             }
         }
 
         public function getProvedor($id){
-            $empresa = Empresa::find($id);
+            $empresa = proveedores_temporales::find($id);
 
             //Reset Data
             $this->buscar = $empresa->RazonSocial;
@@ -661,5 +693,29 @@ class VCreate extends Component
             return redirect()->route('vales.borradores');
 
         }
+
+    public function addNewProveedorTemp() {
+        $validatedData = $this->validate([
+            'new_razon_social' => 'required|string',
+            'new_RFC' => 'required|string',
+            'new_persona' => 'required|date',
+            'new_nombre' => 'required|date',
+            'new_telefono' => 'required|date',
+            'new_regimen' => 'required|date',
+            'new_direccion' => 'required|date',
+            'new_codigo_postal' => 'required|date',
+            'new_datos_banco' => 'required|date',
+        ]);
+
+        // $this -> $new_RFC = 0;
+        // $this -> $new_razon_social = 0;
+        // $this -> $new_persona = 0;
+        // $this -> $new_nombre = 0;
+        // $this -> $new_telefono = 0;
+        // $this -> $new_regimen = 0;
+        // $this -> $new_direccion = 0;
+        // $this -> $new_codigo_postal = 0;
+        // $this -> $new_datos_banco = 0;
+    }
 
 }
