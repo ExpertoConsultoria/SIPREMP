@@ -42,6 +42,7 @@ class Vales_compra extends Model
         'pass_filter',
         'motivo_rechazo',
         'pending_review',
+        'tipo_proveedor'
     ];
 
     protected $encryptable = [

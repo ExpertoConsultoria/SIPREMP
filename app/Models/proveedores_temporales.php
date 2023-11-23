@@ -21,7 +21,7 @@ class proveedores_temporales extends Model
      *
      * @var array
      */
-    protected $fillable = ['RFC','RazonSocial','Nombre','Telefono','Regimen','Direccion','CodigoPostal','DatosContacto','DatosBanco','user_id'];
+    protected $fillable = ['RFC','RazonSocial','Nombre','Telefono','Regimen','Direccion','CodigoPostal','DatosContacto','DatosBanco'];
 
 
     /**
@@ -29,7 +29,7 @@ class proveedores_temporales extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
+        return $this->hasOne('App\Models\User', 'id');
     }
 
     public function compraMenor(): BelongsTo

@@ -25,8 +25,6 @@ return new class extends Migration
             $table->string('DatosContacto', 192)->nullable();
             $table->string('DatosBanco', 128)->nullable();
 
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-
             $table->timestamps();
         });
     }
