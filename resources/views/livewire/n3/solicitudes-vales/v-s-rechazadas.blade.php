@@ -22,31 +22,32 @@
     </x-slot>
 
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
-                <select wire:model.live="mostrar"
-                    class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="10">Mostrar: 10</option>
-                    <option value="25">Mostrar: 25</option>
-                    <option value="50">Mostrar: 50</option>
-                </select>
 
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
-                    </div>
+        <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
+            <select wire:model.live="mostrar"
+                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="10">Mostrar: 10</option>
+                <option value="25">Mostrar: 25</option>
+                <option value="50">Mostrar: 50</option>
+            </select>
 
-                    <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-
-                    <button type="button" wire:click="$set('buscar','')"
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
-                        <i class="fa-solid fa-delete-left"></i>
-                    </button>
+            {{-- Extraido de caja menor borradores --}}
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
+                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+
+                <button type="button" wire:click="$set('buscar','')"
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
+                    <i class="fa-solid fa-delete-left"></i>
+                </button>
             </div>
 
+        </div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 @if (count($rechazadas))
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -121,7 +122,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+
                     @if ($rechazadas->hasPages())
                         <div class="px-6 py-3">
                             {{ $rechazadas->links() }}

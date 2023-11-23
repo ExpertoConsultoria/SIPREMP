@@ -29,7 +29,7 @@
                 @if(Auth::user()->roles[0]->name === 'N4:SEGE')
                     <div class="container grid grid-cols-5 gap-6 px-8 m-auto mb-6 justify-content-center">
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales.create') }}" class="text-right">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="53" viewBox="0 0 40 53"
@@ -54,7 +54,7 @@
                         </div>
 
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales.borradores') }}" class="text-right">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
@@ -81,7 +81,7 @@
                         </div>
 
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('bandejaentrada.rechazadas') }}" class="text-right">
 
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@
                         </div>
 
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales.send-revised') }}" class="text-right">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"
@@ -126,7 +126,7 @@
                         </div>
 
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales.aprobados') }}" class="text-right">
 
                                 <g clip-path="url(#clip0_156_4721)">
@@ -148,7 +148,7 @@
                 @elseif(Auth::user()->roles[0]->name === 'N3:UNTE')
                     <div class="container grid grid-cols-2 gap-6 px-8 m-auto mb-6 justify-content-center">
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales-solicitudes.rechazadas') }}" class="text-right">
 
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +168,7 @@
                         </div>
 
                         <div
-                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales.send-revised') }}" class="text-right">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 49"

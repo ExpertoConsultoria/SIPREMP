@@ -26,9 +26,9 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div class="container grid grid-cols-2 gap-6 px-8 m-auto justify-content-center mb-6">
+                <div class="container grid grid-cols-2 gap-6 px-8 m-auto mb-6 justify-content-center">
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('vales.aprobados') }}" class="text-right">
 
                             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,12 +47,12 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Crear expediente</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Crear expediente</p>
                         </a>
                     </div>
 
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('expediente.list') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,9 +71,9 @@
                                 <rect width="57" height="57" fill="white"/>
                                 </clipPath>
                                 </defs>
-                            </svg>                                
+                            </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Expedientes</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Expedientes</p>
                         </a>
                     </div>
 

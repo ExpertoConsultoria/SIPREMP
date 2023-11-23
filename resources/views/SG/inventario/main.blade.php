@@ -26,9 +26,9 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div class="container grid grid-cols-4 gap-6 px-8 m-auto justify-content-center mb-6">
+                <div class="container grid grid-cols-4 gap-6 px-8 m-auto mb-6 justify-content-center">
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('inventario.create') }}" class="text-right">
 
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,24 +40,24 @@
                                 <path d="M33.099 9.09638C33.099 4.08056 29.0183 0 24.0026 0C18.9869 0 14.9062 4.08056 14.9062 9.09638C14.9062 14.1122 18.9868 18.1928 24.0026 18.1928C29.0183 18.1928 33.099 14.1121 33.099 9.09638ZM22.5729 13.4926L18.6795 9.59916L20.6682 7.61044L22.5729 9.51506L27.337 4.75097L29.3258 6.73969L22.5729 13.4926Z" class="fill-neutral-600 dark:fill-neutral-500"/>
                             </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Crear entrada</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Crear entrada</p>
                         </a>
                     </div>
 
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('solicitudes.borradores') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M28.4912 3.55905L21.1063 10.9604H24.5883C25.1359 10.9539 25.5826 11.4005 25.5762 11.9481V20.7233H31.4201V11.9481C31.4139 11.4065 31.8524 10.9625 32.3941 10.9604H35.89L28.4912 3.55905ZM33.3785 20.6467V21.6971C33.3764 22.2388 32.9358 22.6738 32.3941 22.6675H24.5883C24.0526 22.6654 23.62 22.2328 23.6178 21.6971V20.6711C19.2562 22.0499 14.8513 23.4107 10.4446 24.6882C16.4619 26.5428 22.48 28.3945 28.4982 30.2462L46.5378 24.6987L33.3785 20.6467ZM24.5396 24.2535C27.1526 24.2535 29.7771 24.2535 32.3941 24.2535C32.9418 24.247 33.385 24.6901 33.3785 25.2378C33.3764 25.7795 32.9358 26.218 32.3941 26.2116H24.5883C24.0526 26.2096 23.6199 25.7735 23.6178 25.2378C23.6117 24.713 24.0215 24.2818 24.5396 24.2535ZM7.56092 25.8499L3.64062 32.2669L23.096 38.2457L27.0128 31.8322L7.56092 25.8499ZM49.4354 25.8499L29.987 31.8322L33.9038 38.2457C40.3923 36.2508 46.8716 34.2564 53.3557 32.2669L49.4354 25.8499ZM27.5172 34.7364L24.3622 39.9047C24.1283 40.2839 23.6674 40.4581 23.2421 40.3256L8.08618 35.6685L7.93312 45.9287L27.5172 53.4205V34.7364ZM29.4791 34.7364V53.4205L48.8997 45.9287V35.672L33.7542 40.3256C33.2194 40.5208 32.7819 40.1221 32.6341 39.9047L29.4791 34.7364Z" class="fill-neutral-600 dark:fill-neutral-500"/>
                             </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Crear salida</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Crear salida</p>
                         </a>
                     </div>
 
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('solicitudes.list') }}" class="text-right">
 
                             <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,12 +73,12 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Inventario</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Inventario</p>
                         </a>
                     </div>
 
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('solicitudes.list') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +88,7 @@
                                 <path d="M28.5011 3.21001C23.1911 3.21001 18.8711 7.53001 18.8711 12.84C18.8711 18.15 23.1911 22.47 28.5011 22.47C33.8111 22.47 38.1311 18.15 38.1311 12.84C38.1311 7.53001 33.8111 3.21001 28.5011 3.21001ZM31.3511 13.91H28.5011C27.9111 13.91 27.4311 13.43 27.4311 12.84V8.56001C27.4311 7.97001 27.9111 7.49001 28.5011 7.49001C29.0911 7.49001 29.5711 7.97001 29.5711 8.56001V11.77H31.3511C31.9411 11.77 32.4211 12.25 32.4211 12.84C32.4211 13.43 31.9411 13.91 31.3511 13.91Z" class="fill-neutral-600 dark:fill-neutral-500"/>
                             </svg>
 
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-400">Historial salidas</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Historial salidas</p>
                         </a>
                     </div>
 

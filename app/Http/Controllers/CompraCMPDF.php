@@ -15,31 +15,31 @@ class CompraCMPDF extends Controller
     public function generatePDF($folio)
     {
         $compra = CompraMenor::where('cm_folio', $folio)->first();
-        $mir = $compra['mir_id_fin']. 
+        $mir = $compra['mir_id_fin'].
                    $compra['mir_id_proposito'] .
-                   $compra['mir_id_componente'] . 
+                   $compra['mir_id_componente'] .
                    $compra['mir_id_actividad'];
-        
+
         $compra2 = CompraMenorList::where('icm_folio', $folio)->get();
-        
+
         $empresaId = $compra->empresa_id;
-        
+
         $empresa = Empresa::where('id', $empresaId)->first();
-        
+
         $solicitante_id = $compra->solicitante_id;
-        
+
         $solicitante = User::where('id', $solicitante_id)->first();
-        
+
         $pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        
+
         $pdf->titulo = 'Compra | Caja Menor';
-        
+
         $pdf->AddPage();
-        
+
         $pdf->SetTopMargin(30);
-        
-        $pdf->SetAutoPageBreak(true, 10); 
-        
+
+        $pdf->SetAutoPageBreak(true, 10);
+
         $pdf->SetFont('helvetica', '', 10);
 
 $html = <<<EOF

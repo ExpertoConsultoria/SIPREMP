@@ -26,7 +26,7 @@
             <div class="container mx-auto">
                 <form>
                     {{-- 1ra PARTE --}}
-                    <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
 
                         <div class="container px-4">
                             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-8 xl:grid-cols-10 gap-3 mb-6">
@@ -49,21 +49,21 @@
                                 <div class="col-span-2 ">
                                     <x-label for="area" value="{{_('Área')}}"/>
                                     <input name="area" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required
                                     >
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="lugar" value="{{_('Lugar')}}"/>
                                     <input name="lugar" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required
                                     >
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="mir" value="{{_('MIR')}}"/>
                                     <input name="mir" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required
                                     >
                                 </div>
@@ -79,26 +79,39 @@
 
                         <div class="container px-4 ">
                             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-10 gap-2 mb-1" >
-                                <div class="flex items-center ">
+                                {{-- Centrarlo o no? --}}
+                                <div class="flex mt-3">
                                     <h1 class="font-bold">Proveedor</h1>
                                 </div>
+
+
                                 <div class="col-span-9" >
-                                    <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
+
+                                    <div>
+                                        <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    </div>
+
+                                    <div class="">
+                                        <button class="uppercase text-sm text-blue-400">
+                                            <p >Dar de alta nuevo proveedor</p>
+                                        </button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="container px-4 py-6">
                             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-10 gap-4 mb-1">
-                                
+
                                 <div class="flex col-span-2 gap-7">
                                     <div class="flex items-center ">
                                         <h1 class="font-bold">ID Contrato</h1>
                                     </div>
-    
-                                    <div class=" flex items-center bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+
+                                    <div class=" flex items-center bg-gray-100 border border-gray-400 text-sm rounded-lg p-2 dark:bg-zinc-700 dark:border-zinc-600 ">
                                         <span class="mx-auto">#00000000</span>
                                     </div>
                                 </div>
@@ -108,24 +121,24 @@
                                         <h1 class="font-bold">Razon social</h1>
                                         <label class="text-sm">WALMART</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">RFC</h1>
                                         <label class="text-sm">HHHHHH09090900</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">Telefono</h1>
                                         <label class="text-sm">HHHHHH09090900</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">Periodo</h1>
                                         <label class="text-sm">Primer trimestre</label>
                                     </div>
                                 {{-- </div> --}}
 
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="container px-4 py-6">
@@ -135,45 +148,45 @@
                                 </div>
                                 <div class="col-span-9">
                                     <textarea name="justificacion" id="" rows="4"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                     </div>
 
                     {{--2da PARTE --}}
-                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700" >
+                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-zinc-800 dark:border-zinc-700" >
                         <div class="container px-4">
                             <div
                                 class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-10 gap-3 mb-6">
                                 <div class="col-span-1">
                                     <x-label for="cantidad" value="{{ __('Cantidad') }}" />
                                     <input type=""name="cantidad" placeholder="int/txt/select"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
-                                
+
                                 <div class="col-span-4">
                                     <x-label for="concepto" value="{{ __('Concepto') }}" />
                                     <input type="text" name="concepto" placeholder="txt"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
 
                                 <div class="col-span-1">
                                     <x-label for="p_u" value="{{ __('P/U') }}" />
                                     <input type="text" name="p_u" placeholder=""
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                                 <div class="col-span-1">
                                     <x-label for="importe" value="{{ __('Importe') }}" />
                                     <input type="text" name="importe" placeholder="cant * p/u"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                                 <div class="col-span-3">
                                     <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
                                     <input type="text" name="partida_presupuestal" placeholder="txt/select (CATALOGO BASE DE DATOS)"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                             </div>
                         </div>
@@ -190,7 +203,7 @@
                     </div>
 
                     {{-- 3ra PARTE Nota: Solucionar la vista en dispositivos moviles --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:text-gray-200">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>
@@ -217,33 +230,33 @@
                     {{-- 4ta parte --}}
                     <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                                <tr class="text-center text-bla">
-                                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                                        Cantidad 
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
+                                <tr class="text-center dark:text-gray-200 ">
+                                    <th class="px-4 py-2 whitespace-nowrap">
+                                        Cantidad
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         Concepto
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         P/U
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         Importe
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                                <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
                                     <td class="px-4 py-2"> 1</td>
                                     <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flex items-center w-1/2 mx-auto bg-white border border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                                        <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flex items-center  w-1/2 mx-auto bg-white border border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                                        <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
@@ -251,12 +264,12 @@
                             </tbody>
                         </table>
 
-                        <div class="p-6 bg-white h-16 text dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
                         </div>
 
-                        <hr>
-                        
-                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 ">
+                        <hr class="dark:border-gray-400">
+
+                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
                             <div class="col-span-10 text-end">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                     Subtotal:
@@ -272,7 +285,7 @@
                                     I.V.A:
                                 </p>
                             </div>
-                            <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end w-1/2 ml-auto">
+                            <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                     $00.00
                                 </p>
@@ -291,7 +304,7 @@
                     </div>
 
                     {{-- 5ta parte  --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:text-gray-400">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>
@@ -306,33 +319,33 @@
                     {{-- 6ta parte --}}
                     <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                                <tr class="text-center text-black">
-                                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                                        Cantidad 
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
+                                <tr class="text-center dark:text-gray-200 ">
+                                    <th class="px-4 py-2 whitespace-nowrap">
+                                        Cantidad
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         Concepto
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         P/U
                                     </th>
-                                    <th class="px-4 py-2 cursor-pointer">
+                                    <th class="px-4 py-2">
                                         Importe
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                                <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
                                     <td class="px-4 py-2"> 1</td>
                                     <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flex items-center  w-1/2 mx-auto bg-white border border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                                        <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flex items-center  w-1/2 mx-auto bg-white border border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                                        <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
@@ -340,12 +353,12 @@
                             </tbody>
                         </table>
 
-                        <div class="p-6 bg-white h-16 text dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
                         </div>
 
-                        <hr>
-                        
-                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 ">
+                        <hr class="dark:border-gray-400">
+
+                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
                             <div class="col-span-10 text-end">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                     Subtotal:
@@ -361,7 +374,7 @@
                                     I.V.A:
                                 </p>
                             </div>
-                            <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end w-1/2 ml-auto">
+                            <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                     $00.00
                                 </p>
@@ -380,36 +393,36 @@
                     </div>
 
                     {{-- 7ma parte --}}
-                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-300">
                         <div>
                             <h1 class="text-2xl font-bold">Anexo</h1>
                         </div>
-                        <div class="mt-3 text-lg text-stone-500 font-bold">
+                        <div class="mt-3 text-lg font-bold">
                             <span>Asunto</span>
                         </div>
                         <div class="mt-1">
                             <textarea name="justificacion" id="" rows="2" placeholder="ESPECIFICACIONES TÉCNICAS DE LA IMPRESIÓN DE BOLETAS DE EMPEÑO PARA LA MATRIZ Y SUCURSALES DEL MONTE DE PIEDAD DEL ESTADO DE OAXACA"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Objeto</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="3" placeholder="Adquisición de boletas de empeño para surtir a todas las sucursales del Monte de Piedad del Estado de Oaxaca; con el propósito de que las sucursales cuenten con los insumos necesarios para las actividades diarias en cuanto al proceso de préstamo prendario que ofrece la Institución a los pignorantes."
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Alcance</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="3" placeholder="Gerencia Matriz y 22 Sucursales del Monte de Piedad del Estado de Oaxaca."
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
@@ -417,16 +430,16 @@
                     </div>
 
                     {{-- 8va parte --}}
-                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-300">
                         <div class="mb-6">
-                            <h1 class="text-xl font-bold text-gray-400">Descripción de los bienes</h1>
+                            <h1 class="text-xl font-bold">Descripción de los bienes</h1>
                         </div>
                         {{-- Borrar la linea inferior de la etiqueta table --}}
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                                <tr class="text-center text-black">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
+                                <tr class="text-center dark:text-gray-200">
                                     <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                                        Cantidad 
+                                        Cantidad
                                     </th>
                                     <th class="px-4 py-2 cursor-pointer">
                                         Unidad de media
@@ -440,11 +453,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b dark dark:bg-gray-800 dark:border-gray-700 text-center">
-                                    <td class="px-4 py-2"> 
+                                <tr class="bg-white dark dark:bg-zinc-800 dark:border-gray-700 text-center">
+                                    <td class="px-4 py-2">
                                         <p>1</p>
                                     </td>
-                                    <td class="px-4 py-2"> 
+                                    <td class="px-4 py-2">
                                         <p>2 gallos, 1 Tsuru</p>
                                     </td>
                                     <td class="px-4 py-2">
@@ -457,122 +470,120 @@
                             </tbody>
                         </table>
 
-                        
+
                     </div>
 
                     {{-- Novena parte --}}
-                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
-                        <div class="mt-3 text-lg text-stone-500 font-bold">
+                    <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-300">
+                        <div class="mt-3 text-lg font-bold">
                             <span>Plazo y procedimiento de entrega</span>
                         </div>
                         <div class="mt-1">
                             <textarea name="justificacion" id="" rows="3" placeholder="Los bienes descritos en el Punto 3, se entregarán a partir del dieciséis de febrero del año dos mil veintitrés y “El Proveedor” tendrá como plazo 90 días posteriores a la realización del pedido, y se entregarán en el Departamento de Servicios Generales del Monte de Piedad del Estado de Oaxaca, ubicado en Avenida Morelos núm. 703 esquina Macedonio Alcalá, Colonia Centro, Oaxaca de Juárez, Oaxaca. C.P. 68000. La recepción y verificación de los bienes estará a cargo del personal que oportunamente designe la Dirección de Administración dependiente de “El Organismo” dependiendo de la requisición que se haya remitido en su oportunidad."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Entregables</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Muestras</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Recursos humanos</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Soporte técnico</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Mantenimiento</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
-                                <div class="mt-3 text-lg text-stone-500 font-bold">
+                                <div class="mt-3 text-lg font-bold">
                                     <span>Capacitación y/o actualización</span>
                                 </div>
                                 <div class="mt-1">
                                     <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     </textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-3 text-lg text-stone-500 font-bold">
+                        <div class="mt-3 text-lg font-bold">
                             <span>Vigencia de la contratación</span>
                         </div>
                         <div class="mt-1">
                             <textarea name="justificacion" id="" rows="1" placeholder="Del 16 de febrero de 2023 al 31 de diciembre de 2023."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
-                        <div class="mt-3 text-lg text-stone-500 font-bold">
+                        <div class="mt-3 text-lg font-bold">
                             <span>Forma de pago</span>
                         </div>
                         <div class="mt-1">
                             <textarea name="justificacion" id="" rows="3" placeholder="Los pagos se realizarán de acuerdo a lo siguiente: El importe será fijo durante la vigencia de la contratación, no se otorgará anticipo alguno, el pago se efectuará por cada requisición solicitada por el Departamento de Servicios Generales, y posterior a la presentación del comprobante fiscal correspondiente, mismo que deberá reunir los requisitos fiscales. Los pagos se realizarán, por parte de la Dirección Administrativa del Monte de Piedad del Estado de Oaxaca, dentro de los veinte días naturales posteriores a la presentación del comprobante fiscal correspondiente, pago que será efectuado mediante transferencia bancaria previo a que el proveedor que resulte adjudicado proporcione los datos bancarios correspondientes."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
-                        <div class="mt-3 text-lg text-stone-500 font-bold">
+                        <div class="mt-3 text-lg font-bold">
                             <span>Garantias</span>
                         </div>
                         <div class="mt-1">
                             <textarea name="justificacion" id="" rows="3" placeholder="Para garantizar el anticipo, “el proveedor” al momento de recibir el anticipo deberá otorgar fianza por el monto total del anticipo, es decir, por el 30% del monto total de los bienes adquiridos, a más tardar quince días posteriores al otorgamiento del mismo. La garantía de cumplimiento se constituirá al 10% del monto total adjudicado considerando el impuesto al valor agregado (I.V.A.), la cual podrá presentarse a través de fianza, billete de depósito o cheque certificado y constituirse a favor del Monte de Piedad del Estado de Oaxaca, con fundamento en el numeral 104 fracción I de los Lineamientos en Materia de Adquisiciones, Enajenaciones, Arrendamientos, Prestación de Servicios y Administración de Bienes Muebles e Inmuebles del Monte de Piedad del Estado de Oaxaca, la cual deberá presentarse a más tardar dentro de los diez días naturales contados a partir de la formalización del contrato."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
-                        
+
                         <div class="py-4">
                             <button type="button"
                             class="p-3 text-md w-full font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             ADJUNTAR ANEXOS ADICIONALES Y DOCUMENTACIÓN COMPLEMENTARIA, EN CASO DE QUE SE REQUIERA
                             </button>
                         </div>
-                    </div>  
+                    </div>
 
                     {{-- Botonoes --}}
-                    <div class="mt-16">
-                        <div class="container"> 
-                            <div class="flex relative items-center w-full dark:bg-gray-800 dark:border-gray-700">
+                            <div class="container mt-16 flex relative items-center w-full">
                                 <div class="">
                                     <button type="button"
                                         class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
@@ -583,16 +594,14 @@
                                 <div class="ml-auto sm:col-span-2">
                                     <div class="text-center col-span-1 ml-auto">
                                         <button type="button"
-                                            class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                            Guardar 
+                                            class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
-                    </div>
-                        
+
 
                 </form>
 

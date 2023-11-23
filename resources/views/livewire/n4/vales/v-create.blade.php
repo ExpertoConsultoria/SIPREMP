@@ -81,7 +81,7 @@
                             <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar" placeholder="Buscar..." autofocus
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
                                     dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                        
+
                             @if($showResults)
                                 <select wire:model="id_proveedor" class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm
                                     dark:bg-zinc-700 dark:border-zinc-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -93,14 +93,14 @@
                                     @endif
                                 </select>
                             @endif
-                        
+
                             <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor'/>
                             @error('id_proveedor')
                                 <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
                         </div>
-                        
-                        
+
+
                         <div class="col-span-2">
                             <x-label for="razonsocial" value="{{ __('Razón social') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $razon_social }}</p>

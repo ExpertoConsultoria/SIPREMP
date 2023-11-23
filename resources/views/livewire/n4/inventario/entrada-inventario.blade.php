@@ -26,7 +26,7 @@
 
             {{-- Datos --}}
             <div
-                class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-8 gap-6">
                         <div>
@@ -41,7 +41,7 @@
                         <div class="col-span-2">
                             <x-label for="mir" value="{{ __('MIR') }}" />
                             <input wire:model.blur="concepto" type="text" name="concepto" placeholder=""
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
 
                         @if (!$is_done)
@@ -157,10 +157,10 @@
             </div>
 
             <div
-                class="p-6 mt-4 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                class="p-6 mt-4 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
 
                 <div class="container px-4">
-                    <div class="grid gap-3 mb-6 grid-cols-12">
+                    <div class="grid grid-cols-12 gap-3 mb-6">
                         <div>
                             <x-label for="cantidad" value="{{ __('Cantidad') }}" />
                             <input type="number" name="cantidad" step="0.01" placeholder="0.00"
@@ -198,7 +198,7 @@
 
                         <div class="col-span-2 text-end">
                             <button type="button"
-                                class="mt-8 w-4/5 focus:outline- text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                class="w-4/5 px-5 py-2 mt-8 text-sm font-medium text-white bg-green-700 rounded-lg focus:outline- hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 Registrar
                             </button>
                         </div>
@@ -208,7 +208,7 @@
 
             </div>
 
-            <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-zinc-400">
                         <tr class="text-center text-bla">
@@ -262,7 +262,7 @@
                     </tbody>
                 </table>
 
-                <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
+                <div class="h-16 p-6 bg-white text dark:bg-zinc-800 dark:border-zinc-700">
                 </div>
 
             </div>

@@ -79,7 +79,7 @@
 
                             <x-dropdown-link>
                                 <button id="theme-toggle-button">Cambiar Modo</button>
-                            </x-dropdown-link>                            
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>

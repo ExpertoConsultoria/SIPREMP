@@ -26,10 +26,10 @@
             <div class="grid justify-center bg-transparent">
 
                 <div
-                    class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 mb-6">
+                    class="container grid grid-cols-1 gap-6 px-8 m-auto mb-6 justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('cajamenor.create') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49" viewBox="0 0 47 45"
@@ -39,12 +39,12 @@
                                     class="fill-neutral-600 dark:fill-neutral-500" />
                             </svg>
 
-                            <p class="text-lg mt-20 text-gray-800 dark:text-gray-300">Nueva compra <br />caja Menor</p>
+                            <p class="mt-20 text-lg text-gray-800 dark:text-gray-300">Nueva compra <br />caja Menor</p>
                         </a>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('cajamenor.borradores') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49"
@@ -67,12 +67,12 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-20 text-gray-800 dark:text-gray-300">Borradores <br />caja Menor</p>
+                            <p class="mt-20 text-lg text-gray-800 dark:text-gray-300">Borradores <br />caja Menor</p>
                         </a>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('cajamenor.compras') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="49" viewBox="0 0 50 47"
@@ -95,12 +95,12 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-20 text-gray-800 dark:text-gray-300">Compras de<br />caja Menor</p>
+                            <p class="mt-20 text-lg text-gray-800 dark:text-gray-300">Compras de<br />caja Menor</p>
                         </a>
                     </div>
 
                     <div
-                        class="w-52 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{ route('cajamenor.reportes') }}" class="text-right">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="49" viewBox="0 0 50 47"
@@ -122,7 +122,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p class="text-lg mt-24 text-gray-800 dark:text-gray-300">Reportes </p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-300">Reportes </p>
                         </a>
                     </div>
 

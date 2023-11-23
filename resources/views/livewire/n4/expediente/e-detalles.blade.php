@@ -21,11 +21,11 @@
         </div>
     </x-slot>
 
-    <div class="py-8 max-w-screen-xl mx-auto">
+    <div class="max-w-screen-xl py-8 mx-auto">
 
         <div
-            class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-            <div class="container mx-auto px-4 w-2/3">
+            class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+            <div class="container w-2/3 px-4 mx-auto">
                 <div class="mb-3">
                     <label
                         class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
@@ -37,32 +37,32 @@
                     </div>
 
                     {{-- Círculos y etiquetas --}}
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="text-xs mt-1">Servicios Generales</p>
+                            <p class="mt-1 text-xs">Servicios Generales</p>
                         </div>
 
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="text-xs mt-1">Unidad técnica</p>
+                            <p class="mt-1 text-xs">Unidad técnica</p>
                         </div>
 
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="text-xs mt-1">Control Presupuestal</p>
+                            <p class="mt-1 text-xs">Control Presupuestal</p>
                         </div>
 
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-400 rounded-full "></div>
-                            <p class="text-xs mt-1">Dirección Administrativa</p>
+                            <p class="mt-1 text-xs">Dirección Administrativa</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div
-            class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+            class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
             <div class="container px-4 ">
                 <div class="text-center">
                     <button type="button"
@@ -90,33 +90,33 @@
         </div>
 
         <div
-            class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+            class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
             <div class="container px-4">
-                <div class="grid grid-cols-5  gap-6">
+                <div class="grid grid-cols-5 gap-6">
                     <div>
                         <x-label for="fecha" value="{{ __('Fecha') }}" />
-                        <p class="font-extralight text-xs text-gray-500 font-sans dark:text-gray-400">13/09/2023</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">13/09/2023</p>
                     </div>
                     <div>
                         <x-label for="folio" value="{{ __('Folio') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">SP-000001</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">SP-000001</p>
                     </div>
                     <div>
                         <x-label for="area" value="{{ __('Área') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">User + area</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">User + area</p>
                     </div>
                     <div>
                         <x-label for="lugar" value="{{ __('Sede/Lugar') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">Matriz</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz</p>
                     </div>
                     <div>
                         <x-label for="mir" value="{{ __('MIR') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                             97438498328498-38293898</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-6  gap-6 mt-6">
+                <div class="grid grid-cols-6 gap-6 mt-6">
                     <div class="flex items-center">
                         <label
                             class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
@@ -124,15 +124,15 @@
 
                     <div>
                         <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">Solicitante</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Solicitante</p>
                     </div>
                     <div>
                         <x-label for="rfc" value="{{ __('RFC') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">Matriz</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz</p>
                     </div>
                     <div>
                         <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                             97438498328498-38293898</p>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                             <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación:</label>
                         </div>
                         <div class="col-span-9">
-                            <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">Lorem ipsum
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Lorem ipsum
                                 dolor sit amet consectetur adipisicing elit. Doloribus temporibus ducimus et eum, error
                                 officia libero sunt cum voluptatibus obcaecati rerum. Molestias cumque ex distinctio
                                 voluptatum itaque explicabo consequuntur iure!</p>
@@ -151,8 +151,8 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-10  gap-6 mb-6">
-                    <div class="col-span-3 flex items-center">
+                <div class="grid grid-cols-10 gap-6 mb-6">
+                    <div class="flex items-center col-span-3">
                         <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Condiciones de
                             entrega:</label>
                     </div>
@@ -160,15 +160,15 @@
                         <label
                             class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar:</label>
                     </div>
-                    <div class="flex items-center text-center col-span-2">
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">Matriz </p>
+                    <div class="flex items-center col-span-2 text-center">
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz </p>
                     </div>
                     <div class="flex items-center">
                         <label
                             class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Fecha:</label>
                     </div>
-                    <div class="flex items-center text-center col-span-2">
-                        <p class="font-extralight text-xs  text-gray-500 font-sans dark:text-gray-400">13/09/2023</p>
+                    <div class="flex items-center col-span-2 text-center">
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">13/09/2023</p>
                     </div>
                 </div>
             </div>
@@ -176,19 +176,19 @@
 
 
         <div
-            class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:bg-zinc-800 dark:border-zinc-700">
+            class="relative flex items-center h-4 p-6 mt-4 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-zinc-800 dark:border-zinc-700">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">DISPONIBLE</h1>
+                <h1 class="font-bold text-white">DISPONIBLE</h1>
             </div>
         </div>
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-zinc-400">
                     <tr class="text-center text-bla">
@@ -207,18 +207,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
+                    <tr class="text-center bg-white border-b dark:bg-zinc-800 dark:border-zinc-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 1 Coca </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-800 border w-1/2 border-gray-400 text-gray-900 dark:text-gray-400  text-sm rounded-lg p-2">
+                                class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white  dark:bg-zinc-800 border w-1/2 border-gray-400 text-gray-900 dark:text-gray-400  text-sm rounded-lg p-2">
+                                class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -226,12 +226,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
+            <div class="h-16 p-6 bg-white text dark:bg-zinc-800 dark:border-zinc-700">
             </div>
 
             <hr>
 
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white dark:bg-zinc-800 p-6 ">
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white dark:bg-zinc-800 ">
 
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-zinc-200">
@@ -261,19 +261,19 @@
         </div>
 
         <div
-            class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:bg-400-800 dark:border-gray-700">
+            class="relative flex items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-400-800 dark:border-gray-700">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">NO DISPONIBLE</h1>
+                <h1 class="font-bold text-white">NO DISPONIBLE</h1>
             </div>
         </div>
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-zinc-400">
                     <tr class="text-center text-black">
@@ -292,18 +292,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
+                    <tr class="text-center bg-white border-b dark:bg-zinc-800 dark:border-zinc-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2">1 Coca</td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-800 border w-1/2 border-gray-400 text-gray-900 dark:text-gray-400  text-sm rounded-lg p-2">
+                                class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-800 border w-1/2 border-gray-400 text-gray-900 dark:text-gray-400  text-sm rounded-lg p-2">
+                                class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -311,12 +311,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
+            <div class="h-16 p-6 bg-white text dark:bg-zinc-800 dark:border-zinc-700">
             </div>
 
             <hr>
 
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white dark:bg-zinc-800 p-6 ">
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white dark:bg-zinc-800 ">
 
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
