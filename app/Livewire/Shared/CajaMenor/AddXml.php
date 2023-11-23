@@ -85,7 +85,6 @@ class AddXml extends Component
     }
 
     public function cleanXML(){
-
         $this->dispatch('cleanDataXML');
 
         $this->is_loading_xml = false;
