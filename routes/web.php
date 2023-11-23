@@ -141,6 +141,7 @@ Route::middleware([
     Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
     Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
 
+    
     Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
     Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
     Route::get('/vales/aprobados/{details_of_folio}/agregar',VAgregar::class)->name('vales.add-to-approved');
