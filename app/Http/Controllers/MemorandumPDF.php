@@ -14,6 +14,11 @@ class MemorandumPDF extends Controller
     {
         $data = Memorandum::where('memo_folio', $details_of_folio)->first();
 
+        $mir = $data['mir_id_fin']. 
+                   $data['mir_id_proposito'] .
+                   $data['mir_id_componente'] . 
+                   $data['mir_id_actividad'];
+
         $details = MemorandumList::where('im_folio', $details_of_folio)->first();
 
         $solicitante_id = $data->solicitante_id;
@@ -86,7 +91,7 @@ $html = <<<EOF
       <tr class="p-second">
         <td>{$data['memo_folio']}</td>
         <td>{$data['memo_folio']}</td>
-        <td>{$data['mir_id_fin']}</td>
+        <td>$mir</td>
       </tr>
     </table>
   </div>
@@ -139,6 +144,122 @@ $html = <<<EOF
 EOF;
 
 $pdf->writeHTML($html, true, false, true, false, '');
+
+$pdf->AddPage();
+
+$html = <<<EOF
+<div>
+<table class="title">
+  <tr>
+    <th>SOLICITÓ</th>
+    <th>FECHA</th>
+    <th>FIRMA</th>
+  </tr>
+</table>
+
+<table>
+  <tr class="p-first">
+    <th>Carlos A. Baldiviezo</th>
+  </tr>
+  <tr class="p-second">
+    <td>JEFE DE DEPTO. DE SERV. GRALES</td>
+  </tr>
+</table>
+</div>
+
+
+<div>
+<table class="title">
+  <tr>
+    <th>SOLICITÓ</th>
+    <th>FECHA</th>
+    <th>FIRMA</th>
+  </tr>
+</table>
+
+<table>
+  <tr class="p-first">
+    <th>Carlos A. Baldiviezo</th>
+  </tr>
+  <tr class="p-second">
+    <td>JEFE DE DEPTO. DE SERV. GRALES</td>
+  </tr>
+</table>
+</div>
+
+
+<div>
+<table class="title">
+  <tr>
+    <th>REVISÓ Y VALIDÓ</th>
+    <th>FECHA</th>
+    <th>FIRMA</th>
+  </tr>
+</table>
+
+<table>
+  <tr class="p-first">
+    <th>Francisco Gómez Flores</th>
+  </tr>
+  <tr class="p-second">
+    <td>JEFE DE LA UNIDAD TÉCNICA</td>
+  </tr>
+</table>
+</div>
+
+<div>
+<table class="title">
+  <tr>
+    <th>DISPONIBILIDAD PRESUPUESTAL</th>
+    <th></th>
+    <th>FIRMA</th>
+  </tr>
+</table>
+
+<table>
+  <tr class="p-first">
+    <th>Roberto Ebenezer Rosas</th>
+  </tr>
+  <tr class="p-second">
+    <td>JEFE DE LA UNIDAD TÉCNICA</td>
+  </tr>
+</table>
+</div>
+
+<div>
+<table class="title">
+  <tr>
+    <th>AUTORIZÓ</th>
+    <th></th>
+    <th>FIRMA</th>
+  </tr>
+</table>
+
+<table>
+  <tr class="p-first">
+    <th>Miguel Ricardo Cruz</th>
+  </tr>
+  <tr class="p-second">
+    <td>DIRECTOR ADMINISTRATIVO</td>
+  </tr>
+</table>
+</div>
+EOF;
+$pdf->writeHTML($html, true, false, true, false, '');
+
+$pdf->AddPage();
+
+$html = <<<EOF
+<div>
+    <table class="title">
+      <tr>
+        <th>EVIDENCIA</th>
+      </tr>
+    </table>
+</div>
+EOF;
+$pdf->titulo = 'Factura';
+$pdf->AddPage();
 
 $pdf->Output('ejemplo.pdf', 'I');
     }
