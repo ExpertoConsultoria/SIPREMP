@@ -79,6 +79,7 @@ class CCMCreate extends Component
         public $elementsToMassive = [];
         public $selectPartida = [];
         public $partida_masiva = '';
+        public $select_all = false;
 
     // To Create
         public $compra_CM;
@@ -379,6 +380,15 @@ class CCMCreate extends Component
         $this->elementosCompraMenor[$id]->icm_partida_presupuestal = $value;
     }
 
+    public function selectAll()
+    {
+        foreach ($this->elementosCompraMenor as $index => $element) {
+            $this->elementsToMassive[$index] = true;
+        }
+
+        $this->massive = true;
+    }
+
     public function assignMassive(){
 
         $validatedData = $this->validate([
@@ -399,6 +409,7 @@ class CCMCreate extends Component
         ]);
         $this->partida_masiva = '';
         $this->massive = false;
+        $this->select_all = false;
 
         $this->dispatch('simpleAlert', 'Asignado correctamente', 'success');
 

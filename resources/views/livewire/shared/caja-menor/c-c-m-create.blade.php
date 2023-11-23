@@ -294,7 +294,12 @@
                                 <thead
                                     class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3"></th>
+                                        <th scope="col" class="px-6 py-3">
+                                            @if (count($elementosCompraMenor))
+                                                <input type="checkbox"  wire:click="selectAll()" wire:model='select_all'
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            @endif
+                                        </th>
                                         <th scope="col" class="px-6 py-3">
                                             Cantidad
                                         </th>
@@ -317,7 +322,7 @@
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="flex items-center justify-center px-6 py-4">
-                                                <input type="checkbox" @if($selected !== false) checked @endif
+                                                <input type="checkbox"
                                                     wire:model='elementsToMassive.{{ $loop->index }}'
                                                     value="{{ $loop->index }}" wire:click="$set('massive', true)"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
