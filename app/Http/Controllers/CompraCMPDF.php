@@ -15,6 +15,10 @@ class CompraCMPDF extends Controller
     public function generatePDF($folio)
     {
         $compra = CompraMenor::where('cm_folio', $folio)->first();
+        $mir = $compra['mir_id_fin']. 
+                   $compra['mir_id_proposito'] .
+                   $compra['mir_id_componente'] . 
+                   $compra['mir_id_actividad'];
         
         $compra2 = CompraMenorList::where('icm_folio', $folio)->get();
         
@@ -94,7 +98,7 @@ $html = <<<EOF
         <td>$folio</td>
         <td>{$solicitante['name']}</td>
         <td>{$compra['sucursal']}</td>
-        <td>{$compra['mir_id_fin']}</td>
+        <td>$mir</td>
       </tr>
     </table>
   </div>
