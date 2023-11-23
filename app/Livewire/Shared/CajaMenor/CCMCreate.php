@@ -74,6 +74,12 @@ class CCMCreate extends Component
         public $iva = 0.00;
         public $total = 0.00;
 
+        // Massive Selection
+        public $massive = false; //Activa la Seccíon de Seleccíon Masiva
+        public $elementsToMassive = [];
+        public $selectPartida = [];
+        public $partida_masiva = '';
+
     // To Create
         public $compra_CM;
         public $item_compra;
@@ -101,6 +107,8 @@ class CCMCreate extends Component
             'actividad_mir' => 'required',
             'sede_entrega' => 'required',
             'fecha_entrega' => 'required',
+
+            'elementsToMassive'   => 'array',
         ];
     }
 
@@ -313,7 +321,7 @@ class CCMCreate extends Component
         foreach ($conceptos as $concepto) {
             $item = new stdClass;
                 $item->icm_cantidad = $concepto['Cantidad'];
-                $item->icm_unidad_medida = $concepto['Unidad'];
+                $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
                 $item->icm_concepto = $concepto['Descripcion'];
                 $item->icm_precio_u = $concepto['ValorUnitario'];
                 $item->icm_importe = floatval($concepto['Importe']);
@@ -322,18 +330,22 @@ class CCMCreate extends Component
             array_push($this->elementosCompraMenor, $item);
         }
         // dd($this->elementosCompraMenor);
+        foreach ($this->elementosCompraMenor as $index => $element) {
+            $this->selectPartida[$index] = "";
+        }
 
         $this->CalculateTotals();
         $this->dispatch('simpleAlert','Datos cargados correctamente','success');
     }
 
     public function cleanDataXML(){
-        $this->factura_id = '';
         $this->elementosCompraMenor = [];
         $this->razon_social = "-- -- --";
         $this->RFC = "-- -- --";
         $this->telefono  = "-- -- --";
         $this->CalculateTotals();
+
+        $this->factura_id = '';
         $this->dispatch('simpleAlert','Datos Borrados Correctamente','success');
     }
 
@@ -365,6 +377,31 @@ class CCMCreate extends Component
     public function setPartidaP($value,$id)
     {
         $this->elementosCompraMenor[$id]->icm_partida_presupuestal = $value;
+    }
+
+    public function assignMassive(){
+
+        $validatedData = $this->validate([
+            'elementsToMassive'   => 'array',
+            'partida_masiva'   => 'required',
+        ]);
+
+        foreach ($this->elementsToMassive as $index => $element) {
+            foreach ($this->elementosCompraMenor as $key => $item) {
+                if($index===$key){
+                    $this->elementosCompraMenor[$key]->icm_partida_presupuestal = $this->partida_masiva;
+                    $this->selectPartida[$index] = $this->partida_masiva;
+                }
+            }
+        }
+        $this->reset([
+            'elementsToMassive',
+        ]);
+        $this->partida_masiva = '';
+        $this->massive = false;
+
+        $this->dispatch('simpleAlert', 'Asignado correctamente', 'success');
+
     }
 
     // Ways of Save

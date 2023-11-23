@@ -198,10 +198,7 @@
 
                     </div>
 
-                    <div>
-
-                    </div>
-                    {{-- Buttons --}}
+                    {{-- XML --}}
                     <div
                         class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <div class="container px-4">
@@ -252,6 +249,43 @@
                         </div>
                     </div>
 
+                    {{-- Masive Partida Presupuestal --}}
+                    @if ($massive)
+                        <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                            <div class="container px-4">
+                                <div class="grid grid-cols-12 gap-6">
+                                    <div class="flex items-center justify-center col-span-4">
+                                        <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Asignar Partida Presupuestal</label>
+                                    </div>
+                                    <div class="flex items-center justify-center col-span-5">
+                                        <select wire:model.blur="partida_masiva"
+                                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                            <option value="" disabled selected> Partida Presupuestal </option>
+
+                                            @foreach ($partidas_presupuestales as $partida_presupuestal)
+                                                <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                    {{ $partida_presupuestal->PartidaEspecifica }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <div>
+                                            @error('partida_masiva')
+                                                <span class="text-sm text-rose-600">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center col-span-3">
+                                        <button type="button" wire:click='assignMassive' wire:loading.attr="disabled"
+                                            class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                            Asignar Partidas
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     {{-- Table --}}
                     <div
                         class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
@@ -260,6 +294,7 @@
                                 <thead
                                     class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
+                                        <th scope="col" class="px-6 py-3"></th>
                                         <th scope="col" class="px-6 py-3">
                                             Cantidad
                                         </th>
@@ -281,6 +316,12 @@
                                     @foreach ($elementosCompraMenor as $elemento)
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td class="flex items-center justify-center px-6 py-4">
+                                                <input type="checkbox" @if($selected !== false) checked @endif
+                                                    wire:model='elementsToMassive.{{ $loop->index }}'
+                                                    value="{{ $loop->index }}" wire:click="$set('massive', true)"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            </td>
                                             <td class="px-6 py-4">
                                                 {{ $elemento->icm_cantidad }}
                                             </td>
@@ -290,11 +331,13 @@
                                             </th>
                                             <td class="px-6 py-4">
                                                 <select
+                                                    wire:model='selectPartida.{{ $loop->index }}'
                                                     wire:change="setPartidaP($event.target.value, {{ $loop->index }})"
                                                     required
                                                     class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                                    <option value="" disabled selected> Partida Presupuestal
+                                                    <option value="" disabled selected>
+                                                        Partida Presupuestal
                                                     </option>
 
                                                     @foreach ($partidas_presupuestales as $partida_presupuestal)

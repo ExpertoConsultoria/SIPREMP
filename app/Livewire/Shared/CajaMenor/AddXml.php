@@ -85,14 +85,18 @@ class AddXml extends Component
     }
 
     public function cleanXML(){
+
+        $this->dispatch('cleanDataXML');
+
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
         $this->is_done = false;
 
         $rcm_factura = FacturaCM::find($this->factura_CM->id);
-            File::delete(public_path($rcm_factura->fcm_xml_ruta));
+            File::delete($rcm_factura->fcm_xml_ruta);
             $rcm_factura->delete();
 
-        $this->dispatch('cleanDataXML');
+        $this->factura_CM = null;
+        $this->reset();
     }
 }
