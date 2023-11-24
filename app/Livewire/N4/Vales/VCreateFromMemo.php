@@ -290,8 +290,8 @@ class VCreateFromMemo extends Component
                     'DatosContacto' => $this->telefono,
                 ]);
                 $nuevoProveedor->save();
-                $this -> id_proveedor = $nuevoProveedor -> id; 
-            } 
+                $this -> id_proveedor = $nuevoProveedor -> id;
+            }
 
             $this->vale_compra = new Vales_compra();
             $this->vale_compra->folio = $this->folio;
@@ -384,8 +384,8 @@ class VCreateFromMemo extends Component
                 'tipo_proveedor' => $this->tipo_proveedor,
                 'DatosContacto' => $this->telefono,
             ]);
-            $this -> id_proveedor = $nuevoProveedor -> id;
             $nuevoProveedor->save();
+            $this -> id_proveedor = $nuevoProveedor -> id;
         }
         $this->vale_compra->id_proveedor = $this -> id_proveedor;
 
