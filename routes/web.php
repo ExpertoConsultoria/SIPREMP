@@ -123,7 +123,7 @@ Route::middleware([
     Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
     Route::get('/solicitudes/pdf-cotizacion', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
     //Pendiente
-    Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
+    // Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
 
 
     //Inventario
