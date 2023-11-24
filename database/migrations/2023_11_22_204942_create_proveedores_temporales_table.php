@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('empresas', function (Blueprint $table) {
+        Schema::create('proveedores_temporales', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('RFC', 13)->unique();
