@@ -236,8 +236,7 @@
                                 class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar</label>
                         </div>
                         <div class="col-span-2">
-                            <input wire:model.blur="lugar_entrega" type="text" name="lugar_entrega"
-                                placeholder="Lugar de Entrega"
+                            <input wire:model.blur="lugar_entrega" type="text" name="lugar_entrega" placeholder="Lugar de Entrega"
                                 class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('lugar_entrega')
                             <span class="text-xs text-rose-600">{{ $message }}</span>
@@ -267,16 +266,15 @@
                     <div class="grid gap-3 mb-6 lg:grid-cols-12">
                         <div class="col-span-2">
                             <x-label for="cantidad" value="{{ __('Cantidad') }}" />
-                            <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number"
-                                name="cantidad" step="0.01" placeholder="0.00"
+                            <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number" name="cantidad" step="0.01"
+                                placeholder="0.00"
                                 class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('cantidad') <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2">
                             <x-label for="unidad_medida" value="{{ __('Unidad de medida') }}" />
-                            <input wire:model.blur="unidad_medida" type="text" name="unidad_medida"
-                                placeholder="Unidad de Medida"
+                            <input wire:model.blur="unidad_medida" type="text" name="unidad_medida" placeholder="Unidad de Medida"
                                 class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('unidad_medida') <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
@@ -290,15 +288,14 @@
                         </div>
                         <div class="col-span-2">
                             <x-label for="p_u" value="{{ __('P/U') }}" />
-                            <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number" step="0.001"
-                                placeholder="0.00" name="p_u"
+                            <input wire:model.blur="p_u" wire:change="CalculateAmount()" type="number" step="0.001" placeholder="0.00"
+                                name="p_u"
                                 class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('p_u') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
                         </div>
                         <div class="col-span-2">
                             <x-label for="importe" value="{{ __('Importe') }}" />
-                            <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00"
-                                readonly
+                            <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00" readonly
                                 class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 value="23">
                             @error('importe') <span class="text-xs text-rose-600">{{ $message }}</span>
@@ -340,102 +337,102 @@
             {{-- Partidas Presupuestales --}}
             @foreach ($partidas_data as $data)
 
-            @if ($data->estado === 'DISPONIBLE')
-            {{-- Partidas Disponibles --}}
-            <div class="grid grid-cols-12 gap-2 mt-4">
-                <div
-                    class="relative flex items-center h-4 col-span-11 p-6 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-gray-800 dark:border-gray-700">
-                    <div>
-                        <h1 class="font-bold text-white">Partida presupuestal</h1>
+                @if ($data->estado === 'DISPONIBLE')
+                    {{-- Partidas Disponibles --}}
+                    <div class="grid grid-cols-12 gap-2 mt-4">
+                        <div
+                            class="relative flex items-center h-4 col-span-11 p-6 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                            <div>
+                                <h1 class="font-bold text-white">Partida presupuestal</h1>
+                            </div>
+                            <div>
+                                <span class="text-sm text-white">{{ $data->nombre }}</span>
+                            </div>
+                            <div class="ml-auto sm:col-span-2">
+                                <h1 class="font-bold text-white">DISPONIBLE</h1>
+                            </div>
+                        </div>
+                        <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
+                            class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
-                    <div>
-                        <span class="text-sm text-white">{{ $data->nombre }}</span>
+                @elseif ($data->estado === 'NO DISPONIBLE')
+                    {{-- Partidas No Disponibles --}}
+                    <div class="grid grid-cols-12 gap-2 mt-4">
+                        <div
+                            class="relative flex items-center h-4 col-span-11 p-6 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                            <div>
+                                <h1 class="font-bold text-white">Partida presupuestal</h1>
+                            </div>
+                            <div>
+                                <span class="text-sm text-white">{{ $data->nombre }}</span>
+                            </div>
+                            <div class="ml-auto sm:col-span-2">
+                                <h1 class="font-bold text-white">NO DISPONIBLE</h1>
+                            </div>
+                        </div>
+                        <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
+                            class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
-                    <div class="ml-auto sm:col-span-2">
-                        <h1 class="font-bold text-white">DISPONIBLE</h1>
-                    </div>
-                </div>
-                <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
-                    class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-            @elseif ($data->estado === 'NO DISPONIBLE')
-            {{-- Partidas No Disponibles --}}
-            <div class="grid grid-cols-12 gap-2 mt-4">
-                <div
-                    class="relative flex items-center h-4 col-span-11 p-6 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-gray-800 dark:border-gray-700">
-                    <div>
-                        <h1 class="font-bold text-white">Partida presupuestal</h1>
-                    </div>
-                    <div>
-                        <span class="text-sm text-white">{{ $data->nombre }}</span>
-                    </div>
-                    <div class="ml-auto sm:col-span-2">
-                        <h1 class="font-bold text-white">NO DISPONIBLE</h1>
-                    </div>
-                </div>
-                <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
-                    class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-            @endif
+                @endif
 
-            <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                        <tr class="text-center text-bla">
-                            <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                                Cantidad
-                            </th>
-                            <th class="px-4 py-2 cursor-pointer">
-                                Concepto
-                            </th>
-                            <th class="px-4 py-2 cursor-pointer">
-                                P/U
-                            </th>
-                            <th class="px-4 py-2 cursor-pointer">
-                                Importe
-                            </th>
-                            <th class="px-4 py-2 cursor-pointer">
-                                Acciones
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data->elementos as $elemento)
-                        <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-4 py-2"> {{ $elemento->v_cantidad }}</td>
-                            <td class="px-4 py-2"> {{ $elemento->v_concepto }} </td>
-                            <td class="px-4 py-2">
-                                <div
-                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
-                                    <span class="mx-auto">${{ $elemento->v_precio_u }}</span>
-                                </div>
-                            </td>
-                            <td class="px-4 py-2">
-                                <div
-                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
-                                    <span class="mx-auto">${{ $elemento->v_importe }}</span>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <x-button-colors color="red" wire:click="RemoveFromList({{ json_encode($elemento) }})">
-                                    <i class="fas fa-trash"></i>
-                                </x-button-colors>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                            <tr class="text-center text-bla">
+                                <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                                    Cantidad
+                                </th>
+                                <th class="px-4 py-2 cursor-pointer">
+                                    Concepto
+                                </th>
+                                <th class="px-4 py-2 cursor-pointer">
+                                    P/U
+                                </th>
+                                <th class="px-4 py-2 cursor-pointer">
+                                    Importe
+                                </th>
+                                <th class="px-4 py-2 cursor-pointer">
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data->elementos as $elemento)
+                                <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-4 py-2"> {{ $elemento->v_cantidad }}</td>
+                                    <td class="px-4 py-2"> {{ $elemento->v_concepto }} </td>
+                                    <td class="px-4 py-2">
+                                        <div
+                                            class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                            <span class="mx-auto">${{ $elemento->v_precio_u }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div
+                                            class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                            <span class="mx-auto">${{ $elemento->v_importe }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <x-button-colors color="red" wire:click="RemoveFromList({{ json_encode($elemento) }})">
+                                            <i class="fas fa-trash"></i>
+                                        </x-button-colors>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
-                </div>
+                    <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
+                    </div>
 
                 <hr>
 
-                <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
+                    <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
 
                     <div class="col-span-10 text-end">
                         <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
