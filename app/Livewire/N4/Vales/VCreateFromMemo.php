@@ -73,7 +73,7 @@ class VCreateFromMemo extends Component
         public $razon_social = '---';
         public $RFC = '---';
         public $telefono = '---';
-        public $tipo_proveedor = 'Fijo';
+        public $tipo_proveedor;
 
         // ? ATRIBUTOS PROVEEDOR_TEMPORAL
         public $onAddProveedor = false;
@@ -233,30 +233,19 @@ class VCreateFromMemo extends Component
 
     public function getProvedor($id){
 
-        if ( $this -> tipo_proveedor == 'Temporal') {
-            $provedorTemp = proveedores_temporales::find($id);
+            $empresa = Empresa::find($id);
+            $this -> tipo_proveedor = 'Fijo';
+            //Reset Data
+            $this->buscar = $empresa->RazonSocial;
+            $this->seleccionado = $empresa;
+            $this->showResults = false;
 
-            $this->id_proveedor = $provedorTemp->id;
-            $this->razon_social = $provedorTemp->RazonSocial;
-            $this->RFC = $provedorTemp->RFC;
-            $this->telefono = $provedorTemp->Telefono ? $provedorTemp->Telefono : 'Ninguno';
-            $this -> tipo_proveedor = 'Temporal';
-            return;
-        }
+            // Set Provedor Data
+            $this->id_proveedor = $empresa->id;
+            $this->razon_social = $empresa->RazonSocial;
+            $this->RFC = $empresa->RFC;
+            $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
 
-
-        $empresa = Empresa::find($id);
-        $this -> tipo_proveedor = 'Fijo';
-        //Reset Data
-        $this->buscar = $empresa->RazonSocial;
-        $this->seleccionado = $empresa;
-        $this->showResults = false;
-
-        // Set Provedor Data
-        $this->id_proveedor = $empresa->id;
-        $this->razon_social = $empresa->RazonSocial;
-        $this->RFC = $empresa->RFC;
-        $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
     }
 
     //
@@ -367,6 +356,7 @@ class VCreateFromMemo extends Component
         $this->vale_compra->total_compra = $this->total;
         $this->vale_compra->folio_solicitud = $this->details_of_folio;
         $this->vale_compra->token_solicitante = $token;
+        $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
         $this->vale_compra->creation_status = 'Borrador';
 
