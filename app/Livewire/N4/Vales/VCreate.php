@@ -226,6 +226,7 @@ class VCreate extends Component
 
             // Search Proveedor Data by ID
             $this->id_proveedor = $this->vale_to_edit->id_proveedor;
+
             $this->getProvedor($this->id_proveedor);
 
             // User Data
@@ -278,12 +279,23 @@ class VCreate extends Component
         }
 
         public function getProvedor($id){
-            $empresa = Empresa::find($id);
+            if ( $this -> vale_to_edit && $this -> vale_to_edit -> tipo_proveedor == 'Temporal') {
+                $provedorTemp = proveedores_temporales::find($id);
 
+                $this->id_proveedor = $provedorTemp->id;
+                $this->razon_social = $provedorTemp->RazonSocial;
+                $this->RFC = $provedorTemp->RFC;
+                $this->telefono = $provedorTemp->Telefono ? $provedorTemp->Telefono : 'Ninguno';
+                $this -> tipo_proveedor = 'Temporal';
+                return;
+            }
+            $empresa = Empresa::find($id);
+            $this -> onAddProveedor = false;
             //Reset Data
             $this->buscar = $empresa->RazonSocial;
             $this->seleccionado = $empresa;
             $this->showResults = false;
+            $this -> tipo_proveedor = 'Fijo';
 
             // Set Provedor Data
             $this->id_proveedor = $empresa->id;
@@ -494,6 +506,7 @@ class VCreate extends Component
                     $this->vale_compra->iva = $this->iva;
                     $this->vale_compra->total_compra = $this->total;
                     $this->vale_compra->token_solicitante = $token;
+                    $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
                     if ( $this -> onAddProveedor ) {
                         $nuevoProveedor = new proveedores_temporales([
@@ -506,14 +519,12 @@ class VCreate extends Component
                             'RFC' => $this->new_RFC,
                             'regimen' => $this->new_regimen,
                             'datosBanco' => $this->new_datos_banco,
-                            'tipo_proveedor' => $this->tipo_proveedor,
                             'DatosContacto' => $this->telefono,
                         ]);
-                        $this->vale_compra -> tipo_proveedor = 'Temporal';
                         $nuevoProveedor->save();
-                    } else {
-                        $this->vale_compra -> tipo_proveedor = 'Fijo';
+                        $this -> id_proveedor = $nuevoProveedor -> id;
                     }
+                    $this->vale_compra->id_proveedor = $this -> id_proveedor;
 
                     if(Auth::user()->roles[0]->name === 'N3:UNTE'){
                         $this->vale_compra->creation_status = 'Validado';
@@ -569,6 +580,7 @@ class VCreate extends Component
                     $this->vale_compra->subtotal = $this->subtotal;
                     $this->vale_compra->iva = $this->iva;
                     $this->vale_compra->total_compra = $this->total;
+                    $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
 
                     if ( $this -> onAddProveedor ) {
@@ -585,12 +597,10 @@ class VCreate extends Component
                             'tipo_proveedor' => $this->tipo_proveedor,
                             'DatosContacto' => $this->telefono,
                         ]);
-                        $this->vale_compra -> tipo_proveedor = 'Temporal';
                         $nuevoProveedor->save();
-                    } else {
-                        $this->vale_compra -> tipo_proveedor = 'Fijo';
+                        $this -> id_proveedor = $nuevoProveedor -> id;
                     }
-
+                    $this -> vale_compra -> id_proveedor = $this -> id_proveedor;
                     if(Auth::user()->roles[0]->name === 'N3:UNTE'){
                         $this->vale_compra->creation_status = 'Validado';
                         $this->memorandum->pass_filter = 1;
@@ -650,6 +660,7 @@ class VCreate extends Component
                 $this->vale_compra->iva = $this->iva;
                 $this->vale_compra->total_compra = $this->total;
                 $this->vale_compra->token_solicitante = $token;
+                $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
                 $this->vale_compra->creation_status = 'Borrador';
 
@@ -667,12 +678,10 @@ class VCreate extends Component
                         'tipo_proveedor' => $this->tipo_proveedor,
                         'DatosContacto' => $this->telefono,
                     ]);
-                    $this->vale_compra -> tipo_proveedor = 'Temporal';
                     $nuevoProveedor->save();
-                } else {
-                    $this->vale_compra -> tipo_proveedor = 'Fijo';
+                    $this -> id_proveedor = $nuevoProveedor -> id;
                 }
-
+                $this->vale_compra->id_proveedor = $this -> id_proveedor;
                 $this->vale_compra->save();
 
                 foreach ($this->elementosVale as $item) {
@@ -731,11 +740,10 @@ class VCreate extends Component
                             'tipo_proveedor' => $this->tipo_proveedor,
                             'DatosContacto' => $this->telefono,
                         ]);
-                        $this->vale_compra -> tipo_proveedor = 'Temporal';
                         $nuevoProveedor->save();
-                    } else {
-                        $this->vale_compra -> tipo_proveedor = 'Fijo';
+                        $this -> id_proveedor = $nuevoProveedor -> id;
                     }
+                $this->vale_compra->id_proveedor = $this -> id_proveedor;
                 $this->vale_compra->save();
 
                 foreach ($this->elementosVale as $item) {
@@ -759,7 +767,8 @@ class VCreate extends Component
 
     public function loadProveedor($data_proveedor) {
         $this -> onAddProveedor = true;
-        // dd($data_proveedor);
+        $this -> tipo_proveedor = 'Temporal';
+
         $this -> new_nombre = $data_proveedor['new_nombre'];
         $this -> new_telefono = $data_proveedor['new_telefono'];
         $this -> new_persona = $data_proveedor['new_persona'];
@@ -770,7 +779,6 @@ class VCreate extends Component
         $this -> new_regimen = $data_proveedor['new_regimen'];
         $this -> new_datos_banco = $data_proveedor['new_datos_banco'];
 
-        $this -> tipo_proveedor = 'Temporal';
         $this -> razon_social = $this -> new_razon_social;
         $this -> RFC = $this -> new_RFC;
         $this -> telefono = $this -> new_telefono;

@@ -38,6 +38,8 @@ class Vales_compra extends Model
         'token_disp_ppta',
         'token_autorizacion',
 
+        'tipo_proveedor',
+
         'creation_status',
         'pass_filter',
         'motivo_rechazo',
