@@ -337,7 +337,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->mir_id_componente = $this->componente_mir;
                 $this->memorandum->mir_id_actividad =  $this->actividad_mir;
 
-                if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -395,7 +395,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->memo_sucursal = $this->sucursal;
                 $this->memorandum->destinatario = $this->destinatario;
                 $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{

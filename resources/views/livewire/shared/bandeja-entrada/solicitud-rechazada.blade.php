@@ -26,54 +26,54 @@
             <x-memorandum-status memorandum_id="{{$memorandum_details->id}}" />
 
             {{-- Datos --}}
-            <div class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{$memorandum_details->memo_fecha}}
                             </p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{$memorandum_details->memo_folio}}
                             </p>
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{$memorandum_details->solicitante->name}}
                             </p>
                         </div>
                         <div>
                             <x-label for="lugar" value="{{ __('Lugar') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{$memorandum_details->memo_sucursal}}
                             </p>
                         </div>
                         <div>
                             <x-label for="destinatario" value="{{ __('Destinatario') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{$memorandum_details->destinatario}}
                             </p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $MIR }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $MIR }}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-6 mt-7">
                         <div>
                             <x-label for="a sunto" value="{{ __('Asunto') }}"/>
-                            <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-200">
+                            <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-400">
                                 {{ $memorandum_details->memo_asunto }}
                             </p>
                         </div>
                         <div>
                             <x-label for="a sunto" value="{{ __('Motivo de Rechazo') }}"/>
-                            <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-200">
+                            <p class="font-sans text-xs font-semibold text-gray-500 dark:text-gray-400">
                                 {{ $memorandum_details->motivo_rechazo }}
                             </p>
                         </div>
@@ -82,10 +82,10 @@
             </div>
 
             {{-- Table --}}
-            <div class="pb-12 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+            <div class="pb-12 mt-4 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Cantidad

@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
 
         User::create([
                 'name' => 'Iver Ivan Cruz Perez',
-                'username' => 'Señor De Rancho 34',
+                'username' => 'Iver Ivan',
                 'phone' => '951-444-3456',
                 'email' => 'iver@gmail.com',
                 'password' => Hash::make('holamundo')

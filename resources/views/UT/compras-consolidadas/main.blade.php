@@ -22,12 +22,13 @@
     </x-slot>
 
     <div class="py-12">
+
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
                 <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
-                    <div class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-60 w-30 text dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{route('compraConsolidada.nuevaCompra')}}" class="text-right">
                             <svg width="40" height="53" viewBox="0 0 40 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_317_4148)">
@@ -41,11 +42,11 @@
                                 </defs>
                             </svg>
 
-                            <p class="text-lg mt-24">Nueva compra <br/> consolidada</p>
+                            <p class="mt-24 text-lg dark:text-gray-200">Nueva compra <br/> consolidada</p>
                         </a>
                     </div>
 
-                    <div class="w-60 p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-60 w-30 text dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{route('compraConsolidadaBorrador.borradorCompra')}}" class="text-right">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_317_4142)">
@@ -59,14 +60,15 @@
                                 </clipPath>
                                 </defs>
                             </svg>
-                            <p class="text-lg mt-24"> Compras <br/> consolidadas en <br/> borrador </p>
+                            <p class="mt-24 text-lg dark:text-gray-200"> Compras <br/> consolidadas en <br/> borrador </p>
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
 </x-app-layout>

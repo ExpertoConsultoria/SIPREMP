@@ -60,6 +60,7 @@ use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
 use App\Http\Controllers\CotizacionPDF;
+use App\Http\Controllers\ValePDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -121,6 +122,8 @@ Route::middleware([
     Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
     Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
     Route::get('/solicitudes/pdf-cotizacion', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
+    //Pendiente
+    Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
 
 
     //Inventario
@@ -187,5 +190,5 @@ Route::middleware([
 
     // Expedientes
     Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');
-    
+
 });

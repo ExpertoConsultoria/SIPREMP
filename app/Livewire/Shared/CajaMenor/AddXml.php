@@ -4,6 +4,8 @@ namespace App\Livewire\Shared\CajaMenor;
 
 
 use Livewire\Component;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\FacturaCM;
 use Livewire\WithFileUploads;
@@ -80,5 +82,20 @@ class AddXml extends Component
         $this->is_done = true;
 
         $this->dispatch('loadDataXML', $this->factura_CM->id);
+    }
+
+    public function cleanXML(){
+        $this->dispatch('cleanDataXML');
+
+        $this->is_loading_xml = false;
+        $this->is_valid_xml = false;
+        $this->is_done = false;
+
+        $rcm_factura = FacturaCM::find($this->factura_CM->id);
+            File::delete($rcm_factura->fcm_xml_ruta);
+            $rcm_factura->delete();
+
+        $this->factura_CM = null;
+        $this->reset();
     }
 }
