@@ -83,7 +83,7 @@ class VCreate extends Component
         public $razon_social = '---';
         public $RFC = '---';
         public $telefono = '---';
-        public $tipo_proveedor = 'Fijo';
+        public $tipo_proveedor;
 
         // Select Data
         public $fines_mir = [];
@@ -288,20 +288,21 @@ class VCreate extends Component
                 $this->telefono = $provedorTemp->Telefono ? $provedorTemp->Telefono : 'Ninguno';
                 $this -> tipo_proveedor = 'Temporal';
                 return;
-            }
-            $empresa = Empresa::find($id);
-            $this -> onAddProveedor = false;
-            //Reset Data
-            $this->buscar = $empresa->RazonSocial;
-            $this->seleccionado = $empresa;
-            $this->showResults = false;
-            $this -> tipo_proveedor = 'Fijo';
+            } else {
+                $empresa = Empresa::find($id);
+                $this -> onAddProveedor = false;
+                //Reset Data
+                $this->buscar = $empresa->RazonSocial;
+                $this->seleccionado = $empresa;
+                $this->showResults = false;
+                $this -> tipo_proveedor = 'Fijo';
 
-            // Set Provedor Data
-            $this->id_proveedor = $empresa->id;
-            $this->razon_social = $empresa->RazonSocial;
-            $this->RFC = $empresa->RFC;
-            $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
+                // Set Provedor Data
+                $this->id_proveedor = $empresa->id;
+                $this->razon_social = $empresa->RazonSocial;
+                $this->RFC = $empresa->RFC;
+                $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
+            }
         }
 
     // Forge MIR

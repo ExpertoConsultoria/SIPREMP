@@ -233,7 +233,7 @@ class VCreateFromMemo extends Component
 
     public function getProvedor($id){
 
-        if ( $this -> vale_compra && $this -> vale_compra -> tipo_proveedor == 'Temporal') {
+        if ( $this -> tipo_proveedor == 'Temporal') {
             $provedorTemp = proveedores_temporales::find($id);
 
             $this->id_proveedor = $provedorTemp->id;
