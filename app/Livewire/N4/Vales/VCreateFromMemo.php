@@ -411,7 +411,8 @@ class VCreateFromMemo extends Component
 
     public function loadProveedor($data_proveedor) {
         $this -> onAddProveedor = true;
-        // dd($data_proveedor);
+        $this -> tipo_proveedor = 'Temporal';
+
         $this -> new_nombre = $data_proveedor['new_nombre'];
         $this -> new_telefono = $data_proveedor['new_telefono'];
         $this -> new_persona = $data_proveedor['new_persona'];
@@ -422,7 +423,6 @@ class VCreateFromMemo extends Component
         $this -> new_regimen = $data_proveedor['new_regimen'];
         $this -> new_datos_banco = $data_proveedor['new_datos_banco'];
 
-        $this -> tipo_proveedor = 'Temporal';
         $this -> razon_social = $this -> new_razon_social;
         $this -> RFC = $this -> new_RFC;
         $this -> telefono = $this -> new_telefono;

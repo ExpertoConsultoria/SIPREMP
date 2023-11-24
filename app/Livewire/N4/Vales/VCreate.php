@@ -302,7 +302,6 @@ class VCreate extends Component
             $this->razon_social = $empresa->RazonSocial;
             $this->RFC = $empresa->RFC;
             $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
-            $this -> tipo_proveedor = 'Fijo';
         }
 
     // Forge MIR
