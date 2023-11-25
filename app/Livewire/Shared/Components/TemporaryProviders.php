@@ -77,6 +77,4 @@ class TemporaryProviders extends ModalComponent
 
         $this->dispatch('loadProveedor', $proveedor);
     }
-
-
 }
