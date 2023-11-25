@@ -205,7 +205,7 @@ class VCreate extends Component
         }else{
             // Search CompraMenor
             $this->vale_to_edit = Vales_compra::where('folio', $this->edit_to_folio)->first();
-
+            $this -> tipo_proveedor = $this->vale_to_edit -> tipo_proveedor ? $this->vale_to_edit -> tipo_proveedor : 'Fijo';
             // Get item list
             $all_items = Elementos_Vale_compra::where('vales_compra_id', $this->vale_to_edit->id)->get();
 
@@ -273,13 +273,14 @@ class VCreate extends Component
                     ->where('RazonSocial', 'like', '%' . $this->buscar . '%')
                     ->get();
                 $this->showResults = true;
+                $this -> tipo_proveedor = 'Fijo';
             } else {
                 $this->showResults = false;
             }
         }
 
         public function getProvedor($id){
-            if ( $this -> vale_to_edit && $this -> vale_to_edit -> tipo_proveedor == 'Temporal') {
+            if ( $this -> tipo_proveedor == 'Temporal' ) {
                 $provedorTemp = proveedores_temporales::find($id);
 
                 $this->id_proveedor = $provedorTemp->id;
@@ -288,7 +289,7 @@ class VCreate extends Component
                 $this->telefono = $provedorTemp->Telefono ? $provedorTemp->Telefono : 'Ninguno';
                 $this -> tipo_proveedor = 'Temporal';
                 return;
-            } else {
+            } else if ( $this -> tipo_proveedor == 'Fijo' ) {
                 $empresa = Empresa::find($id);
                 $this -> onAddProveedor = false;
                 //Reset Data
@@ -723,6 +724,7 @@ class VCreate extends Component
                     $this->vale_compra->subtotal = $this->subtotal;
                     $this->vale_compra->iva = $this->iva;
                     $this->vale_compra->total_compra = $this->total;
+                    $this->vale_compra->tipo_proveedor = $this->tipo_proveedor;
 
                     $this->vale_compra->creation_status = 'Borrador';
 

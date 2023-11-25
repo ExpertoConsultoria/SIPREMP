@@ -48,7 +48,7 @@ return new class extends Migration
             $table->enum('tipo_proveedor', [
                 'Fijo',
                 'Temporal'
-            ]);
+            ])->nullable();
 
             $table->boolean('pending_review')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
             $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
