@@ -24,13 +24,13 @@
                 </a>
             </div>
         @elseif ($quote->arch_extension === 'txt')
-            <div class="max-w-lg p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-2xl p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400">
                     {{ File::get($quote->arch_ruta) }}
                 </p>
             </div>
         @else
-            <div class="max-w-5xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <img class="rounded-t-lg" src="{{ asset($quote->arch_ruta) }}" alt="{{ $quote->arch_descripcion }}" />
             </div>
         @endif

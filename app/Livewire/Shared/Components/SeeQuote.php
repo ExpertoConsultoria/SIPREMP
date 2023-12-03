@@ -24,9 +24,4 @@ class SeeQuote extends ModalComponent
         return view('livewire.shared.components.see-quote');
     }
 
-    function get_quoteID()
-    {
-        return $this->quote_id;
-    }
-
 }
