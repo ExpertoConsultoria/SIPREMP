@@ -14,24 +14,28 @@ class Archivos extends Model
     protected $table = 'archivos';
 
     protected $fillable = [
-        'fecha',
-        'lugar',
+        'fecha_registro',
+        'lugar_registro',
         'folio',
-        'NoFin',
-        'NoProposito',
-        'NoComponente',
-        'NoActividad',
-        'titulo',
-        'descripcion',
-        'archivo_pdf',
+        'arch_nombre',
+        'arch_descripcion',
+        'arch_extension',
+        'arch_ruta',
     ];
 
     protected $encryptable = [
-        'titulo',
-        'descripcion',
+        'arch_nombre',
+        'arch_descripcion',
+        'arch_extension',
+        'lugar_registro',
     ];
 
     public function Vales_compra(){
         return $this->hasOne(Vales_compra::class);
+    }
+
+    public function Memorandum(): BelongsTo
+    {
+        return $this->belongsTo(Memorandum::class);
     }
 }

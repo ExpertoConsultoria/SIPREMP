@@ -34,27 +34,27 @@
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{$memorandum_details -> memo_fecha}}</p>
+                                {{$memorandum_details->memo_fecha}}</p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{$memorandum_details -> memo_folio}}</p>
+                                {{$memorandum_details->memo_folio}}</p>
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{$memorandum_details -> solicitante -> name}}</p>
+                                {{$memorandum_details->solicitante->name}}</p>
                         </div>
                         <div>
                             <x-label for="lugar" value="{{ __('Lugar') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{$memorandum_details -> memo_sucursal}}</p>
+                                {{$memorandum_details->memo_sucursal}}</p>
                         </div>
                         <div>
                             <x-label for="destinatario" value="{{ __('Destinatario') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{$memorandum_details -> destinatario}}</p>
+                                {{$memorandum_details->destinatario}}</p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}" />
@@ -105,16 +105,16 @@
                             @foreach($memoList as $item)
                             <tr>
                                 <th class="px-6 py-3">
-                                    {{$item -> im_cantidad}}
+                                    {{$item->im_cantidad}}
                                 </th>
                                 <th class="px-6 py-3">
-                                    {{$item -> im_unidad_medida}}
+                                    {{$item->im_unidad_medida}}
                                 </th>
                                 <th class="px-6 py-3">
-                                    {{$item -> im_concepto}}
+                                    {{$item->im_concepto}}
                                 </th>
                                 <th class="px-6 py-3">
-                                    {{$item -> im_partida_presupuestal}}
+                                    {{$item->im_partida_presupuestal}}
                                 </th>
                             </tr>
                             @endforeach

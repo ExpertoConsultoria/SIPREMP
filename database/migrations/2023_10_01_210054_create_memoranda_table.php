@@ -33,7 +33,8 @@ return new class extends Migration
             $table->text('mir_id_componente');
             $table->text('mir_id_actividad');
 
-            $table->text('memo_id_cotizacion');
+            $table->unsignedBigInteger('memo_id_cotizacion')->nullable();
+            $table->foreign('memo_id_cotizacion')->references('id')->on('archivos')->onDelete('set null');
 
             $table->enum('memo_creation_status', [
                 'Enviado',

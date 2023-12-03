@@ -50,12 +50,12 @@ class SolicitudesList extends Component
         if($this->cargarLista){
             $memorandums = Memorandum::select('id','memo_fecha','memo_folio','memo_asunto','memo_creation_status')
             ->where('memo_creation_status','not like','Borrador')
-            ->where('solicitante_id', Auth::user() -> id)
+            ->where('solicitante_id', Auth::user()->id)
             ->where('memo_asunto','like','%'.$this->buscar.'%')
             ->orderby($this->ordenar, $this->direccion)
             ->paginate($this->mostrar);
         }
-        $this -> backButton = Helper::backButton();
+        $this->backButton = Helper::backButton();
         return view('livewire.shared.solicitud.solicitudes-list', compact('memorandums'));
     }
 

@@ -31,7 +31,7 @@ class AddXml extends Component
     protected function rules()
     {
         return [
-            'factura_XML' => 'required|max:382',
+            'factura_XML' => 'required|max:400',
         ];
     }
 

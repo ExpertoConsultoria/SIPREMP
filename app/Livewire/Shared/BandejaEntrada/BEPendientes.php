@@ -49,7 +49,7 @@ class BEPendientes extends Component
 
             $filtrados = [];
 
-            if(Auth::user() -> roles[0] -> name === 'N5:18A:F'){
+            if(Auth::user()->roles[0]->name === 'N5:18A:F'){
 
                 $memorandums = Memorandum::select('memo_fecha', 'memo_folio', 'memo_asunto', 'memo_creation_status', 'solicitante_id')
                     ->where('memo_asunto', 'like', '%' . $this->buscar . '%')
@@ -73,7 +73,7 @@ class BEPendientes extends Component
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
 
-            } elseif (Auth::user() -> roles[0] -> name === 'N4:SEGE'){
+            } elseif (Auth::user()->roles[0]->name === 'N4:SEGE'){
 
                 $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id','destinatario')
                     ->where('memo_asunto','like','%'.$this->buscar.'%')
@@ -96,7 +96,7 @@ class BEPendientes extends Component
 
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
-            } elseif (Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+            } elseif (Auth::user()->roles[0]->name === 'N3:UNTE'){
 
                 $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
@@ -129,11 +129,11 @@ class BEPendientes extends Component
 
     public function getDetails($data)
     {
-        if(Auth::user() -> roles[0] -> name === 'N5:18A:F'){
+        if(Auth::user()->roles[0]->name === 'N5:18A:F'){
             return redirect()->to(route("bandejaentrada.details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user() -> roles[0] -> name === 'N4:SEGE'){
+        } elseif(Auth::user()->roles[0]->name === 'N4:SEGE'){
             return redirect()->to(route("bandejaentrada.advanced-details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+        } elseif(Auth::user()->roles[0]->name === 'N3:UNTE'){
             return redirect()->to(route("bandejaentrada.valeServicio", ['details_of_folio'=>$data['folio']]));
         }
     }

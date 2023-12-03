@@ -234,7 +234,7 @@ class VCreateFromMemo extends Component
     public function getProvedor($id){
 
             $empresa = Empresa::find($id);
-            $this -> tipo_proveedor = 'Fijo';
+            $this->tipo_proveedor = 'Fijo';
             //Reset Data
             $this->buscar = $empresa->RazonSocial;
             $this->seleccionado = $empresa;
@@ -264,7 +264,7 @@ class VCreateFromMemo extends Component
         if (count($this->memoList)) {
             $this->folio = Helper::FolioGenerator(new Vales_compra, 'folio', 6, 'VCS', $this->userSedeCode);
             $token = strtoupper(Str::random(5));
-            if ( $this -> onAddProveedor ) {
+            if ( $this->onAddProveedor ) {
                 $nuevoProveedor = new proveedores_temporales([
                     'Nombre' => $this->new_nombre,
                     'Telefono' => $this->new_telefono,
@@ -279,7 +279,7 @@ class VCreateFromMemo extends Component
                     'DatosContacto' => $this->telefono,
                 ]);
                 $nuevoProveedor->save();
-                $this -> id_proveedor = $nuevoProveedor -> id;
+                $this->id_proveedor = $nuevoProveedor->id;
             }
 
             $this->vale_compra = new Vales_compra();
@@ -300,10 +300,10 @@ class VCreateFromMemo extends Component
             $this->vale_compra->total_compra = $this->total;
             $this->vale_compra->folio_solicitud = $this->details_of_folio;
             $this->vale_compra->token_solicitante = $token;
-            $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
+            $this->vale_compra->tipo_proveedor = $this->tipo_proveedor;
 
             $this->vale_compra->creation_status = 'Enviado';
-            $this->vale_compra->id_proveedor = $this -> id_proveedor;
+            $this->vale_compra->id_proveedor = $this->id_proveedor;
 
             $this->vale_compra->save();
 
@@ -356,11 +356,11 @@ class VCreateFromMemo extends Component
         $this->vale_compra->total_compra = $this->total;
         $this->vale_compra->folio_solicitud = $this->details_of_folio;
         $this->vale_compra->token_solicitante = $token;
-        $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
+        $this->vale_compra->tipo_proveedor = $this->tipo_proveedor;
 
         $this->vale_compra->creation_status = 'Borrador';
 
-        if ( $this -> onAddProveedor ) {
+        if ( $this->onAddProveedor ) {
             $nuevoProveedor = new proveedores_temporales([
                 'Nombre' => $this->new_nombre,
                 'Telefono' => $this->new_telefono,
@@ -375,9 +375,9 @@ class VCreateFromMemo extends Component
                 'DatosContacto' => $this->telefono,
             ]);
             $nuevoProveedor->save();
-            $this -> id_proveedor = $nuevoProveedor -> id;
+            $this->id_proveedor = $nuevoProveedor->id;
         }
-        $this->vale_compra->id_proveedor = $this -> id_proveedor;
+        $this->vale_compra->id_proveedor = $this->id_proveedor;
 
         $this->vale_compra->save();
 
@@ -400,22 +400,22 @@ class VCreateFromMemo extends Component
     }
 
     public function loadProveedor($data_proveedor) {
-        $this -> onAddProveedor = true;
-        $this -> tipo_proveedor = 'Temporal';
+        $this->onAddProveedor = true;
+        $this->tipo_proveedor = 'Temporal';
 
-        $this -> new_nombre = $data_proveedor['new_nombre'];
-        $this -> new_telefono = $data_proveedor['new_telefono'];
-        $this -> new_persona = $data_proveedor['new_persona'];
-        $this -> new_direccion = $data_proveedor['new_direccion'];
-        $this -> new_codigo_postal = $data_proveedor['new_codigo_postal'];
-        $this -> new_razon_social = $data_proveedor['new_razon_social'];
-        $this -> new_RFC = $data_proveedor['new_RFC'];
-        $this -> new_regimen = $data_proveedor['new_regimen'];
-        $this -> new_datos_banco = $data_proveedor['new_datos_banco'];
+        $this->new_nombre = $data_proveedor['new_nombre'];
+        $this->new_telefono = $data_proveedor['new_telefono'];
+        $this->new_persona = $data_proveedor['new_persona'];
+        $this->new_direccion = $data_proveedor['new_direccion'];
+        $this->new_codigo_postal = $data_proveedor['new_codigo_postal'];
+        $this->new_razon_social = $data_proveedor['new_razon_social'];
+        $this->new_RFC = $data_proveedor['new_RFC'];
+        $this->new_regimen = $data_proveedor['new_regimen'];
+        $this->new_datos_banco = $data_proveedor['new_datos_banco'];
 
-        $this -> razon_social = $this -> new_razon_social;
-        $this -> RFC = $this -> new_RFC;
-        $this -> telefono = $this -> new_telefono;
+        $this->razon_social = $this->new_razon_social;
+        $this->RFC = $this->new_RFC;
+        $this->telefono = $this->new_telefono;
         $this->dispatch('closeModal');
         $this->dispatch('simpleAlert', 'Se agregaron los datos del proveedor Correctamente', 'success');
     }

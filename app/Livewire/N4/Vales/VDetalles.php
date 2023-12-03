@@ -58,9 +58,9 @@ class VDetalles extends Component
         $this->MIR =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
 
         // Proveedor Data
-        if ( $this -> vale_details -> tipo_proveedor == 'Fijo') {
+        if ( $this->vale_details->tipo_proveedor == 'Fijo') {
             $this->proveedor = Empresa::find($this->vale_details->id_proveedor);
-        } else if ( $this -> vale_details -> tipo_proveedor == 'Temporal') {
+        } else if ( $this->vale_details->tipo_proveedor == 'Temporal') {
             $this->proveedor = proveedores_temporales::find($this->vale_details->id_proveedor);
         }
 

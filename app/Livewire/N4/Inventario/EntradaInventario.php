@@ -110,44 +110,44 @@ class EntradaInventario extends Component
 
         foreach( $conceptos as $concepto ) {
             $item = new stdClass;
-            $item -> cantidad = $concepto['Cantidad'];
-            $item -> unidad_medida = $concepto['Unidad'];
-            $item -> concepto = $concepto['Descripcion'];
-            $item -> precio_unitario = $concepto['ValorUnitario'];
-            $item -> importe = floatval($concepto['Importe']);
-            $item -> partida_presupuestal = '';
-            array_push($this -> items_inventario, $item);
+            $item->cantidad = $concepto['Cantidad'];
+            $item->unidad_medida = $concepto['Unidad'];
+            $item->concepto = $concepto['Descripcion'];
+            $item->precio_unitario = $concepto['ValorUnitario'];
+            $item->importe = floatval($concepto['Importe']);
+            $item->partida_presupuestal = '';
+            array_push($this->items_inventario, $item);
     }
         // $this->dispatch('simpleAlert','Datos cargados correctamente','success');
     }
 
     public function saveEntrada() {
         $this->validate();
-        $this -> folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
+        $this->folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
 
         $vale_entrada = new Vales_entrada_material();
-        $vale_entrada -> folio = $this -> folio;
-        $vale_entrada -> fecha = date('Y-m-d');
-        $vale_entrada -> lugar = $this -> userSede;
-        $vale_entrada -> id_receptor = 1;
-        $vale_entrada -> entrego_material = 1;
-        $vale_entrada -> material_recibido = 1;
-        $vale_entrada -> estatus_SG = 0;
-        $vale_entrada -> token_recepcion = $this -> token_recepcion;
-        $vale_entrada -> token_entrega = $this -> token_entrega;
-        $vale_entrada -> save();
+        $vale_entrada->folio = $this->folio;
+        $vale_entrada->fecha = date('Y-m-d');
+        $vale_entrada->lugar = $this->userSede;
+        $vale_entrada->id_receptor = 1;
+        $vale_entrada->entrego_material = 1;
+        $vale_entrada->material_recibido = 1;
+        $vale_entrada->estatus_SG = 0;
+        $vale_entrada->token_recepcion = $this->token_recepcion;
+        $vale_entrada->token_entrega = $this->token_entrega;
+        $vale_entrada->save();
 
-        foreach ($this -> items_inventario as $item) {
+        foreach ($this->items_inventario as $item) {
             $i = 0;
-            $this -> item_compra = new Materiales_recibidos();
-            $this -> item_compra -> vales_entrada_materials_id = 1;
-            $this -> item_compra -> cantidad = $item -> cantidad;
-            $this -> item_compra -> unidad_medida = $item -> unidad_medida;
-            $this -> item_compra -> concepto = $item -> concepto;
-            $this -> item_compra -> precio_unitario = $item -> precio_unitario;
-            $this -> item_compra -> importe = $item -> importe;
-            $this -> item_compra -> partidas_presupuestales_id = $item -> partida_presupuestal;
-            $this -> item_compra -> save();
+            $this->item_compra = new Materiales_recibidos();
+            $this->item_compra->vales_entrada_materials_id = 1;
+            $this->item_compra->cantidad = $item->cantidad;
+            $this->item_compra->unidad_medida = $item->unidad_medida;
+            $this->item_compra->concepto = $item->concepto;
+            $this->item_compra->precio_unitario = $item->precio_unitario;
+            $this->item_compra->importe = $item->importe;
+            $this->item_compra->partidas_presupuestales_id = $item->partida_presupuestal;
+            $this->item_compra->save();
         }
     }
 
@@ -171,6 +171,6 @@ class EntradaInventario extends Component
 
     public function setPartidaP($value, $id)
     {
-        $this -> items_inventario[$id] -> partida_presupuestal = $value;
+        $this->items_inventario[$id]->partida_presupuestal = $value;
     }
 }

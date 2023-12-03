@@ -24,7 +24,7 @@ class SolicitudStatus extends Component
     public $memoList = [];
 
     public $backButton;
-    
+
     public $MIR;
 
     public function render()
@@ -33,15 +33,15 @@ class SolicitudStatus extends Component
     }
 
     public function mount() {
-        $this-> memorandum_details= Memorandum::where('memo_folio', $this -> details_of_folio) -> first();
+        $this-> memorandum_details= Memorandum::where('memo_folio', $this->details_of_folio)->first();
 
         if($this->memorandum_details->pending_review === 1){
             $this->memorandum_details->pending_review = 0;
             $this->memorandum_details->save();
         }
 
-        $this -> memorandum_details -> load('solicitante');
-        $this -> memoList = MemorandumList::where('im_folio', $this -> memorandum_details -> memo_folio) -> get();
+        $this->memorandum_details->load('solicitante');
+        $this->memoList = MemorandumList::where('im_folio', $this->memorandum_details->memo_folio)->get();
 
         $fin = Plan1Fin::where('id',$this->memorandum_details->mir_id_fin)->first();
         $proposito = Plan2Proposito::where('id',$this->memorandum_details->mir_id_proposito)->first();
