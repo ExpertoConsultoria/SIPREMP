@@ -680,7 +680,7 @@
                                 </div>
 
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                    <a href="proveedores" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
                                         <div>
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_307_1718)">

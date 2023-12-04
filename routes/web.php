@@ -61,6 +61,11 @@ use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
 use App\Http\Controllers\CotizacionPDF;
 use App\Http\Controllers\ValePDF;
+
+// * Proveedores
+use App\Livewire\ut\proveedores\PGeneral;
+use App\Livewire\ut\proveedores\PDetalles;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,6 +120,10 @@ Route::middleware([
         Route::get('/compras-consolidadas', function(){
             return view('UT.compras-consolidadas.main');
         })->name('compraconsolidada');
+
+        Route::get('/proveedores', function(){
+            return view('UT.Proveedores.main');
+        })->name('proveedores');
 
     // Reactive Pages
     //pdf
@@ -190,5 +199,9 @@ Route::middleware([
 
     // Expedientes
     Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');
+
+    // Expedientes
+    Route::get('/proveedores/proveedores-pendientes', PGeneral::class)->name('proveedores.pendientes');
+    Route::get('/proveedores/proveedor-detalles/{id_proveedor}', PDetalles::class)->name('proveedores.detalles');
 
 });
