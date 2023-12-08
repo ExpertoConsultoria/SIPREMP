@@ -56,7 +56,7 @@
                         </p>
                     </div>
                     <div>
-                        <button type="button"
+                        <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $vale_details->id_cotizacion }} } })"
                             class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                             <i class="fas fa-eye"></i>
                             COTIZACIÓN

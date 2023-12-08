@@ -38,4 +38,9 @@ class Archivos extends Model
     {
         return $this->belongsTo(Memorandum::class);
     }
+
+    public function ValeCompra(): BelongsTo
+    {
+        return $this->belongsTo(Vales_compra::class);
+    }
 }

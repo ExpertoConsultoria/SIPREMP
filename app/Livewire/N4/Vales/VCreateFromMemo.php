@@ -50,6 +50,7 @@ class VCreateFromMemo extends Component
         public $NoActividad;
 
         public $id_proveedor = '';
+        public $id_cotizacion = '';
 
         public $justificacion;
         public $lugar_entrega = '';
@@ -139,6 +140,7 @@ class VCreateFromMemo extends Component
             $this->fecha = date('Y-m-d');
             $this->id_usuario = $this->memorandum_details->solicitante->id;
             $this->lugar = $this->memorandum_details->memo_sucursal;
+            $this->id_cotizacion = $this->memorandum_details->memo_id_cotizacion;
 
             // Mir
             $this->NoFin = $this->memorandum_details->mir_id_fin;
@@ -292,6 +294,7 @@ class VCreateFromMemo extends Component
             $this->vale_compra->NoComponente = $this->NoComponente;
             $this->vale_compra->NoActividad = $this->NoActividad;
             $this->vale_compra->id_proveedor = $this->id_proveedor;
+            $this->vale_compra->id_cotizacion = $this->id_cotizacion;
             $this->vale_compra->justificacion = $this->justificacion;
             $this->vale_compra->lugar_entrega = $this->lugar_entrega;
             $this->vale_compra->fecha_entrega = $this->fecha_entrega;
@@ -348,6 +351,7 @@ class VCreateFromMemo extends Component
         $this->vale_compra->NoComponente = $this->NoComponente;
         $this->vale_compra->NoActividad = $this->NoActividad;
         $this->vale_compra->id_proveedor = $this->id_proveedor;
+        $this->vale_compra->id_cotizacion = $this->id_cotizacion;
         $this->vale_compra->justificacion = $this->justificacion;
         $this->vale_compra->lugar_entrega = $this->lugar_entrega;
         $this->vale_compra->fecha_entrega = $this->fecha_entrega;

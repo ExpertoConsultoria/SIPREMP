@@ -41,7 +41,9 @@
 
                     {{-- Default --}}
                     <div class="grid grid-cols-6 gap-6">
-                        <div></div>
+                        @if (!$is_quote)
+                            <div></div>
+                        @endif
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $fecha }}
@@ -67,12 +69,34 @@
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $lugar }}
                             </p>
                         </div>
-                        <div>
-                            <button type="button"
-                                class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                ADJUNTAR COTIZACIÓN
-                            </button>
-                        </div>
+
+                        {{-- Hidden Fields --}}
+                        <input wire:model.blur="id_cotizacion" type="hidden" name="id_cotizacion">
+
+                        @if (!$is_quote)
+                            <div>
+                                <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.add-quote' })"
+                                    class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                    ADJUNTAR COTIZACIÓN
+                                </button>
+                                @error('id_cotizacion')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @else
+                            <div class="text-end">
+                                <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $id_cotizacion }} } })"
+                                    class="disabled:opacity-25 focus:outline- text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800">
+                                    Ver Cotización
+                                </button>
+                            </div>
+                            <div class="text-start">
+                                <button type="button" wire:click="DeleteQuotation()"
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                    Eliminar Cotización
+                                </button>
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Proveedor --}}

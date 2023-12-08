@@ -121,7 +121,7 @@ Route::middleware([
     Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
     Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
     Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
-    Route::get('/solicitudes/pdf-cotizacion', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
+    Route::get('/solicitudes/pdf-cotizacion/{details_of_folio}', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
     //Pendiente
     // Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
 

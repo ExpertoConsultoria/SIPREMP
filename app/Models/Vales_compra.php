@@ -22,7 +22,7 @@ class Vales_compra extends Model
         'NoProposito',
         'NoComponente',
         'NoActividad',
-        'archivos_id',
+        'id_cotizacion',
         'id_proveedor',
         'justificacion',
         'lugar_entrega',
@@ -81,6 +81,10 @@ class Vales_compra extends Model
     public function solicitante()
     {
         return $this->hasOne(User::class, 'id', 'id_usuario');
+    }
+
+    public function cotizacion() {
+        return $this->hasOne(Archivos::class, 'id', 'id_cotizacion');
     }
 
 }

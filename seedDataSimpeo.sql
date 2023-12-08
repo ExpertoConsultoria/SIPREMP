@@ -590,7 +590,9 @@ INSERT INTO `org4_empleados` (`id`, `RFC`, `CURP`, `NUE`, `Titulo`, `Nombre`, `A
 (2, NULL, NULL, NULL, NULL, 'Luis Esteban', 'Lopez ', 'Rios ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 2, 2, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
 (3, NULL, NULL, NULL, NULL, 'Carlos Emanuel', 'Almaraz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 3, 5, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
 (4, NULL, NULL, NULL, NULL, 'Victor Gabriel', 'Valencia', 'Garcia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 4, 18, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
-(5, NULL, NULL, NULL, NULL, 'Iver Ivan', 'Cruz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 5, 7, '2023-10-19 19:28:11', '2023-10-19 19:28:11');
+(5, NULL, NULL, NULL, NULL, 'Iver Ivan', 'Cruz', 'Perez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 5, 7, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
+(6, NULL, NULL, NULL, NULL, 'Eliana', 'Rodriguez', 'Reyes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 6, 15, '2023-10-19 19:28:11', '2023-10-19 19:28:11'),
+(7, NULL, NULL, NULL, NULL, 'Lesly Anette', 'Fernandez', 'Robles', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 7, 1, '2023-10-19 19:28:11', '2023-10-19 19:28:11');
 
 INSERT INTO `ppto1_capitulos` (`id`, `Capitulo`, `CapituloNombre`, `created_at`, `updated_at`) VALUES
 (1, 1000, 'SERVICIOS PERSONALES', '2023-03-22 10:23:04', '2023-03-22 10:23:04'),

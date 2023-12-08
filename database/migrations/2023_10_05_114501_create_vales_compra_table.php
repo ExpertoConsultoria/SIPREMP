@@ -59,8 +59,8 @@ return new class extends Migration
             $table->text("token_disp_ppta")->nullable();
             $table->text("token_autorizacion")->nullable();
 
-            $table->unsignedBigInteger('archivos_id')->unique()->nullable();//id_arch_cotizacion
-            $table->foreign('archivos_id')->references('id')->on('archivos')->onDelete('cascade');
+            $table->unsignedBigInteger('id_cotizacion')->nullable();
+            $table->foreign('id_cotizacion')->references('id')->on('archivos')->onDelete('set null');
 
             $table->timestamps();
         });

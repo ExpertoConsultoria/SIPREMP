@@ -5,6 +5,7 @@ namespace App\Livewire\N4\Vales;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Helpers\Helper;
 use stdClass;
@@ -12,6 +13,7 @@ use stdClass;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
+use App\Models\Archivos;
 use App\Models\Empresa;
 use App\Models\proveedores_temporales;
 use App\Models\Plan1Fin;
@@ -26,6 +28,7 @@ class VCreate extends Component
         public $edit_to_folio = '';
         public $vale_to_edit;
         public $solicitante;
+        public $quote;
 
     // Fields
         public $folio;
@@ -39,6 +42,7 @@ class VCreate extends Component
         public $NoActividad;
 
         public $id_proveedor = '';
+        public $id_cotizacion = '';
 
         public $justificacion;
         public $lugar_entrega = '';
@@ -99,6 +103,8 @@ class VCreate extends Component
 
         public $partidas_data = [];
 
+        public $is_quote = false;
+
         //
         public $vale_compra;
         public $sucursal;
@@ -127,6 +133,7 @@ class VCreate extends Component
             'NoComponente' => 'required',
             'NoActividad' => 'required',
 
+            'id_cotizacion'   => 'required',
             // 'id_proveedor' => 'required',
             'justificacion'   => 'required|string',
             'lugar_entrega'   => 'required|string',
@@ -152,6 +159,8 @@ class VCreate extends Component
         'NoActividad.required' => 'Este campo es Obligatorio.',
 
         // Element List
+        'id_cotizacion.required' => 'Cotización Obligatoria.',
+
         'cantidad.required' => 'Este campo es Obligatorio.',
         'cantidad.numeric' => 'No es un nÃºmero.',
 
@@ -168,7 +177,7 @@ class VCreate extends Component
 
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
     ];
-    protected $listeners = ['loadProveedor'];
+    protected $listeners = ['loadProveedor', 'AssignQuotation'];
 
     public function mount()
     {
@@ -193,6 +202,7 @@ class VCreate extends Component
                 $this->NoProposito = '';
                 $this->NoComponente = '';
                 $this->NoActividad = '';
+                $this->id_cotizacion = '';
 
                 // Entrega
                 $this->justificacion = null;
@@ -238,7 +248,11 @@ class VCreate extends Component
             $this->lugar = $this->specificUserSede;
 
             $this->sucursal = Helper::GetSpecificUserSede($this->vale_to_edit->solicitante)->SedeNombre;
-            $this->cotizacion = $this->vale_to_edit->archivos_id;
+            $this->id_cotizacion = $this->vale_to_edit->id_cotizacion;
+
+            if($this->id_cotizacion != null){
+                $this->is_quote = true;
+            }
 
             // Values that can be set here
             $this->fecha = $this->vale_to_edit->fecha;
@@ -481,6 +495,26 @@ class VCreate extends Component
             }
         }
 
+    // Cotizaciones
+        public function AssignQuotation($quote_id){
+            $this->id_cotizacion = $quote_id;
+            $this->is_quote = true;
+
+            $this->dispatch('closeModal');
+            $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+        }
+
+        public function DeleteQuotation(){
+            $this->quote = Archivos::find($this->id_cotizacion);
+                File::delete($this->quote->arch_ruta);
+                $this->quote->delete();
+
+            $this->is_quote = false;
+            $this->id_cotizacion = null;
+
+            $this->dispatch('simpleAlert', 'Eliminado correctamente', 'success');
+        }
+
     // Ways for Save
         public function Save(){
             $this->validate();
@@ -500,6 +534,7 @@ class VCreate extends Component
                     $this->vale_compra->NoComponente = $this->NoComponente;
                     $this->vale_compra->NoActividad = $this->NoActividad;
                     $this->vale_compra->id_proveedor = $this->id_proveedor;
+                    $this->vale_compra->id_cotizacion = $this->id_cotizacion;
                     $this->vale_compra->justificacion = $this->justificacion;
                     $this->vale_compra->lugar_entrega = $this->lugar_entrega;
                     $this->vale_compra->fecha_entrega = $this->fecha_entrega;
@@ -575,6 +610,7 @@ class VCreate extends Component
                     $this->vale_compra->NoComponente = $this->NoComponente;
                     $this->vale_compra->NoActividad = $this->NoActividad;
                     $this->vale_compra->id_proveedor = $this->id_proveedor;
+                    $this->vale_compra->id_cotizacion = $this->id_cotizacion;
                     $this->vale_compra->justificacion = $this->justificacion;
                     $this->vale_compra->lugar_entrega = $this->lugar_entrega;
                     $this->vale_compra->fecha_entrega = $this->fecha_entrega;
@@ -654,6 +690,7 @@ class VCreate extends Component
                 $this->vale_compra->NoComponente = $this->NoComponente;
                 $this->vale_compra->NoActividad = $this->NoActividad;
                 $this->vale_compra->id_proveedor = $this->id_proveedor;
+                $this->vale_compra->id_cotizacion = $this->id_cotizacion;
                 $this->vale_compra->justificacion = $this->justificacion;
                 $this->vale_compra->lugar_entrega = $this->lugar_entrega;
                 $this->vale_compra->fecha_entrega = $this->fecha_entrega;
@@ -718,6 +755,7 @@ class VCreate extends Component
                     $this->vale_compra->NoComponente = $this->NoComponente;
                     $this->vale_compra->NoActividad = $this->NoActividad;
                     $this->vale_compra->id_proveedor = $this->id_proveedor;
+                    $this->vale_compra->id_cotizacion = $this->id_cotizacion;
                     $this->vale_compra->justificacion = $this->justificacion;
                     $this->vale_compra->lugar_entrega = $this->lugar_entrega;
                     $this->vale_compra->fecha_entrega = $this->fecha_entrega;
