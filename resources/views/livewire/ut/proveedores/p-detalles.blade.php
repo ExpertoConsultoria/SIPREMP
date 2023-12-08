@@ -151,14 +151,20 @@
 
             <div
                 class="mt-4 p-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
-                <x-button wire:click="autorizarProveedor()"
-                    class="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+                <x-button-colors wire:click="autorizarProveedor()" color="green"
+                    class="inline-flex text-white rounded text-lg">
                     Autorizar proveedor
-                </x-button>
+                </x-button-colors>
                 <x-button-colors color="red" wire:click="deleteProveedor()"
                     class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
                     Rechazar proveedor
                 </x-button-colors>
+                @if ( count($this -> proveedoresList) )
+                <x-button-colors wire:click="reasignarProveedor()" color="green"
+                    class="inline-flex text-white rounded text-lg">
+                    Reasignar proveedor
+                </x-button-colors>
+                @endif
             </div>
         </div>
     </div>

@@ -28,6 +28,14 @@ class PDetalles extends Component
     }
 
     public function autorizarProveedor( ) {
+        if ( count($this -> proveedoresList) ) {
+            $this->dispatch('alertCRUD',
+                'Este proveedor ya está registrado!',
+                'El proveedor ya se encuentra registrado',
+                'error'
+            );
+            return;
+        }
         $proveedorFijo = Empresa::create([
             'RFC' => $this -> proveedor -> RFC,
             'RazonSocial' => $this -> proveedor -> RazonSocial,
@@ -57,7 +65,33 @@ class PDetalles extends Component
         return redirect()->route('proveedores.pendientes');
     }
 
-    #[On('deleteP')]
+    public function reasignarProveedor() {
+        if ( count( $this -> valesByProveedor ) == 0 ){
+            $this->dispatch('alertCRUD',
+                'No hay vales registrados!',
+                'No hay vales registrados con este proveedor',
+                'error'
+            );
+            return;
+        }
+        foreach($this -> valesByProveedor as $vale) {
+            $vale -> update([
+                'tipo_proveedor' => 'Fijo',
+                'id_proveedor' => $this -> proveedoresList[0] -> id,
+                'pending_review' => 1
+            ]);
+            $vale -> save();
+            $this -> proveedor -> delete();
+        }
+        $this->dispatch('alertCRUD',
+            'Se añadió al proveedor!',
+            'Proveedor nuevo agregado al registro',
+            'success'
+        );
+        return redirect()->route('proveedores.pendientes');
+    }
+
+    // #[On('deleteP')]
     public function deleteProveedor( ) {
         $this->dispatch('alertCRUD',
             'Proveedor Eliminado!',
