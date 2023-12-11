@@ -400,6 +400,7 @@ class VCreateFromMemo extends Component
     }
 
     public function loadProveedor($data_proveedor) {
+        dd($data_proveedor);
         $this -> onAddProveedor = true;
         $this -> tipo_proveedor = 'Temporal';
 
