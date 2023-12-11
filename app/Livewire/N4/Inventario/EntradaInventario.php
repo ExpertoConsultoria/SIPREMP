@@ -260,3 +260,4 @@ class EntradaInventario extends Component
         $this->actividad_mir = '';
     }
 }
+
