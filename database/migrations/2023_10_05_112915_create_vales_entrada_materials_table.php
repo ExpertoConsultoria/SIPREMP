@@ -19,12 +19,9 @@ return new class extends Migration
             $table->text("lugar");
             $table->integer("id_receptor");
             $table->text("entrego_material");
-            $table->integer("material_recibido");
-            $table->text("token_recepcion");
-            $table->text("token_entrega");
-            $table->text("estatus_SG");
-            $table->text("info_extra")->nullable();
-
+            $table->text("token_recepcion")->nullable();
+            $table->text("token_entrega")->nullable();
+            $table->text("estatus_SG")->nullable();
             $table->timestamps();
         });
     }

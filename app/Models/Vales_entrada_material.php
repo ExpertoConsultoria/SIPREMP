@@ -13,15 +13,10 @@ class Vales_entrada_material extends Model
     // protected $table = 'vales_entrada_materials';
 
     protected $fillable = [
-        'folio',
         'fecha',
         'lugar',
         'id_receptor',
         'entrego_material',
-        'material_recibido',
-        'token_recepcion',
-        'token_entrega',
-        'estatus_SG',
     ];
 
     protected $encryptable = [

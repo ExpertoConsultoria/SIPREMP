@@ -74,7 +74,6 @@ class TemporaryProviders extends ModalComponent
         $proveedor -> new_RFC = $this -> new_RFC;
         $proveedor -> new_regimen = $this -> new_regimen;
         $proveedor -> new_datos_banco = $this -> new_datos_banco;
-
         $this->dispatch('loadProveedor', $proveedor);
     }
 
