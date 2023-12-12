@@ -29,6 +29,7 @@ class EntradaInventario extends Component
     public $is_valid_xml;
     public $is_done;
     public $xml_message = '';
+    public $ruta = '';
 
     public $nombreXML = '';
     public $extensionFile = '';
@@ -47,6 +48,7 @@ class EntradaInventario extends Component
     public $token_entrega;
     public $estatus_SG;
     public $asunto;
+    public $sucursal;
 
     // materiales_entregados Table data
     public $cantidad;
@@ -150,7 +152,7 @@ class EntradaInventario extends Component
     public function loadDataXML()
     {
 
-        $xml = file_get_contents('storage\files\FacturasCM\XML\IKYiWyJPzb2UWHAYhi7sAV7x7C1CGeMVR3HOS5hs.xml');
+        $xml = file_get_contents($this -> ruta);
         $factura_json = JsonConverter::convertToJson($xml);
         $factura_json = json_decode($factura_json, true);
         $conceptos = $factura_json['Conceptos']['Concepto'];
@@ -180,9 +182,9 @@ class EntradaInventario extends Component
         $vale_entrada -> id_receptor = 1;
         $vale_entrada -> entrego_material = 1;
         $vale_entrada -> material_recibido = 1;
-        $vale_entrada -> estatus_SG = 0;
-        $vale_entrada -> token_recepcion = $this -> token_recepcion;
-        $vale_entrada -> token_entrega = $this -> token_entrega;
+        // $vale_entrada -> estatus_SG = 0;
+        // $vale_entrada -> token_recepcion = $this -> token_recepcion;
+        // $vale_entrada -> token_entrega = $this -> token_entrega;
         $vale_entrada -> save();
 
         foreach ($this -> items_inventario as $item) {
@@ -204,12 +206,12 @@ class EntradaInventario extends Component
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
         $this->is_done = false;
+        File::delete($this -> riuta);
+        // $rcm_factura = FacturaCM::find($this->factura_CM->id);
+        // File::delete($rcm_factura->fcm_xml_ruta);
+        // $rcm_factura->delete();
 
-        $rcm_factura = FacturaCM::find($this->factura_CM->id);
-            File::delete($rcm_factura->fcm_xml_ruta);
-            $rcm_factura->delete();
-
-        $this->factura_CM = null;
+        // $this->factura_CM = null;
         $this->reset();
     }
 
@@ -221,7 +223,7 @@ class EntradaInventario extends Component
         if (strcmp( $this->extensionFile, 'xml' ) === 0) {
             $this->xml_message = 'Tipo de Archivo Revisado y Aprovado';
             $this->is_valid_xml = true;
-            'storage/'.$this->factura_XML->store('files/FacturasCM/XML','public');
+            $this -> ruta = 'storage/'.$this->factura_XML->store('files/Inventario/XML','public');
         } else {
             $this->xml_message = 'El archivo que subiste no es XML';
         }
