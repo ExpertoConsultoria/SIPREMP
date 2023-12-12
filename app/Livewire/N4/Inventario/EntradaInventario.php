@@ -14,6 +14,7 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
+use Illuminate\Support\Facades\File;
 
 use stdClass;
 
@@ -48,14 +49,12 @@ class EntradaInventario extends Component
     public $token_entrega;
     public $estatus_SG;
     public $asunto;
-    public $sucursal;
 
     // materiales_entregados Table data
     public $cantidad;
     public $unidad_medida;
     public $concepto;
     public $precio_unitario;
-    public $vale_perteneciente;
     public $partida_presupuestal;
 
     // Select Data
@@ -64,6 +63,7 @@ class EntradaInventario extends Component
     public $componetes_mir = [];
     public $actividades_mir = [];
     public $partidas_presupuestales = [];
+    public $selectPartida = [];
 
     public $userSede;
     public $userSedeCode;
@@ -79,7 +79,6 @@ class EntradaInventario extends Component
     public $proposito_mir = '';
     public $componente_mir = '';
     public $actividad_mir = '';
-    public $sede_entrega;
 
 
     public function render()
@@ -99,7 +98,7 @@ class EntradaInventario extends Component
 
         $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
         $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
-        $this->sucursal = $this->userSede;
+        $this->lugar = $this->userSede;
 
         $this->fines_mir = Plan1Fin::all();
         $this->partidas_presupuestales = PptoDeEgreso::all();
@@ -109,18 +108,24 @@ class EntradaInventario extends Component
     protected function rules()
     {
         return [
-            'fecha' => 'required|date',
             'folio' => 'required|string',
+            'fecha' => 'required|date',
             'lugar' => 'required|string',
-            'id_receptor' => 'required|string',
+            // 'id_receptor' => 'required|string',
 
             'asunto' => 'required|string',
             'fin_mir' => 'required',
             'proposito_mir' => 'required',
             'componente_mir' => 'required',
             'actividad_mir' => 'required',
-            'sede_entrega' => 'required',
+            'lugar' => 'required',
 
+            'cantidad' => 'required',
+            'unidad_medida' => 'required',
+            'concepto' => 'required',
+            'precio_unitario' => 'required',
+            // 'partida_presupuestal' => 'required',
+            // 'factura_XML' => 'required',
         ];
     }
 
@@ -130,9 +135,6 @@ class EntradaInventario extends Component
 
         'folio.required' => 'Este campo es Obligatorio.',
         'folio.string' => 'Texto Invalido.',
-
-        'id_receptor.required' => 'Este campo es Obligatorio.',
-        'id_receptor.string' => 'Texto Invalido.',
 
         'lugar.required' => 'Este campo es Obligatorio.',
         'lugar.string' => 'Texto Invalido.',
@@ -146,12 +148,16 @@ class EntradaInventario extends Component
         'actividad_mir.required' => 'Este campo es Obligatorio.',
 
         'partida_presupuestal.required' => 'Este campo es Obligatorio.',
-
+        'cantidad' => 'Este campo es Obligatorio',
+        'unidad_medida' => 'Este campo es Obligatorio',
+        'concepto' => 'Este campo es Obligatorio',
+        'precio_unitario' => 'Este campo es Obligatorio',
+        // 'partida_presupuestal' => 'Este campo es Obligatorio',
+        'factura_XML' => 'Este campo es Obligatorio',
     ];
 
     public function loadDataXML()
     {
-
         $xml = file_get_contents($this -> ruta);
         $factura_json = JsonConverter::convertToJson($xml);
         $factura_json = json_decode($factura_json, true);
@@ -164,33 +170,41 @@ class EntradaInventario extends Component
             $item -> concepto = $concepto['Descripcion'];
             $item -> precio_unitario = $concepto['ValorUnitario'];
             $item -> importe = floatval($concepto['Importe']);
-            $item -> partida_presupuestal = '';
             array_push($this -> items_inventario, $item);
         }
+
+        foreach ($this->items_inventario as $index => $element) {
+            $this->selectPartida[$index] = "";
+        }
+
         $this->is_done = true;
         $this->dispatch('simpleAlert','Archivo Cargado Correctamente','success');
     }
 
     public function saveEntrada() {
-        $this->validate();
-        $this -> folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
+
+        // $this->validate();
+        $this->folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
 
         $vale_entrada = new Vales_entrada_material();
-        $vale_entrada -> folio = $this -> folio;
+        $vale_entrada->folio = $this->folio; // Fix: Use $this->folio instead of $folio
         $vale_entrada -> fecha = date('Y-m-d');
         $vale_entrada -> lugar = $this -> userSede;
-        $vale_entrada -> id_receptor = 1;
-        $vale_entrada -> entrego_material = 1;
-        $vale_entrada -> material_recibido = 1;
-        // $vale_entrada -> estatus_SG = 0;
-        // $vale_entrada -> token_recepcion = $this -> token_recepcion;
-        // $vale_entrada -> token_entrega = $this -> token_entrega;
+        $vale_entrada -> asunto = $this -> asunto;
+        $vale_entrada -> mir_id_fin = $this -> fin_mir;
+        $vale_entrada -> mir_id_proposito = $this -> proposito_mir;
+        $vale_entrada -> mir_id_componente = $this -> componente_mir;
+        $vale_entrada -> mir_id_actividad = $this -> actividad_mir;
+        $vale_entrada -> id_receptor = null;
+        $vale_entrada -> entrego_material = null;
+        $vale_entrada -> token_recepcion = null;
+        $vale_entrada -> token_entrega = null;
+        $vale_entrada -> estatus_SG	 = null;
         $vale_entrada -> save();
 
         foreach ($this -> items_inventario as $item) {
-            $i = 0;
             $this -> item_compra = new Materiales_recibidos();
-            $this -> item_compra -> vales_entrada_materials_id = 1;
+            $this -> item_compra -> folio_vale_entrada = $vale_entrada -> folio;
             $this -> item_compra -> cantidad = $item -> cantidad;
             $this -> item_compra -> unidad_medida = $item -> unidad_medida;
             $this -> item_compra -> concepto = $item -> concepto;
@@ -199,24 +213,25 @@ class EntradaInventario extends Component
             $this -> item_compra -> partidas_presupuestales_id = $item -> partida_presupuestal;
             $this -> item_compra -> save();
         }
+        $this->dispatch('simpleAlert','Se creó con exito el registro','success');
+        return redirect()->route('dashboard');
     }
-    public function cleanXML(){
+    public function cleanXML() {
         $this->dispatch('cleanDataXML');
 
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
         $this->is_done = false;
-        File::delete($this -> riuta);
-        // $rcm_factura = FacturaCM::find($this->factura_CM->id);
-        // File::delete($rcm_factura->fcm_xml_ruta);
-        // $rcm_factura->delete();
+        File::delete($this -> ruta);
+        $this -> items_inventario = [];
 
-        // $this->factura_CM = null;
-        $this->reset();
     }
 
     public function validateXML()
     {
+        $this->validate([
+            'factura_XML' => 'required',
+        ]);
         $this->nombreXML = $this->factura_XML->getClientOriginalName();
         $this->extensionFile = $this->factura_XML->extension();
 

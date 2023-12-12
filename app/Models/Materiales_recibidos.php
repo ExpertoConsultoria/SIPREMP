@@ -25,6 +25,7 @@ class Materiales_recibidos extends Model
         'unidad_medida',
         'concepto',
         'importe',
+        'folio_vale_entrada'
     ];
 
     public function Vales_entrada_material(){

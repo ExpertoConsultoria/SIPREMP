@@ -23,7 +23,6 @@
     </x-slot>
     <div class="py-8">
         <div class="max-w-screen-xl mx-auto">
-
             {{-- Datos --}}
             <div
                 class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
@@ -48,6 +47,98 @@
                                 required>
                         </div>
 
+                    </div>
+                </div>
+
+            {{-- MIR --}}
+                <div
+                    class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
+
+                    <div class="col-span-3">
+                        <x-label for="asunto" value="{{ __('Justificación *') }}" />
+                        <textarea wire:model.blur="asunto" name="asunto" rows="6" placeholder="Describe el motivo de la compra"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </textarea>
+                        @error('asunto')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="w-auto mx-2 mt-6 h-36">
+                        <div
+                            class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
+                            <p
+                                class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
+                                MIR</p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-2">
+                        <div>
+                            <x-label for="fin_mir" value="{{ __('Fin *') }}" />
+                            <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)"
+                                name="fin_mir"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled value="">Selecciona una Opción</option>
+                                @foreach ($fines_mir as $fin_mir)
+                                    <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
+                                @endforeach
+                            </select>
+                            @error('fin_mir')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mt-4">
+                            <x-label for="proposito_mir" value="{{ __('Proposito *') }}" />
+                            <select wire:model.blur="proposito_mir"
+                                wire:change="GetComponents($event.target.value)" name="proposito_mir"
+                                @if (!$mir2) disabled @endif
+                                class="@if (!$mir2) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                <option selected disabled value="">Selecciona una Opción</option>
+                                @foreach ($propositos_mir as $proposito_mir)
+                                    <option value="{{ $proposito_mir['NoProposito'] }}">
+                                        {{ $proposito_mir['DescProposito'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('proposito_mir')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-span-2">
+                        <div>
+                            <x-label for="componente_mir" value="{{ __('Componente *') }}" />
+                            <select wire:model.blur="componente_mir"
+                                wire:change="GetActivities($event.target.value)" name="componente_mir"
+                                @if (!$mir3) disabled @endif
+                                class="@if (!$mir3) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled value="">Selecciona una Opción</option>
+                                @foreach ($componetes_mir as $componete_mir)
+                                    <option value="{{ $componete_mir['NoComponente'] }}">
+                                        {{ $componete_mir['DescComponente'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('componente_mir')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mt-4">
+                            <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
+                            <select wire:model.blur="actividad_mir" name="actividad_mir"
+                                @if (!$mir4) disabled @endif
+                                class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled value="">Selecciona una Opción</option>
+                                @foreach ($actividades_mir as $actividad_mir)
+                                    <option value="{{ $actividad_mir['NoActividad'] }}">
+                                        {{ $actividad_mir['DescActividad'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('actividad_mir')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,7 +235,7 @@
                     <div class="items-center text-center">
                         <div class="col-span-3">
                             <p class="text-lg font-bold text-gray-900 dark:text-white">
-                                !Factura Cargada Correctamente!
+                                !Datos cargados correctamente!
                             </p>
 
                             <button type="button" wire:click='cleanXML'
@@ -157,150 +248,6 @@
             </div>
 
 
-            <div class="container px-4">
-                <div
-                    class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
-
-                    <div class="col-span-3">
-                        <x-label for="asunto" value="{{ __('Justificación *') }}" />
-                        <textarea wire:model.blur="asunto" name="asunto" rows="6" placeholder="Describe el motivo de la compra"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </textarea>
-                        @error('asunto')
-                            <span class="text-xs text-rose-600">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="w-auto mx-2 mt-6 h-36">
-                        <div
-                            class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
-                            <p
-                                class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
-                                MIR</p>
-                        </div>
-                    </div>
-
-                    <div class="col-span-2">
-                        <div>
-                            <x-label for="fin_mir" value="{{ __('Fin *') }}" />
-                            <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)"
-                                name="fin_mir"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled value="">Selecciona una Opción</option>
-                                @foreach ($fines_mir as $fin_mir)
-                                    <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
-                                @endforeach
-                            </select>
-                            @error('fin_mir')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mt-4">
-                            <x-label for="proposito_mir" value="{{ __('Proposito *') }}" />
-                            <select wire:model.blur="proposito_mir"
-                                wire:change="GetComponents($event.target.value)" name="proposito_mir"
-                                @if (!$mir2) disabled @endif
-                                class="@if (!$mir2) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-                                <option selected disabled value="">Selecciona una Opción</option>
-                                @foreach ($propositos_mir as $proposito_mir)
-                                    <option value="{{ $proposito_mir['NoProposito'] }}">
-                                        {{ $proposito_mir['DescProposito'] }}</option>
-                                @endforeach
-                            </select>
-                            @error('proposito_mir')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="col-span-2">
-                        <div>
-                            <x-label for="componente_mir" value="{{ __('Componente *') }}" />
-                            <select wire:model.blur="componente_mir"
-                                wire:change="GetActivities($event.target.value)" name="componente_mir"
-                                @if (!$mir3) disabled @endif
-                                class="@if (!$mir3) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled value="">Selecciona una Opción</option>
-                                @foreach ($componetes_mir as $componete_mir)
-                                    <option value="{{ $componete_mir['NoComponente'] }}">
-                                        {{ $componete_mir['DescComponente'] }}</option>
-                                @endforeach
-                            </select>
-                            @error('componente_mir')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mt-4">
-                            <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
-                            <select wire:model.blur="actividad_mir" name="actividad_mir"
-                                @if (!$mir4) disabled @endif
-                                class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled value="">Selecciona una Opción</option>
-                                @foreach ($actividades_mir as $actividad_mir)
-                                    <option value="{{ $actividad_mir['NoActividad'] }}">
-                                        {{ $actividad_mir['DescActividad'] }}</option>
-                                @endforeach
-                            </select>
-                            @error('actividad_mir')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="p-6 mt-4 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-
-                <div class="container px-4">
-                    <div class="grid grid-cols-12 gap-3 mb-6">
-                        <div>
-                            <x-label for="cantidad" value="{{ __('Cantidad') }}" />
-                            <input type="number" name="cantidad" step="0.01" placeholder="0.00"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @error('cantidad')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <x-label for="unidad_medida" value="{{ __('UM') }}" />
-                            <input wire:model.blur="unidad_medida" type="text" name="unidad_medida"
-                                placeholder="Unidad de Medida"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @error('unidad_medida')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-span-4">
-                            <x-label for="concepto" value="{{ __('Concepto') }}" />
-                            <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @error('concepto')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-4">
-                            <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
-                            <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @error('concepto')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2 text-end">
-                            <button type="button"
-                                class="w-4/5 px-5 py-2 mt-8 text-sm font-medium text-white bg-green-700 rounded-lg focus:outline- hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                Registrar
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
 
             <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -314,6 +261,12 @@
                             </th>
                             <th class="px-4 py-2 cursor-pointer">
                                 Partida presupuestal
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer">
+                                Precio unitario
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer">
+                                Importe
                             </th>
 
                         </tr>
@@ -330,11 +283,15 @@
                                     {{ $item->concepto }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    <select wire:change="setPartidaP($event.target.value, {{ $loop->index }})"
+                                    <select
+                                        wire:model='selectPartida.{{ $loop->index }}'
+                                        wire:change="setPartidaP($event.target.value, {{ $loop->index }})"
                                         required
-                                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                        <option value="" disabled selected> Partida Presupuestal</option>
+                                        <option value="" disabled selected>
+                                            Partida Presupuestal
+                                        </option>
 
                                         @foreach ($partidas_presupuestales as $partida_presupuestal)
                                             <option value="{{ $partida_presupuestal->CvePptal }}">
@@ -372,5 +329,4 @@
 
         </div>
     </div>
-
 </div>

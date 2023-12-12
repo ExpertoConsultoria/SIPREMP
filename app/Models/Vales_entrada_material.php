@@ -14,16 +14,21 @@ class Vales_entrada_material extends Model
 
     protected $fillable = [
         'fecha',
-        'lugar',
         'id_receptor',
         'entrego_material',
     ];
 
     protected $encryptable = [
+        'lugar',
         'folio',
+        'asunto',
         'token_recepcion',
         'token_entrega',
         'estatus_SG',
+        'mir_id_fin',
+        'mir_id_proposito',
+        'mir_id_componente',
+        'mir_id_actividad'
     ];
 
     // Relacion uno a uno
