@@ -15,37 +15,25 @@ class Expediente extends Model
 
     protected $fillable = [
         'folio',
-        'folio_memorandum',
         'id_cotizacion',
-        'folio_vale_compra',
         'id_factura',
-        'folio_vale_entrada',
         'id_evd_foto',
+        'memoranda_id',
+        'vales_compra_id',
     ];
 
-    // SIN  VALORES ENCRYPTABLES, AUN...
-    // protected $encryptable = [
-    //     'folio',
-    //     'folio_memorandum',
-    //     'id_cotizacion',
-    //     'folio_vale_compra',
-    //     'id_factura',
-    //     'folio_vale_entrada',
-    //     'id_evd_foto',
-    //     'info_extra'
-    // ];
 
         // RELACION UNO A UNO (INVERSO)
         public function memorandum(){
-            return $this->belongsTo(Memorandum::class);
+            return $this->hasOne(Memorandum::class, 'id', 'memoranda_id');
         }
 
-        public function ValeEntraMaterial(){
-            return $this->belongsTo(Vales_entrada_material::class);
-        }
+        // public function ValeEntraMaterial(){
+        //     return $this->belongsTo(Vales_entrada_material::class);
+        // }
 
         public function ValesCompra(){
-            return $this->belongsTo(Vales_compra::class);
+            return $this->hasOne(Vales_compra::class, 'id', 'vales_compra_id');
         }
 
 }

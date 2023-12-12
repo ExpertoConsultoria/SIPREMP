@@ -10,20 +10,20 @@
         </div>
     </x-slot>
 
-    @if (Auth::user()->roles[0]->name == 'N7:GS:17A')
+    @if (Auth::user()->hasRole('N7:GS:17A'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
-
+                    {{ Auth::user()->hasRole('N7:GS:17A') }}
                     <div
-                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <p class="text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
                             {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <div class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 text-gray-700 dark:text-gray-300">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        <div class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
 
                             <div class="grid justify-center">
                                 <x-user-icon class="block w-auto h-9" />
@@ -43,7 +43,7 @@
                             class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
                             <div
-                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('cajamenor') }}"
                                     class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
 
@@ -69,7 +69,7 @@
                             </div>
 
                             <div
-                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('solicitudes') }}"
                                     class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
                                     <svg width="66" height="83" viewBox="0 0 66 83" fill="none"
@@ -104,20 +104,20 @@
                 </div>
             </div>
         </div>
-    @elseif (Auth::user()->roles[0]->name === 'N6:17A')
+    @elseif (Auth::user()->hasRole('N6:17A'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
 
                     <div
-                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <p class=" text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        <p class="text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
                             {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <div class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 text-gray-700 dark:text-gray-300">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        <div class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
 
                             <div class="grid justify-center">
                                 <x-user-icon class="block w-auto h-9" />
@@ -136,7 +136,7 @@
                         <div
                             class="container grid grid-cols-1 gap-6 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                             <div
-                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('solicitudes.create') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="53"
@@ -156,12 +156,12 @@
                                         </defs>
                                     </svg>
 
-                                    <p class="text-lg mt-36 text-gray-800 dark:text-gray-300">Nueva Solicitud de <br /> Bienes/Servicios</p>
+                                    <p class="text-lg text-gray-800 mt-36 dark:text-gray-300">Nueva Solicitud de <br /> Bienes/Servicios</p>
                                 </a>
                             </div>
 
                             <div
-                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('solicitudes.borradores') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49"
@@ -183,12 +183,12 @@
                                         </defs>
                                     </svg>
 
-                                    <p class="text-lg mt-36 text-gray-800 dark:text-gray-300">Borradores </p>
+                                    <p class="text-lg text-gray-800 mt-36 dark:text-gray-300">Borradores </p>
                                 </a>
                             </div>
 
                             <div
-                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="w-64 p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('solicitudes.list') }}" class="text-right">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="47" height="49"
@@ -208,7 +208,7 @@
                                         </defs>
                                     </svg>
 
-                                    <p class="text-lg mt-36 text-gray-800 dark:text-gray-300">Estatus de <br /> Solicitudes</p>
+                                    <p class="text-lg text-gray-800 mt-36 dark:text-gray-300">Estatus de <br /> Solicitudes</p>
                                 </a>
                             </div>
 
@@ -218,21 +218,21 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
+    @elseif(Auth::user()->hasRole('N5:18A:F'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
 
                     <div
-                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <p class="text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
                             {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <div
-                            class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 text-gray-700 dark:text-gray-300">
+                            class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
 
                             <div class="grid justify-center">
                                 <x-user-icon class="block w-auto h-9" />
@@ -252,7 +252,7 @@
                             class="grid grid-cols-1 gap-5 mb-6 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
                             <div
-                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('bandejaentrada') }}"
                                     class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
 
@@ -281,7 +281,7 @@
                             </div>
 
                             <div
-                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                class="p-2 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                 <a href="{{ route('solicitudes') }}"
                                     class="grid p-5 text-center sm:p-8 md:p-12 lg:p-16 xl:p-20 justify-items-center">
                                     <svg width="66" height="83" viewBox="0 0 66 83" fill="none"
@@ -315,21 +315,21 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N4:SEGE')
+    @elseif(Auth::user()->hasRole('N4:SEGE'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
 
                     <div
-                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <p class="mb-3 text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
                             {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <div
-                            class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 text-gray-700 dark:text-gray-300">
+                            class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
 
                             <div class="grid justify-center">
                                 <x-user-icon class="block w-auto h-9" />
@@ -349,7 +349,7 @@
                             class="grid grid-cols-1 gap-5 mb-6 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
                             <div>
                                 <div
-                                    class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                     <a href="{{ route('bandejaentrada') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
@@ -380,7 +380,7 @@
                                 </div>
 
                                 <div
-                                    class="p-2 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    class="p-2 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                     <a href="{{ route('inventario') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start">
                                         <div>
@@ -417,7 +417,7 @@
 
                             <div>
                                 <div
-                                    class="p-2 mt-8 mb-2 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    class="p-2 mt-8 mb-2 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                     <a href="{{ route('vales') }}" class="grid grid-cols-3 p-5 text-start">
                                         <div class="px-5">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -466,7 +466,7 @@
                                 </div>
 
                                 <div
-                                    class="p-2 mb-2 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    class="p-2 mb-2 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                     <a href="{{ route('expedientes') }}" class="grid grid-cols-3 p-5 text-start">
                                         <div class="px-5">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -509,7 +509,7 @@
                                 </div>
 
                                 <div
-                                    class="p-2 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    class="p-2 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                                     <a href="{{ route('cajamenor') }}" class="grid grid-cols-3 p-5 text-start">
                                         <div class="px-5">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -543,21 +543,21 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N3:UNTE')
+    @elseif(Auth::user()->hasRole('N3:UNTE'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
 
                     <div
-                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <p class="text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
                             {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
                     </div>
 
                     <div
-                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <div
-                            class="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 text-gray-700 dark:text-gray-300">
+                            class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
 
                             <div class="grid justify-center">
                                 <x-user-icon class="block w-auto h-9" />
@@ -573,11 +573,11 @@
                     </div>
 
                     <div class="grid justify-center">
-                        <div class="grid grid-cols-1 gap-5 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 mb-3 mt-5">
+                        <div class="grid grid-cols-1 gap-5 mt-5 mb-3 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
                             <div class="space-y-16">
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-                                    <a href="{{route('bandejaentrada')}}"class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                    <a href="{{route('bandejaentrada')}}"class="grid grid-cols-3 p-5 text-start justify-items-start">
                                         <div class="">
                                             <svg width="83" height="60" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M53.7812 44.9449L46.8298 51.9199C44.0109 54.7487 39.051 54.8096 36.1711 51.9199L29.2194 44.9449L4.25195 69.9934C5.18133 70.4232 6.20602 70.6796 7.29539 70.6796H75.7056C76.7949 70.6796 77.8193 70.4235 78.7483 69.9936L53.7812 44.9449Z" fill="#515151"/>
@@ -596,7 +596,7 @@
                                 </div>
 
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-                                    <a href="{{route('compraconsolidada')}}" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                    <a href="{{route('compraconsolidada')}}" class="grid grid-cols-3 p-5 text-start justify-items-start">
                                         <div>
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_328_85)">
@@ -627,8 +627,8 @@
                             </div>
 
                             <div class="space-y-4">
-                                <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-                                    <a href="{{route('vales')}}" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
+                                    <a href="{{route('vales')}}" class="grid grid-cols-3 p-5 text-start justify-items-start">
                                         <div class="">
                                             <svg width="60" height="60" viewBox="0 0 66 83" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_51_1154)">
@@ -652,7 +652,7 @@
                                 </div>
 
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="expedientes" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                    <a href="expedientes" class="grid grid-cols-3 p-5 text-start justify-items-start">
                                         <div>
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_307_1718)">
@@ -680,7 +680,7 @@
                                 </div>
 
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="" class=" p-5  grid grid-cols-3 text-start justify-items-start ">
+                                    <a href="" class="grid grid-cols-3 p-5 text-start justify-items-start">
                                         <div>
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g clip-path="url(#clip0_307_1718)">
@@ -718,7 +718,7 @@
     @push('js')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-            @if (Auth::user()->roles[0]->name === 'N6:17A')
+            @if (Auth::user()->hasRole('N6:17A'))
                 $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
@@ -790,7 +790,7 @@
 
                                 data = JSON.parse(data);
                                 for (let i = 0; i < data.folios.length; i++) {
-                                    @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                    @if (Auth::user()->hasAnyRole(['N6:17A', 'N7:GS:17A']))
                                         Livewire.dispatch('toastifyAlert', [
                                             `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
                                             `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom',
@@ -806,7 +806,7 @@
 
                             for (let i = 0; i < data.folios.length; i++) {
 
-                                @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                @if (Auth::user()->hasAnyRole(['N6:17A', 'N7:GS:17A']))
                                     Livewire.dispatch('toastifyAlert', [
                                         `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
                                         `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
@@ -862,7 +862,7 @@
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
                 });
@@ -872,7 +872,7 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
                     @endif
@@ -885,7 +885,7 @@
                 window.onbeforeunload = function() {
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.removeItem("trayAlert");
                     @endif
                 };
@@ -999,7 +999,7 @@
 
                     var trayAlert = localStorage.getItem("trayAlert");
 
-                    $.get('api/trayAlert/{{ Auth::user()->roles[0]->name }}', function(data) {
+                    $.get('api/trayAlert/{{ Auth::id() }}', function(data) {
 
                         if (trayAlert != '') {
                             data = JSON.stringify(data);

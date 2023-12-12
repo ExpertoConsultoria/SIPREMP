@@ -17,15 +17,12 @@ return new class extends Migration
             $table->integer("id_cotizacion");
             $table->integer("id_factura");
             $table->integer("id_evd_foto");
-            $table->string("info_extra")->nullable();
 
-            $table->unsignedBigInteger('memoranda_id')->unique();//folio_memorandum
-            $table->unsignedBigInteger("vales_compra_id")->unique();//folio vale compra
-            $table->unsignedBigInteger("vales_entrada_materials_id")->unique();//folio_vale_entrada
+            $table->unsignedBigInteger('memoranda_id')->unique()->nullable();//folio_memorandum
+            $table->unsignedBigInteger("vales_compra_id")->unique()->nullable();//folio vale compra
 
-            $table->foreign('memoranda_id')->references('id')->on('memoranda')->onDelete('cascade');
-            $table->foreign('vales_compra_id')->references('id')->on('vales_compra')->onDelete('cascade');
-            $table->foreign('vales_entrada_materials_id')->references('id')->on('vales_entrada_materials')->onDelete('cascade');
+            $table->foreign('memoranda_id')->references('id')->on('memoranda')->onDelete('set null');
+            $table->foreign('vales_compra_id')->references('id')->on('vales_compra')->onDelete('set null');
 
             $table->timestamps();
         });

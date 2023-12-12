@@ -58,4 +58,9 @@ class Memorandum extends Model
     public function cotizacion() {
         return $this->hasOne(Archivos::class, 'id', 'memo_id_cotizacion');
     }
+
+    public function expediente(){
+        return $this->belongsTo(Expediente::class);
+    }
+
 }

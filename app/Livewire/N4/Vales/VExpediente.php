@@ -6,12 +6,14 @@ use Livewire\Component;
 
 use stdClass;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\File;
 
 use Livewire\Redirector;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
 use App\Models\Empresa;
+use App\Models\Archivos;
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
@@ -31,6 +33,9 @@ class VExpediente extends Component
 
     public $MIR;
     public $proveedor;
+
+    // For Files
+    public $signed_voucher;
 
     public function render()
     {
@@ -103,5 +108,24 @@ class VExpediente extends Component
             }
 
         }
+    }
+
+    protected $listeners = ['AssignSignedVoucher'];
+
+    // Vales Firmados
+    public function AssignSignedVoucher($voucher_id){
+
+        if($this->vale_details->id_vale_firmado != null){
+            $this->voucher = Archivos::find($this->vale_details->id_vale_firmado);
+                File::delete($this->voucher->arch_ruta);
+                $this->voucher->delete();
+        }
+
+        $this->vale_details->id_vale_firmado = $voucher_id;
+        $this->vale_details->save();
+
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+
     }
 }

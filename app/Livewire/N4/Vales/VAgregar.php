@@ -6,12 +6,14 @@ use Livewire\Component;
 
 use stdClass;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\File;
 
 use Livewire\Redirector;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
 use App\Models\Empresa;
+use App\Models\Archivos;
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
@@ -29,6 +31,10 @@ class VAgregar extends Component
 
     public $MIR;
     public $proveedor;
+
+    // For Files
+    public $invoice;
+    public $evidence;
 
     public function render()
     {
@@ -101,5 +107,41 @@ class VAgregar extends Component
             }
 
         }
+    }
+
+    protected $listeners = ['AssignInvoice','AssignEvidence'];
+
+    // Facturas
+    public function AssignInvoice($invoice_id){
+
+        if($this->vale_details->id_factura != null){
+            $this->invoice = Archivos::find($this->vale_details->id_factura);
+                File::delete($this->invoice->arch_ruta);
+                $this->invoice->delete();
+        }
+
+        $this->vale_details->id_factura = $invoice_id;
+        $this->vale_details->save();
+
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+
+    }
+
+    // Evidencias
+    public function AssignEvidence($evidence_id){
+
+        if($this->vale_details->id_evidencia != null){
+            $this->evidence = Archivos::find($this->vale_details->id_evidencia);
+                File::delete($this->evidence->arch_ruta);
+                $this->evidence->delete();
+        }
+
+        $this->vale_details->id_evidencia = $evidence_id;
+        $this->vale_details->save();
+
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+
     }
 }

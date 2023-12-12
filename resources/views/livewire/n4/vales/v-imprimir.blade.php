@@ -70,12 +70,12 @@
                         <i class="mr-2 fas fa-eye"></i>
                         COTIZACIÓN
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-invoice', arguments: { invoice_id: {{ $vale_details->id_factura }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         FACTURA
                     </button>
-                    <button type="button"
+                    <button type="button"onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-evidence', arguments: { evidence_id: {{ $vale_details->id_evidencia }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         EVIDENCIAS
@@ -284,10 +284,12 @@
 
         <div class="mt-10">
             <div class="text-end">
-                <button type="button"
-                    class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                <a href="{{ route('pdf.Vale', ['details_of_folio' => $vale_details->folio]) }}" target="_blank"
+                    class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300
+                    font-medium rounded-lg text-xs px-3 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+                    transition-all active:translate-y-1">
                     IMPRIMIR PARA FIRMA
-                </button>
+                </a>
             </div>
         </div>
 

@@ -22,7 +22,6 @@ class Vales_compra extends Model
         'NoProposito',
         'NoComponente',
         'NoActividad',
-        'id_cotizacion',
         'id_proveedor',
         'justificacion',
         'lugar_entrega',
@@ -30,21 +29,23 @@ class Vales_compra extends Model
         'subtotal',
         'iva',
         'total_compra',
-
         'folio_solicitud',
+        'tipo_proveedor',
+
+        'id_cotizacion',
+        'id_factura',
+        'id_evidencia',
+        'id_vale_firmado',
 
         'token_solicitante',
         'token_rev_val',
         'token_disp_ppta',
         'token_autorizacion',
 
-        'tipo_proveedor',
-
         'creation_status',
         'pass_filter',
         'motivo_rechazo',
         'pending_review',
-        'tipo_proveedor'
     ];
 
     protected $encryptable = [
@@ -53,7 +54,6 @@ class Vales_compra extends Model
         'NoFin',
         'NoProposito',
         'NoActividad',
-        'id_arch_cotizacion',
         'lugar_entrega',
         'fecha_entrega',
         'subtotal',
@@ -86,5 +86,13 @@ class Vales_compra extends Model
     public function cotizacion() {
         return $this->hasOne(Archivos::class, 'id', 'id_cotizacion');
     }
-
+    public function factura() {
+        return $this->hasOne(Archivos::class, 'id', 'id_factura');
+    }
+    public function evidencia() {
+        return $this->hasOne(Archivos::class, 'id', 'id_evidencia');
+    }
+    public function vale_firmado() {
+        return $this->hasOne(Archivos::class, 'id', 'id_vale_firmado');
+    }
 }

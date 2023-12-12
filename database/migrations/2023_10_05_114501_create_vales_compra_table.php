@@ -62,6 +62,15 @@ return new class extends Migration
             $table->unsignedBigInteger('id_cotizacion')->nullable();
             $table->foreign('id_cotizacion')->references('id')->on('archivos')->onDelete('set null');
 
+            $table->unsignedBigInteger('id_factura')->nullable();
+            $table->foreign('id_factura')->references('id')->on('archivos')->onDelete('set null');
+
+            $table->unsignedBigInteger('id_evidencia')->nullable();
+            $table->foreign('id_evidencia')->references('id')->on('archivos')->onDelete('set null');
+
+            $table->unsignedBigInteger('id_vale_firmado')->nullable();
+            $table->foreign('id_vale_firmado')->references('id')->on('archivos')->onDelete('set null');
+
             $table->timestamps();
         });
     }

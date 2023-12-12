@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Archivos;
 
-class AddQuote extends ModalComponent
+class AddSignedVoucher extends ModalComponent
 {
     use WithFileUploads;
 
@@ -28,11 +28,12 @@ class AddQuote extends ModalComponent
         public $archivo;
         public $userSedeCode;
 
-        public $cotizacion;
+        // Element for Create
+        public $vale_firmado;
 
     protected function rules() {
         return [
-            'archivo' => 'required | mimes:jpg,jpeg,png,pdf,txt,webp|max:1024',
+            'archivo' => 'required | mimes:pdf|max:6000',
             'fecha_registro' => 'required|date',
             'lugar_registro' => 'required',
             'folio' => 'required|string',
@@ -61,7 +62,7 @@ class AddQuote extends ModalComponent
 
         $this->fecha_registro = date('Y-m-d');
         $this->lugar_registro = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
-        $this->folio = "CTMM-0000";
+        $this->folio = "VF-VCS-0000";
         $this->arch_nombre = '';
         $this->arch_descripcion = '';
         $this->arch_extension = '';
@@ -70,32 +71,25 @@ class AddQuote extends ModalComponent
 
     public function render()
     {
-        return view('livewire.shared.components.add-quote');
+        return view('livewire.shared.components.add-signed-voucher');
     }
 
-    public function SaveQuote(){
+    public function SaveSignedVoucher(){
         $this->validate();
         $this->arch_extension = $this->archivo->extension();
 
-        $this->cotizacion = new Archivos();
-        $this->cotizacion->fecha_registro = $this->fecha_registro;
-        $this->cotizacion->lugar_registro = $this->lugar_registro;
-        $this->cotizacion->folio = Helper::FileFolioGenerator(new Archivos,'folio', 5, 'CTMM', $this->userSedeCode);
-        $this->cotizacion->arch_nombre = $this->arch_nombre;
-        $this->cotizacion->arch_descripcion = $this->arch_descripcion;
-        $this->cotizacion->arch_extension = $this->arch_extension;
+        $this->vale_firmado = new Archivos();
+        $this->vale_firmado->fecha_registro = $this->fecha_registro;
+        $this->vale_firmado->lugar_registro = $this->lugar_registro;
+        $this->vale_firmado->folio = Helper::FileFolioGenerator(new Archivos,'folio', 5, 'VF-VCS', $this->userSedeCode);
+        $this->vale_firmado->arch_nombre = $this->arch_nombre;
+        $this->vale_firmado->arch_descripcion = $this->arch_descripcion;
+        $this->vale_firmado->arch_extension = $this->arch_extension;
 
-        if ($this->arch_extension === 'jpg' || $this->arch_extension === 'jpeg' || $this->arch_extension === 'png' || $this->arch_extension === 'webp') {
-            $this->cotizacion->arch_ruta = 'storage/'.$this->archivo->store('files/Quotes/Images','public');
-        } elseif ($this->arch_extension === 'txt') {
-            $this->cotizacion->arch_ruta = 'storage/'.$this->archivo->store('files/Quotes/TXT','public');
-        } elseif ($this->arch_extension === 'pdf'){
-            $this->cotizacion->arch_ruta = 'storage/'.$this->archivo->store('files/Quotes/PDF','public');
-        }
+        $this->vale_firmado->arch_ruta = 'storage/'.$this->archivo->store('files/SignedVouchers','public');
 
-        $this->cotizacion->save();
+        $this->vale_firmado->save();
 
-        $this->dispatch('AssignQuotation', $this->cotizacion->id);
+        $this->dispatch('AssignSignedVoucher', $this->vale_firmado->id);
     }
-
 }

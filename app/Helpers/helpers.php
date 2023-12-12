@@ -5,6 +5,8 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use App\Models\User;
+
 class Helper
 {
 
@@ -105,9 +107,9 @@ class Helper
     }
 
     public static function backButton() {
-        $user = Auth::user()->roles[0]->name;
+        $user = User::find(Auth::id());
 
-        if ( $user === 'N6:17A' ) {
+        if ($user->hasRole('N6:17A')) {
             // Check the dashboard of this user for understand
             return 'dashboard';
         } else {

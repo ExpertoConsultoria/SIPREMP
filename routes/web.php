@@ -60,6 +60,7 @@ use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
 use App\Http\Controllers\CotizacionPDF;
+use App\Http\Controllers\EvidenciaPDF;
 use App\Http\Controllers\ValePDF;
 /*
 |--------------------------------------------------------------------------
@@ -117,13 +118,13 @@ Route::middleware([
         })->name('compraconsolidada');
 
     // Reactive Pages
-    //pdf
-    Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
-    Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
-    Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
-    Route::get('/solicitudes/pdf-cotizacion/{details_of_folio}', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
-    //Pendiente
-    // Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
+        //PDF
+        Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
+        Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
+        Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
+        Route::get('/solicitudes/pdf-cotizacion/{details_of_folio}', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
+        Route::get('/vale-compra-servicio/pdf-evidencia/{details_of_folio}', [EvidenciaPDF::class, 'generatePDF'])->name('pdf.Evidencia');
+        Route::get('/vale-compra-servicio/pdf-vale/{details_of_folio}', [ValePDF::class, 'generatePDF'])->name('pdf.Vale');
 
 
     //Inventario
