@@ -137,7 +137,7 @@ class MemorandumPDF extends Controller
             </div>
         EOF;
 
-        $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output('ejemplo.pdf', 'I');
+$pdf->writeHTML($html, true, false, true, false, '');
+$pdf->Output('Memorándum '.$details_of_folio . '.pdf', 'I');
     }
 }
