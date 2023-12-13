@@ -56,6 +56,11 @@ use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 use App\Livewire\N3\SolicitudesVales\VSRechazadas;
 use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
+use App\Livewire\N2\Vales\VBienServicio;
+use App\Livewire\N2\Vales\VSolicitud;
+use App\Livewire\N2\BandejaEntrada\BELista;
+use App\Livewire\N2\ReportesCM\RCMList;
+
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
@@ -125,6 +130,14 @@ Route::middleware([
     //Pendiente
     // Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
 
+    // N2
+    // Vales
+    Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
+    Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
+    // Bandeja de entrada
+    Route::get('/bandeja-entrada/list',BELista::class)->name('bandejaentrada.list');
+    // Reportes Caja menor
+    Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
 
     //Inventario
     Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');

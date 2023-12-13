@@ -125,6 +125,6 @@ EOF;
 
 $pdf->writeHTML($html, true, false, true, false, '');
 
-$pdf->Output('ejemplo.pdf', 'I');
+$pdf->Output('ReporteCM '.$id_of_report . '.pdf', 'I');
     }
 }
