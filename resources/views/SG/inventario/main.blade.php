@@ -58,7 +58,7 @@
 
                     <div
                         class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{ route('solicitudes.list') }}" class="text-right">
+                        <a href="{{ route('inventario.list') }}" class="text-right">
 
                             <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_154_3643)">

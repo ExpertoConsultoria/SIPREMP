@@ -72,14 +72,15 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    @foreach($valesInventario as $vale)
                         <td class="px-4 py-2">
-                            <p>#88898</p>
+                            <p>{{$vale -> folio}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>14/09/2023</p>
+                            <p>{{$vale -> fecha}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>10</p>
+                            <p>{{$vale -> cantidad}}</p>
                         </td>
                         <td class="px-4 py-2">
                             <p>Lapiceros</p>
@@ -90,6 +91,7 @@
                                 <x-button-icons icon="box" />
                             </div>
                         </td>
+                    @endforeach
                     </tr>
                 </tbody>
             </table>
