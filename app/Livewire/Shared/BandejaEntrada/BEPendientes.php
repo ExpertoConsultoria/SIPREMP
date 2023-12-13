@@ -104,6 +104,8 @@ class BEPendientes extends Component
                     ->where('pass_filter',0)
                     ->whereNull('motivo_rechazo')
                     ->whereNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
                     ->whereNotNull('token_solicitante')
                     ->get();
 

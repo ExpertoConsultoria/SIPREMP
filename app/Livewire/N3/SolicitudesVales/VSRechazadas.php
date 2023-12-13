@@ -55,6 +55,8 @@ class VSRechazadas extends Component
                 ->where('creation_status','Rechazado')
                 ->where('pass_filter',0)
                 ->whereNull('token_rev_val')
+                ->whereNull('token_disp_ppta')
+                ->whereNull('token_autorizacion')
                 ->whereNotNull('token_solicitante')
                 ->whereNotNull('motivo_rechazo')
                 ->get();

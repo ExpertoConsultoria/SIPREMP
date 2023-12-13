@@ -146,7 +146,7 @@
 
                     </div>
                 @elseif(Auth::user()->hasRole('N3:UNTE'))
-                    <div class="container grid grid-cols-2 gap-6 px-8 m-auto mb-6 justify-content-center">
+                    <div class="container grid grid-cols-3 gap-6 px-8 m-auto mb-6 justify-content-center">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                             <a href="{{ route('vales-solicitudes.rechazadas') }}" class="text-right">
@@ -189,6 +189,27 @@
                                 </svg>
 
                                 <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Vales revisados <br> y enviados</p>
+                            </a>
+                        </div>
+
+                        <div
+                            class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                            <a href="{{ route('vales.aprobados') }}" class="text-right">
+
+                                <g clip-path="url(#clip0_156_4721)">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M34.107 5.89312C26.3157 -1.89813 13.6845 -1.89813 5.89324 5.89312C-1.89801 13.6844 -1.89801 26.3156 5.89324 34.1069C13.6845 41.8981 26.3157 41.8981 34.107 34.1069C41.8982 26.3156 41.8982 13.6831 34.107 5.89312ZM16.8695 30.3094L7.81449 21.2544L11.3495 17.7194L16.8695 23.2394L28.6495 11.4581L32.1845 14.9931L16.8695 30.3094Z"
+                                            class="fill-neutral-600 dark:fill-neutral-500" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_156_4721">
+                                        <rect width="40" height="40" fill="white" />
+                                    </clipPath>
+                                </defs>
+                                </svg>
+
+                                <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Vales aprobados</p>
                             </a>
                         </div>
 

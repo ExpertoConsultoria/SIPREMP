@@ -104,6 +104,8 @@ class BERechazadas extends Component
                     ->where('creation_status','Rechazado')
                     ->where('pass_filter',0)
                     ->whereNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
                     ->whereNotNull('token_solicitante')
                     ->whereNotNull('motivo_rechazo')
                     ->get();
@@ -129,8 +131,13 @@ class BERechazadas extends Component
         return view('livewire.shared.bandeja-entrada.b-e-rechazadas',compact('rechazadas'));
     }
 
-    public function getDetails($memorandum)
+    public function getDetails($element)
     {
-        return redirect()->to(route("bandejaentrada.rechazada", ['details_of_folio'=>$memorandum['memo_folio']]));
+        if(Auth::user()->hasAnyRole(['N5:18A:F','N4:SEGE'])){
+            return redirect()->to(route("bandejaentrada.rechazada", ['details_of_folio'=>$element['memo_folio']]));
+        } elseif(Auth::user()->hasRole('N3:UNTE')){
+            return redirect()->to(route("vales-solicitudes.details", ['details_of_folio' => $element['folio']]));
+
+        }
     }
 }
