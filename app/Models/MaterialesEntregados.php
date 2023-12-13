@@ -12,16 +12,15 @@ class MaterialesEntregados extends Model
 
     protected $table = 'materiales_entregados';
     protected $fillable = [
-        'info_extra',
+        'folio_vale',
     ];
 
     protected $encryptable  = [
-        'folio_vale',
         'cantidad',
         'unidad_medida',
         'concepto',
         'precio_unitario',
-        'id_par_pres',
+        'partida_presupuestal_id',
     ];
 
     protected $primaryKey = 'id';

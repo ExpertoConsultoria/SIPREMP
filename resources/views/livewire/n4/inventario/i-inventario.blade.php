@@ -71,8 +71,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                     @foreach($valesInventario as $vale)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-4 py-2">
                             <p>{{$vale -> folio}}</p>
                         </td>
@@ -80,19 +80,19 @@
                             <p>{{$vale -> fecha}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> cantidad}}</p>
+                            <p>{{$vale -> totalCantidad}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>Lapiceros</p>
+                            <p>{{$vale -> asunto}}</p>
                         </td>
                         <td class="px-4 py-2">
                             <div>
-                                <x-button-icons icon="eye" />
+                                <x-button-icons wire:click="registroDetail({{$vale}})" icon="eye" />
                                 <x-button-icons icon="box" />
                             </div>
                         </td>
-                    @endforeach
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 

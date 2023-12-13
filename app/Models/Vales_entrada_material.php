@@ -16,11 +16,11 @@ class Vales_entrada_material extends Model
         'fecha',
         'id_receptor',
         'entrego_material',
+        'folio',
     ];
 
     protected $encryptable = [
         'lugar',
-        'folio',
         'asunto',
         'token_recepcion',
         'token_entrega',

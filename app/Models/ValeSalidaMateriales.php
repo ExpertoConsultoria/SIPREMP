@@ -16,22 +16,17 @@ class ValeSalidaMateriales extends Model
         'folio',
         'fecha',
         'lugar',
-        'encargado_entrega',
-        'solicitante',
-        'mat_entregado',
-        'token_solicitante',
-        'token_entrega',
-        'estatus_SG',
+        'id_encargado_entrega',
+        'id_solicitante',
     ];
 
     protected $encryptable = [
-        'folio',
         'token_solicitante',
         'token_entrega',
         'estatus_SG',
     ];
 
-    public function Materiales_entregados(){
-        return $this->hasOne(Materiales_entregados::class);
-    }
+    // public function Materiales_entregados(){
+    //     return $this->hasOne(Materiales_entregados::class);
+    // }
 }

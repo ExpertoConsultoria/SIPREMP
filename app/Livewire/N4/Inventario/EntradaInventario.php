@@ -214,7 +214,7 @@ class EntradaInventario extends Component
             $this -> item_compra -> save();
         }
         $this->dispatch('simpleAlert','Se creó con exito el registro','success');
-        return redirect()->route('dashboard');
+        return redirect()->route('inventario');
     }
     public function cleanXML() {
         $this->dispatch('cleanDataXML');

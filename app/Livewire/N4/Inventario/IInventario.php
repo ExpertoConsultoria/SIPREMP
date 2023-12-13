@@ -13,14 +13,21 @@ class IInventario extends Component
 
     public function render()
     {
-        $valesInventario = Vales_entrada_material::all();
-        foreach($valesInventario as $vale) {
-            // $valesInventario -> items = Materiales_recibidos::where('folio', $vale -> folio);
+        $this->valesInventario = Vales_entrada_material::all();
+
+        foreach ($this->valesInventario as $vale) {
+            $vale->items = Materiales_recibidos::where('folio_vale_entrada', $vale->folio)->get();
+            $vale->totalCantidad = $vale->items->sum('cantidad');
         }
+        
         return view('livewire.n4.inventario.i-inventario');
     }
 
     public function mount() {
 
+    }
+
+    public function registroDetail( $folio ) {
+        return redirect()->to(route("inventario.detalles", ['folio' => $folio['folio']]));
     }
 }

@@ -18,21 +18,20 @@ class Materiales_recibidos extends Model
         'cantidad',
         'partidas_presupuestales_id',
         'precio_unitario',
-    ];
-
-    protected $encryptable = [
-        'folio_vale',
-        'unidad_medida',
-        'concepto',
-        'importe',
         'folio_vale_entrada'
     ];
 
-    public function Vales_entrada_material(){
-        return $this->belongsTo(Vales_entrada_material::class);
-    }
+    protected $encryptable = [
+        'unidad_medida',
+        'concepto',
+        'importe',
+    ];
 
-    public function Partidas_presupuestales(){
-        return $this->belongsTo(Partidas_presupuestales::class);
-    }
+    // public function Vales_entrada_material(){
+    //     return $this->belongsTo(Vales_entrada_material::class);
+    // }
+
+    // public function Partidas_presupuestales(){
+    //     return $this->belongsTo(Partidas_presupuestales::class);
+    // }
 }

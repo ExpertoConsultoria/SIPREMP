@@ -48,6 +48,7 @@ use App\Livewire\N4\Inventario\ICrearEntrada;
 use App\Livewire\N4\Inventario\ICrearSalida;
 use App\Livewire\N4\Inventario\IInventario;
 use App\Livewire\N4\Inventario\IHistorial;
+use App\Livewire\N4\Inventario\IDetails;
 
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
@@ -140,6 +141,7 @@ Route::middleware([
     Route::get('/inventario/salida',ICrearSalida::class)->name('inventario.salida');
     Route::get('/inventario/list',IInventario::class)->name('inventario.list');
     Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
+    Route::get('/inventario/detalles/{folio}',IDetails::class)->name('inventario.detalles');
 
     //Expedientes
     Route::get('/expediente/list',EList::class)->name('expediente.list');
