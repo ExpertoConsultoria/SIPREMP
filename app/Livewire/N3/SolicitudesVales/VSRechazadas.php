@@ -60,7 +60,7 @@ class VSRechazadas extends Component
                 ->get();
 
             foreach ($vales as $vale) {
-                if($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F'){
+                if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F'])){
                     array_push($filtrados, $vale);
                 }
             }

@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('expedientes', function (Blueprint $table) {
             $table->id();
-            $table->string("folio");
+
+            $table->string("exp_folio", 100);
+
+            $table->date("fecha");
+            $table->text("concepto");
+
             $table->integer("id_cotizacion");
             $table->integer("id_factura");
             $table->integer("id_evd_foto");
+            $table->integer("id_vale_firmado");
 
             $table->unsignedBigInteger('memoranda_id')->unique()->nullable();//folio_memorandum
             $table->unsignedBigInteger("vales_compra_id")->unique()->nullable();//folio vale compra

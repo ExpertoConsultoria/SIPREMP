@@ -49,7 +49,7 @@ class BEPendientes extends Component
 
             $filtrados = [];
 
-            if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+            if(Auth::user()->hasRole('N5:18A:F')){
 
                 $memorandums = Memorandum::select('memo_fecha', 'memo_folio', 'memo_asunto', 'memo_creation_status', 'solicitante_id')
                     ->where('memo_asunto', 'like', '%' . $this->buscar . '%')
@@ -60,7 +60,7 @@ class BEPendientes extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if ($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A') {
+                    if ($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A'])) {
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -73,7 +73,7 @@ class BEPendientes extends Component
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
 
-            } elseif (Auth::user()->roles[0]->name === 'N4:SEGE'){
+            } elseif (Auth::user()->hasRole('N4:SEGE')){
 
                 $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id','destinatario')
                     ->where('memo_asunto','like','%'.$this->buscar.'%')
@@ -84,7 +84,7 @@ class BEPendientes extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if(($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A' || $memorandum->solicitante->roles[0]->name === 'N5:18A:F') && $memorandum->destinatario === "Servicos Generales"){
+                    if($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F'])&& $memorandum->destinatario === "Servicos Generales"){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -96,7 +96,7 @@ class BEPendientes extends Component
 
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
-            } elseif (Auth::user()->roles[0]->name === 'N3:UNTE'){
+            } elseif (Auth::user()->hasRole('N3:UNTE')){
 
                 $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
@@ -108,7 +108,7 @@ class BEPendientes extends Component
                     ->get();
 
                 foreach ($vales as $vale) {
-                    if($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F' || $vale->solicitante->roles[0]->name === 'N4:SEGE'){
+                    if($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])){
                         array_push($filtrados, $vale);
                     }
                 }
@@ -129,11 +129,11 @@ class BEPendientes extends Component
 
     public function getDetails($data)
     {
-        if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+        if(Auth::user()->hasRole('N5:18A:F')){
             return redirect()->to(route("bandejaentrada.details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user()->roles[0]->name === 'N4:SEGE'){
+        } elseif(Auth::user()->hasRole('N4:SEGE')){
             return redirect()->to(route("bandejaentrada.advanced-details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user()->roles[0]->name === 'N3:UNTE'){
+        } elseif(Auth::user()->hasRole('N3:UNTE')){
             return redirect()->to(route("bandejaentrada.valeServicio", ['details_of_folio'=>$data['folio']]));
         }
     }

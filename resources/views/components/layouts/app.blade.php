@@ -96,6 +96,23 @@
                     },
                 }).showToast();
             });
+
+            Livewire.on('expedientAlert', () => {
+                Swal.fire({
+                    title: "¿Estas seguro?",
+                    text: '¿Deseas generar un Expediente, a partir de la información de este Vale de Compra?',
+                    showDenyButton: true,
+                    confirmButtonText: "Si, Generar",
+                    denyButtonText: "No, Cancelar",
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('CreateExpedient');
+                    } else if (result.isDenied) {
+                        Swal.fire("El proceso ha sido cancelado", "", "info");
+                    }
+                });
+            });
         </script>
     </body>
 </html>

@@ -562,7 +562,7 @@ class VCreate extends Component
                     }
                     $this->vale_compra->id_proveedor = $this->id_proveedor;
 
-                    if(Auth::user()->roles[0]->name === 'N3:UNTE'){
+                    if(Auth::user()->hasRole('N3:UNTE')){
                         $this->vale_compra->creation_status = 'Validado';
                         $this->memorandum->pass_filter = 1;
                     }else{
@@ -638,7 +638,7 @@ class VCreate extends Component
                         $this->id_proveedor = $nuevoProveedor->id;
                     }
                     $this->vale_compra->id_proveedor = $this->id_proveedor;
-                    if(Auth::user()->roles[0]->name === 'N3:UNTE'){
+                    if(Auth::user()->hasRole('N3:UNTE')){
                         $this->vale_compra->creation_status = 'Validado';
                         $this->memorandum->pass_filter = 1;
                     }else{

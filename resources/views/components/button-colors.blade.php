@@ -73,16 +73,16 @@ switch ($color) {
         break;
 }
 // https://tailwindcss.com/docs/customizing-colors
-    //      Gray,               Slate , Zinc ,  Neutral , Stone , 
+    //      Gray,               Slate , Zinc ,  Neutral , Stone ,
     //      Red, Yellow,        Orange, Amber ,
     //      Green,              Lime, Emerald, Teal
-    //      Blue, Indigo,       Cyan, Sky, 
+    //      Blue, Indigo,       Cyan, Sky,
     //      Purple, Pink,       Violet, Fuchsia, Rose,
 @endphp
 
 <button {{ $attributes->merge([
-    'type' => 'button', 
-    'class' => 'transition-all active:translate-y-1 inline-flex items-center justify-center px-4 py-2 '
+    'type' => 'button',
+    'class' => 'disabled:opacity-25 transition-all active:translate-y-1 inline-flex items-center justify-center px-4 py-2 '
                 .$bg.' border border-transparent rounded-md font-semibold text-xs '
                 .$text.' uppercase tracking-widest '
                 .$hoverActive.' focus:outline-none focus:ring-2 '

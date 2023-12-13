@@ -50,7 +50,7 @@ class BERechazadas extends Component
         if($this->cargarLista){
             $filtrados = [];
 
-            if(Auth::user()->roles[0]->name === 'N5:18A:F'){
+            if(Auth::user()->hasRole('N5:18A:F')){
 
                 $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
                     ->where('memo_asunto','like','%'.$this->buscar.'%')
@@ -61,7 +61,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                    if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A']) ){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -74,7 +74,7 @@ class BERechazadas extends Component
                 $rechazadas = $rechazadas->sortBy([$this->ordenar, $this->direccion]);
                 $rechazadas = new LengthAwarePaginator($rechazadas->forPage($page, $this->mostrar), $rechazadas->count(), $this->mostrar, $page);
 
-            } elseif (Auth::user()->roles[0]->name === 'N4:SEGE'){
+            } elseif (Auth::user()->hasRole('N4:SEGE')){
 
                 $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id','destinatario')
                     ->where('memo_asunto','like','%'.$this->buscar.'%')
@@ -85,7 +85,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if(($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A' || $memorandum->solicitante->roles[0]->name === 'N5:18A:F') && $memorandum->destinatario === "Servicos Generales"){
+                    if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F']) && $memorandum->destinatario === "Servicos Generales"){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -97,7 +97,7 @@ class BERechazadas extends Component
 
                 $rechazadas = $rechazadas->sortBy([$this->ordenar, $this->direccion]);
                 $rechazadas = new LengthAwarePaginator($rechazadas->forPage($page, $this->mostrar), $rechazadas->count(), $this->mostrar, $page);
-            } elseif (Auth::user()->roles[0]->name === 'N3:UNTE'){
+            } elseif (Auth::user()->hasRole('N3:UNTE')){
 
                 $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
@@ -109,7 +109,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($vales as $vale) {
-                    if($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F'){
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F'])){
                         array_push($filtrados, $vale);
                     }
                 }

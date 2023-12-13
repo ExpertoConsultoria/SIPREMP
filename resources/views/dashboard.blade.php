@@ -14,7 +14,7 @@
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
-                    {{ Auth::user()->hasRole('N7:GS:17A') }}
+                    
                     <div
                         class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <p class="text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,

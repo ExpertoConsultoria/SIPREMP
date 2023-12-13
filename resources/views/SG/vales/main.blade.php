@@ -26,7 +26,7 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                @if(Auth::user()->roles[0]->name === 'N4:SEGE')
+                @if(Auth::user()->hasRole('N4:SEGE'))
                     <div class="container grid grid-cols-5 gap-6 px-8 m-auto mb-6 justify-content-center">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
@@ -145,7 +145,7 @@
                         </div>
 
                     </div>
-                @elseif(Auth::user()->roles[0]->name === 'N3:UNTE')
+                @elseif(Auth::user()->hasRole('N3:UNTE'))
                     <div class="container grid grid-cols-2 gap-6 px-8 m-auto mb-6 justify-content-center">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">

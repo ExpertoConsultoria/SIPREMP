@@ -63,7 +63,7 @@
                                 </div>
                             </div>
 
-                            @if (Auth::user()->roles[0]->name != 'N7:GS:17A')
+                            @if (Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F','N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                                 <div
                                     class="grid grid-cols-2 gap-3 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-9">
                                     <div class="flex items-center justify-center col-span-2">

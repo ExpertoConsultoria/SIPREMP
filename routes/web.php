@@ -135,7 +135,7 @@ Route::middleware([
 
     //Expedientes
     Route::get('/expediente/list',EList::class)->name('expediente.list');
-    Route::get('/expediente/list/detalles',EDetalles::class)->name('expediente.detalles');
+    Route::get('/expediente/list/detalles/{details_of_folio}',EDetalles::class)->name('expediente.detalles');
 
     //Vales
     Route::get('/vales/create-from-memorandum/{details_of_folio}',VCreateFromMemo::class)->name('vale.create-from-memo');
@@ -188,8 +188,5 @@ Route::middleware([
 
     // Inventario
     Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
-
-    // Expedientes
-    Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');
 
 });

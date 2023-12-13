@@ -70,14 +70,12 @@
                         <i class="mr-2 fas fa-eye"></i>
                         COTIZACIÓN
                     </button>
-                    <button type="button"
-                        onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-invoice', arguments: { invoice_id: {{ $vale_details->id_factura }} } })"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-invoice', arguments: { invoice_id: {{ $vale_details->id_factura }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         FACTURA
                     </button>
-                    <button type="button"
-                        onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-evidence', arguments: { evidence_id: {{ $vale_details->id_evidencia }} } })"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-evidence', arguments: { evidence_id: {{ $vale_details->id_evidencia }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         EVIDENCIAS
@@ -287,13 +285,13 @@
         <div class="mt-10">
             <div class="grid grid-cols-2">
                 <div class="text-start">
-                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.add-signed-voucher' })"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.add-signed-voucher' })" @if($vale_details->id_factura === null || $vale_details->id_evidencia === null) disabled @endif
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         ADJUNTAR VALE FIRMADO
                     </button>
                 </div>
                 <div class="text-end">
-                    <button type="button" @if($vale_details->id_vale_firmado === null) disabled @endif
+                    <button type="button" @if(!$is_signed) disabled @endif wire:click="$dispatch('expedientAlert')"
                         class="disabled:opacity-25 focus:outline-none text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 transition-all active:translate-y-1">
                         CREAR EXPEDIENTE
                     </button>

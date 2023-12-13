@@ -7,7 +7,7 @@
         </h2>
 
         <div class=" ps-16 pe-16">
-            <a href="{{ asset($invoice->arch_ruta) }}" target="_blank"
+            <a href="{{ asset($invoice->arch_ruta) }}" target="_blank" wire:click="$dispatch('closeModal')"
                 class="flex items-center justify-center p-6 bg-white border border-gray-200 rounded-lg shadow max-w-s hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="58" height="77" viewBox="0 0 58 77" fill="none">
