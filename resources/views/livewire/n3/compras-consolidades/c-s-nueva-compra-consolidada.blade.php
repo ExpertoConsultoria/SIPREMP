@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Nuevo vale de compra o servicio | Solicitud #0001')}}
+                    {{_('Nuevo vale de compra o servicio | Solicitud #000')}}
                 </h2>
             </div>
 

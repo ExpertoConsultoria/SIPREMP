@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Bandeja de entrada') }}
+                    {{ __('Bandeja de entrada321') }}
                 </h2>
             </div>
 
@@ -21,11 +21,11 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="py-12 mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center bg-transparent">
 
                 @if( Auth::user() -> roles[0] -> name === 'N5:18A:F')
+
                     <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
@@ -89,6 +89,7 @@
                         </div>
 
                     </div>
+
                 @elseif( Auth::user() -> roles[0] -> name === 'N4:SEGE' || Auth::user() -> roles[0] -> name === 'N3:UNTE')
                     <div class="container grid grid-cols-1 gap-16 m-auto px-28 justify-content-center sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         <div
@@ -131,6 +132,6 @@
 
             </div>
         </div>
-    </div>
+
 
 </x-app-layout>

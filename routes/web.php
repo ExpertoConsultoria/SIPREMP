@@ -56,6 +56,9 @@ use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 use App\Livewire\N3\SolicitudesVales\VSRechazadas;
 use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
+use App\Livewire\N2\BandejaEntrada\BEBandejaEntrada;
+use App\Livewire\N2\BandejaEntrada\BEValeBienOServicio;
+
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
@@ -104,6 +107,12 @@ Route::middleware([
             return view('SG.vales.main');
         })->name('vales');
 
+        //N2 vales
+        Route::get('/valesControlPresupuestal', function () {
+            return view('N2.vales.main');
+        })->name('valesconpresupuestal');
+
+
         Route::get('/expedientes', function () {
             return view('SG.expedientes.main');
         })->name('expedientes');
@@ -144,6 +153,7 @@ Route::middleware([
     Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
     Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
 
+
     Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
     Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
     Route::get('/vales/aprobados/{details_of_folio}/agregar',VAgregar::class)->name('vales.add-to-approved');
@@ -167,6 +177,9 @@ Route::middleware([
     Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
     Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
     Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
+    // N2
+    Route::get('/bandeja-entrada-UN', BEBandejaEntrada::class)->name('bandejaentrada.unidadcontrol');
+    Route::get('/vale-bien-servicio', BEValeBienOServicio::class)->name('valeservicio.contrpresuptl');
 
 
     // Caja Menor

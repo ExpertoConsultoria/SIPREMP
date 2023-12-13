@@ -42,7 +42,7 @@
                                 </defs>
                             </svg>
 
-                            <p class="mt-24 text-lg dark:text-gray-200">Nueva compra <br/> consolidada</p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400">Nueva compra <br/> consolidada</p>
                         </a>
                     </div>
 
@@ -60,7 +60,7 @@
                                 </clipPath>
                                 </defs>
                             </svg>
-                            <p class="mt-24 text-lg dark:text-gray-200"> Compras <br/> consolidadas en <br/> borrador </p>
+                            <p class="mt-24 text-lg text-gray-800 dark:text-gray-400"> Compras <br/> consolidadas en <br/> borrador </p>
                         </a>
                     </div>
                 </div>
