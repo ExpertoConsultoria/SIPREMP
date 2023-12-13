@@ -13,6 +13,8 @@ use App\Models\MemorandumList;
 use Illuminate\Support\Facades\Auth;
 
 use App\Helpers\Helper;
+use Livewire\Attributes\On;
+
 class SolicitudesBorradores extends Component
 {
     use WithPagination;

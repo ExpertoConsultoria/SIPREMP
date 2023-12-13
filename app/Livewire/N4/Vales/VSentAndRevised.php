@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Crypt;
 
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 
 class VSentAndRevised extends Component
 {
@@ -45,16 +47,17 @@ class VSentAndRevised extends Component
     {
 
         $vales = [];
+        $user = User::find(Auth::id());
 
         if($this->cargarLista){
-            if(Auth::user()->roles[0]->name === 'N4:SEGE'){
+            if($user->hasRole('N4:SEGE')){
                 $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
                     ->where('creation_status','not like','Borrador')
                     ->where('justificacion','like','%'.$this->buscar.'%')
                     ->orderby($this->ordenar, $this->direccion)
                     ->paginate($this->mostrar);
 
-            } elseif (Auth::user()->roles[0]->name === 'N3:UNTE') {
+            } elseif ($user->hasRole('N3:UNTE')) {
                 $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
                     ->where('creation_status','not like','Borrador')

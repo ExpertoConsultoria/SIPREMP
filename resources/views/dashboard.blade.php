@@ -10,7 +10,7 @@
         </div>
     </x-slot>
 
-    @if (Auth::user()->roles[0]->name == 'N7:GS:17A')
+    @if (Auth::user()->hasRole('N7:GS:17A'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
@@ -104,7 +104,7 @@
                 </div>
             </div>
         </div>
-    @elseif (Auth::user()->roles[0]->name === 'N6:17A')
+    @elseif (Auth::user()->hasRole('N6:17A'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
@@ -218,7 +218,7 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N5:18A:F')
+    @elseif(Auth::user()->hasRole('N5:18A:F'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
@@ -315,7 +315,7 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N4:SEGE')
+    @elseif(Auth::user()->hasRole('N4:SEGE'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
@@ -543,7 +543,7 @@
                 </div>
             </div>
         </div>
-    @elseif(Auth::user()->roles[0]->name === 'N3:UNTE')
+    @elseif(Auth::user()->hasRole('N3:UNTE'))
         <div class="py-12">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="bg-transparent">
@@ -718,7 +718,7 @@
     @push('js')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-            @if (Auth::user()->roles[0]->name === 'N6:17A')
+            @if (Auth::user()->hasRole('N6:17A'))
                 $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
@@ -790,7 +790,7 @@
 
                                 data = JSON.parse(data);
                                 for (let i = 0; i < data.folios.length; i++) {
-                                    @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                    @if (Auth::user()->hasRole('N6:17A') || Auth::user()->hasRole('N7:GS:17A'))
                                         Livewire.dispatch('toastifyAlert', [
                                             `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
                                             `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom',
@@ -806,7 +806,7 @@
 
                             for (let i = 0; i < data.folios.length; i++) {
 
-                                @if (Auth::user()->roles[0]->name === 'N6:17A' || Auth::user()->roles[0]->name === 'N7:GS:17A')
+                                @if (Auth::user()->hasRole('N6:17A') || Auth::user()->hasRole('N7:GS:17A'))
                                     Livewire.dispatch('toastifyAlert', [
                                         `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
                                         `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
@@ -862,7 +862,7 @@
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (!Auth::user()->hasRole('N6:17A') && !Auth::user()->hasRole('N7:GS:17A'))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
                 });
@@ -872,7 +872,7 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (!Auth::user()->hasRole('N6:17A') && !Auth::user()->hasRole('N7:GS:17A'))
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
                     @endif
@@ -885,7 +885,7 @@
                 window.onbeforeunload = function() {
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
-                    @if (Auth::user()->roles[0]->name != 'N6:17A' && Auth::user()->roles[0]->name != 'N7:GS:17A')
+                    @if (!Auth::user()->hasRole('N6:17A') && !Auth::user()->hasRole('N7:GS:17A'))
                         localStorage.removeItem("trayAlert");
                     @endif
                 };
@@ -999,7 +999,7 @@
 
                     var trayAlert = localStorage.getItem("trayAlert");
 
-                    $.get('api/trayAlert/{{ Auth::user()->roles[0]->name }}', function(data) {
+                    $.get('api/trayAlert/{{ Auth::user()->id }}', function(data) {
 
                         if (trayAlert != '') {
                             data = JSON.stringify(data);

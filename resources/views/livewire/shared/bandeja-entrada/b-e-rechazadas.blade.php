@@ -49,7 +49,7 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if (count($rechazadas))
-                @if (Auth::user()->roles[0]->name === 'N3:UNTE')
+                @if (Auth::user()->hasRole('N3:UNTE'))
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>

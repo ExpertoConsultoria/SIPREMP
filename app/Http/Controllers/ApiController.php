@@ -17,10 +17,12 @@ use App\Models\User;
 
 class ApiController extends Controller
 {
-    public function trayAlert($role){
+    public function trayAlert($user_id){
         $filtrados = [];
 
-        if($role === 'N5:18A:F'){
+        $user = User::find($user_id);
+
+        if($user->hasRole('N5:18A:F')){
             $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
                 ->where('memo_creation_status','Enviado')
                 ->whereNull('token_aceptacion')
@@ -36,7 +38,7 @@ class ApiController extends Controller
             if(count($filtrados)){
                 return 'Tienes solicitudes pendientes a Revisar';
             }
-        } else if($role === 'N4:SEGE'){
+        } else if($user->hasRole('N4:SEGE')){
             $memorandums = Memorandum::select('memo_fecha', 'memo_folio', 'memo_asunto', 'memo_creation_status', 'solicitante_id', 'destinatario')
                 ->where('memo_creation_status', 'Validado')
                 ->where('pass_filter', 1)
@@ -53,7 +55,7 @@ class ApiController extends Controller
             if(count($filtrados)){
                 return 'Tienes solicitudes pendientes a Revisar';
             }
-        }else if($role === 'N3:UNTE'){
+        }else if($user->hasRole('N3:UNTE')){
 
             $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('creation_status','Enviado')

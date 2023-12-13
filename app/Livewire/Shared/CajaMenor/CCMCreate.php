@@ -147,6 +147,7 @@ class CCMCreate extends Component
     public function mount()
     {
         // Default Input Data
+        $user = User::find(Auth::id());
 
         if ($this->edit_to_folio == '') {
 
@@ -162,7 +163,7 @@ class CCMCreate extends Component
             $this->componente_mir = '';
             $this->actividad_mir = '';
 
-            if(Auth::user()->roles[0]->name === 'N7:GS:17A'){
+            if($user->hasRole('N7:GS:17A')){
                 $this->sede_entrega = 'Ninguno';
                 $this->fecha_entrega = 'Ninguno';
             }else{

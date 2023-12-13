@@ -318,6 +318,7 @@ class SolicitudesCreate extends Component
             $this->dispatch('alertCRUD', 'Error!', 'Ha excedido el monto limite ($10,000) para una Compra Extraordinaria', 'error');
             return;
         }
+        $user = User::find(Auth::id());
 
         if(!$this->is_editing) {
             $this->validate();
@@ -337,7 +338,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->mir_id_componente = $this->componente_mir;
                 $this->memorandum->mir_id_actividad =  $this->actividad_mir;
 
-                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
+                if($user->hasRole('N5:18A:F') || $user->hasRole('N6:17A')){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -359,7 +360,7 @@ class SolicitudesCreate extends Component
                 }
 
                 $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-                return redirect()->route($this -> redirectTo());
+                return $this->redirectRoute($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -395,7 +396,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->memo_sucursal = $this->sucursal;
                 $this->memorandum->destinatario = $this->destinatario;
                 $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
+                if($user->hasRole('N5:18A:F') || $user->hasRole('N6:17A')){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -428,7 +429,7 @@ class SolicitudesCreate extends Component
                 $this->actividad_mir = '';
                 $this->destinatario = '';
                 $this->cotizacion = '';
-                return redirect()->route($this -> redirectTo());
+                return $this->redirectRoute($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -526,14 +527,15 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
         $this->destinatario = '';
         $this->cotizacion = '';
-        return redirect()->route($this -> redirectTo());
+        return $this->redirectRoute($this -> redirectTo());
     }
 
     public function redirectTo() {
-        $user = Auth::user() -> roles[0] -> name;
-        if ( $user === 'N6:17A' ) {
+        $user = User::find(Auth::id());
+
+        if ( $user->hasRole('N6:17A') ) {
             return 'dashboard';
-        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
+        } elseif ( $user->hasRole('N7:GS:17A') || $user->hasRole('admin') || $user->hasRole('N5:18A:F') ) {
             return 'solicitudes';
         }
     }

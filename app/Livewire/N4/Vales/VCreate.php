@@ -19,6 +19,7 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
+use App\Models\User;
 
 class VCreate extends Component
 {
@@ -484,6 +485,8 @@ class VCreate extends Component
     // Ways for Save
         public function Save(){
             $this->validate();
+            $user = User::find(Auth::id());
+
             if(count($this->elementosVale)){
 
                 if (!$this->is_editing) {
@@ -527,7 +530,7 @@ class VCreate extends Component
                     }
                     $this->vale_compra->id_proveedor = $this -> id_proveedor;
 
-                    if(Auth::user()->roles[0]->name === 'N3:UNTE'){
+                    if($user->hasRole('N3:UNTE')){
                         $this->vale_compra->creation_status = 'Validado';
                         $this->memorandum->pass_filter = 1;
                     }else{
@@ -602,7 +605,7 @@ class VCreate extends Component
                         $this -> id_proveedor = $nuevoProveedor -> id;
                     }
                     $this -> vale_compra -> id_proveedor = $this -> id_proveedor;
-                    if(Auth::user()->roles[0]->name === 'N3:UNTE'){
+                    if($user->hasRole('N3:UNTE')){
                         $this->vale_compra->creation_status = 'Validado';
                         $this->memorandum->pass_filter = 1;
                     }else{

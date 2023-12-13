@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-6 mt-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
-                        @if (Auth::user()->roles[0]->name != 'N7:GS:17A')
+                        @if (!Auth::user()->hasRole('N7:GS:17A'))
                             <div>
                                 <x-label for="justificacion" value="{{ __('Lugar de Entrega') }}"/>
                                 <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_entrega_sede }}</p>
