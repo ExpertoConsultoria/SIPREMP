@@ -49,6 +49,9 @@ use App\Livewire\N4\Inventario\ICrearSalida;
 use App\Livewire\N4\Inventario\IInventario;
 use App\Livewire\N4\Inventario\IHistorial;
 
+use App\Livewire\N2\BandejaEntrada\BEBandejaEntrada;
+use App\Livewire\N2\BandejaEntrada\BEValeBienOServicio;
+
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
@@ -102,6 +105,11 @@ Route::middleware([
         Route::get('/vales', function () {
             return view('SG.vales.main');
         })->name('vales');
+
+        // N2 vales
+        Route::get('/valesControlPresupuestal', function () {
+            return view('N2.vales.main');
+        })->name('valesconpresupuestal');
 
         Route::get('/expedientes', function () {
             return view('SG.expedientes.main');
@@ -165,6 +173,10 @@ Route::middleware([
     Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
     Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
     Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
+
+    //N2
+    Route::get('/bandeja-entrada-UN', BEBandejaEntrada::class)->name('bandejaentrada.unidadcontrol');
+    Route::get('/vale-bien-servicio', BEValeBienOServicio::class)->name('valeservicio.contrpresuptl');
 
 
     // Caja Menor
