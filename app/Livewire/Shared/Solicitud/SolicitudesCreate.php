@@ -356,6 +356,7 @@ class SolicitudesCreate extends Component
 
         // Validamos Todos los Campos
         $this->validate();
+        $user = User::find(Auth::id());
 
         if(!$this->is_editing) {
             if(count($this->elementosMemorandum)){
@@ -374,7 +375,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->mir_id_componente = $this->componente_mir;
                 $this->memorandum->mir_id_actividad =  $this->actividad_mir;
 
-                if(Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F'])){
+                if($user->hasAnyRole(['N6:17A', 'N5:18A:F'])){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -396,7 +397,7 @@ class SolicitudesCreate extends Component
                 }
 
                 $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-                return redirect()->route($this->redirectTo());
+                return $this->redirectRoute($this->redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -431,7 +432,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->memo_sucursal = $this->sucursal;
                 $this->memorandum->destinatario = $this->destinatario;
                 $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                if(Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F'])){
+                if($user->hasAnyRole(['N6:17A', 'N5:18A:F'])){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -464,7 +465,7 @@ class SolicitudesCreate extends Component
                 $this->actividad_mir = '';
                 $this->destinatario = '';
                 $this->cotizacion = null;
-                return redirect()->route($this->redirectTo());
+                return $this->redirectRoute($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -563,7 +564,7 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
         $this->destinatario = '';
         $this->cotizacion = null;
-        return redirect()->route($this->redirectTo());
+        return $this->redirectRoute($this -> redirectTo());
     }
 
     public function redirectTo() {
