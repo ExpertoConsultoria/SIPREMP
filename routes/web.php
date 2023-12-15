@@ -61,8 +61,9 @@ use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
 use App\Livewire\N2\Vales\VBienServicio;
 use App\Livewire\N2\Vales\VSolicitud;
-use App\Livewire\N2\BandejaEntrada\BELista;
+
 use App\Livewire\N2\ReportesCM\RCMList;
+use App\Livewire\N2\ReportesCM\RCMDetails;
 
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
@@ -140,13 +141,12 @@ Route::middleware([
         Route::get('/vale-compra-servicio/pdf-vale/{details_of_folio}', [ValePDF::class, 'generatePDF'])->name('pdf.Vale');
 
     // N2
-    // Vales
-    Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
-    Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
-    // Bandeja de entrada
-    Route::get('/bandeja-entrada/list',BELista::class)->name('bandejaentrada.list');
-    // Reportes Caja menor
-    Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
+        // Vales
+        Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
+        Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
+        // Reportes Caja menor
+        Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
+        Route::get('/reportes-caja-menor/{folio_report}', RCMDetails::class)->name('reportescajamenor.reportData');
 
     //Inventario
     Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');

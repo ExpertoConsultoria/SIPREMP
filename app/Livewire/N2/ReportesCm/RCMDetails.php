@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Shared\CajaMenor;
+namespace App\Livewire\N2\ReportesCm;
 
 use Livewire\Component;
 use stdClass;
@@ -11,22 +11,20 @@ use App\Models\CompraMenorList;
 
 use LivewireUI\Modal\ModalComponent;
 
-class CCMReportData extends Component
+class RCMDetails extends Component
 {
 
-    public $id_of_report = '';
+    public $folio_report = '';
 
     public $report;
     public $fecha_creacion;
     public $montos = [];
 
-    public $has_been_sent = false;
-
     public function mount()
     {
 
 
-        $this->report = ReporteCM::find($this->id_of_report);
+        $this->report = ReporteCM::where('rcm_folio',$this->folio_report)->first();
         $this->fecha_creacion = date('F, Y', strtotime($this->report->created_at));
 
         for ($i=0; $i < 12 ; $i++) {
@@ -59,28 +57,15 @@ class CCMReportData extends Component
             }
         }
 
-        if($this->report->has_been_sent === 1){
-            $this->has_been_sent = true;
+        if($this->report->pending_review === 1){
+            $this->report->pending_review = 0;
+            $this->report->save();
         }
 
     }
 
     public function render()
     {
-        return view('livewire.shared.caja-menor.c-c-m-report-data');
-    }
-
-    protected $listeners = ['SendReport'];
-
-    public function SendReport(){
-
-        $this->report->has_been_sent = 1;
-        $this->report->pending_review = 1;
-        $this->report->save();
-
-        $this->has_been_sent = true;
-
-
-        $this->dispatch('alertCRUD', 'Exito!', 'Reporte Enviado Correctamente', 'success');
+        return view('livewire.n2.reportes-cm.r-c-m-details');
     }
 }

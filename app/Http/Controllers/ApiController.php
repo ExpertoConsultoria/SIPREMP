@@ -12,8 +12,8 @@ use stdClass;
 
 use App\Models\Vales_compra;
 use App\Models\Memorandum;
+use App\Models\ReporteCM;
 use App\Models\User;
-
 
 class ApiController extends Controller
 {
@@ -143,6 +143,26 @@ class ApiController extends Controller
         }
 
         return $alertsAccepted;
+
+    }
+
+    public function RCMAlert(){
+
+        $reportsAlert = new stdClass;
+        $reportsAlert->folios = [];
+        // $reportsAlert->message = '';
+
+        $reports = ReporteCM::where('has_been_sent', 1)
+                        ->where('pending_review',1)
+                        ->get();
+
+        if(count($reports)){
+            foreach ($reports as $report) {
+                array_push($reportsAlert->folios,$report->rcm_folio);
+            }
+        }
+
+        return $reportsAlert;
 
     }
 }

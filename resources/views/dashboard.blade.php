@@ -811,7 +811,7 @@
                             <div>
                                 <div
                                     class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="{{ route('bandejaentrada.list') }}"
+                                    <a href="{{ route('bandejaentrada.pendientes') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
@@ -1232,17 +1232,18 @@
             @else
 
                 $(document).ready(function() {
-                $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        setInterval(getRCMAlert, 10000);
+                    @endif
                 });
 
                 // On window load
-                window.onload = function() {
                 window.onload = function() {
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
@@ -1251,6 +1252,10 @@
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
                     @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        localStorage.setItem("rcmAlert", '');
+                        getRCMAlert();
+                    @endif
                     getRejectionAlert();
                     getAcceptanceAlert();
                     getApprovedAlert();
@@ -1258,11 +1263,14 @@
 
                 // On window unload
                 window.onbeforeunload = function() {
-                window.onbeforeunload = function() {
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
+                    localStorage.removeItem("approvedAlert");
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.removeItem("trayAlert");
+                    @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        localStorage.removeItem("rcmAlert");
                     @endif
                 };
 
@@ -1401,6 +1409,41 @@
                             }
                             data = JSON.stringify(data);
                             localStorage.setItem("trayAlert", data);
+                        }
+
+                    });
+                }
+
+                function getRCMAlert() {
+
+                    var rcmAlert = localStorage.getItem("rcmAlert");
+
+                    $.get('api/rcmAlert', function(data) {
+
+                        if (rcmAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != rcmAlert) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                        '#7C3AED', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rcmAlert", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                    '#7C3AED', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rcmAlert", data);
                         }
 
                     });
