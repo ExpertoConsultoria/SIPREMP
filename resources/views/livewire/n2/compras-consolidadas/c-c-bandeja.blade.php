@@ -8,7 +8,7 @@
                 </h2>
             </div>
 
-            <div class="grid" style="justify-content: end; padding-right: 5.5rem" >
+            <div class="grid" style="justify-content: end; padding-right: 5.5rem">
                 <a href="{{route('dashboard')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="none">
                         <path
@@ -48,55 +48,53 @@
         </div>
 
 
-    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-400">
-                <tr class="text-center">
-                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                        Folio
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Fecha de Creación
-                    </th>
-                    <th class="px-16 py-2 cursor-pointer">
-                        Asunto
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Origen
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
+        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-400">
+                    <tr class="text-center">
+                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                            Folio
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Fecha de Creación
+                        </th>
+                        <th class="px-16 py-2 cursor-pointer">
+                            Asunto
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Origen
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
-                    <td class="px-4 py-2">
-                        <p>#88898</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>14/09/2023</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Unidad Técnica</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Usuario del que proviene</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div>
-                            <a href="{{route('valeservicio.contrpresuptl')}}">
-                                <x-button-icons icon="eye" />
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
+                        <td class="px-4 py-2">
+                            <p>#88898</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>14/09/2023</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>Unidad Técnica</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>Usuario del que proviene</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div>
+                                <a>
+                                    <x-button-icons icon="eye" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 

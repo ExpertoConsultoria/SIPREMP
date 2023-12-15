@@ -835,7 +835,7 @@
                                                 class="mt-2 text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
                                                 BANDEJA DE ENTRADA
                                             </p>
-                                            <p class="mt-2 text-gray-800 dark:text-gray-400">Solicitudes por revisar</p>
+                                            <p class="mt-2 text-gray-800 dark:text-gray-400">Vales de Bienes/Servicios por revisar</p>
                                         </div>
                                     </a>
                                 </div>
@@ -930,7 +930,7 @@
                     </div>
 
                     {{-- 2da parte, Parte que puede que se mueva. O no --}}
-                        <div class="grid justify-center">
+                        {{-- <div class="grid justify-center">
                             <div
                                 class="grid grid-cols-1 gap-5 mt-5 mb-3 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
@@ -939,7 +939,7 @@
                                     <div
                                         class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
 
-                                        <a href="{{route('bandejaentrada.unidadcontrol')}}"
+                                        <a href="{{route('comprasconsolidadas.pendientes')}}"
                                             class="grid items-center grid-cols-3 p-5 h-60 justify-items-center ">
                                             <div class="">
                                                 <svg width="83" height="60" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1080,7 +1080,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     {{-- Fin de la parte 2. Puede que se mueva, O nadota --}}
 
                 </div>

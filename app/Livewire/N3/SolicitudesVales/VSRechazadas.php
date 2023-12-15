@@ -50,16 +50,42 @@ class VSRechazadas extends Component
         if($this->cargarLista){
             $filtrados = [];
 
-            $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
-                ->where('justificacion','like','%'.$this->buscar.'%')
-                ->where('creation_status','Rechazado')
-                ->where('pass_filter',0)
-                ->whereNull('token_rev_val')
-                ->whereNull('token_disp_ppta')
-                ->whereNull('token_autorizacion')
-                ->whereNotNull('token_solicitante')
-                ->whereNotNull('motivo_rechazo')
-                ->get();
+            if(Auth::user()->hasRole('N3:UNTE')){
+                $vales = Vales_compra::select('fecha', 'folio', 'justificacion', 'creation_status', 'id_usuario')
+                    ->where('justificacion', 'like', '%' . $this->buscar . '%')
+                    ->where('creation_status', 'Rechazado')
+                    ->where('pass_filter', 0)
+                    ->whereNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_solicitante')
+                    ->whereNotNull('motivo_rechazo')
+                    ->get();
+            } elseif (Auth::user()->hasRole('N2:CP')) {
+                $vales = Vales_compra::select('fecha', 'folio', 'justificacion', 'creation_status', 'id_usuario')
+                    ->where('justificacion', 'like', '%' . $this->buscar . '%')
+                    ->where('creation_status', 'Rechazado')
+                    ->where('pass_filter', 1)
+                    ->whereNotNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_solicitante')
+                    ->whereNotNull('motivo_rechazo')
+                    ->get();
+            } elseif (Auth::user()->hasRole('N1:DA')) {
+                $vales = Vales_compra::select('fecha', 'folio', 'justificacion', 'creation_status', 'id_usuario')
+                    ->where('justificacion', 'like', '%' . $this->buscar . '%')
+                    ->where('creation_status', 'Rechazado')
+                    ->where('pass_filter', 1)
+                    ->where('pass_cp', 1)
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_disp_ppta')
+                    ->whereNotNull('token_solicitante')
+                    ->whereNotNull('motivo_rechazo')
+                    ->whereNull('token_autorizacion')
+                    ->get();
+            }
+
 
             foreach ($vales as $vale) {
                 if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F'])){

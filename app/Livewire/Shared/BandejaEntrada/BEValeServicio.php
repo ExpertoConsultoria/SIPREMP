@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use stdClass;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Support\Renderable;
 
 use Livewire\Redirector;
@@ -112,38 +113,53 @@ class BEValeServicio extends Component
 
 
         $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
-        $vale->creation_status = 'Validado';
-        $vale->token_rev_val = strtoupper(Str::random(5));
-        $vale->pending_review = 1;
-        $vale->pass_filter = 1;
-        $vale->save();
+
+        if (Auth::user()->hasRole('N3:UNTE')) {
+            $vale->creation_status = 'Validado';
+            $vale->token_rev_val = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->pass_filter = 1;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N2:CP')) {
+            $vale->creation_status = 'Presupuestado';
+            $vale->token_disp_ppta = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->pass_cp = 1;
+            $vale->save();
+        }
 
         $this->dispatch('simpleAlert',
             '¡Aprobada y Enviada!',
             'success'
         );
-
         return redirect()->route('vales.send-revised');
 
     }
 
     #[On('rejectVale')]
     public function rejectVale($reason){
-        if ($user->hasRole('N3:UNTE')){} elseif ($user->hasRole('N2:CP')){}
 
         $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
-        $vale->creation_status = 'Rechazado';
-        $vale->motivo_rechazo = $reason;
-        $vale->pending_review = 1;
-        $vale->pass_filter = 0;
-        $vale->save();
+
+        if (Auth::user()->hasRole('N3:UNTE')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
+            $vale->pass_filter = 0;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N2:CP')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
+            $vale->pass_cp = 0;
+            $vale->save();
+        }
 
         $this->dispatch('simpleAlert',
             'Rechazada y Retornada',
             'success'
         );
-
-        return redirect()->route('bandejaentrada.rechazadas');
+        return redirect()->route('vales-solicitudes.rechazadas');
 
     }
 
