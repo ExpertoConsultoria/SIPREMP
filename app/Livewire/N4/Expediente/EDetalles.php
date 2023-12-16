@@ -46,11 +46,6 @@ class EDetalles extends Component
 
         $this->vale_details = $this->expedient_details->ValesCompra;
 
-        if($this->vale_details->pending_review === 1){
-            $this->vale_details->pending_review = 0;
-            $this->vale_details->save();
-        }
-
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
         $this->vale_details->load('solicitante');
 

@@ -97,6 +97,28 @@ class ApiController extends Controller
             if(count($filtrados)){
                 return 'Tienes vales pendientes a Revisar';
             }
+        } else if($user->hasRole('N1:DA')){
+
+            $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('creation_status','Presupuestado')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_disp_ppta')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+            foreach ($vales as $vale) {
+                if ($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])) {
+                    array_push($filtrados, $vale);
+                }
+            }
+
+            if(count($filtrados)){
+                return 'Tienes vales pendientes a Revisar';
+            }
         }
     }
 

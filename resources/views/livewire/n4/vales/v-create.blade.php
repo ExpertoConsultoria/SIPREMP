@@ -43,9 +43,6 @@
 
                     {{-- Default --}}
                     <div class="grid grid-cols-6 gap-6">
-                        @if (!$is_quote)
-                            <div></div>
-                        @endif
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
@@ -111,56 +108,6 @@
                     </div>
 
                     {{-- Proveedor --}}
-                    <div class="grid grid-cols-12 gap-6 mt-6">
-                        <div class="col-span-2">
-                            <label
-                                class="block m-auto text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
-                        </div>
-                        {{-- Cambiar estetica --}}
-                        <div class="col-span-4">
-                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
-                                placeholder="Buscar..." autofocus
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
-                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-
-                            @if ($showResults)
-                                <select class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    @if (!empty($resultados))
-                                        @foreach ($resultados as $resultado)
-                                            <option wire:click='getProvedor({{ $resultado->id }})'>
-                                                {{ $resultado->RazonSocial }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            @endif
-                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor' />
-                            @error('id_proveedor')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-
-                            <a onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
-                            class="text-xs text-blue-500 underline cursor-pointer">
-                            DAR DE ALTA NUEVO PROVEEDOR</a>
-
-                        </div>
-
-                        <div class="col-span-2">
-                            <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $razon_social }}</p>
-                        </div>
-                        <div class="col-span-2">
-                            <x-label for="rfc" value="{{ __('RFC') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{ $RFC }}</p>
-                        </div>
-                        <div class="col-span-2">
-                            <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{ $telefono }}
-                            </p>
-                        </div>
-                    </div>
                     <div class="grid grid-cols-12 gap-6 mt-6">
                         <button type="button"
                             onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"

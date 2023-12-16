@@ -240,7 +240,6 @@
                         </button>
                     </div>
 
-
                     <div class="ml-auto sm:col-span-2">
                         <div class="col-span-1 ml-auto text-center">
                             <button type="button" wire:click="$dispatch('alertForAprove')"
@@ -249,6 +248,8 @@
                                     REVISAR Y VALIDAR
                                 @elseif (Auth::user()->hasRole('N2:CP'))
                                     DISPONIBILIDAD PRESUPUESTAL
+                                @elseif (Auth::user()->hasRole('N1:DA'))
+                                    APROBAR VALE
                                 @endif
                             </button>
                         </div>

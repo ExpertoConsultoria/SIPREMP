@@ -43,11 +43,6 @@ class BEValeServicio extends Component
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
 
-        // if($this->vale_details->pending_review === 1){
-        //     $this->vale_details->pending_review = 0;
-        //     $this->vale_details->save();
-        // }
-
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
         $this->vale_details->load('solicitante');
 
@@ -126,6 +121,11 @@ class BEValeServicio extends Component
             $vale->pending_review = 1;
             $vale->pass_cp = 1;
             $vale->save();
+        } elseif (Auth::user()->hasRole('N1:DA')) {
+            $vale->creation_status = 'Aprobado';
+            $vale->token_autorizacion = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->save();
         }
 
         $this->dispatch('simpleAlert',
@@ -152,6 +152,11 @@ class BEValeServicio extends Component
             $vale->motivo_rechazo = $reason;
             $vale->pending_review = 1;
             $vale->pass_cp = 0;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N1:DA')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
             $vale->save();
         }
 

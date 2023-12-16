@@ -13,6 +13,7 @@ use stdClass;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
+use App\Models\User;
 use App\Models\Archivos;
 use App\Models\Empresa;
 use App\Models\proveedores_temporales;

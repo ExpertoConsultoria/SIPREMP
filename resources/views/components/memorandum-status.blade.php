@@ -60,33 +60,45 @@
 
                 <div class="relative flex flex-col items-center">
                     <div class="
-                        @if ($memo->pending_review === 3)
+
+                        @if(( $vale_data->creation_status === 'Validado' ||  $vale_data->pass_filter===1) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null)
                             w-6 h-6 bg-green-400 rounded-full
+                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_rev_val===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_filter===0)
+                            w-6 h-6 bg-red-400 rounded-full
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
+
                     "></div>
                     <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Unidad Técnica</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
                     <div class="
-                        @if ($memo->pending_review === 3)
+
+                        @if(( $vale_data->creation_status === 'Presupuestado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null)
                             w-6 h-6 bg-green-400 rounded-full
+                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_disp_ppta===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===0 &&  $vale_data->pass_filter===1)
+                            w-6 h-6 bg-red-400 rounded-full
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
+
                     "></div>
                     <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Control Presupuestal</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
                     <div class="
-                        @if ($memo->pending_review === 3)
+
+                        @if(( $vale_data->creation_status === 'Aprobado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null &&  $vale_data->token_autorizacion != null)
                             w-6 h-6 bg-green-400 rounded-full
+                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_autorizacion===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)
+                            w-6 h-6 bg-red-400 rounded-full
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
+
                     "></div>
                     <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Dirección Administrativa</p>
                 </div>
