@@ -268,7 +268,9 @@
                             <th class="px-4 py-2 cursor-pointer">
                                 Importe
                             </th>
-
+                            <th class="px-4 py-2 cursor-pointer">
+                                Cantidad
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -307,7 +309,9 @@
                                 <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $item->importe }}
                                 </th>
-
+                                <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $item->cantidad }}
+                                </th>
                             </tr>
                         @endforeach
                     </tbody>

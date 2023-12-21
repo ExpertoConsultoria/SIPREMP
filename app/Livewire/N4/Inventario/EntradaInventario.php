@@ -120,12 +120,12 @@ class EntradaInventario extends Component
             'actividad_mir' => 'required',
             'lugar' => 'required',
 
-            'cantidad' => 'required',
-            'unidad_medida' => 'required',
-            'concepto' => 'required',
-            'precio_unitario' => 'required',
+            // 'cantidad' => 'required',
+            // 'unidad_medida' => 'required',
+            // 'concepto' => 'required',
+            // 'precio_unitario' => 'required',
             // 'partida_presupuestal' => 'required',
-            // 'factura_XML' => 'required',
+            'factura_XML' => 'required',
         ];
     }
 
@@ -133,27 +133,27 @@ class EntradaInventario extends Component
         'fecha.required' => 'Este campo es Obligatorio.',
         'fecha.date' => 'No es una fecha.',
 
-        'folio.required' => 'Este campo es Obligatorio.',
+        'folio.required' => 'El folio es un campo obligatorio.',
         'folio.string' => 'Texto Invalido.',
 
-        'lugar.required' => 'Este campo es Obligatorio.',
+        'lugar.required' => 'El lugar es un campo Obligatorio.',
         'lugar.string' => 'Texto Invalido.',
 
-        'asunto.required' => 'Este campo es Obligatorio.',
+        'asunto.required' => 'El asunto es un campo Obligatorio.',
         'asunto.string' => 'Texto Invalido.',
 
-        'fin_mir.required' => 'Este campo es Obligatorio.',
-        'proposito_mir.required' => 'Este campo es Obligatorio.',
-        'componente_mir.required' => 'Este campo es Obligatorio.',
-        'actividad_mir.required' => 'Este campo es Obligatorio.',
+        'fin_mir.required' => 'Los datos del mir son obligatorios.',
+        'proposito_mir.required' => 'Los datos del mir son obligatorios.',
+        'componente_mir.required' => 'Los datos del mir son obligatorios.',
+        'actividad_mir.required' => 'Los datos del mir son obligatorios.',
 
-        'partida_presupuestal.required' => 'Este campo es Obligatorio.',
-        'cantidad' => 'Este campo es Obligatorio',
-        'unidad_medida' => 'Este campo es Obligatorio',
-        'concepto' => 'Este campo es Obligatorio',
-        'precio_unitario' => 'Este campo es Obligatorio',
+        'partida_presupuestal.required' => 'La partida presupuestal es un campo Obligatorio.',
+        'cantidad' => 'La cantidad es un campo Obligatorio',
+        'unidad_medida' => 'La unidad de medida es un campo Obligatorio',
+        'concepto' => 'El concepto es un campo Obligatorio',
+        'precio_unitario' => 'El precio unitario es un campo Obligatorio',
         // 'partida_presupuestal' => 'Este campo es Obligatorio',
-        'factura_XML' => 'Este campo es Obligatorio',
+        'factura_XML' => 'El xml es un campo Obligatorio',
     ];
 
     public function loadDataXML()
@@ -182,40 +182,44 @@ class EntradaInventario extends Component
     }
 
     public function saveEntrada() {
-
-        // $this->validate();
-        $this->folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
-
-        $vale_entrada = new Vales_entrada_material();
-        $vale_entrada->folio = $this->folio; // Fix: Use $this->folio instead of $folio
-        $vale_entrada -> fecha = date('Y-m-d');
-        $vale_entrada -> lugar = $this -> userSede;
-        $vale_entrada -> asunto = $this -> asunto;
-        $vale_entrada -> mir_id_fin = $this -> fin_mir;
-        $vale_entrada -> mir_id_proposito = $this -> proposito_mir;
-        $vale_entrada -> mir_id_componente = $this -> componente_mir;
-        $vale_entrada -> mir_id_actividad = $this -> actividad_mir;
-        $vale_entrada -> id_receptor = null;
-        $vale_entrada -> entrego_material = null;
-        $vale_entrada -> token_recepcion = null;
-        $vale_entrada -> token_entrega = null;
-        $vale_entrada -> estatus_SG	 = null;
-        $vale_entrada -> save();
-
-        foreach ($this -> items_inventario as $item) {
-            $this -> item_compra = new Materiales_recibidos();
-            $this -> item_compra -> folio_vale_entrada = $vale_entrada -> folio;
-            $this -> item_compra -> cantidad = $item -> cantidad;
-            $this -> item_compra -> unidad_medida = $item -> unidad_medida;
-            $this -> item_compra -> concepto = $item -> concepto;
-            $this -> item_compra -> precio_unitario = $item -> precio_unitario;
-            $this -> item_compra -> importe = $item -> importe;
-            $this -> item_compra -> partidas_presupuestales_id = $item -> partida_presupuestal;
-            $this -> item_compra -> save();
+        try {
+            $this->validate();
+            $this->folio = Helper::FolioGenerator(new Vales_entrada_material, 'folio', 5, 'vem', $this->userSedeCode);
+    
+            $vale_entrada = new Vales_entrada_material();
+            $vale_entrada->folio = $this->folio;
+            $vale_entrada -> fecha = date('Y-m-d');
+            $vale_entrada -> lugar = $this -> userSede;
+            $vale_entrada -> asunto = $this -> asunto;
+            $vale_entrada -> mir_id_fin = $this -> fin_mir;
+            $vale_entrada -> mir_id_proposito = $this -> proposito_mir;
+            $vale_entrada -> mir_id_componente = $this -> componente_mir;
+            $vale_entrada -> mir_id_actividad = $this -> actividad_mir;
+            $vale_entrada -> id_receptor = null;
+            $vale_entrada -> entrego_material = null;
+            $vale_entrada -> token_recepcion = null;
+            $vale_entrada -> token_entrega = null;
+            $vale_entrada -> estatus_SG	 = null;
+            $vale_entrada -> save();
+    
+            foreach ($this -> items_inventario as $item) {
+                $this -> item_compra = new Materiales_recibidos();
+                $this -> item_compra -> folio_vale_entrada = $vale_entrada -> folio;
+                $this -> item_compra -> cantidad = $item -> cantidad;
+                $this -> item_compra -> unidad_medida = $item -> unidad_medida;
+                $this -> item_compra -> concepto = $item -> concepto;
+                $this -> item_compra -> precio_unitario = $item -> precio_unitario;
+                $this -> item_compra -> importe = $item -> importe;
+                $this -> item_compra -> partida_presupuestal_id = $item -> partida_presupuestal;
+                $this -> item_compra -> save();
+            }
+            $this->dispatch('simpleAlert','Se creó con exito el registro','success');
+            return redirect()->route('inventario');    
+        } catch ( \Exception $e ) {
+            dd($e);
         }
-        $this->dispatch('simpleAlert','Se creó con exito el registro','success');
-        return redirect()->route('inventario');
     }
+
     public function cleanXML() {
         $this->dispatch('cleanDataXML');
 

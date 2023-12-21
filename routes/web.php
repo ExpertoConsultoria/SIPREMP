@@ -142,6 +142,7 @@ Route::middleware([
     Route::get('/inventario/list',IInventario::class)->name('inventario.list');
     Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
     Route::get('/inventario/detalles/{folio}',IDetails::class)->name('inventario.detalles');
+    Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
 
     //Expedientes
     Route::get('/expediente/list',EList::class)->name('expediente.list');
@@ -195,9 +196,6 @@ Route::middleware([
     Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
     Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
     Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
-
-    // Inventario
-    Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
 
     // Expedientes
     Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');

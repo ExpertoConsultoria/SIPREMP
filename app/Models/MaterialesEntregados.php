@@ -12,7 +12,7 @@ class MaterialesEntregados extends Model
 
     protected $table = 'materiales_entregados';
     protected $fillable = [
-        'folio_vale',
+        'folio_vale_salida',
     ];
 
     protected $encryptable  = [

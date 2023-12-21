@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::create('materiales_entregados', function (Blueprint $table) {
             $table->id();
 
-            $table->integer("cantidad");
+            $table->text("folio_vale_salida");
+            $table->text("cantidad");
             $table->text("unidad_medida");
             $table->text("concepto");
-            $table->float("precio_unitario");
-            // $table->text("info_extra")->nullable();
+            $table->text('partida_presupuestal_id');
+            $table->text("precio_unitario");
 
-            $table->unsignedBigInteger('vale_salida_materials_id')->unique();
-            $table->unsignedBigInteger('partidas_presupuestales_id')->unique();
-
-            $table->foreign('vale_salida_materials_id')->references('id')->on('vale_salida_materials')->onDelete('cascade');//folio_vale
+            
+            // $table->foreign('folio_vale')->references('folio')->on('vale_salida_materiales')->onDelete('cascade');
             // $table->foreign('partidas_presupuestales_id')->references('id')->on('partidas_presupuestales')->onDelete('cascade');//id_par_ppta
 
             $table->timestamps();

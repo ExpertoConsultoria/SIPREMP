@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helper;
 use App\Models\ValeSalidaMateriales;
+use App\Models\MaterialesEntregados;
 
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
@@ -37,6 +38,7 @@ class ICrearSalida extends Component
     public $proposito_mir = '';
     public $componente_mir = '';
     public $actividad_mir = '';
+
     // Select Data
     public $fines_mir = [];
     public $propositos_mir = [];
@@ -59,25 +61,25 @@ class ICrearSalida extends Component
     protected function rules()
     {
         return [
+            'fecha' => 'required',
             'cantidad' => 'required|numeric',
             'unidad_medida' => 'required|string',
             'concepto' => 'required|string',
-            'precio_unitario' => 'required|numeric',
-            'partida_presupuestal_id' => 'required',
+            'precio_unitario' => 'required|string',
+            'partida_presupuestal' => 'required',
         ];
     }
 
     protected $messages = [
-        'fecha.required' => 'Este campo es Obligatorio.',
+        'fecha.required' => 'La fecha es un campo Obligatorio.',
         'fecha.date' => 'No es una fecha.',
 
-        'cantidad' => 'Este campo es Obligatorio',
-        'unidad_medida' => 'Este campo es Obligatorio',
-        'concepto' => 'Este campo es Obligatorio',
-        'precio_unitario' => 'Este campo es Obligatorio',
-        'partida_presupuestal_id' => 'Este campo es Obligatorio',
+        'cantidad' => 'La cantidad es un campo Obligatorio',
+        'unidad_medida' => 'La unidad de medida es un campo Obligatorio',
+        'concepto' => 'El concepto es un campo Obligatorio',
+        'precio_unitario' => 'El precio unitario es un campo Obligatorio',
+        'partida_presupuestal' => 'La partida presupuestal es un campo Obligatorio',
     ];
-
 
     public function render()
     {
@@ -97,10 +99,6 @@ class ICrearSalida extends Component
 
         $this->fines_mir = Plan1Fin::all();
         $this->partidas_presupuestales = PptoDeEgreso::all();
-    }
-
-    public function setPartidaP($value, $id) {
-        $this -> items_inventario[$id] -> partida_presupuestal = $value;
     }
 
     // Forge MIR
@@ -128,21 +126,24 @@ class ICrearSalida extends Component
         $this->actividad_mir = '';
     }
 
-    public function AddToList(){
+    public function AddToList() {
 
+        try {
         $validatedData = $this->validate([
             'cantidad' => 'required|numeric',
             'unidad_medida' => 'required|string',
             'concepto' => 'required|string',
-            'precio_unitario' => 'required|numeric',
+            'precio_unitario' => 'required',
+            'partida_presupuestal' => 'required',
         ]);
+        // dd($validatedData);
 
         $item = new stdClass;
-        $item->cantidad = $this->cantidad;
-        $item->unidad_medida = $this->unidad_medida;
-        $item->concepto = $this->concepto;
-        $item->precio_unitario = $this->precio_unitario;
-        $item->partida_presupuestal_id = $this->partida_presupuestal;
+        $item -> cantidad = $this -> cantidad;
+        $item -> unidad_medida = $this -> unidad_medida;
+        $item -> concepto = $this -> concepto;
+        $item -> precio_unitario = $this -> precio_unitario;
+        $item -> partida_presupuestal_id = $this -> partida_presupuestal;
 
         array_push($this->itemSalida, $item);
 
@@ -150,29 +151,56 @@ class ICrearSalida extends Component
             'cantidad',
             'unidad_medida',
             'concepto',
-            'p_u',
-            'importe'
+            'precio_unitario',
         ]);
         $this->partida_presupuestal = '';
-
-        $this->CalculateTotals();
         $this->dispatch('simpleAlert','Agregado correctamente','success');
+
+        } catch (\Exception $e) {
+            // dd($e->getMessage());
+            $this->dispatch('simpleAlert','Hay campos vacios','error');
+            $validatedData = $this->validate([
+                'cantidad' => 'required|numeric',
+                'unidad_medida' => 'required|string',
+                'concepto' => 'required|string',
+                'precio_unitario' => 'required',
+                'partida_presupuestal' => 'required',
+            ]);
+        }
     }
 
     public function saveSalida() {
-        $this -> validate();
-        $this->folio = Helper::FolioGenerator(new ValeSalidaMateriales, 'vale_folio', 5, 'SI', $this->userSedeCode);
-
-        $valeSalida = ValeSalidaMateriales::create([
-            'folio' => $this -> folio,
-            'fecha' => $this -> fecha,
-            'lugar' => $this -> lugar,
-            'id_solicitante' => $this -> id_solicitante
-        ]);
-
-        foreach($this -> itemSalida as $items) {
-            $items -> folio = $valeSalida -> folio;
+        try {
+            // $this -> validate();
+            if ( $this -> itemSalida ) {
+                $this->folio = Helper::FolioGenerator(new ValeSalidaMateriales, 'folio', 5, 'SI', $this->userSedeCode);
+        
+                $valeSalida = ValeSalidaMateriales::create([
+                    'folio' => $this -> folio,
+                    'fecha' => $this -> fecha,
+                    'lugar' => $this -> lugar,
+                    'id_solicitante' => $this -> id_solicitante
+                ]);
+        
+                foreach($this -> itemSalida as $item) {
+                    $item_salida = new MaterialesEntregados();
+                    $item_salida -> folio_vale_salida = $valeSalida -> folio;
+                    $item_salida -> cantidad = $item -> cantidad;
+                    $item_salida -> unidad_medida = $item -> unidad_medida;
+                    $item_salida -> concepto = $item -> concepto;
+                    $item_salida -> precio_unitario = $item -> precio_unitario;
+                    $item_salida -> partida_presupuestal_id = $item -> partida_presupuestal_id;
+                    $item_salida -> save();
+                }
+                // $itemsSalida = MaterialesEntregados::insert($this -> itemSalida);
+                $this->dispatch('simpleAlert','Se registró la salida correctamente!','success');
+                return redirect() -> route('inventario.historial');
+            } else {
+                $this->dispatch('simpleAlert','Hay campos vacios!','error');
+            }
+        } catch ( \Exception $e ) {
+            
+            dd($e);
         }
-
     }
 }

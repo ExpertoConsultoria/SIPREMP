@@ -79,7 +79,7 @@
 
                     <div
                         class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{ route('solicitudes.list') }}" class="text-right">
+                        <a href="{{ route('inventario.historial') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M33.7506 40.33C33.2206 40.52 32.7806 40.12 32.6306 39.9L29.4806 34.74V53.42L48.9006 45.93V35.67L33.7506 40.33ZM24.3606 39.9C24.1306 40.28 23.6706 40.46 23.2406 40.33L8.09062 35.67L7.93062 45.93L27.5206 53.42V34.74L24.3606 39.9ZM49.4406 25.85L29.9906 31.83L33.9006 38.25C40.3906 36.25 46.8706 34.26 53.3606 32.27L49.4406 25.85ZM7.56062 25.85L3.64062 32.27L23.1006 38.25L27.0106 31.83L7.56062 25.85Z" class="fill-neutral-600 dark:fill-neutral-500"/>

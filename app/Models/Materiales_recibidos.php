@@ -16,7 +16,7 @@ class Materiales_recibidos extends Model
     protected $fillable = [
         'folio_vale',
         'cantidad',
-        'partidas_presupuestales_id',
+        'partida_presupuestal_id',
         'precio_unitario',
         'folio_vale_entrada'
     ];

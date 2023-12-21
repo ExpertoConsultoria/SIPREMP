@@ -61,14 +61,6 @@
                                 required>
                         </div>
 
-                        <!-- <div class="col-span-4 flex">
-                            <div class="my-auto mr-6">
-                                <label for="entrega"
-                                class="block text-sm font-bold text-start text-gray-900 dark:text-white">Entrega</label>
-                            </div>
-                            <input wire:model.blur="mir" type="text" name="mir" placeholder=""
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -97,6 +89,16 @@
                             @enderror
                         </div>
 
+                        <div class="col-span-3">
+                            <x-label for="precio_unitario" value="{{ __('Precio unitario') }}" />
+                            <input wire:model.blur="precio_unitario" type="number" name="precio_unitario"
+                                placeholder="0.00"
+                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @error('precio_unitario')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="col-span-4">
                             <x-label for="concepto" value="{{ __('Concepto') }}" />
                             <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
@@ -107,12 +109,24 @@
                         </div>
 
                         <div class="col-span-4 flex">
-                            <div class="my-auto mr-6">
-                                <label for="mir"
-                                class="block text-sm font-bold text-start text-gray-900 dark:text-white">MIR</label>
-                            </div>
-                                <input wire:model.blur="mir" type="text" name="mir" placeholder=""
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
+                            <select value=""
+                                wire:model.blur="partida_presupuestal"
+                                required
+                                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="">
+                                    Seleccione una partida presupuestal
+                                </option>
+                                @foreach ($partidas_presupuestales as $partida_presupuestal)
+                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                        {{ $partida_presupuestal->PartidaEspecifica }}
+                                    </option>
+                                @endforeach
+                                {{-- opciones --}}
+                            </select>             
+                            @error('partida_presupuestal')
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror           
                         </div>
 
                         <div class="col-span-5 text-start">
@@ -140,12 +154,11 @@
                                 <th scope="col" class="px-6 py-3">
                                     Concepto
                                 </th>
-
                                 <th scope="col" class="px-6 py-3">
                                     Partida presupuestal
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    MIR
+                                    Precio unitario
                                 </th>
                             </tr>
                         </thead>
@@ -153,13 +166,19 @@
                             @foreach($itemSalida as $item)
                             <tr class="text-center dark:bg-gray-800 dark:border-gray-700 border-b">
                                 <td class="px-6 py-3">
-                                    10
+                                    {{ $item -> cantidad}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    pza
+                                    {{ $item -> unidad_medida}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    Paquete - Galletas surtidas
+                                    {{ $item -> concepto}}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {{ $item -> partida_presupuestal_id}}
+                                </td>
+                                <td class="px-6 py-3">
+                                    {{ number_format($item -> precio_unitario) }}
                                 </td>
                             </tr>
                             @endforeach
@@ -188,7 +207,7 @@
                             </button>
                         </div>
                         <div class="col-span-4 text-end">
-                            <button type="submit" wire:loading.attr="disabled"
+                            <button wire:click="saveSalida" wire:loading.attr="disabled"
                                 class="disabled:opacity-25 focus:outline- text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 transition-all active:translate-y-1">
                                 REGISTRAR SALIDA
                             </button>
