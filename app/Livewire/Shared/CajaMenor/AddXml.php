@@ -94,7 +94,11 @@ class AddXml extends Component
             $factura_json = json_decode($factura_json, true);
 
             if($xml_json === $factura_json){
-                return true;
+                if ($xml_json['Complemento']['TimbreFiscalDigital']['UUID'] === $factura_json['Complemento']['TimbreFiscalDigital']['UUID']) {
+                    return true;
+                }else{
+                    return false;
+                }
             }else{
                 return false;
             }
