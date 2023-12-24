@@ -59,7 +59,7 @@ class AddXml extends Component
         $this->nombreXML = $this->factura_XML->getClientOriginalName();
         $this->extensionFile = $this->factura_XML->extension();
 
-        if (strcmp( $this->extensionFile, 'xml' ) === 0) {
+        if ((strcmp( $this->extensionFile, 'xml' ) === 0) || (strcmp( $this->extensionFile, 'txt' ) === 0)) {
             $this->xml_message = 'Tipo de Archivo Revisado y Aprovado';
             $this->is_valid_xml = true;
         } else {

@@ -29,6 +29,8 @@
             <div
                 class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
                 <div class="container px-4">
+
+                    {{-- Default --}}
                     <div class="grid grid-cols-6 gap-6">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
@@ -61,54 +63,61 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-6 gap-6 mt-6">
-                        <div class="flex items-center">
-                            <label
-                                class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
-                        </div>
-                        <button type="button"
-                            onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
-                            class="relative items-center col-span-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                            Agregar provedor
-                            <i class="fas fa-plus"></i>
-                        </button>
-
+                    {{-- Proveedor --}}
+                    <div class="grid grid-cols-12 gap-6 mt-8">
                         <div class="col-span-2">
-                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar" placeholder="Buscar..." autofocus
+                            <label
+                                class="block m-auto text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
+                        </div>
+
+                        <div class="col-span-4">
+                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
+                                placeholder="Buscar..." autofocus
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
-                                @if($showResults)
-                                    <ul>
-                                        @if(!empty($resultados))
-                                            @foreach($resultados as $resultado)
-                                            <li wire:click='getProvedor({{ $resultado->id }})'>{{ $resultado->RazonSocial }}</li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
-                                @endif
-
-                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor'/>
+                            @if ($showResults)
+                                <select wire:model.live="provedor_selected" wire:change='getProvedor()'
+                                    class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" selected disabled>-- Selecciona una opción --</option>
+                                    @if (!empty($resultados))
+                                        @foreach ($resultados as $resultado)
+                                            <option value="{{ $resultado->id }}">
+                                                {{ $resultado->RazonSocial }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            @endif
+                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor' />
                             @error('id_proveedor')
                                 <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
+
+                            <a onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
+                            class="text-xs text-blue-500 underline cursor-pointer">
+                            DAR DE ALTA NUEVO PROVEEDOR</a>
+
                         </div>
-                        <div>
+
+                        <div class="col-span-2">
                             <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $razon_social }}</p>
-                        </div>
-                        <div>
-                            <x-label for="rfc" value="{{ __('RFC') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $RFC }}</p>
-                        </div>
-                        <div>
-                            <x-label for="telefono" value="{{ __('Teléfono') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $razon_social }}</p>
+                        </div>
+                        <div class="col-span-2">
+                            <x-label for="rfc" value="{{ __('RFC') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
+                                {{ $RFC }}</p>
+                        </div>
+                        <div class="col-span-2">
+                            <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{ $telefono }}
                             </p>
                         </div>
                     </div>
 
+                    {{-- Justificacion y MIR --}}
                     <div class="container py-6">
                         <div
                             class="grid grid-cols-2 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-10">
@@ -127,6 +136,7 @@
                         </div>
                     </div>
 
+                    {{-- Entrega --}}
                     <div class="grid grid-cols-10 gap-6 mb-6">
                         <div class="flex items-center col-span-3">
                             <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Condiciones de
@@ -159,6 +169,7 @@
                 </div>
             </div>
 
+            {{-- Partidas Presupuestales --}}
             @foreach ($partidas_data as $data)
 
                 @if ($data->estado === 'DISPONIBLE')
@@ -265,8 +276,6 @@
                     </div>
                 </div>
             @endforeach
-
-
 
             {{-- Buttons --}}
             <div class="mt-4 ">

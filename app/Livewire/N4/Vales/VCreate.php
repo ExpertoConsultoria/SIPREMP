@@ -49,6 +49,8 @@ class VCreate extends Component
         public $lugar_entrega = '';
         public $fecha_entrega;
 
+        public $provedor_selected;
+
         public $subtotal = 0.00;
         public $iva = 0.00;
         public $total = 0.00;
@@ -289,12 +291,14 @@ class VCreate extends Component
                     ->get();
                 $this->showResults = true;
                 $this->tipo_proveedor = 'Fijo';
+                $this->provedor_selected = '';
             } else {
                 $this->showResults = false;
             }
         }
 
-        public function getProvedor($id){
+        public function getProvedor(){
+            $id = $this->provedor_selected;
             if ( $this->tipo_proveedor == 'Temporal' ) {
                 $provedorTemp = proveedores_temporales::find($id);
 

@@ -60,6 +60,8 @@ class VCreateFromMemo extends Component
         public $iva = 0.00;
         public $total = 0.00;
 
+        public $provedor_selected;
+
     // Reactive
 
         public $buscar = '';
@@ -228,25 +230,27 @@ class VCreateFromMemo extends Component
                 ->where('RazonSocial', 'like', '%' . $this->buscar . '%')
                 ->get();
             $this->showResults = true;
+            $this->provedor_selected = '';
         }else{
             $this->showResults = false;
         }
     }
 
-    public function getProvedor($id){
+    public function getProvedor(){
+        $id = $this->provedor_selected;
 
-            $empresa = Empresa::find($id);
-            $this->tipo_proveedor = 'Fijo';
-            //Reset Data
-            $this->buscar = $empresa->RazonSocial;
-            $this->seleccionado = $empresa;
-            $this->showResults = false;
+        $empresa = Empresa::find($id);
+        $this->tipo_proveedor = 'Fijo';
+        //Reset Data
+        $this->buscar = $empresa->RazonSocial;
+        $this->seleccionado = $empresa;
+        $this->showResults = false;
 
-            // Set Provedor Data
-            $this->id_proveedor = $empresa->id;
-            $this->razon_social = $empresa->RazonSocial;
-            $this->RFC = $empresa->RFC;
-            $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
+        // Set Provedor Data
+        $this->id_proveedor = $empresa->id;
+        $this->razon_social = $empresa->RazonSocial;
+        $this->RFC = $empresa->RFC;
+        $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
 
     }
 
