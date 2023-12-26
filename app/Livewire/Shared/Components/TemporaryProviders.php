@@ -34,15 +34,15 @@ class TemporaryProviders extends ModalComponent
     }
 
     protected $messages = [
-        'new_nombre.required' => 'Este campo es Obligatorio',
-        'new_telefono.required' => 'Este campo es Obligatorio',
-        'new_persona.required' => 'Este campo es Obligatorio',
-        'new_direccion.required' => 'Este campo es Obligatorio',
-        'new_codigo_postal.required' => 'Este campo es Obligatorio',
-        'new_razon_social.required' => 'Este campo es Obligatorio',
-        'new_RFC.required' => 'Este campo es Obligatorio',
-        'new_regimen.required' => 'Este campo es Obligatorio',
-        'new_datos_banco.required' => 'Este campo es Obligatorio',
+        'new_nombre.required' => 'El nombre campo es Obligatorio',
+        'new_telefono.required' => 'El telefono campo es Obligatorio',
+        'new_persona.required' => 'El tipo de persona campo es Obligatorio',
+        'new_direccion.required' => 'La direccion campo es Obligatorio',
+        'new_codigo_postal.required' => 'El codigo postal campo es Obligatorio',
+        'new_razon_social.required' => 'La razon social campo es Obligatorio',
+        'new_RFC.required' => 'El RFC campo es Obligatorio',
+        'new_regimen.required' => 'El regimen campo es Obligatorio',
+        'new_datos_banco.required' => 'Los datos del banco campo es Obligatorio',
     ];
 
 
@@ -53,28 +53,35 @@ class TemporaryProviders extends ModalComponent
     }
 
     public function addNewProveedorTemp() {
-        $validatedData = $this->validate([
-            'new_razon_social' => 'required|string',
-            'new_RFC' => 'required|string',
-            'new_persona' => 'required',
-            'new_nombre' => 'required',
-            'new_telefono' => 'required',
-            'new_regimen' => 'required',
-            'new_direccion' => 'required',
-            'new_codigo_postal' => 'required',
-            'new_datos_banco' => 'required',
-        ]);
-        $proveedor = new stdClass;
-        $proveedor -> new_nombre = $this -> new_nombre;
-        $proveedor -> new_telefono = $this -> new_telefono;
-        $proveedor -> new_persona = $this -> new_persona;
-        $proveedor -> new_direccion = $this -> new_direccion;
-        $proveedor -> new_codigo_postal = $this -> new_codigo_postal;
-        $proveedor -> new_razon_social = $this -> new_razon_social;
-        $proveedor -> new_RFC = $this -> new_RFC;
-        $proveedor -> new_regimen = $this -> new_regimen;
-        $proveedor -> new_datos_banco = $this -> new_datos_banco;
-        $this->dispatch('loadProveedor', $proveedor);
+        try {
+            //code...
+            $validatedData = $this->validate([
+                'new_razon_social' => 'required|string',
+                'new_RFC' => 'required|string',
+                'new_persona' => 'required',
+                'new_nombre' => 'required',
+                'new_telefono' => 'required',
+                'new_regimen' => 'required',
+                'new_direccion' => 'required',
+                'new_codigo_postal' => 'required',
+                'new_datos_banco' => 'required',
+            ]);
+            $proveedor = new stdClass;
+            $proveedor -> new_nombre = $this -> new_nombre;
+            $proveedor -> new_telefono = $this -> new_telefono;
+            $proveedor -> new_persona = $this -> new_persona;
+            $proveedor -> new_direccion = $this -> new_direccion;
+            $proveedor -> new_codigo_postal = $this -> new_codigo_postal;
+            $proveedor -> new_razon_social = $this -> new_razon_social;
+            $proveedor -> new_RFC = $this -> new_RFC;
+            $proveedor -> new_regimen = $this -> new_regimen;
+            $proveedor -> new_datos_banco = $this -> new_datos_banco;
+            $this->dispatch('loadProveedor', $proveedor);
+        } catch (\Exception $th) {
+            //throw $th;
+            dd($th);
+        }
+
     }
 
 

@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-60 w-30 text dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{route('compraConsolidadaBorrador.borradorCompra')}}" class="text-right">
+                        <a href="{{route('compraConsolidada.borradorCompra')}}" class="text-right">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_317_4142)">
                                 <path d="M37.9976 -2.78144e-05H35.9948C35.7274 -0.016633 35.4596 0.0237945 35.2091 0.118573C34.9586 0.213352 34.7311 0.360315 34.5417 0.549714C34.3523 0.739113 34.2053 0.966619 34.1105 1.21714C34.0157 1.46766 33.9753 1.73547 33.9919 2.00281V27.9996H40.0004V2.00281C40.0165 1.7356 39.9757 1.46803 39.8807 1.21776C39.7857 0.967482 39.6388 0.740199 39.4495 0.550915C39.2602 0.361632 39.0329 0.214652 38.7826 0.119682C38.5324 0.0247113 38.2648 -0.0160898 37.9976 -2.78144e-05Z" fill="#515151"/>

@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('proveedores_temporales', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('RFC', 13)->unique();
-            $table->string('RazonSocial', 128);
-            $table->char('Persona', 1)->default('M'); //(F)Fisica o (M)Moral
-            $table->string('Nombre', 128)->nullable();
-            $table->string('Telefono', 64)->nullable();
-            $table->integer('Regimen')->nullable();
-            $table->string('Direccion', 128)->nullable();
-            $table->integer('CodigoPostal');
-            $table->string('DatosContacto', 192)->nullable();
-            $table->string('DatosBanco', 128)->nullable();
+            $table->text('RFC', 13)->unique();
+            $table->text('RazonSocial', 128);
+            $table->text('Persona', 1)->default('M'); //(F)Fisica o (M)Moral
+            $table->text('Nombre', 128)->nullable();
+            $table->text('Telefono', 64)->nullable();
+            $table->text('Regimen')->nullable();
+            $table->text('Direccion', 128)->nullable();
+            $table->text('CodigoPostal');
+            $table->text('DatosContacto', 192)->nullable();
+            $table->text('DatosBanco', 128)->nullable();
 
             $table->timestamps();
         });

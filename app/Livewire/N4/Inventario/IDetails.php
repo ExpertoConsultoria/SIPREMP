@@ -16,7 +16,7 @@ class IDetails extends Component
     public $folio = '';
     public $valeEntrada;
     public $items;
-    
+
     public $MIR;
     public $subtotal;
 
@@ -39,7 +39,7 @@ class IDetails extends Component
         $componente = Plan3Componente::where('id',$this->valeEntrada->mir_id_componente)->first();
         $actividad = Plan4Actividad::where('id',$this->valeEntrada->mir_id_actividad)->first();
 
-        $mir =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
-        $this->MIR = $mir;
+        $mir = $fin -> NoFin.'-'.$proposito -> NoProposito.'-'.$componente -> NoComponente.'-'.$actividad -> NoActividad;
+        $this -> MIR = $mir;
     }
 }
