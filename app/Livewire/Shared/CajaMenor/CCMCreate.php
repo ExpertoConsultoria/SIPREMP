@@ -320,17 +320,19 @@ class CCMCreate extends Component
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
         foreach ($conceptos as $concepto) {
-            $item = new stdClass;
-                $item->icm_cantidad = $concepto['Cantidad'];
-                $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
-                $item->icm_concepto = $concepto['Descripcion'];
-                $item->icm_precio_u = $concepto['ValorUnitario'];
-                $item->icm_importe = floatval($concepto['Importe']);
-                $item->icm_partida_presupuestal = '';
+            if(floatval($concepto['Importe']) > 0 && floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario']) > 0) {
+                $item = new stdClass;
+                    $item->icm_cantidad = $concepto['Cantidad'];
+                    $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
+                    $item->icm_concepto = $concepto['Descripcion'];
+                    $item->icm_precio_u = $concepto['ValorUnitario'];
+                    $item->icm_importe = floatval($concepto['Importe']);
+                    $item->icm_partida_presupuestal = '';
 
-            array_push($this->elementosCompraMenor, $item);
+                array_push($this->elementosCompraMenor, $item);
+            }
         }
-        // dd($this->elementosCompraMenor);
+
         foreach ($this->elementosCompraMenor as $index => $element) {
             $this->selectPartida[$index] = "";
         }

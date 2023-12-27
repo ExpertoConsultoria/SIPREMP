@@ -65,17 +65,56 @@ class AddXml extends Component
         if ((strcmp( $this->extensionFile, 'xml' ) === 0) || (strcmp( $this->extensionFile, 'txt' ) === 0)) {
 
             $xml_exist = $this->validateExistence();
+            $xml_is_empty = $this->checkAmounts();
 
             if($xml_exist){
                 $this->xml_message = 'El archivo que subiste ya ha sido usado anteriormente';
                 $this->is_valid_xml = false;
             } else{
-                $this->xml_message = 'Tipo de Archivo Revisado y Aprovado';
-                $this->is_valid_xml = true;
+                if($xml_is_empty){
+                    $this->xml_message = 'El archivo que subiste tiene un Importe Final de $0';
+                    $this->is_valid_xml = false;
+                }else{
+                    $this->xml_message = 'Archivo Revisado y Aprovado';
+                    $this->is_valid_xml = true;
+                }
             }
             File::delete($this->xml_temporal);
         } else {
             $this->xml_message = 'El archivo que subiste no es XML';
+        }
+
+    }
+
+    public function checkAmounts() {
+        $this->xml_temporal = 'storage/'.$this->factura_XML->store('files/FacturasCM/XML','public');
+        $xml_content = file_get_contents($this->xml_temporal);
+        $xml_json = JsonConverter::convertToJson($xml_content);
+        $xml_json = json_decode($xml_json, true);
+
+
+        if(array_key_exists('Concepto', $xml_json['Conceptos'])){
+
+            $conceptos = $xml_json['Conceptos']['Concepto'];
+            $importe_final = 0;
+
+            foreach ($conceptos as $concepto) {
+                if(
+                    (floatval($concepto['Importe']) != 0) &&
+                    ((floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario'])) > 0)
+                ) {
+                    $importe_final += floatval($concepto['Importe']);
+                }
+            }
+            if($importe_final <= 0){
+                $this->dispatch('simpleAlert','Factura de Egresos Detectada','error');
+                return true;
+            } else{
+                return false;
+            }
+        }else{
+            $this->dispatch('simpleAlert','Factura sin conceptos Detectada','error');
+            return true;
         }
 
     }
