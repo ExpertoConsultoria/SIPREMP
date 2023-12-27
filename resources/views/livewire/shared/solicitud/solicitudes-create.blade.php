@@ -24,7 +24,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="">
                         <path
                             d="M36.6666 18.3334H7.35664L16.1783 9.51172C16.3375 9.35798 16.4645 9.17407 16.5518 8.97073C16.6392 8.76739 16.6851 8.54869 16.6871 8.32739C16.689 8.10609 16.6468 7.88662 16.563 7.6818C16.4792 7.47697 16.3554 7.29088 16.199 7.1344C16.0425 6.97791 15.8564 6.85415 15.6516 6.77035C15.4467 6.68655 15.2273 6.64438 15.006 6.6463C14.7847 6.64823 14.566 6.6942 14.3626 6.78155C14.1593 6.8689 13.9754 6.99587 13.8216 7.15505L2.15497 18.8217C1.84252 19.1343 1.66699 19.5581 1.66699 20.0001C1.66699 20.442 1.84252 20.8658 2.15497 21.1784L13.8216 32.8451C14.136 33.1487 14.557 33.3166 14.994 33.3128C15.431 33.309 15.849 33.1338 16.158 32.8248C16.467 32.5157 16.6423 32.0977 16.6461 31.6607C16.6499 31.2237 16.4819 30.8027 16.1783 30.4884L7.35664 21.6667H36.6666C37.1087 21.6667 37.5326 21.4911 37.8451 21.1786C38.1577 20.866 38.3333 20.4421 38.3333 20.0001C38.3333 19.558 38.1577 19.1341 37.8451 18.8215C37.5326 18.509 37.1087 18.3334 36.6666 18.3334Z"
-                            fill="#515151" />
+                            class="fill-neutral-600 dark:fill-neutral-500" />
                     </svg>
                 </a>
             </div>
@@ -39,7 +39,7 @@
 
                     {{-- Basic Data --}}
                     <div
-                        class="p-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
 
                         {{-- Defualt --}}
                         <div class="container px-4">
@@ -47,32 +47,32 @@
                                 <div>
                                     <x-label for="fecha" value="{{ __('Fecha') }}" />
                                     <input wire:model.blur="fecha" type="date" name="fecha" readonly
-                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required max="2100-12-31" step="1">
                                 </div>
 
                                 <div>
                                     <x-label for="folio" value="{{ __('Folio') }}" />
                                     <input wire:model.blur="folio" type="text" name="folio" readonly
-                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="solicitante" value="{{ __('Solicitante') }}" />
                                     <input wire:model.blur="solicitante" type="text" name="solicitante" readonly
-                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="sucursal" value="{{ __('Sucursal') }}" />
                                     <input wire:model.blur="sucursal" type="text" name="sucursal" readonly
-                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="destinatario" value="{{ __('Destinatario') }}" />
                                     <select wire:model.blur="destinatario" name="destinatario"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         <option value="Servicos Generales">Servicos Generales</option>
                                         <option value="Unidad Tecnica">Unidad Tecnica</option>
@@ -107,8 +107,7 @@
                                 <div class="col-span-2">
                                     <div>
                                         <x-label for="fin_mir" value="{{ __('Fin *') }}" />
-                                        <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)"
-                                            name="fin_mir"
+                                        <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)" name="fin_mir"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($fines_mir as $fin_mir)
@@ -123,7 +122,7 @@
                                         <select wire:model.blur="proposito_mir"
                                             wire:change="GetComponents($event.target.value)" name="proposito_mir"
                                             @if(!$mir2) disabled @endif
-                                            class="@if(!$mir2) bg-gray-200 @else @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir2) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($propositos_mir as $proposito_mir)
@@ -142,7 +141,7 @@
                                         <select wire:model.blur="componente_mir"
                                             wire:change="GetActivities($event.target.value)" name="componente_mir"
                                             @if(!$mir3) disabled @endif
-                                            class="@if(!$mir3) bg-gray-200 @else @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir3) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($componetes_mir as $componete_mir)
                                             <option value="{{ $componete_mir['NoComponente'] }}">{{
@@ -156,7 +155,7 @@
                                         <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
                                         <select wire:model.blur="actividad_mir" name="actividad_mir" @if(!$mir4)
                                             disabled @endif
-                                            class="@if(!$mir4) bg-gray-200 @else @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="@if(!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected disabled value="">Selecciona una Opción</option>
                                             @foreach ($actividades_mir as $actividad_mir)
                                             <option value="{{ $actividad_mir['NoActividad'] }}">{{
@@ -173,7 +172,7 @@
                     </div>
 
                     <div
-                        class="p-6 mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                        class="p-6 mt-4 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
 
                         <div class="container px-4">
                             <div class="grid gap-3 mb-6 lg:grid-cols-12">
@@ -229,9 +228,19 @@
                                     <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
-                                        @foreach ($partidas_presupuestales as $pp)
-                                        <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
-                                        @endforeach
+                                        @foreach ($partidas_presupuestales as $partida_presupuestal)
+
+                                                @php
+                                                    $reduceString = (int) substr($partida_presupuestal -> CvePptal, 0, 4);
+                                                @endphp
+
+                                                @if ($reduceString >= 2000 &&  $reduceString <= 3000  )
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal -> PartidaEspecifica}}
+                                                    </option>
+                                                @endif
+
+                                            @endforeach
                                     </select>
                                     @error('partida_presupuestal') <span class="text-xs text-rose-600">{{ $message
                                         }}</span> @enderror
@@ -251,7 +260,7 @@
 
                     {{-- Table --}}
                     <div
-                        class="pb-12 mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                        class="pb-12 mt-4 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <div class="relative overflow-x-auto sm:rounded-lg">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead
@@ -374,7 +383,13 @@
                         <div class="container px-4">
 
                             <div class="grid grid-cols-12 gap-2 mb-1">
-                                <div class="col-span-10 text-end">
+                                <div class="col-span-2 text-end">
+                                    <button type="button" wire:click=""
+                                        class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Adjuntar cotizaciones
+                                    </button>
+                                </div>
+                                <div class="col-span-8 text-end">
                                     <button type="button" wire:click="SaveAsDraft"
                                         class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Guardar borrador

@@ -49,7 +49,7 @@ class VBorradores extends Component
         if($this->cargarLista){
             $drafts = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
                 ->where('creation_status','Borrador')
-                ->where('id_usuario', Auth::user()->id)
+                // ->where('id_usuario', Auth::user()->id)
                 ->where('justificacion','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);

@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Vale | Solicitud # 0001') }} 
+                    {{ __('Vale | Solicitud # 0001') }}
                 </h2>
             </div>
 
@@ -20,37 +20,37 @@
         </div>
     </x-slot>
 
-    <div class="py-8 max-w-screen-xl mx-auto">
+    <div class="max-w-screen-xl py-8 mx-auto">
 
         <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="container mx-auto px-4 w-2/3">
+            <div class="container w-2/3 px-4 mx-auto">
                 <div class="mb-3">
                     <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
                 </div>
                 <div class="relative h-8 mb-4">
                     {{-- Línea base de la barra de progreso  --}}
                     <div class="h-0.5 w-[86%] sm:w-[86%] md:w-[86%] lg:w-[92%] xl:w-[86%] bg-gray-300 absolute top-3 left-0 right-0 mx-12"></div>
-        
+
                     {{-- Círculos y etiquetas --}}
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center justify-between">
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Servicios Generales</p>
+                            <p class="mt-1 text-xs">Servicios Generales</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Unidad técnica</p>
+                            <p class="mt-1 text-xs">Unidad técnica</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Control Presupuestal</p>
+                            <p class="mt-1 text-xs">Control Presupuestal</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full "></div>
-                            <p class="text-xs mt-1">Dirección Administrativa</p>
+                            <p class="mt-1 text-xs">Dirección Administrativa</p>
                         </div>
                     </div>
                 </div>
@@ -58,14 +58,14 @@
         </div>
 
         <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="container px-4 justify-center items-center text-center">
+            <div class="container items-center justify-center px-4 text-center">
                 <x-button-icons icon="eye" />
             </div>
         </div>
 
         <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="container px-4">
-                <div class="grid grid-cols-12 gap-3 items-center justify-center ">
+                <div class="grid items-center justify-center grid-cols-12 gap-3 ">
 
                     <div class="col-span-1">
                         <h1 class="font-bold">Fecha</h1>
@@ -87,13 +87,13 @@
                         <h1 class="font-bold" >MIR</h1>
                         <span class="w-full text-sm ">97438498328498-38293898</span>
                     </div>
-                    
 
-                </div>  
+
+                </div>
             </div>
 
             <div class="container px-4 py-8">
-                <div class="grid grid-cols-8 gap-3 items-center justify-center ">
+                <div class="grid items-center justify-center grid-cols-8 gap-3 ">
                     <div class="col-span-1">
                         <h1 class="font-bold">Proveedor</h1>
                         <span class="w-full text-sm ">--------</span>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="container px-4 py-6">
-                <div class="grid grid-cols-8 gap-3 items-center justify-center">
+                <div class="grid items-center justify-center grid-cols-8 gap-3">
                     <div class="col-span-2">
                         <h1 class="font-bold">Justificación:</h1>
                         <label class="w-full text-sm "></label>
@@ -123,7 +123,7 @@
             </div>
 
             <div class="container px-4 py-6">
-                <div class="grid grid-cols-8 gap-3 items-center justify-center">
+                <div class="grid items-center justify-center grid-cols-8 gap-3">
                     <div class="col-span-2">
                         <h1 class="font-bold">Condiciones de entrega:</h1>
                         <label class="w-full text-sm "></label>
@@ -144,30 +144,30 @@
                             <span>13/09/2023</span>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
         </div>
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative flex items-center h-4 p-6 mt-4 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-gray-800 dark:border-gray-700">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">DISPONIBLE</h1>
+                <h1 class="font-bold text-white">DISPONIBLE</h1>
             </div>
         </div>
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="text-center text-bla">
                         <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                            Cantidad 
+                            Cantidad
                         </th>
                         <th class="px-4 py-2 cursor-pointer">
                             Concepto
@@ -181,16 +181,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -198,12 +198,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-gray-800 dark:border-gray-700">
+            <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
             </div>
 
             <hr>
-            
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 ">
+
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         Subtotal:
@@ -237,24 +237,24 @@
             </div>
         </div>
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative flex items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-gray-800 dark:border-gray-700">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">NO DISPONIBLE</h1>
+                <h1 class="font-bold text-white">NO DISPONIBLE</h1>
             </div>
         </div>
-        
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="text-center text-black">
                         <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                            Cantidad 
+                            Cantidad
                         </th>
                         <th class="px-4 py-2 cursor-pointer">
                             Concepto
@@ -268,16 +268,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -285,12 +285,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-gray-800 dark:border-gray-700">
+            <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
             </div>
 
             <hr>
-            
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 ">
+
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         Subtotal:
@@ -331,14 +331,14 @@
 
 
 
-{{-- 
+{{--
     <div>
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Vale | Solicitud # 0001') }} 
+                    {{ __('Vale | Solicitud # 0001') }}
                 </h2>
             </div>
 
@@ -354,35 +354,35 @@
         </div>
     </x-slot>
 
-    <div class="py-8 max-w-screen-xl mx-auto">
+    <div class="max-w-screen-xl py-8 mx-auto">
 
         <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-700">
-            <div class="container mx-auto px-4 w-2/3">
+            <div class="container w-2/3 px-4 mx-auto">
                 <div class="mb-3">
                     <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-gray-200">ESTATUS</label>
                 </div>
                 <div class="relative h-8 mb-4">
                     <div class="h-0.5 w-[86%] sm:w-[86%] md:w-[86%] lg:w-[92%] xl:w-[86%] bg-gray-300 absolute top-3 left-0 right-0 mx-12"></div>
-        
-                    <div class="flex justify-between items-center dark:text-gray-200">
+
+                    <div class="flex items-center justify-between dark:text-gray-200">
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Servicios Generales</p>
+                            <p class="mt-1 text-xs">Servicios Generales</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Unidad técnica</p>
+                            <p class="mt-1 text-xs">Unidad técnica</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full"></div>
-                            <p class="text-xs mt-1">Control Presupuestal</p>
+                            <p class="mt-1 text-xs">Control Presupuestal</p>
                         </div>
-        
+
                         <div class="relative flex flex-col items-center">
                             <div class="w-6 h-6 bg-green-300 rounded-full "></div>
-                            <p class="text-xs mt-1">Dirección Administrativa</p>
+                            <p class="mt-1 text-xs">Dirección Administrativa</p>
                         </div>
                     </div>
                 </div>
@@ -390,15 +390,15 @@
         </div>
 
         <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-zinc-800 dark:border-zinc-700">
-            <div class="container px-4 justify-center items-center text-center">
+            <div class="container items-center justify-center px-4 text-center">
                 <x-button-icons icon="eye" />
             </div>
         </div>
 
 
         <div class="p-8 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-            
-            <div class="px-4 grid grid-cols-12 gap-3 items-center justify-center dark:text-gray-200">
+
+            <div class="grid items-center justify-center grid-cols-12 gap-3 px-4 dark:text-gray-200">
                 <div class="col-span-1">
                     <h1 class="font-bold">Fecha</h1>
                     <span class="w-full text-sm ">00/00/0000</span>
@@ -419,10 +419,10 @@
                     <h1 class="font-bold" >MIR</h1>
                     <span class="w-full text-sm ">97438498328498-38293898</span>
                 </div>
-                
+
             </div>
 
-            <div class="container px-4 py-8 grid grid-cols-8 gap-3 items-center justify-center dark:text-gray-200">
+            <div class="container grid items-center justify-center grid-cols-8 gap-3 px-4 py-8 dark:text-gray-200">
                     <div>
                         <h1 class="font-bold">Proveedor</h1>
                         <span class="w-full text-sm ">--------</span>
@@ -441,7 +441,7 @@
                     </div>
             </div>
 
-            <div class="container px-4 py-8 grid grid-cols-8 gap-3 items-center justify-center dark:text-gray-200">
+            <div class="container grid items-center justify-center grid-cols-8 gap-3 px-4 py-8 dark:text-gray-200">
                     <div class="col-span-2">
                         <h1 class="font-bold">Justificación:</h1>
                         <label class="w-full text-sm "></label>
@@ -450,7 +450,7 @@
             </div>
 
             <div class="container px-4 py-6 dark:text-gray-200">
-                <div class="grid grid-cols-8 gap-3 items-center justify-center">
+                <div class="grid items-center justify-center grid-cols-8 gap-3">
                     <div class="col-span-2">
                         <h1 class="font-bold">Condiciones de entrega:</h1>
                         <label class="w-full text-sm "></label>
@@ -471,30 +471,30 @@
                             <span>13/09/2023</span>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
         </div>
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:text-gray-200">
+        <div class="relative flex items-center h-4 p-6 mt-4 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:text-gray-200">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">DISPONIBLE</h1>
+                <h1 class="font-bold text-white">DISPONIBLE</h1>
             </div>
         </div>
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                     <tr class="text-center dark:text-gray-200 ">
                         <th class="px-4 py-2 whitespace-nowrap">
-                            Cantidad 
+                            Cantidad
                         </th>
                         <th class="px-4 py-2">
                             Concepto
@@ -508,16 +508,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
+                    <tr class="text-center bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                         <td class="px-4 py-2">
-                            <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                            <div class="w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  flexitems-center dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -525,12 +525,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
+            <div class="h-16 p-6 bg-white text dark:bg-zinc-800 dark:border-none">
             </div>
 
             <hr class="dark:border-gray-400">
-            
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
+
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white dark:bg-zinc-800 ">
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         Subtotal:
@@ -546,7 +546,7 @@
                         I.V.A:
                     </p>
                 </div>
-                <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
+                <div class="w-2/3 col-span-2 px-3 ml-auto border rounded-lg text-end ">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         $00.00
                     </p>
@@ -564,24 +564,24 @@
             </div>
         </div>
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text">
+        <div class="relative flex items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg gap-x-7 w-30 text">
             <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
+                <h1 class="font-bold text-white">Partida presupuestal</h1>
             </div>
             <div>
                 <span class="text-sm text-white">09397589347598437597295</span>
             </div>
             <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">NO DISPONIBLE</h1>
+                <h1 class="font-bold text-white">NO DISPONIBLE</h1>
             </div>
         </div>
-        
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+
+        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                     <tr class="text-center dark:text-gray-200 ">
                         <th class="px-4 py-2 whitespace-nowrap">
-                            Cantidad 
+                            Cantidad
                         </th>
                         <th class="px-4 py-2">
                             Concepto
@@ -595,16 +595,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
+                    <tr class="text-center bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                         <td class="px-4 py-2">
-                            <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                            <div class="w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  flexitems-center dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                            <div class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg  dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -612,12 +612,12 @@
                 </tbody>
             </table>
 
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
+            <div class="h-16 p-6 bg-white text dark:bg-zinc-800 dark:border-none">
             </div>
 
             <hr class="dark:border-gray-400">
-            
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
+
+            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white dark:bg-zinc-800 ">
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         Subtotal:
@@ -633,7 +633,7 @@
                         I.V.A:
                     </p>
                 </div>
-                <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
+                <div class="w-2/3 col-span-2 px-3 ml-auto border rounded-lg text-end ">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                         $00.00
                     </p>

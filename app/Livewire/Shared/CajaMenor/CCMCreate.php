@@ -60,11 +60,11 @@ class CCMCreate extends Component
         public $telefono;
 
     // Select Data
-    public $fines_mir = [];
-    public $propositos_mir = [];
-    public $componetes_mir = [];
-    public $actividades_mir = [];
-    public $partidas_presupuestales = [];
+        public $fines_mir = [];
+        public $propositos_mir = [];
+        public $componetes_mir = [];
+        public $actividades_mir = [];
+        public $partidas_presupuestales = [];
 
     // Making Interactions
         public $mir2 = false;
@@ -73,6 +73,13 @@ class CCMCreate extends Component
         public $subtotal = 0.00;
         public $iva = 0.00;
         public $total = 0.00;
+
+        // Massive Selection
+        public $massive = false; //Activa la Seccíon de Seleccíon Masiva
+        public $elementsToMassive = [];
+        public $selectPartida = [];
+        public $partida_masiva = '';
+        public $select_all = false;
 
     // To Create
         public $compra_CM;
@@ -101,6 +108,8 @@ class CCMCreate extends Component
             'actividad_mir' => 'required',
             'sede_entrega' => 'required',
             'fecha_entrega' => 'required',
+
+            'elementsToMassive'   => 'array',
         ];
     }
 
@@ -133,7 +142,7 @@ class CCMCreate extends Component
         'sede_entrega.required' => 'Este campo es Obligatorio.',
     ];
 
-    protected $listeners = ['loadDataXML','setPartidaP'];
+    protected $listeners = ['loadDataXML','setPartidaP', 'cleanDataXML'];
 
     public function mount()
     {
@@ -310,21 +319,56 @@ class CCMCreate extends Component
 
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
+        $sumaImporte = 0;
+
         foreach ($conceptos as $concepto) {
-            $item = new stdClass;
+            
+            $importe = floatval($concepto['Importe']);
+
+            if(floatval($concepto['Importe']) != 0 && floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario']) > 0) {
+                $item = new stdClass;
                 $item->icm_cantidad = $concepto['Cantidad'];
-                $item->icm_unidad_medida = $concepto['Unidad'];
+                $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
                 $item->icm_concepto = $concepto['Descripcion'];
                 $item->icm_precio_u = $concepto['ValorUnitario'];
                 $item->icm_importe = floatval($concepto['Importe']);
                 $item->icm_partida_presupuestal = '';
 
-            array_push($this->elementosCompraMenor, $item);
+                array_push($this->elementosCompraMenor, $item);
+
+                $sumaImporte += $importe;
+            }
+        }
+
+        if($sumaImporte == 0){
+            $this->dispatch('simpleAlert','El archivo esta vacio','error');
+            return;
         }
         // dd($this->elementosCompraMenor);
+        // AQUI!!!!
+        foreach ($this->elementosCompraMenor as $index => $element) {
+            $this->selectPartida[$index] = "";
+        }
+
+        if(count($this->elementosCompraMenor) == 0){
+            $this->cleanDataXML();
+            $this->dispatch('simpleAlert','El archivo esta vacio','error');
+        }
 
         $this->CalculateTotals();
         $this->dispatch('simpleAlert','Datos cargados correctamente','success');
+    }
+
+
+    public function cleanDataXML(){
+        $this->elementosCompraMenor = [];
+        $this->razon_social = "-- -- --";
+        $this->RFC = "-- -- --";
+        $this->telefono  = "-- -- --";
+        $this->CalculateTotals();
+
+        $this->factura_id = '';
+        $this->dispatch('simpleAlert','Datos Borrados Correctamente','success');
     }
 
     public function RemoveFromList($id){
@@ -355,6 +399,41 @@ class CCMCreate extends Component
     public function setPartidaP($value,$id)
     {
         $this->elementosCompraMenor[$id]->icm_partida_presupuestal = $value;
+    }
+
+    public function selectAll()
+    {
+        foreach ($this->elementosCompraMenor as $index => $element) {
+            $this->elementsToMassive[$index] = true;
+        }
+
+        $this->massive = true;
+    }
+
+    public function assignMassive(){
+
+        $validatedData = $this->validate([
+            'elementsToMassive'   => 'array',
+            'partida_masiva'   => 'required',
+        ]);
+
+        foreach ($this->elementsToMassive as $index => $element) {
+            foreach ($this->elementosCompraMenor as $key => $item) {
+                if($index===$key){
+                    $this->elementosCompraMenor[$key]->icm_partida_presupuestal = $this->partida_masiva;
+                    $this->selectPartida[$index] = $this->partida_masiva;
+                }
+            }
+        }
+        $this->reset([
+            'elementsToMassive',
+        ]);
+        $this->partida_masiva = '';
+        $this->massive = false;
+        $this->select_all = false;
+
+        $this->dispatch('simpleAlert', 'Asignado correctamente', 'success');
+
     }
 
     // Ways of Save

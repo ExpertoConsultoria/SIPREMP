@@ -35,12 +35,12 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-zinc-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-neutral-900">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow dark:bg-zinc-800">
+                <header class="bg-white shadow dark:bg-zinc-800 dark:border-zinc-500">
                     <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -54,6 +54,8 @@
         </div>
 
         @stack('modals')
+
+        @livewire('wire-elements-modal')
 
         @livewireScripts
         @stack('js')

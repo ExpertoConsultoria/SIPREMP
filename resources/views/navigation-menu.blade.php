@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-gray-100 dark:bg-zinc-800 dark:border-zinc-700">
+<nav x-data="{ open: false }" class="bg-white border-gray-100 dark:bg-zinc-800 dark:border-zinc-500">
     <!-- Primary Navigation Menu -->
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -79,7 +79,7 @@
 
                             <x-dropdown-link>
                                 <button id="theme-toggle-button">Cambiar Modo</button>
-                            </x-dropdown-link>                            
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>

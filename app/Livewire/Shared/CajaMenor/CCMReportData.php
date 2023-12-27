@@ -9,6 +9,8 @@ use App\Models\ReporteCM;
 use App\Models\CompraMenor;
 use App\Models\CompraMenorList;
 
+use LivewireUI\Modal\ModalComponent;
+
 class CCMReportData extends Component
 {
 

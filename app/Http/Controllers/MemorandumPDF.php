@@ -14,10 +14,15 @@ class MemorandumPDF extends Controller
     {
         $data = Memorandum::where('memo_folio', $details_of_folio)->first();
 
+        $mir = $data['mir_id_fin'].
+                   $data['mir_id_proposito'] .
+                   $data['mir_id_componente'] .
+                   $data['mir_id_actividad'];
+
         $details = MemorandumList::where('im_folio', $details_of_folio)->first();
 
         $solicitante_id = $data->solicitante_id;
-      
+
 
           $solicitante = User::where('id', $solicitante_id)->first();
 
@@ -27,8 +32,8 @@ $pdf->titulo = 'Memorándum';
 $pdf->AddPage();
 
 
-$pdf->SetTopMargin(30); 
-$pdf->SetAutoPageBreak(true, 10); 
+$pdf->SetTopMargin(30);
+$pdf->SetAutoPageBreak(true, 10);
 
 
 $pdf->SetFont('helvetica', '', 10);
@@ -86,7 +91,7 @@ $html = <<<EOF
       <tr class="p-second">
         <td>{$data['memo_folio']}</td>
         <td>{$data['memo_folio']}</td>
-        <td>{$data['mir_id_fin']}</td>
+        <td>$mir</td>
       </tr>
     </table>
   </div>
@@ -139,7 +144,6 @@ $html = <<<EOF
 EOF;
 
 $pdf->writeHTML($html, true, false, true, false, '');
-
 $pdf->Output('ejemplo.pdf', 'I');
     }
 }

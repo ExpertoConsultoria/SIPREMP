@@ -65,6 +65,13 @@
                             <label
                                 class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                         </div>
+                        <button type="button"
+                            onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
+                            class="relative items-center col-span-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                            Agregar provedor
+                            <i class="fas fa-plus"></i>
+                        </button>
+
                         <div class="col-span-2">
                             <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar" placeholder="Buscar..." autofocus
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5

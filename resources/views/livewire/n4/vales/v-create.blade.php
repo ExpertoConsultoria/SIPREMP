@@ -4,7 +4,8 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    @if(!$edit_to_folio) {{ __('Nuevo Vale de Compra o Servicio') }} @else {{ __('Editar Vale de Compra o Servicio | ') }}{{ $folio }} @endif
+                    @if(!$edit_to_folio) {{ __('Nuevo Vale de Compra o Servicio') }} @else
+                    {{ __('Editar Vale de Compra o Servicio | ') }}{{ $folio }} @endif
                 </h2>
             </div>
 
@@ -23,7 +24,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="">
                         <path
                             d="M36.6666 18.3334H7.35664L16.1783 9.51172C16.3375 9.35798 16.4645 9.17407 16.5518 8.97073C16.6392 8.76739 16.6851 8.54869 16.6871 8.32739C16.689 8.10609 16.6468 7.88662 16.563 7.6818C16.4792 7.47697 16.3554 7.29088 16.199 7.1344C16.0425 6.97791 15.8564 6.85415 15.6516 6.77035C15.4467 6.68655 15.2273 6.64438 15.006 6.6463C14.7847 6.64823 14.566 6.6942 14.3626 6.78155C14.1593 6.8689 13.9754 6.99587 13.8216 7.15505L2.15497 18.8217C1.84252 19.1343 1.66699 19.5581 1.66699 20.0001C1.66699 20.442 1.84252 20.8658 2.15497 21.1784L13.8216 32.8451C14.136 33.1487 14.557 33.3166 14.994 33.3128C15.431 33.309 15.849 33.1338 16.158 32.8248C16.467 32.5157 16.6423 32.0977 16.6461 31.6607C16.6499 31.2237 16.4819 30.8027 16.1783 30.4884L7.35664 21.6667H36.6666C37.1087 21.6667 37.5326 21.4911 37.8451 21.1786C38.1577 20.866 38.3333 20.4421 38.3333 20.0001C38.3333 19.558 38.1577 19.1341 37.8451 18.8215C37.5326 18.509 37.1087 18.3334 36.6666 18.3334Z"
-                            fill="#515151" />
+                            class="fill-neutral-600 dark:fill-neutral-500" />
                     </svg>
                 </a>
             </div>
@@ -35,7 +36,7 @@
 
             {{-- Basic Data --}}
             <div
-                class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 mb-6 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
 
                     {{-- Default --}}
@@ -43,25 +44,28 @@
                         <div></div>
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $fecha }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $fecha }}
+                            </p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $folio }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $folio }}
+                            </p>
                         </div>
                         <div>
                             <x-label for="solicitante" value="{{ __('Solicitante') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 @if(!$edit_to_folio)
-                                    {{ Auth::user()->name }}
+                                {{ Auth::user()->name }}
                                 @else
-                                    {{ $solicitante }}
+                                {{ $solicitante }}
                                 @endif
                             </p>
                         </div>
                         <div>
                             <x-label for="lugar" value="{{ __('Sede/Lugar') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $lugar }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $lugar }}
+                            </p>
                         </div>
                         <div>
                             <button type="button"
@@ -73,41 +77,51 @@
 
                     {{-- Proveedor --}}
                     <div class="grid grid-cols-12 gap-6 mt-6">
+                        <button type="button"
+                            onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
+                            class="relative items-center col-span-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                            Agregar provedor
+                            <i class="fas fa-plus"></i>
+                        </button>
                         <div class="flex items-center col-span-2">
                             <label
                                 class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                         </div>
                         <div class="col-span-4">
-                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar" placeholder="Buscar..." autofocus
+                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
+                                placeholder="Buscar..." autofocus
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
-                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
-                                @if($showResults)
-                                    <ul>
-                                        @if(!empty($resultados))
-                                            @foreach($resultados as $resultado)
-                                            <li wire:click='getProvedor({{ $resultado->id }})'>{{ $resultado->RazonSocial }}</li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
+                            @if($showResults)
+                            <ul>
+                                @if(!empty($resultados))
+                                @foreach($resultados as $resultado)
+                                <li wire:click='getProvedor({{ $resultado->id }})'>{{ $resultado->RazonSocial }}</li>
+                                @endforeach
                                 @endif
+                            </ul>
+                            @endif
 
-                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor'/>
+                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor' />
                             @error('id_proveedor')
-                                <span class="text-xs text-rose-600">{{ $message }}</span>
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
                         </div>
+
+
                         <div class="col-span-2">
                             <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $razon_social }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $razon_social }}</p>
                         </div>
                         <div class="col-span-2">
                             <x-label for="rfc" value="{{ __('RFC') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $RFC }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $RFC }}</p>
                         </div>
                         <div class="col-span-2">
                             <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
                                 {{ $telefono }}
                             </p>
                         </div>
@@ -118,20 +132,22 @@
                         <div
                             class="grid grid-cols-2 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-10">
                             <div class="text-left">
-                                <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación</label>
+                                <label
+                                    class="block text-lg font-bold text-gray-900 dark:text-white">Justificación</label>
                             </div>
 
                             <div class="col-span-4">
-                                <textarea name="justificacion" rows="4" placeholder="Justifique el motivo de la solicitud" wire:model.blur="justificacion"
+                                <textarea name="justificacion" rows="4"
+                                    placeholder="Justifique el motivo de la solicitud" wire:model.blur="justificacion"
                                     class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                                 @error('justificacion')
-                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                <span class="text-xs text-rose-600">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="w-auto mx-2 mt-6 h-36">
                                 <div
-                                    class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                    class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
                                     <p
                                         class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
                                         MIR</p>
@@ -143,20 +159,21 @@
                                     <x-label for="NoFin" value="{{ __('Fin *') }}" />
                                     <select wire:model.blur="NoFin" wire:change="GetProposes($event.target.value)"
                                         name="NoFin"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         @foreach ($fines_mir as $fin_mir)
-                                            <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
+                                        <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
                                         @endforeach
                                     </select>
                                     @error('NoFin')
-                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="mt-4">
                                     <x-label for="NoProposito" value="{{ __('Proposito *') }}" />
-                                    <select wire:model.blur="NoProposito" wire:change="GetComponents($event.target.value)"
-                                        name="NoProposito" @if (!$mir2) disabled @endif
+                                    <select wire:model.blur="NoProposito"
+                                        wire:change="GetComponents($event.target.value)" name="NoProposito" @if (!$mir2)
+                                        disabled @endif
                                         class="@if (!$mir2) bg-gray-300 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                         <option selected disabled value="">Selecciona una Opción</option>
@@ -166,7 +183,7 @@
                                         @endforeach
                                     </select>
                                     @error('NoProposito')
-                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -177,22 +194,22 @@
                                     <select wire:model.blur="NoComponente"
                                         wire:change="GetActivities($event.target.value)" name="NoComponente" @if (!$mir3)
                                         disabled @endif
-                                        class="@if (!$mir3) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="@if (!$mir3) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         @foreach ($componetes_mir as $componete_mir)
-                                            <option value="{{ $componete_mir['NoComponente'] }}">
+                                        <option value="{{ $componete_mir['NoComponente'] }}">
                                             {{ $componete_mir['DescComponente'] }}</option>
                                         @endforeach
                                     </select>
                                     @error('NoComponente')
-                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="mt-4">
                                     <x-label for="NoActividad" value="{{ __('Actividad *') }}" />
                                     <select wire:model.blur="NoActividad" name="NoActividad" @if (!$mir4) disabled
                                         @endif
-                                        class="@if (!$mir4) bg-gray-300 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         @foreach ($actividades_mir as $actividad_mir)
                                         <option value="{{ $actividad_mir['NoActividad'] }}">
@@ -200,7 +217,7 @@
                                         @endforeach
                                     </select>
                                     @error('NoActividad')
-                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -210,11 +227,13 @@
                     {{-- Entrega --}}
                     <div class="grid grid-cols-10 gap-6 mb-6">
                         <div class="flex items-center col-span-3">
-                            <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Condiciones de
+                            <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Condiciones
+                                de
                                 entrega:</label>
                         </div>
                         <div class="flex items-center">
-                            <label class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar</label>
+                            <label
+                                class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar</label>
                         </div>
                         <div class="col-span-2">
                             <input wire:model.blur="lugar_entrega" type="text" name="lugar_entrega" placeholder="Lugar de Entrega"
@@ -224,11 +243,12 @@
                             @enderror
                         </div>
                         <div class="flex items-center">
-                            <label class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Fecha</label>
+                            <label
+                                class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Fecha</label>
                         </div>
                         <div class="col-span-2">
                             <input wire:model.blur="fecha_entrega" type="date" name="fecha_entrega"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required max="2100-12-31" step="1">
                             @error('fecha_entrega')
                             <span class="text-xs text-rose-600">{{ $message }}</span>
@@ -240,7 +260,7 @@
 
             {{-- Add to List --}}
             <div
-                class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow w-30 text dark:bg-gray-800 dark:border-gray-700">
+                class="p-6 mt-4 bg-white border-gray-200 rounded-lg shadow-lg  shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
 
                 <div class="container px-4">
                     <div class="grid gap-3 mb-6 lg:grid-cols-12">
@@ -262,7 +282,7 @@
                         <div class="col-span-4">
                             <x-label for="concepto" value="{{ __('Concepto') }}" />
                             <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @error('concepto') <span class="text-xs text-rose-600">{{ $message }}</span>
                             @enderror
                         </div>
@@ -292,7 +312,7 @@
 
                         <div class="col-span-4">
                             <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled value="">Selecciona una Opción</option>
                                 @foreach ($partidas_presupuestales as $pp)
                                 <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
@@ -410,36 +430,39 @@
                     <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
                     </div>
 
-                    <hr>
+                <hr>
 
                     <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
 
-                        <div class="col-span-10 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                Subtotal:</p>
-                        </div>
-                        <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->subtotal }}
-                            </p>
-                        </div>
-                        <div class="col-span-10 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:
-                            </p>
-                        </div>
-                        <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->iva }}
-                            </p>
-                        </div>
-                        <div class="col-span-10 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:
-                            </p>
-                        </div>
-                        <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->total_compra }}
-                            </p>
-                        </div>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                            Subtotal:</p>
+                    </div>
+                    <div class="col-span-2 px-3 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                            ${{ $data->subtotal }}
+                        </p>
+                    </div>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:
+                        </p>
+                    </div>
+                    <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                            ${{ $data->iva }}
+                        </p>
+                    </div>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:
+                        </p>
+                    </div>
+                    <div class="col-span-2 px-3 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                            ${{ $data->total_compra }}
+                        </p>
                     </div>
                 </div>
+            </div>
             @endforeach
 
             {{-- Buttons --}}

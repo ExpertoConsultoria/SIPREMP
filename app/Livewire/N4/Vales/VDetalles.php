@@ -12,6 +12,8 @@ use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
 use App\Models\Empresa;
+use App\Models\proveedores_temporales;
+
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
@@ -56,7 +58,11 @@ class VDetalles extends Component
         $this->MIR =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
 
         // Proveedor Data
-        $this->proveedor = Empresa::find($this->vale_details->id_proveedor);
+        if ( $this -> vale_details -> tipo_proveedor == 'Fijo') {
+            $this->proveedor = Empresa::find($this->vale_details->id_proveedor);
+        } else if ( $this -> vale_details -> tipo_proveedor == 'Temporal') {
+            $this->proveedor = proveedores_temporales::find($this->vale_details->id_proveedor);
+        }
 
         // Desglosar Partidas
 

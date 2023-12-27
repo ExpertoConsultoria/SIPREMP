@@ -122,15 +122,15 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+
                     @if ($rechazadas->hasPages())
                         <div class="px-6 py-3">
                             {{ $rechazadas->links() }}
                         </div>
                     @endif
                 @else
-                <div class="bg-gray-50 dark:bg-gray-700">
-                    <p class="p-4 font-semibold text-center">
+                <div class="bg-gray-50 dark:bg-zinc-700">
+                    <p class="p-4 font-semibold text-center text-gray-700 dark:text-gray-300">
                         !! No existen registros ¡¡
                     </p>
                 </div>

@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Nuevo vale de compra o servicio | Solicitud #0001')}}
+                    {{_('Nuevo vale de compra o servicio | Solicitud #000')}}
                 </h2>
             </div>
 
@@ -83,7 +83,7 @@
                                 <div class="flex mt-3">
                                     <h1 class="font-bold">Proveedor</h1>
                                 </div>
-                                
+
 
                                 <div class="col-span-9" >
 
@@ -92,25 +92,25 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                     dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                     </div>
-                                    
+
                                     <div class="">
                                         <button class="uppercase text-sm text-blue-400">
                                             <p >Dar de alta nuevo proveedor</p>
                                         </button>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="container px-4 py-6">
                             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-10 gap-4 mb-1">
-                                
+
                                 <div class="flex col-span-2 gap-7">
                                     <div class="flex items-center ">
                                         <h1 class="font-bold">ID Contrato</h1>
                                     </div>
-    
+
                                     <div class=" flex items-center bg-gray-100 border border-gray-400 text-sm rounded-lg p-2 dark:bg-zinc-700 dark:border-zinc-600 ">
                                         <span class="mx-auto">#00000000</span>
                                     </div>
@@ -121,24 +121,24 @@
                                         <h1 class="font-bold">Razon social</h1>
                                         <label class="text-sm">WALMART</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">RFC</h1>
                                         <label class="text-sm">HHHHHH09090900</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">Telefono</h1>
                                         <label class="text-sm">HHHHHH09090900</label>
                                     </div>
-    
+
                                     <div class="col-span-2">
                                         <h1 class="font-bold">Periodo</h1>
                                         <label class="text-sm">Primer trimestre</label>
                                     </div>
                                 {{-- </div> --}}
 
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="container px-4 py-6">
@@ -153,7 +153,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
                     {{--2da PARTE --}}
@@ -166,7 +166,7 @@
                                     <input type=""name="cantidad" placeholder="int/txt/select"
                                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
-                                
+
                                 <div class="col-span-4">
                                     <x-label for="concepto" value="{{ __('Concepto') }}" />
                                     <input type="text" name="concepto" placeholder="txt"
@@ -203,7 +203,7 @@
                     </div>
 
                     {{-- 3ra PARTE Nota: Solucionar la vista en dispositivos moviles --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:text-gray-200">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 rounded-lg w-30 dark:text-gray-200">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>
@@ -233,7 +233,7 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                                 <tr class="text-center dark:text-gray-200 ">
                                     <th class="px-4 py-2 whitespace-nowrap">
-                                        Cantidad 
+                                        Cantidad
                                     </th>
                                     <th class="px-4 py-2">
                                         Concepto
@@ -263,12 +263,12 @@
                                 </tr>
                             </tbody>
                         </table>
-            
+
                         <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
                         </div>
-            
+
                         <hr class="dark:border-gray-400">
-                        
+
                         <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
                             <div class="col-span-10 text-end">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
@@ -304,7 +304,7 @@
                     </div>
 
                     {{-- 5ta parte  --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:text-gray-400">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 rounded-lg w-30 dark:text-gray-400 ">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>
@@ -322,7 +322,7 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                                 <tr class="text-center dark:text-gray-200 ">
                                     <th class="px-4 py-2 whitespace-nowrap">
-                                        Cantidad 
+                                        Cantidad
                                     </th>
                                     <th class="px-4 py-2">
                                         Concepto
@@ -352,12 +352,12 @@
                                 </tr>
                             </tbody>
                         </table>
-            
+
                         <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
                         </div>
-            
+
                         <hr class="dark:border-gray-400">
-                        
+
                         <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
                             <div class="col-span-10 text-end">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
@@ -439,7 +439,7 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                                 <tr class="text-center dark:text-gray-200">
                                     <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                                        Cantidad 
+                                        Cantidad
                                     </th>
                                     <th class="px-4 py-2 cursor-pointer">
                                         Unidad de media
@@ -454,10 +454,10 @@
                             </thead>
                             <tbody>
                                 <tr class="bg-white dark dark:bg-zinc-800 dark:border-gray-700 text-center">
-                                    <td class="px-4 py-2"> 
+                                    <td class="px-4 py-2">
                                         <p>1</p>
                                     </td>
-                                    <td class="px-4 py-2"> 
+                                    <td class="px-4 py-2">
                                         <p>2 gallos, 1 Tsuru</p>
                                     </td>
                                     <td class="px-4 py-2">
@@ -470,7 +470,7 @@
                             </tbody>
                         </table>
 
-                        
+
                     </div>
 
                     {{-- Novena parte --}}
@@ -573,14 +573,14 @@
                                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </textarea>
                         </div>
-                        
+
                         <div class="py-4">
                             <button type="button"
                             class="p-3 text-md w-full font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             ADJUNTAR ANEXOS ADICIONALES Y DOCUMENTACIÓN COMPLEMENTARIA, EN CASO DE QUE SE REQUIERA
                             </button>
                         </div>
-                    </div>  
+                    </div>
 
                     {{-- Botonoes --}}
                             <div class="container mt-16 flex relative items-center w-full">
@@ -595,13 +595,13 @@
                                     <div class="text-center col-span-1 ml-auto">
                                         <button type="button"
                                             class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                            Guardar 
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>
 
                             </div>
-                        
+
 
                 </form>
 

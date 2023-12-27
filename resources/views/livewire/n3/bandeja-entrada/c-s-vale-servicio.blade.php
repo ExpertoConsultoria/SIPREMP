@@ -447,7 +447,7 @@
                         <span class="w-full text-sm ">97438498328498-38293898</span>
                     </div>
                     <div class="col-span-3 ml-auto">
-                        
+
                         <div>
                             <x-button-icons icon="eye" />
                         </div>
@@ -700,7 +700,7 @@
             </div>
         </div>
 
-        
+
         <div class="mt-16">
             <div class="container">
                 <div class="flex relative items-center w-full dark:bg-gray-800 dark:border-gray-700">

@@ -21,32 +21,33 @@
     </x-slot>
 
     <div class="max-w-screen-xl py-8 mx-auto">
+
         <x-vale-status vale_id="{{$vale_details->id}}" />
 
-        <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
             <div class="container px-4">
                 <div class="grid items-center justify-center grid-cols-12 gap-3 ">
 
                     <div class="col-span-1">
                         <h1 class="font-bold">Fecha</h1>
-                        <span class="w-full text-sm ">{{$vale_details->fecha}}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha}}</span>
                     </div>
                     <div class="col-span-2">
                         <h1 class="font-bold">Folio</h1>
-                        <span class="w-full text-sm ">{{$vale_details->folio}}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->folio}}</span>
                     </div>
                     <div class="col-span-2">
                         <h1 class="font-bold">Área</h1>
-                        <span class="w-full text-sm ">{{$vale_details->solicitante->name}} -
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->solicitante->name}} -
                         {{$vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area ? $vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area->AreaNombre : $vale_details->solicitante->name}}</span>
                     </div>
                     <div class="col-span-3">
                         <h1 class="font-bold">Lugar</h1>
-                        <span class="w-full text-sm ">{{$vale_details->lugar}}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar}}</span>
                     </div>
                     <div class="col-span-3">
                         <h1 class="font-bold" >MIR</h1>
-                        <span class="w-full text-sm ">{{ $MIR }}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $MIR }}</span>
                     </div>
                     <div class="col-span-1 ml-auto">
                         {{-- Agregarle el pinche texto --}}
@@ -78,15 +79,15 @@
                     </div>
                     <div class="col-span-2">
                         <h1 class="font-bold">Razón social</h1>
-                        <span class="w-full text-sm ">{{ $proveedor->RazonSocial }}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RazonSocial }}</span>
                     </div>
                     <div class="col-span-2">
                         <h1 class="font-bold">RFC</h1>
-                        <span class="w-full text-sm ">{{ $proveedor->RFC }}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RFC }}</span>
                     </div>
                     <div class="col-span-2">
                         <h1 class="font-bold" >Teléfono</h1>
-                        <span class="w-full text-sm ">{{ $proveedor?->Telefono ? $proveedor->Telefono : 'Ninguno' }}</span>
+                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor?->Telefono ? $proveedor->Telefono : 'Ninguno' }}</span>
                     </div>
                 </div>
             </div>
@@ -94,7 +95,7 @@
             <div class="container px-4 py-6">
                 <div class="grid grid-cols-1 gap-2 mb-1">
                     <div class="text-left">
-                        <label class="block text-base font-bold text-gray-900 dark:text-white">Justificación:</label>
+                        <label class="block text-base font-bold text-gray-900">Justificación:</label>
                     </div>
                     <div class="col-span-9">
                         <p class="font-sans text-sm text-gray-500 font-extralight dark:text-gray-200">
@@ -115,7 +116,7 @@
                             <h1>Lugar:</h1>
                         </div>
                         <div>
-                            <span>{{$vale_details->lugar_entrega}}</span>
+                            <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar_entrega}}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
@@ -123,7 +124,7 @@
                             <h1>Fecha:</h1>
                         </div>
                         <div>
-                            <span>{{$vale_details->fecha_entrega}}</span>
+                            <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha_entrega}}</span>
                         </div>
                     </div>
 

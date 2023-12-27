@@ -14,6 +14,7 @@ use App\Models\MemorandumList;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
+use App\Models\proveedores_temporales;
 use App\Models\Empresa;
 use App\Models\Plan1Fin;
 use App\Models\Plan2Proposito;
@@ -72,11 +73,25 @@ class VCreateFromMemo extends Component
         public $razon_social = '---';
         public $RFC = '---';
         public $telefono = '---';
+        public $tipo_proveedor;
+
+        // ? ATRIBUTOS PROVEEDOR_TEMPORAL
+        public $onAddProveedor = false;
+
+        public $new_nombre;
+        public $new_telefono;
+        public $new_persona;
+        public $new_direccion;
+        public $new_codigo_postal;
+        public $new_razon_social;
+        public $new_RFC;
+        public $new_regimen;
+        public $new_datos_banco;
 
 
     protected function rules() {
         return [
-            'id_proveedor' => 'required',
+            // 'id_proveedor' => 'required',
             'justificacion'   => 'required|string',
             'lugar_entrega'   => 'required|string',
             'fecha_entrega' => 'required|date',
@@ -84,7 +99,7 @@ class VCreateFromMemo extends Component
     }
 
     protected $messages = [
-        'id_proveedor.required' => 'No ha seleccionado ningún Proveedor.',
+        // 'id_proveedor.required' => 'No ha seleccionado ningún Proveedor.',
 
         'justificacion.required' => 'Este campo es Obligatorio.',
         'justificacion.string' => 'Texto Invalido.',
@@ -95,6 +110,9 @@ class VCreateFromMemo extends Component
         'fecha_entrega.required' => 'Este campo es Obligatorio.',
         'fecha_entrega.date' => 'No es una fecha.',
     ];
+
+    protected $listeners = ['loadProveedor'];
+
 
     public function mount()
     {
@@ -214,18 +232,20 @@ class VCreateFromMemo extends Component
     }
 
     public function getProvedor($id){
-        $empresa = Empresa::find($id);
 
-        //Reset Data
-        $this->buscar = $empresa->RazonSocial;
-        $this->seleccionado = $empresa;
-        $this->showResults = false;
+            $empresa = Empresa::find($id);
+            $this -> tipo_proveedor = 'Fijo';
+            //Reset Data
+            $this->buscar = $empresa->RazonSocial;
+            $this->seleccionado = $empresa;
+            $this->showResults = false;
 
-        // Set Provedor Data
-        $this->id_proveedor = $empresa->id;
-        $this->razon_social = $empresa->RazonSocial;
-        $this->RFC = $empresa->RFC;
-        $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
+            // Set Provedor Data
+            $this->id_proveedor = $empresa->id;
+            $this->razon_social = $empresa->RazonSocial;
+            $this->RFC = $empresa->RFC;
+            $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
+
     }
 
     //
@@ -239,11 +259,28 @@ class VCreateFromMemo extends Component
     }
 
     // Ways for Save
-    public function Save(){
+    public function Save() {
         $this->validate();
         if (count($this->memoList)) {
             $this->folio = Helper::FolioGenerator(new Vales_compra, 'folio', 6, 'VCS', $this->userSedeCode);
             $token = strtoupper(Str::random(5));
+            if ( $this -> onAddProveedor ) {
+                $nuevoProveedor = new proveedores_temporales([
+                    'Nombre' => $this->new_nombre,
+                    'Telefono' => $this->new_telefono,
+                    'Persona' => $this->new_persona,
+                    'Direccion' => $this->new_direccion,
+                    'CodigoPostal' => $this->new_codigo_postal,
+                    'RazonSocial' => $this->razon_social,
+                    'RFC' => $this->new_RFC,
+                    'regimen' => $this->new_regimen,
+                    'datosBanco' => $this->new_datos_banco,
+                    'tipo_proveedor' => $this->tipo_proveedor,
+                    'DatosContacto' => $this->telefono,
+                ]);
+                $nuevoProveedor->save();
+                $this -> id_proveedor = $nuevoProveedor -> id;
+            }
 
             $this->vale_compra = new Vales_compra();
             $this->vale_compra->folio = $this->folio;
@@ -263,8 +300,10 @@ class VCreateFromMemo extends Component
             $this->vale_compra->total_compra = $this->total;
             $this->vale_compra->folio_solicitud = $this->details_of_folio;
             $this->vale_compra->token_solicitante = $token;
+            $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
             $this->vale_compra->creation_status = 'Enviado';
+            $this->vale_compra->id_proveedor = $this -> id_proveedor;
 
             $this->vale_compra->save();
 
@@ -317,8 +356,28 @@ class VCreateFromMemo extends Component
         $this->vale_compra->total_compra = $this->total;
         $this->vale_compra->folio_solicitud = $this->details_of_folio;
         $this->vale_compra->token_solicitante = $token;
+        $this->vale_compra->tipo_proveedor = $this -> tipo_proveedor;
 
         $this->vale_compra->creation_status = 'Borrador';
+
+        if ( $this -> onAddProveedor ) {
+            $nuevoProveedor = new proveedores_temporales([
+                'Nombre' => $this->new_nombre,
+                'Telefono' => $this->new_telefono,
+                'Persona' => $this->new_persona,
+                'Direccion' => $this->new_direccion,
+                'CodigoPostal' => $this->new_codigo_postal,
+                'RazonSocial' => $this->razon_social,
+                'RFC' => $this->new_RFC,
+                'regimen' => $this->new_regimen,
+                'datosBanco' => $this->new_datos_banco,
+                'tipo_proveedor' => $this->tipo_proveedor,
+                'DatosContacto' => $this->telefono,
+            ]);
+            $nuevoProveedor->save();
+            $this -> id_proveedor = $nuevoProveedor -> id;
+        }
+        $this->vale_compra->id_proveedor = $this -> id_proveedor;
 
         $this->vale_compra->save();
 
@@ -338,5 +397,26 @@ class VCreateFromMemo extends Component
 
         $this->dispatch('alertCRUD', 'Exito!', 'Borrador Generado Correctamente', 'success');
         return redirect()->route('vales.borradores');
+    }
+
+    public function loadProveedor($data_proveedor) {
+        $this -> onAddProveedor = true;
+        $this -> tipo_proveedor = 'Temporal';
+
+        $this -> new_nombre = $data_proveedor['new_nombre'];
+        $this -> new_telefono = $data_proveedor['new_telefono'];
+        $this -> new_persona = $data_proveedor['new_persona'];
+        $this -> new_direccion = $data_proveedor['new_direccion'];
+        $this -> new_codigo_postal = $data_proveedor['new_codigo_postal'];
+        $this -> new_razon_social = $data_proveedor['new_razon_social'];
+        $this -> new_RFC = $data_proveedor['new_RFC'];
+        $this -> new_regimen = $data_proveedor['new_regimen'];
+        $this -> new_datos_banco = $data_proveedor['new_datos_banco'];
+
+        $this -> razon_social = $this -> new_razon_social;
+        $this -> RFC = $this -> new_RFC;
+        $this -> telefono = $this -> new_telefono;
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Se agregaron los datos del proveedor Correctamente', 'success');
     }
 }

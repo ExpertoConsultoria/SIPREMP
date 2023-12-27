@@ -9,7 +9,7 @@
 
 @endphp
 
-<div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+<div class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
     <div class="container px-4 mx-auto">
         <div class="mb-3">
             <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
@@ -17,7 +17,7 @@
         <div class="relative h-8 mb-4">
             {{-- Línea base de la barra de progreso --}}
             <div
-                class="h-1 w-[82%] sm:w-[85%] md:w-[89%] lg:w-[92%] xl:w-[93%] bg-gray-300 absolute top-3 left-0 right-0 mx-4">
+                class="h-1 w-[82%] sm:w-[85%] md:w-[89%] lg:w-[92%] xl:w-[93%] bg-zinc-300 dark:bg-gray-500 absolute top-3 left-0 right-0 mx-4">
             </div>
 
             {{-- Círculos y etiquetas --}}
@@ -25,7 +25,7 @@
                 <div class="relative flex flex-col items-center">
                     <div class="w-6 h-6 bg-green-400 rounded-full">
                     </div>
-                    <p class="mt-1 text-xs">Enviado</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Enviado</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
@@ -40,7 +40,7 @@
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
                     "></div>
-                    <p class="mt-1 text-xs">Filtrado</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Filtrado</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
@@ -55,7 +55,7 @@
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
                     "></div>
-                    <p class="mt-1 text-xs">Servicios Generales</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Servicios Generales</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
@@ -66,7 +66,7 @@
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
                     "></div>
-                    <p class="mt-1 text-xs">Unidad Técnica</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Unidad Técnica</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
@@ -77,7 +77,7 @@
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
                     "></div>
-                    <p class="mt-1 text-xs">Control Presupuestal</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Control Presupuestal</p>
                 </div>
 
                 <div class="relative flex flex-col items-center">
@@ -88,7 +88,7 @@
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
                     "></div>
-                    <p class="mt-1 text-xs">Dirección Administrativa</p>
+                    <p class="mt-1 text-xs text-gray-700 dark:text-gray-400">Dirección Administrativa</p>
                 </div>
             </div>
         </div>
