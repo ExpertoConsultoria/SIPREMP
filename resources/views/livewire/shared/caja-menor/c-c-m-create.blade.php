@@ -264,9 +264,11 @@
                                             <option value="" disabled selected> Partida Presupuestal </option>
 
                                             @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                    {{ $partida_presupuestal->PartidaEspecifica }}
-                                                </option>
+                                                @if (str_starts_with($partida_presupuestal->CvePptal, '2000') || str_starts_with($partida_presupuestal->CvePptal, '3000'))
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal->PartidaEspecifica }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         <div>
@@ -346,9 +348,11 @@
                                                     </option>
 
                                                     @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                        <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                            {{ $partida_presupuestal->PartidaEspecifica }}
-                                                        </option>
+                                                        @if (str_starts_with($partida_presupuestal->CvePptal, '2000') || str_starts_with($partida_presupuestal->CvePptal, '3000'))
+                                                            <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                                {{ $partida_presupuestal->PartidaEspecifica }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                     {{-- opciones --}}
                                                 </select>

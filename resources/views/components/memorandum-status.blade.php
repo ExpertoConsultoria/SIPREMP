@@ -61,10 +61,12 @@
                 <div class="relative flex flex-col items-center">
                     <div class="
 
-                        @if(( $vale_data->creation_status === 'Validado' ||  $vale_data->pass_filter===1) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null)
-                            w-6 h-6 bg-green-400 rounded-full
-                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_rev_val===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_filter===0)
-                            w-6 h-6 bg-red-400 rounded-full
+                        @if ($vale_data)
+                            @if(( $vale_data->creation_status === 'Validado' ||  $vale_data->pass_filter===1) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null)
+                                w-6 h-6 bg-green-400 rounded-full
+                            @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_rev_val===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_filter===0)
+                                w-6 h-6 bg-red-400 rounded-full
+                            @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
@@ -76,10 +78,12 @@
                 <div class="relative flex flex-col items-center">
                     <div class="
 
-                        @if(( $vale_data->creation_status === 'Presupuestado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null)
-                            w-6 h-6 bg-green-400 rounded-full
-                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_disp_ppta===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===0 &&  $vale_data->pass_filter===1)
-                            w-6 h-6 bg-red-400 rounded-full
+                        @if ($vale_data)
+                            @if(( $vale_data->creation_status === 'Presupuestado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null)
+                                w-6 h-6 bg-green-400 rounded-full
+                            @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_disp_ppta===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===0 &&  $vale_data->pass_filter===1)
+                                w-6 h-6 bg-red-400 rounded-full
+                            @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
@@ -91,10 +95,12 @@
                 <div class="relative flex flex-col items-center">
                     <div class="
 
-                        @if(( $vale_data->creation_status === 'Aprobado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null &&  $vale_data->token_autorizacion != null)
-                            w-6 h-6 bg-green-400 rounded-full
-                        @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_autorizacion===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)
-                            w-6 h-6 bg-red-400 rounded-full
+                        @if ($vale_data)
+                            @if(( $vale_data->creation_status === 'Aprobado' || ( $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)) &&  $vale_data->token_solicitante != null &&  $vale_data->token_rev_val != null &&  $vale_data->token_disp_ppta != null &&  $vale_data->token_autorizacion != null)
+                                w-6 h-6 bg-green-400 rounded-full
+                            @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_autorizacion===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)
+                                w-6 h-6 bg-red-400 rounded-full
+                            @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
                         @endif
