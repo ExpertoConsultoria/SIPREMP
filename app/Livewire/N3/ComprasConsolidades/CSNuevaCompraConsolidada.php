@@ -16,11 +16,14 @@ use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
 
+use App\Models\compra_consolidada;
+use App\Models\item_compra_consolidada;
+
 use stdClass;
 class CSNuevaCompraConsolidada extends Component
 {
     //? Atributos del proveedor
-    public $onAddProveedor;
+    public $onAddProveedor = false;
     public $tipo_proveedor;
     public $new_nombre;
     public $new_telefono;
@@ -50,7 +53,7 @@ class CSNuevaCompraConsolidada extends Component
     public $muestras = '';
     public $RRHH = '';
     public $soporte_tecnico = '';
-    public $manenimiento = '';
+    public $mantenimiento = '';
     public $capacitacion = '';
     public $vigencia = '';
     public $forma_pago = '';
@@ -91,6 +94,7 @@ class CSNuevaCompraConsolidada extends Component
     public $proposito_mir = '';
     public $componente_mir = '';
     public $actividad_mir = '';
+    public $mir_id_cotizacion = '';
 
     // ? Proveedores
     public $proveedores = [];
@@ -111,15 +115,18 @@ class CSNuevaCompraConsolidada extends Component
             'importe' => 'required',
             'partida_presupuestal_id' => 'required',
 
-            'fin_mir' => 'required.',
-            'proposito_mir' => 'required.',
-            'componente_mir' => 'required.',
-            'actividad_mir' => 'required.',
+            'fin_mir' => 'required',
+            'proposito_mir' => 'required',
+            'componente_mir' => 'required',
+            'actividad_mir' => 'required',
 
             // 'id_proveedor' => 'required',
             'justificacion'   => 'required|string',
 
             // ? datos del anexo
+            'asunto' => 'required',
+            'objeto' => 'required',
+            'alcance' => 'required',
             'procEntrega' => 'required',
             'entregables' => 'required',
             'muestras' => 'required',
@@ -136,7 +143,7 @@ class CSNuevaCompraConsolidada extends Component
     protected $messages = [
         // 'id_proveedor.required' => 'No ha seleccionado ningún Proveedor.',
 
-        'justificacion.required' => 'Este campo es Obligatorio.',
+        'justificacion.required' => 'La justificacion es obligatoria.',
         'justificacion.string' => 'Texto Invalido.',
 
         'lugar_entrega.required' => 'Este campo es Obligatorio.',
@@ -145,10 +152,11 @@ class CSNuevaCompraConsolidada extends Component
         'fecha_entrega.required' => 'Este campo es Obligatorio.',
         'fecha_entrega.date' => 'No es una fecha.',
 
-        'NoFin.required' => 'Este campo es Obligatorio.',
-        'NoProposito.required' => 'Este campo es Obligatorio.',
-        'NoComponente.required' => 'Este campo es Obligatorio.',
-        'NoActividad.required' => 'Este campo es Obligatorio.',
+        // MIR data
+        'fin_mir' => 'El campo de fin es requerido',
+        'proposito_mir' => 'El campo de proposito es requerido',
+        'componente_mir' => 'El campo de componente es requerido',
+        'actividad_mir' => 'El campo de actividad es requerido',
 
         // Element List
         'cantidad.required' => 'La cantidad es un campo Obligatorio.',
@@ -168,6 +176,9 @@ class CSNuevaCompraConsolidada extends Component
         'partida_presupuestal_id.required' => 'La partida presupuestal es un campo Obligatorio.',
 
         // ? datos del anexo
+        'asunto' => 'el asunto es necesario',
+        'objeto' => 'el objeto es necesario',
+        'alcance' => 'el alcance es necesario',
         'procEntrega' => 'el procedimiento de entrega es necesario',
         'entregables' => 'es necesario especificar los entregables',
         'muestras' => 'es necesario especificar las muestras',
@@ -179,6 +190,7 @@ class CSNuevaCompraConsolidada extends Component
         'forma_pago' => 'es necesario especificar la forma de pago',
         'garantia' => 'es necesario especificar la garantia',
     ];
+
     public function render()
     {
         return view('livewire.n3.compras-consolidades.c-s-nueva-compra-consolidada');
@@ -243,7 +255,7 @@ class CSNuevaCompraConsolidada extends Component
         }
     }
 
-    public function getProvedor($id){
+    public function getProvedor($id) {
         if ( $this -> tipo_proveedor == 'Temporal' ) {
             $provedorTemp = proveedores_temporales::find($id);
 
@@ -269,7 +281,6 @@ class CSNuevaCompraConsolidada extends Component
             $this->telefono = $empresa->Telefono ? $empresa->Telefono : 'Ninguno';
         }
     }
-
 
     // * AGREGAR ITEM
     public function AddToList() {
@@ -299,6 +310,7 @@ class CSNuevaCompraConsolidada extends Component
             'partida_presupuestal_id',
         ]);
     }
+
     public function RemoveFromList($element){
         $element= json_decode(json_encode($element), FALSE);
 
@@ -335,8 +347,6 @@ class CSNuevaCompraConsolidada extends Component
         $this->DesglosarPorPartidas();
         $this->dispatch('simpleAlert', 'Eliminado correctamente', 'success');
     }
-
-
 
     // ? MIR FUNCTIONS
     public function setPartidaP($value, $id)
@@ -391,7 +401,7 @@ class CSNuevaCompraConsolidada extends Component
         // dump(['Subtotal='.$this->subtotal,'IVA='.$this->iva,'Total='.$this->total]);
     }
 
-    public function CalculateAmount(){
+    public function CalculateAmount() {
         if (is_numeric($this->cantidad) && is_numeric($this->precio_unitario)) {
             $cantidad = floatval($this->cantidad);
             $p_u = floatval($this->precio_unitario);
@@ -445,6 +455,101 @@ class CSNuevaCompraConsolidada extends Component
             if(count($dataPartida->elementos)){
                 array_push($this->partidas_data, $dataPartida);
             }
+        }
+    }
+
+    
+    public function saveDraft() {
+        try {
+            //code...
+            $this -> validate([
+                'folio'   => 'required|string',
+                'fecha' => 'required|date',
+    
+                'fin_mir' => 'required',
+                'proposito_mir' => 'required',
+                'componente_mir' => 'required',
+                'actividad_mir' => 'required',
+    
+                // 'id_proveedor' => 'required',
+                'justificacion'   => 'required|string',
+    
+                // ? datos del anexo
+                'asunto' => 'required',
+                'objeto' => 'required',
+                'alcance' => 'required',
+                'procEntrega' => 'required',
+                'entregables' => 'required',
+                'muestras' => 'required',
+                'RRHH' => 'required',
+                'soporte_tecnico' => 'required',
+                'mantenimiento' => 'required',
+                'capacitacion' => 'required',
+                'vigencia' => 'required',
+                'forma_pago' => 'required',
+                'garantia' => 'required',
+            ]);
+            $compra_consolidada = compra_consolidada::create([
+                'fecha' => $this -> fecha,
+                // GENERAR FOLIO EN BORRADOR
+                'folio' => $this -> folio,
+                'justificacion' => $this -> justificacion,
+                // ? Anexo CompraCons
+                'asunto' => $this -> asunto,
+                'objeto' => $this -> objeto,
+                'alcance' => $this -> alcance,
+                'procedimiento_entrega' => $this -> procEntrega,
+                'entregables' => $this -> entregables,
+                'muestras' => $this -> muestras,
+                'recursos_humanos' => $this -> RRHH,
+                'soporte_tecnico' => $this -> soporte_tecnico,
+                'mantenimiento' => $this -> mantenimiento,
+                'capacitacion' => $this -> capacitacion,
+                'vigencia' => $this -> vigencia,
+                'forma_pago' => $this -> forma_pago,
+                'garantia' => $this -> garantia,
+                // ATRIBUTOS MIR
+                'mir_id_fin' => $this -> fin_mir,
+                'mir_id_proposito' => $this -> proposito_mir,
+                'mir_id_componente' => $this -> componente_mir,
+                'mir_id_cotizacion' => $this -> mir_id_cotizacion,
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $this -> validate([
+                'folio'   => 'required|string',
+                'fecha' => 'required|date',
+    
+                // 'cantidad' => 'required',
+                // 'concepto' => 'required',
+                // 'precio_unitario' => 'required',
+                // 'importe' => 'required',
+                // 'partida_presupuestal_id' => 'required',
+    
+                'fin_mir' => 'required',
+                'proposito_mir' => 'required',
+                'componente_mir' => 'required',
+                'actividad_mir' => 'required',
+    
+                // 'id_proveedor' => 'required',
+                'justificacion'   => 'required|string',
+    
+                // ? datos del anexo
+                'asunto' => 'required',
+                'objeto' => 'required',
+                'alcance' => 'required',
+                'procEntrega' => 'required',
+                'entregables' => 'required',
+                'muestras' => 'required',
+                'RRHH' => 'required',
+                'soporte_tecnico' => 'required',
+                'mantenimiento' => 'required',
+                'capacitacion' => 'required',
+                'vigencia' => 'required',
+                'forma_pago' => 'required',
+                'garantia' => 'required',
+            ]);
+            dd($th);
         }
     }
 }

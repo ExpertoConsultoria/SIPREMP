@@ -79,7 +79,6 @@
 
 
                                 <div class="col-span-9" >
-
                                     <div>
                                         <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
                                         placeholder="Buscar..." autofocus
@@ -103,6 +102,7 @@
                                         class="text-sm text-blue-400 uppercase">
                                         Agregar provedor
                                     </button>
+                                    {{ $onAddProveedor ? 'prov_temporal' : 'prov_fijo' }}
                                 </div>
                             </div>
                         </div>
@@ -674,7 +674,7 @@
                     {{-- Botonoes --}}
                     <div class="container mt-16 flex relative items-center w-full">
                         <div class="">
-                            <button type="button"
+                            <button type="button" wire:click="saveDraft"
                                 class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                                 Guardar Borrador
                             </button>

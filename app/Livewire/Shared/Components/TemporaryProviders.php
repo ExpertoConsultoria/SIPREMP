@@ -79,6 +79,17 @@ class TemporaryProviders extends ModalComponent
             $this->dispatch('loadProveedor', $proveedor);
         } catch (\Exception $th) {
             //throw $th;
+            $validatedData = $this->validate([
+                'new_razon_social' => 'required|string',
+                'new_RFC' => 'required|string',
+                'new_persona' => 'required',
+                'new_nombre' => 'required',
+                'new_telefono' => 'required',
+                'new_regimen' => 'required',
+                'new_direccion' => 'required',
+                'new_codigo_postal' => 'required',
+                'new_datos_banco' => 'required',
+            ]);
             dd($th);
         }
 
