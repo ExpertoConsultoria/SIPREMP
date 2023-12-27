@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('lugar');
 
             $table->unsignedBigInteger('id_encargado_entrega');
-            // $table->foreign('id_encargado_entrega') -> references('id') -> on ('users') -> nullable()->constrained()->nullOnDelete();
+            // $table->foreign('id_encargado_entrega')->references('id')->on ('users')->nullable()->constrained()->nullOnDelete();
 
             $table->unsignedBigInteger('id_solicitante');
-            // $table->foreign('id_solicitante') -> references('id') -> on ('users') -> nullable()->constrained()->nullOnDelete();
+            // $table->foreign('id_solicitante')->references('id')->on ('users')->nullable()->constrained()->nullOnDelete();
 
             $table->text('token_entrega');
             $table->text('estatus_SG');
-            $table->string('info_extra') -> nullable();
+            $table->string('info_extra')->nullable();
             $table->timestamps();
         });
     }

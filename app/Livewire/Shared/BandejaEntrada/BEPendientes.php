@@ -48,8 +48,9 @@ class BEPendientes extends Component
         if($this->cargarLista){
 
             $filtrados = [];
+            $user = User::find(Auth::id());
 
-            if(Auth::user() -> roles[0] -> name === 'N5:18A:F'){
+            if($user->hasRole('N5:18A:F')){
 
                 $memorandums = Memorandum::select('memo_fecha', 'memo_folio', 'memo_asunto', 'memo_creation_status', 'solicitante_id')
                     ->where('memo_asunto', 'like', '%' . $this->buscar . '%')
@@ -60,7 +61,7 @@ class BEPendientes extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if ($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A') {
+                    if ($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A'])) {
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -73,7 +74,7 @@ class BEPendientes extends Component
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
 
-            } elseif (Auth::user() -> roles[0] -> name === 'N4:SEGE'){
+            } elseif ($user->hasRole('N4:SEGE')){
 
                 $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id','destinatario')
                     ->where('memo_asunto','like','%'.$this->buscar.'%')
@@ -84,7 +85,7 @@ class BEPendientes extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if(($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A' || $memorandum->solicitante->roles[0]->name === 'N5:18A:F') && $memorandum->destinatario === "Servicos Generales"){
+                    if($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F'])&& $memorandum->destinatario === "Servicos Generales"){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -96,7 +97,8 @@ class BEPendientes extends Component
 
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
-            } elseif (Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+
+            } elseif ($user->hasRole('N3:UNTE')){
 
                 $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
@@ -104,11 +106,66 @@ class BEPendientes extends Component
                     ->where('pass_filter',0)
                     ->whereNull('motivo_rechazo')
                     ->whereNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
                     ->whereNotNull('token_solicitante')
                     ->get();
 
                 foreach ($vales as $vale) {
-                    if($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F' || $vale->solicitante->roles[0]->name === 'N4:SEGE'){
+                    if($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])){
+                        array_push($filtrados, $vale);
+                    }
+                }
+
+                $pendientes = Collection::make($filtrados);
+
+                $page = 0;
+                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+                $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
+                $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
+            } elseif ($user->hasRole('N2:CP')){
+
+                $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','Validado')
+                    ->where('pass_filter',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+                foreach ($vales as $vale) {
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
+                        array_push($filtrados, $vale);
+                    }
+                }
+
+                $pendientes = Collection::make($filtrados);
+
+                $page = 0;
+                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+                $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
+                $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
+            } elseif ($user->hasRole('N1:DA')){
+
+                $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','Presupuestado')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_disp_ppta')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+                foreach ($vales as $vale) {
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
                         array_push($filtrados, $vale);
                     }
                 }
@@ -121,7 +178,6 @@ class BEPendientes extends Component
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
             }
-
         }
 
         return view('livewire.shared.bandeja-entrada.b-e-pendientes',compact('pendientes'));
@@ -129,11 +185,13 @@ class BEPendientes extends Component
 
     public function getDetails($data)
     {
-        if(Auth::user() -> roles[0] -> name === 'N5:18A:F'){
+        $user = User::find(Auth::id());
+
+        if($user->hasRole('N5:18A:F')){
             return redirect()->to(route("bandejaentrada.details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user() -> roles[0] -> name === 'N4:SEGE'){
+        } elseif($user->hasRole('N4:SEGE')){
             return redirect()->to(route("bandejaentrada.advanced-details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+        } elseif($user->hasAnyRole(['N3:UNTE', 'N2:CP', 'N1:DA'])){
             return redirect()->to(route("bandejaentrada.valeServicio", ['details_of_folio'=>$data['folio']]));
         }
     }

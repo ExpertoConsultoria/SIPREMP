@@ -51,6 +51,7 @@ class VAprobados extends Component
                 ->where('justificacion','like','%'.$this->buscar.'%')
                 ->where('creation_status','Aprobado')
                 ->where('pass_filter',1)
+                ->where('pass_cp',1)
                 ->whereNull('motivo_rechazo')
                 ->whereNotNull('token_solicitante')
                 ->whereNotNull('token_rev_val')

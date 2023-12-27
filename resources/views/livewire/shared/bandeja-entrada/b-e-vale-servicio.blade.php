@@ -26,108 +26,96 @@
 
         <div class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
             <div class="container px-4">
-                <div class="grid items-center justify-center grid-cols-12 gap-3 ">
-
-                    <div class="col-span-1">
-                        <h1 class="font-bold">Fecha</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha}}</span>
+                <div class="grid grid-cols-6 gap-6">
+                    <div>
+                        <x-label for="fecha" value="{{ __('Fecha') }}" />
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{$vale_details->fecha}}</p>
                     </div>
-                    <div class="col-span-2">
-                        <h1 class="font-bold">Folio</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->folio}}</span>
+                    <div>
+                        <x-label for="folio" value="{{ __('Folio') }}" />
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{$vale_details->folio}}</p>
                     </div>
-                    <div class="col-span-2">
-                        <h1 class="font-bold">Área</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->solicitante->name}} -
-                        {{$vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area ? $vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area->AreaNombre : $vale_details->solicitante->name}}</span>
+                    <div>
+                        <x-label for="area" value="{{ __('Área') }}" />
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            {{$vale_details->solicitante->name}} -
+                            {{$vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area ?
+                            $vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area->AreaNombre :
+                            $vale_details->solicitante->name}}
+                        </p>
                     </div>
-                    <div class="col-span-3">
-                        <h1 class="font-bold">Lugar</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar}}</span>
+                    <div>
+                        <x-label for="lugar" value="{{ __('Sede/Lugar') }}" />
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{$vale_details->lugar}}</p>
                     </div>
-                    <div class="col-span-3">
-                        <h1 class="font-bold" >MIR</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $MIR }}</span>
+                    <div>
+                        <x-label for="mir" value="{{ __('MIR') }}" />
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                            {{ $MIR }}
+                        </p>
                     </div>
-                    <div class="col-span-1 ml-auto">
-                        {{-- Agregarle el pinche texto --}}
-                        <div>
-                            <button type="button"
-                            class="px-12 py-1 text-sm font-medium transition-all bg-blue-600 rounded-lg disabled:opacity-25 focus:outline-1 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 active:translate-y-1">
-                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_317_5348)">
-                                <path d="M15 6.05859C9.26818 6.05859 4.07027 9.19453 0.234735 14.2881C-0.0782449 14.7054 -0.0782449 15.2884 0.234735 15.7057C4.07027 20.8054 9.26818 23.9414 15 23.9414C20.7318 23.9414 25.9297 20.8054 29.7653 15.7119C30.0782 15.2946 30.0782 14.7116 29.7653 14.2942C25.9297 9.19453 20.7318 6.05859 15 6.05859ZM15.4112 21.2964C11.6063 21.5357 8.46425 18.3998 8.70359 14.5888C8.89997 11.4467 11.4468 8.89996 14.5888 8.70358C18.3937 8.46424 21.5357 11.6002 21.2964 15.4112C21.0939 18.5471 18.5471 21.0939 15.4112 21.2964ZM15.2209 18.3875C13.1712 18.5164 11.4774 16.8288 11.6125 14.7791C11.7168 13.0853 13.0914 11.7168 14.7852 11.6063C16.8349 11.4774 18.5287 13.1651 18.3937 15.2148C18.2832 16.9147 16.9086 18.2832 15.2209 18.3875Z" fill="white"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_317_5348">
-                                <rect width="30" height="30" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>
-                            </button>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="container px-4 py-8">
-                <div class="grid items-center justify-center grid-cols-8 gap-3 ">
-                    <div class="col-span-1">
-                        <h1 class="font-bold">Proveedor</h1>
-                    </div>
-                    <div class="col-span-2">
-                        <h1 class="font-bold">Razón social</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RazonSocial }}</span>
-                    </div>
-                    <div class="col-span-2">
-                        <h1 class="font-bold">RFC</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RFC }}</span>
-                    </div>
-                    <div class="col-span-2">
-                        <h1 class="font-bold" >Teléfono</h1>
-                        <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor?->Telefono ? $proveedor->Telefono : 'Ninguno' }}</span>
+                    <div>
+                        <button type="button"
+                            onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $vale_details->id_cotizacion }} } })"
+                            class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                            <i class="fas fa-eye"></i>
+                            COTIZACIÓN
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="container px-4 py-6">
+            <div class="grid grid-cols-6 gap-6 mt-6">
+                <div class="flex items-center">
+                    <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
+                </div>
+
+                <div>
+                    <x-label for="razonsocial" value="{{ __('Razón social') }}" />
+                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $proveedor->RazonSocial }}</p>
+                </div>
+                <div>
+                    <x-label for="rfc" value="{{ __('RFC') }}" />
+                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $proveedor->RFC }}</p>
+                </div>
+                <div>
+                    <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                        {{ $proveedor?->Telefono ? $proveedor->Telefono : 'Ninguno' }}</p>
+                </div>
+            </div>
+
+            <div class="container py-6">
                 <div class="grid grid-cols-1 gap-2 mb-1">
                     <div class="text-left">
-                        <label class="block text-base font-bold text-gray-900">Justificación:</label>
+                        <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación:</label>
                     </div>
                     <div class="col-span-9">
-                        <p class="font-sans text-sm text-gray-500 font-extralight dark:text-gray-200">
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
                             {{$vale_details->justificacion}}
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="container px-4 py-6">
-                <div class="grid items-center justify-center grid-cols-8 gap-3">
-                    <div class="col-span-2">
-                        <h1 class="font-bold">Condiciones de entrega:</h1>
-                        <label class="w-full text-sm "></label>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="font-bold">
-                            <h1>Lugar:</h1>
-                        </div>
-                        <div>
-                            <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar_entrega}}</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="font-bold">
-                            <h1>Fecha:</h1>
-                        </div>
-                        <div>
-                            <span class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha_entrega}}</span>
-                        </div>
-                    </div>
-
+            <div class="grid grid-cols-10 gap-6 mb-6">
+                <div class="flex items-center col-span-3">
+                    <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Condiciones de
+                        entrega:</label>
+                </div>
+                <div class="flex items-center">
+                    <label class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar:</label>
+                </div>
+                <div class="flex items-center col-span-2 text-center">
+                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{$vale_details->lugar_entrega}}
+                    </p>
+                </div>
+                <div class="flex items-center">
+                    <label class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Fecha:</label>
+                </div>
+                <div class="flex items-center col-span-2 text-center">
+                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{$vale_details->fecha_entrega}}
+                    </p>
                 </div>
             </div>
 
@@ -257,11 +245,16 @@
                         <div class="col-span-1 ml-auto text-center">
                             <button type="button" wire:click="$dispatch('alertForAprove')"
                                 class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                REVISAR Y VALIDAR
+                                @if (Auth::user()->hasRole('N3:UNTE'))
+                                    REVISAR Y VALIDAR
+                                @elseif (Auth::user()->hasRole('N2:CP'))
+                                    DISPONIBILIDAD PRESUPUESTAL
+                                @elseif (Auth::user()->hasRole('N1:DA'))
+                                    APROBAR VALE
+                                @endif
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -273,7 +266,7 @@
             Livewire.on('alertForAprove', (event) => {
                 Swal.fire({
                     title: '¿Estas seguro?',
-                    text: "¿Deseas aprobar esta Solicitud Extraordinaria?",
+                    text: "¿Deseas aprobar este Vale de Compra?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

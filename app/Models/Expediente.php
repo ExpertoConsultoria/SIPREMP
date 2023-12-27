@@ -4,48 +4,38 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use betterapp\LaravelDbEncrypter\Traits\EncryptableDbAttribute;
 
 class Expediente extends Model
 {
-    use HasFactory, EncryptableDbAttribute;
+    use HasFactory;
 
     // Por si acaso, ya que el modelo estaba como "Expedientes y lo cambie a singular"
     protected $table = 'expedientes';
 
     protected $fillable = [
-        'folio',
-        'folio_memorandum',
+        'exp_folio',
+        'fecha',
+        'concepto',
         'id_cotizacion',
-        'folio_vale_compra',
         'id_factura',
-        'folio_vale_entrada',
         'id_evd_foto',
+        'id_vale_firmado',
+        'memoranda_id',
+        'vales_compra_id',
     ];
 
-    // SIN  VALORES ENCRYPTABLES, AUN...
-    // protected $encryptable = [
-    //     'folio',
-    //     'folio_memorandum',
-    //     'id_cotizacion',
-    //     'folio_vale_compra',
-    //     'id_factura',
-    //     'folio_vale_entrada',
-    //     'id_evd_foto',
-    //     'info_extra'
-    // ];
 
         // RELACION UNO A UNO (INVERSO)
         public function memorandum(){
-            return $this->belongsTo(Memorandum::class);
+            return $this->hasOne(Memorandum::class, 'id', 'memoranda_id');
         }
 
-        public function ValeEntraMaterial(){
-            return $this->belongsTo(Vales_entrada_material::class);
-        }
+        // public function ValeEntraMaterial(){
+        //     return $this->belongsTo(Vales_entrada_material::class);
+        // }
 
         public function ValesCompra(){
-            return $this->belongsTo(Vales_compra::class);
+            return $this->hasOne(Vales_compra::class, 'id', 'vales_compra_id');
         }
 
 }

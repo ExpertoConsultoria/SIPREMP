@@ -5,6 +5,7 @@ namespace App\Livewire\Shared\Solicitud;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Helpers\Helper;
 use stdClass;
 
@@ -14,6 +15,7 @@ use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 
 use App\Models\User;
+use App\Models\Archivos;
 use App\Models\Memorandum;
 use App\Models\MemorandumList;
 use App\Models\PptoDeEgreso;
@@ -24,6 +26,7 @@ class SolicitudesCreate extends Component
     // Edit Class
     public $edit_to_folio = '';
     public $memo_to_edit;
+    public $quote;
 
     // Fields
     public $fecha;
@@ -67,6 +70,8 @@ class SolicitudesCreate extends Component
     public $iva = 0.00;
     public $total = 0.00;
 
+    public $is_quote = false;
+
     // To Create
     public $memorandum;
     public $memorandum_item;
@@ -91,6 +96,7 @@ class SolicitudesCreate extends Component
             'destinatario' => 'required',
 
             'asunto'   => 'required|string',
+            'cotizacion'   => 'required',
             'fin_mir'   => 'required',
             'proposito_mir'   => 'required',
             'componente_mir'   => 'required',
@@ -115,6 +121,7 @@ class SolicitudesCreate extends Component
         'asunto.string' => 'Texto Invalido.',
 
         'fin_mir.required' => 'Este campo es Obligatorio.',
+        'cotizacion.required' => 'Cotización Obligatoria.',
         'proposito_mir.required' => 'Este campo es Obligatorio.',
         'componente_mir.required' => 'Este campo es Obligatorio.',
         'actividad_mir.required' => 'Este campo es Obligatorio.',
@@ -135,9 +142,11 @@ class SolicitudesCreate extends Component
         'importe.string' => 'Texto Invalido.',
     ];
 
+    protected $listeners = ['AssignQuotation'];
+
     public function render()
     {
-        $this -> backButton = Helper::backButton();
+        $this->backButton = Helper::backButton();
         return view('livewire.shared.solicitud.solicitudes-create');
     }
 
@@ -152,7 +161,7 @@ class SolicitudesCreate extends Component
             $this->solicitante = auth()->user()->name;
             $this->sucursal = $this->userSede;
             $this->destinatario = '';
-            $this->cotizacion = '';
+            $this->cotizacion = null;
             $this->fin_mir = '';
             $this->proposito_mir = '';
             $this->componente_mir = '';
@@ -193,6 +202,10 @@ class SolicitudesCreate extends Component
             $this->destinatario = $this->memo_to_edit->destinatario;
             $this->cotizacion = $this->memo_to_edit->memo_id_cotizacion;
 
+            if($this->cotizacion != null){
+                $this->is_quote = true;
+            }
+
             // Values that can be set here
             $this->fecha = $this->memo_to_edit->memo_fecha;
             $this->folio = $this->memo_to_edit->memo_folio;
@@ -217,6 +230,7 @@ class SolicitudesCreate extends Component
         $this->fines_mir = Plan1Fin::all();
     }
 
+    // MIR
     public function GetProposes($value){
         $this->mir2 = true;
         $this->propositos_mir = Plan2Proposito::where('plan1_fin_id', $value)->get()->toArray();
@@ -241,6 +255,7 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
     }
 
+    // Table Interactions
     public function CalculateAmount(){
         if (is_numeric($this->cantidad) && is_numeric($this->p_u)) {
             $cantidad = floatval($this->cantidad);
@@ -294,6 +309,26 @@ class SolicitudesCreate extends Component
         $this->dispatch('simpleAlert','Eliminado correctamente','success');
     }
 
+    // Cotizaciones
+    public function AssignQuotation($quote_id){
+        $this->cotizacion = $quote_id;
+        $this->is_quote = true;
+
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+    }
+
+    public function DeleteQuotation(){
+        $this->quote = Archivos::find($this->cotizacion);
+            File::delete($this->quote->arch_ruta);
+            $this->quote->delete();
+
+        $this->is_quote = false;
+        $this->cotizacion = null;
+
+        $this->dispatch('simpleAlert', 'Eliminado correctamente', 'success');
+    }
+
     // Get Totals
     public function CalculateTotals() {
         $this->subtotal = 0;
@@ -319,8 +354,11 @@ class SolicitudesCreate extends Component
             return;
         }
 
+        // Validamos Todos los Campos
+        $this->validate();
+        $user = User::find(Auth::id());
+
         if(!$this->is_editing) {
-            $this->validate();
             if(count($this->elementosMemorandum)){
                 $this->folio = Helper::FolioGenerator(new Memorandum, 'memo_folio', 5, 'MM', $this->userSedeCode);
 
@@ -337,7 +375,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->mir_id_componente = $this->componente_mir;
                 $this->memorandum->mir_id_actividad =  $this->actividad_mir;
 
-                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
+                if($user->hasAnyRole(['N6:17A', 'N5:18A:F'])){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -359,13 +397,12 @@ class SolicitudesCreate extends Component
                 }
 
                 $this->dispatch('alertCRUD','Exito!', 'Enviado correctamente', 'success');
-                return redirect()->route($this -> redirectTo());
+                return $this->redirectRoute($this->redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
             }
         } else {
-            $this->validate();
             if ( count($this->elementosMemorandum ) ) {
 
                 // Search CompraMenor
@@ -395,7 +432,7 @@ class SolicitudesCreate extends Component
                 $this->memorandum->memo_sucursal = $this->sucursal;
                 $this->memorandum->destinatario = $this->destinatario;
                 $this->memorandum->memo_id_cotizacion = $this->cotizacion;
-                if(Auth::user()->roles[0]->name === 'N5:18A:F' || Auth::user()->roles[0]->name === 'N6:17A'){
+                if($user->hasAnyRole(['N6:17A', 'N5:18A:F'])){
                     $this->memorandum->memo_creation_status = 'Validado';
                     $this->memorandum->pass_filter = 1;
                 }else{
@@ -427,8 +464,8 @@ class SolicitudesCreate extends Component
                 $this->componente_mir = '';
                 $this->actividad_mir = '';
                 $this->destinatario = '';
-                $this->cotizacion = '';
-                return redirect()->route($this -> redirectTo());
+                $this->cotizacion = null;
+                return $this->redirectRoute($this -> redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -441,10 +478,13 @@ class SolicitudesCreate extends Component
     // Ways of Save
     public function SaveAsDraft(){
 
+        $validatedData = $this->validate([
+            'asunto'   => 'required|string',
+        ]);
+
         if (!$this->is_editing) {
 
             $this->folio = Helper::FakeFolioGenerator(5,'DRAFT');
-            $this->validate();
 
             $this->memorandum = new Memorandum();
                 $this->memorandum->memo_fecha = $this->fecha;
@@ -476,8 +516,6 @@ class SolicitudesCreate extends Component
 
             $this->dispatch('alertCRUD','Exito!', 'Guardado correctamente', 'success');
         } else {
-
-            $this->validate();
 
             // Search Memorandum
             $this->memorandum = Memorandum::where('memo_folio',$this->edit_to_folio)->first();
@@ -525,15 +563,15 @@ class SolicitudesCreate extends Component
         $this->componente_mir = '';
         $this->actividad_mir = '';
         $this->destinatario = '';
-        $this->cotizacion = '';
-        return redirect()->route($this -> redirectTo());
+        $this->cotizacion = null;
+        return $this->redirectRoute($this -> redirectTo());
     }
 
     public function redirectTo() {
-        $user = Auth::user() -> roles[0] -> name;
-        if ( $user === 'N6:17A' ) {
+        $user = User::find(Auth::id());
+        if ( $user->hasRole('N6:17A')) {
             return 'dashboard';
-        } elseif ( $user === 'N7:GS:17A' || $user === 'admin' || $user === 'N5:18A:F' ) {
+        } elseif ( $user->hasAnyRole(['N7:GS:17A', 'N5:18A:F'])) {
             return 'solicitudes';
         }
     }

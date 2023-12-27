@@ -40,10 +40,11 @@ return new class extends Migration
 
             $table->enum('creation_status', [
                 'Enviado',
+                'Validado',
+                'Presupuestado',
+                'Aprobado',
                 'Borrador',
                 'Rechazado',
-                'Aprobado',
-                'Validado',
             ]);
             $table->enum('tipo_proveedor', [
                 'Fijo',
@@ -51,7 +52,8 @@ return new class extends Migration
             ])->nullable();
 
             $table->boolean('pending_review')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
-            $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
+            $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada por N3:UT
+            $table->boolean('pass_cp')->default(0); // Solo cambia si ha sido Aprovada o Rechazada por N2:CP
             $table->text('motivo_rechazo')->nullable();
 
             $table->text("token_solicitante")->nullable();
@@ -59,8 +61,17 @@ return new class extends Migration
             $table->text("token_disp_ppta")->nullable();
             $table->text("token_autorizacion")->nullable();
 
-            $table->unsignedBigInteger('archivos_id')->unique()->nullable();//id_arch_cotizacion
-            $table->foreign('archivos_id')->references('id')->on('archivos')->onDelete('cascade');
+            $table->unsignedBigInteger('id_cotizacion')->nullable();
+            $table->foreign('id_cotizacion')->references('id')->on('archivos')->onDelete('set null');
+
+            $table->unsignedBigInteger('id_factura')->nullable();
+            $table->foreign('id_factura')->references('id')->on('archivos')->onDelete('set null');
+
+            $table->unsignedBigInteger('id_evidencia')->nullable();
+            $table->foreign('id_evidencia')->references('id')->on('archivos')->onDelete('set null');
+
+            $table->unsignedBigInteger('id_vale_firmado')->nullable();
+            $table->foreign('id_vale_firmado')->references('id')->on('archivos')->onDelete('set null');
 
             $table->timestamps();
         });

@@ -33,7 +33,8 @@ return new class extends Migration
             $table->text('mir_id_componente');
             $table->text('mir_id_actividad');
 
-            $table->text('memo_id_cotizacion');
+            $table->unsignedBigInteger('memo_id_cotizacion')->nullable();
+            $table->foreign('memo_id_cotizacion')->references('id')->on('archivos')->onDelete('set null');
 
             $table->enum('memo_creation_status', [
                 'Enviado',
@@ -43,7 +44,7 @@ return new class extends Migration
                 'Validado',
             ]);
 
-            $table->boolean('pending_review')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
+            $table->boolean('pending_review')->default(0); // Ayuda a las notificaciones del Dashboard
             $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
             $table->text('motivo_rechazo')->nullable();
 

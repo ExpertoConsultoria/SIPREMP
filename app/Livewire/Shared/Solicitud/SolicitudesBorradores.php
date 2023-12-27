@@ -13,6 +13,8 @@ use App\Models\MemorandumList;
 use Illuminate\Support\Facades\Auth;
 
 use App\Helpers\Helper;
+use Livewire\Attributes\On;
+
 class SolicitudesBorradores extends Component
 {
     use WithPagination;
@@ -58,7 +60,7 @@ class SolicitudesBorradores extends Component
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
         }
-        $this -> backButton = Helper::backButton();
+        $this->backButton = Helper::backButton();
         return view('livewire.shared.solicitud.solicitudes-borradores', compact('drafts'));
     }
 

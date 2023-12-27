@@ -20,6 +20,8 @@ class CCMReportData extends Component
     public $fecha_creacion;
     public $montos = [];
 
+    public $has_been_sent = false;
+
     public function mount()
     {
 
@@ -57,10 +59,28 @@ class CCMReportData extends Component
             }
         }
 
+        if($this->report->has_been_sent === 1){
+            $this->has_been_sent = true;
+        }
+
     }
 
     public function render()
     {
         return view('livewire.shared.caja-menor.c-c-m-report-data');
+    }
+
+    protected $listeners = ['SendReport'];
+
+    public function SendReport(){
+
+        $this->report->has_been_sent = 1;
+        $this->report->pending_review = 1;
+        $this->report->save();
+
+        $this->has_been_sent = true;
+
+
+        $this->dispatch('alertCRUD', 'Exito!', 'Reporte Enviado Correctamente', 'success');
     }
 }

@@ -58,7 +58,7 @@ class BEAprobadas extends Component
                 ->get();
 
             foreach ($memorandums as $memorandum) {
-                if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A']) ){
                     array_push($filtrados, $memorandum);
                 }
             }
@@ -72,7 +72,7 @@ class BEAprobadas extends Component
                 ->get();
 
             foreach ($memorandums_rejected as $memorandum) {
-                if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A']) ){
                     array_push($filtrados, $memorandum);
                 }
             }

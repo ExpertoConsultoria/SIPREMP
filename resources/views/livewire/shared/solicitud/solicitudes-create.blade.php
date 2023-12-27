@@ -75,7 +75,7 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         <option value="Servicos Generales">Servicos Generales</option>
-                                        <option value="Unidad Tecnica">Unidad Tecnica</option>
+                                        {{-- <option value="Unidad Tecnica">Unidad Tecnica</option> --}}
                                     </select>
                                     @error('destinatario') <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
@@ -383,13 +383,35 @@
                         <div class="container px-4">
 
                             <div class="grid grid-cols-12 gap-2 mb-1">
-                                <div class="col-span-2 text-end">
-                                    <button type="button" wire:click=""
-                                        class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Adjuntar cotizaciones
-                                    </button>
-                                </div>
-                                <div class="col-span-8 text-end">
+
+                                @if (!$is_quote)
+                                    <div class="col-span-6 text-start">
+                                        <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.add-quote' })"
+                                            class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            Adjuntar Cotización
+                                        </button>
+
+                                        @error('cotizacion')
+                                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                @else
+                                    <div class="col-span-3 text-end">
+                                        <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $cotizacion }} } })"
+                                            class="disabled:opacity-25 focus:outline- text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800">
+                                            Ver Cotización
+                                        </button>
+                                    </div>
+                                    <div class="col-span-3 text-start">
+                                        <button type="button" wire:click="DeleteQuotation()"
+                                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                            Eliminar Cotización
+                                        </button>
+                                    </div>
+                                @endif
+
+
+                                <div class="col-span-4 text-end">
                                     <button type="button" wire:click="SaveAsDraft"
                                         class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Guardar borrador

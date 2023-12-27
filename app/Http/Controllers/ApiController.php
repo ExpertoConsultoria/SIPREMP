@@ -12,15 +12,17 @@ use stdClass;
 
 use App\Models\Vales_compra;
 use App\Models\Memorandum;
+use App\Models\ReporteCM;
 use App\Models\User;
-
 
 class ApiController extends Controller
 {
-    public function trayAlert($role){
+    public function trayAlert($user_id){
         $filtrados = [];
 
-        if($role === 'N5:18A:F'){
+        $user = User::find($user_id);
+
+        if($user->hasRole('N5:18A:F')){
             $memorandums = Memorandum::select('memo_fecha','memo_folio','memo_asunto','memo_creation_status','solicitante_id')
                 ->where('memo_creation_status','Enviado')
                 ->whereNull('token_aceptacion')
@@ -28,7 +30,7 @@ class ApiController extends Controller
                 ->get();
 
             foreach ($memorandums as $memorandum) {
-                if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                if($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A'])){
                     array_push($filtrados, $memorandum);
                 }
             }
@@ -36,7 +38,7 @@ class ApiController extends Controller
             if(count($filtrados)){
                 return 'Tienes solicitudes pendientes a Revisar';
             }
-        } else if($role === 'N4:SEGE'){
+        } else if($user->hasRole('N4:SEGE')){
             $memorandums = Memorandum::select('memo_fecha', 'memo_folio', 'memo_asunto', 'memo_creation_status', 'solicitante_id', 'destinatario')
                 ->where('memo_creation_status', 'Validado')
                 ->where('pass_filter', 1)
@@ -45,7 +47,7 @@ class ApiController extends Controller
                 ->get();
 
             foreach ($memorandums as $memorandum) {
-                if (($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A' || $memorandum->solicitante->roles[0]->name === 'N5:18A:F') && $memorandum->destinatario === "Servicos Generales") {
+                if ($memorandum->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F']) && $memorandum->destinatario === "Servicos Generales") {
                     array_push($filtrados, $memorandum);
                 }
             }
@@ -53,18 +55,63 @@ class ApiController extends Controller
             if(count($filtrados)){
                 return 'Tienes solicitudes pendientes a Revisar';
             }
-        }else if($role === 'N3:UNTE'){
+        }else if($user->hasRole('N3:UNTE')){
 
             $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('creation_status','Enviado')
                     ->where('pass_filter',0)
                     ->whereNull('motivo_rechazo')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
                     ->whereNull('token_rev_val')
                     ->whereNotNull('token_solicitante')
                     ->get();
 
             foreach ($vales as $vale) {
-                if (($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F' || $vale->solicitante->roles[0]->name === 'N4:SEGE')) {
+                if ($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])) {
+                    array_push($filtrados, $vale);
+                }
+            }
+
+            if(count($filtrados)){
+                return 'Tienes vales pendientes a Revisar';
+            }
+        } else if($user->hasRole('N2:CP')){
+
+            $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('creation_status','Validado')
+                    ->where('pass_filter',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+            foreach ($vales as $vale) {
+                if ($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])) {
+                    array_push($filtrados, $vale);
+                }
+            }
+
+            if(count($filtrados)){
+                return 'Tienes vales pendientes a Revisar';
+            }
+        } else if($user->hasRole('N1:DA')){
+
+            $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('creation_status','Presupuestado')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_disp_ppta')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+            foreach ($vales as $vale) {
+                if ($vale->solicitante->hasAnyRole(['N6:17A', 'N7:GS:17A', 'N5:18A:F','N4:SEGE'])) {
                     array_push($filtrados, $vale);
                 }
             }
@@ -141,6 +188,26 @@ class ApiController extends Controller
         }
 
         return $alertsAccepted;
+
+    }
+
+    public function RCMAlert(){
+
+        $reportsAlert = new stdClass;
+        $reportsAlert->folios = [];
+        // $reportsAlert->message = '';
+
+        $reports = ReporteCM::where('has_been_sent', 1)
+                        ->where('pending_review',1)
+                        ->get();
+
+        if(count($reports)){
+            foreach ($reports as $report) {
+                array_push($reportsAlert->folios,$report->rcm_folio);
+            }
+        }
+
+        return $reportsAlert;
 
     }
 }

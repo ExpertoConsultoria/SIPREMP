@@ -6,6 +6,7 @@ import typography from '@tailwindcss/typography';
 export default {
     darkMode: 'class',
     content: [
+        './vendor/wire-elements/modal/resources/views/*.blade.php',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -13,9 +14,12 @@ export default {
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
-        './node_modules/flowbite/**/*.js'
+        './node_modules/flowbite/**/*.js',
     ],
-
+    safelist: [{
+        pattern: /(max|min)-(w)-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
+        variants: ["sm", "md", "lg", "xl"],
+    }, ],
     theme: {
         extend: {
             fontFamily: {

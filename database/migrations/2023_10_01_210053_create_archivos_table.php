@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
 
-            $table->text("fecha");
-            $table->text("lugar");
+            $table->text("fecha_registro");
+            $table->text("lugar_registro");
             $table->text("folio");
-            $table->integer("NoFin");
-            $table->integer("NoProposito");
-            $table->integer("NoComponente");
-            $table->integer("NoActividad");
-            $table->text("titulo");
-            $table->text("descripcion");
-            $table->text("archivo_pdf");
-            $table->text("info_extra")->nullable();
+            // $table->integer("NoFin");
+            // $table->integer("NoProposito");
+            // $table->integer("NoComponente");
+            // $table->integer("NoActividad");
+            $table->text("arch_nombre");
+            $table->text("arch_descripcion");
+            $table->text("arch_extension");
+            $table->string('arch_ruta');
+
 
             $table->timestamps();
         });

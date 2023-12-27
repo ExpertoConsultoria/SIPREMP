@@ -1,5 +1,5 @@
 
-<div>
+<div wire:init="loadExpedients">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
@@ -50,42 +50,86 @@
 
 
     <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700  dark:border-zinc-600 dark:text-gray-400">
-                <tr class="text-center">
-                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                        Folio
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Fecha
-                    </th>
-                    <th class="px-16 py-2 cursor-pointer">
-                        Concepto
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b  dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
-                    <td class="px-4 py-2">
-                        <p>#88898</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>14/09/2023</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Solicitud de computadoras</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div>
-                            <x-button-icons icon="eye" wire:click="getDetails()"/>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+        @if (count($expedients))
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-zinc-400">
+                    <tr class="text-center text-black">
+                        <th wire:click="ordenaPor('exp_folio')" class="px-4 py-2 text-center cursor-pointer">
+                            Folio
+                            @if ($ordenar == 'exp_folio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('fecha')" class="px-4 py-2 text-center cursor-pointer">
+                            Fecha de Creación
+                            @if ($ordenar == 'fecha')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('concepto')" class="px-4 py-2 text-center cursor-pointer">
+                            Concepto
+                            @if ($ordenar == 'concepto')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($expedients as $expedient)
+                        <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
+                            <td class="px-4 py-2">
+                                <p>{{ $expedient->exp_folio }}</p>
+                            </td>
+                            <td class="px-4 py-2">
+                                <p>{{ $expedient->fecha }}</p>
+                            </td>
+                            <td class="px-4 py-2">
+                                <p>{{ $expedient->concepto }}</p>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div>
+                                    <x-button-icons icon="eye" wire:click="getDetails({{ $expedient }})"/>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            @if ($expedients->hasPages())
+                <div class="px-6 py-3">
+                    {{ $expedients->links() }}
+                </div>
+            @endif
+        @else
+            <div class="bg-gray-50 dark:bg-zinc-700">
+                <p class="p-4 font-semibold text-center text-gray-700 dark:text-gray-300">
+                    !! No existen registros ¡¡
+                </p>
+            </div>
+        @endif
 
         </div>
     </div>

@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Expediente | Solicitud #0001') }}
+                    {{ __('Expediente | Solicitud ') }} {{ $details_of_folio }}
                 </h2>
             </div>
 
@@ -61,26 +61,27 @@
                 </div>
             </div>
         </div>
+
         <div
             class="p-6 my-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
             <div class="container px-4 ">
                 <div class="text-center">
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $expedient_details->id_cotizacion }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         COTIZACIÓN
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-invoice', arguments: { invoice_id: {{ $expedient_details->id_factura }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         FACTURA
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-evidence', arguments: { evidence_id: {{ $expedient_details->id_evd_foto }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         EVIDENCIAS
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-signed-voucher', arguments: { signed_id: {{ $expedient_details->id_vale_firmado }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         VALE FIRMADO
@@ -95,24 +96,28 @@
                 <div class="grid grid-cols-5 gap-6">
                     <div>
                         <x-label for="fecha" value="{{ __('Fecha') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">13/09/2023</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha}}</p>
                     </div>
                     <div>
                         <x-label for="folio" value="{{ __('Folio') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">SP-000001</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->folio}}</p>
                     </div>
                     <div>
                         <x-label for="area" value="{{ __('Área') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">User + area</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
+                            {{$vale_details->solicitante->name}} -
+                            {{$vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area ?
+                            $vale_details->solicitante?->org4empleado?->org3Puesto?->org2Area->AreaNombre : $vale_details->solicitante->name}}
+                        </p>
                     </div>
                     <div>
                         <x-label for="lugar" value="{{ __('Sede/Lugar') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar}}</p>
                     </div>
                     <div>
                         <x-label for="mir" value="{{ __('MIR') }}" />
                         <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                            97438498328498-38293898</p>
+                            {{ $MIR }}</p>
                     </div>
                 </div>
 
@@ -124,16 +129,16 @@
 
                     <div>
                         <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Solicitante</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RazonSocial }}</p>
                     </div>
                     <div>
                         <x-label for="rfc" value="{{ __('RFC') }}" />
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RFC }}</p>
                     </div>
                     <div>
                         <x-label for="telefono" value="{{ __('Teléfono') }}" />
                         <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                            97438498328498-38293898</p>
+                            {{ $proveedor?->Telefono ? $proveedor->Telefono : 'Ninguno' }}</p>
                     </div>
                 </div>
 
@@ -143,10 +148,9 @@
                             <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación:</label>
                         </div>
                         <div class="col-span-9">
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Lorem ipsum
-                                dolor sit amet consectetur adipisicing elit. Doloribus temporibus ducimus et eum, error
-                                officia libero sunt cum voluptatibus obcaecati rerum. Molestias cumque ex distinctio
-                                voluptatum itaque explicabo consequuntur iure!</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
+                                {{$vale_details->justificacion}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -161,193 +165,128 @@
                             class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Lugar:</label>
                     </div>
                     <div class="flex items-center col-span-2 text-center">
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">Matriz </p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->lugar_entrega}} </p>
                     </div>
                     <div class="flex items-center">
                         <label
                             class="block text-lg font-semibold text-gray-900 text-start dark:text-white">Fecha:</label>
                     </div>
                     <div class="flex items-center col-span-2 text-center">
-                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">13/09/2023</p>
+                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{$vale_details->fecha_entrega}}</p>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 rounded-lg w-30 dark:text-gray-200">
-            <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
-            </div>
-            <div>
-                <span class="text-sm text-white">09397589347598437597295</span>
-            </div>
-            <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">DISPONIBLE</h1>
-            </div>
-        </div>
+        {{-- Partidas presupuestales --}}
+        @foreach ($partidas_data as $data)
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                    <tr class="text-center dark:text-gray-200 ">
-                        <th class="px-4 py-2 whitespace-nowrap">
-                            Cantidad
-                        </th>
-                        <th class="px-4 py-2">
-                            Concepto
-                        </th>
-                        <th class="px-4 py-2">
-                            P/U
-                        </th>
-                        <th class="px-4 py-2">
-                            Importe
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
-                        <td class="px-4 py-2"> 1</td>
-                        <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
-                        <td class="px-4 py-2">
-                            <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                <span class="mx-auto">$00.00</span>
-                            </div>
-                        </td>
-                        <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                <span class="mx-auto">$00.00</span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            @if ($data->estado === 'DISPONIBLE')
+                {{-- Partidas Disponibles --}}
+                <div
+                    class="relative flex items-center h-4 p-6 mt-4 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div>
+                        <h1 class="font-bold text-white">Partida presupuestal</h1>
+                    </div>
+                    <div>
+                        <span class="text-sm text-white">{{ $data->nombre }}</span>
+                    </div>
+                    <div class="ml-auto sm:col-span-2">
+                        <h1 class="font-bold text-white">DISPONIBLE</h1>
+                    </div>
+                </div>
+            @elseif ($data->estado === 'NO DISPONIBLE')
+                {{-- Partidas No Disponibles --}}
+                <div
+                    class="relative flex items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                    <div>
+                        <h1 class="font-bold text-white">Partida presupuestal</h1>
+                    </div>
+                    <div>
+                        <span class="text-sm text-white">{{ $data->nombre }}</span>
+                    </div>
+                    <div class="ml-auto sm:col-span-2">
+                        <h1 class="font-bold text-white">NO DISPONIBLE</h1>
+                    </div>
+                </div>
+            @endif
 
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
-            </div>
+            <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                        <tr class="text-center text-bla">
+                            <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                                Cantidad
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer">
+                                Concepto
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer">
+                                P/U
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer">
+                                Importe
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data->elementos as $elemento)
+                        <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-4 py-2"> {{ $elemento->cantidad }}</td>
+                            <td class="px-4 py-2"> {{ $elemento->concepto }} </td>
+                            <td class="px-4 py-2">
+                                <div
+                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                    <span class="mx-auto">${{ $elemento->precio_unitario }}</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-2">
+                                <div
+                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                    <span class="mx-auto">${{ $elemento->importe }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-            <hr class="dark:border-gray-400">
+                <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
+                </div>
 
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        Subtotal:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.000
-                    </p>
-                </div>
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        I.V.A:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.00
-                    </p>
-                </div>
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        Total:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.00
-                    </p>
-                </div>
-            </div>
-        </div>
+                <hr>
 
-        <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 rounded-lg w-30 dark:text-gray-400 ">
-            <div>
-                <h1 class="text-white font-bold">Partida presupuestal</h1>
-            </div>
-            <div>
-                <span class="text-sm text-white">09397589347598437597295</span>
-            </div>
-            <div class="ml-auto sm:col-span-2">
-                <h1 class="text-white font-bold">NO DISPONIBLE</h1>
-            </div>
-        </div>
+                <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
 
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                    <tr class="text-center dark:text-gray-200 ">
-                        <th class="px-4 py-2 whitespace-nowrap">
-                            Cantidad
-                        </th>
-                        <th class="px-4 py-2">
-                            Concepto
-                        </th>
-                        <th class="px-4 py-2">
-                            P/U
-                        </th>
-                        <th class="px-4 py-2">
-                            Importe
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
-                        <td class="px-4 py-2"> 1</td>
-                        <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
-                        <td class="px-4 py-2">
-                            <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                <span class="mx-auto">$00.00</span>
-                            </div>
-                        </td>
-                        <td class="px-4 py-2">
-                            <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                <span class="mx-auto">$00.00</span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
-            </div>
-
-            <hr class="dark:border-gray-400">
-
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        Subtotal:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.000
-                    </p>
-                </div>
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        I.V.A:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.00
-                    </p>
-                </div>
-                <div class="col-span-10 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        Total:
-                    </p>
-                </div>
-                <div class="col-span-2 px-3 text-end">
-                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                        $00.00
-                    </p>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                            Subtotal:</p>
+                    </div>
+                    <div class="col-span-2 px-3 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->subtotal }}
+                        </p>
+                    </div>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:
+                        </p>
+                    </div>
+                    <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->iva }}
+                        </p>
+                    </div>
+                    <div class="col-span-10 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:
+                        </p>
+                    </div>
+                    <div class="col-span-2 px-3 text-end">
+                        <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">${{ $data->total_compra
+                            }}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
 
         <div class="mt-10">
             <div class="text-end">

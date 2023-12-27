@@ -58,6 +58,7 @@ class AddXml extends Component
     public function validateXML()
     {
 
+        // Obtenemos los datos del Archivo
         $this->validate();
         $this->nombreXML = $this->factura_XML->getClientOriginalName();
         $this->extensionFile = $this->factura_XML->extension();
@@ -77,6 +78,32 @@ class AddXml extends Component
         } else {
             $this->xml_message = 'El archivo que subiste no es XML';
         }
+    }
+
+    public function validateExistence() {
+        $this->xml_temporal = 'storage/'.$this->factura_XML->store('files/FacturasCM/XML','public');
+        $xml_content = file_get_contents($this->xml_temporal);
+        $xml_json = JsonConverter::convertToJson($xml_content);
+        $xml_json = json_decode($xml_json, true);
+
+        $files = FacturaCM::all();
+
+        foreach ($files as $file) {
+            $factura_contents = file_get_contents($file->fcm_xml_ruta);
+            $factura_json = JsonConverter::convertToJson($factura_contents);
+            $factura_json = json_decode($factura_json, true);
+
+            if($xml_json === $factura_json){
+                if ($xml_json['Complemento']['TimbreFiscalDigital']['UUID'] === $factura_json['Complemento']['TimbreFiscalDigital']['UUID']) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+
     }
 
     public function validateExistence() {
