@@ -590,7 +590,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                             BANDEJA DE ENTRADA
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Solicitudes por revisar</p>
@@ -620,7 +620,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                             COMPRAS CONSOLIDADAS
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Generación de vales, borradores, estatus </p>
@@ -646,7 +646,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                             SOLICITUDES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Rechazadas y aprobadas</p>
@@ -674,7 +674,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                             EXPEDIENTES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Contiene los expedientes completos </p>
@@ -702,7 +702,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                             PROVEEDORES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Contiene los expedientes completos </p>
@@ -721,7 +721,8 @@
 
                                 <div class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
 
-                                    <a href="{{route('bandejaentrada.unidadcontrol')}}" class="h-60 p-5  grid grid-cols-3 justify-items-center items-center  ">
+                                    <a href="{{route('bandejaentrada.unidadcontrol')}}" class="h-60 p-4 grid grid-cols-3 justify-items-center items-center ">
+                                        
                                         <div class="">
                                             <svg width="83" height="60" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M53.7812 44.9449L46.8298 51.9199C44.0109 54.7487 39.051 54.8096 36.1711 51.9199L29.2194 44.9449L4.25195 69.9934C5.18133 70.4232 6.20602 70.6796 7.29539 70.6796H75.7056C76.7949 70.6796 77.8193 70.4235 78.7483 69.9936L53.7812 44.9449Z" fill="#515151"/>
@@ -730,8 +731,9 @@
                                                 <path d="M82.2243 16.4071L57.2139 41.5008L82.2243 66.5929C82.7051 65.6206 83.0001 64.5413 83.0001 63.3848V19.6152C83.0001 18.4588 82.7051 17.3794 82.2243 16.4071Z" fill="#515151"/>
                                             </svg>
                                         </div>
+                                        
                                         <div class="col-span-2">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                                 BANDEJA DE ENTRADA 
                                             </p>
                                             <p class="mt-2  dark:text-gray-400">Solicitudes por revisar</p>
@@ -755,14 +757,15 @@
                                                 </defs>
                                             </svg>
                                         </div>
-                                        <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                        <div class="col-span-2">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                                 Reporte $ caja menor
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus </p>
                                         </div>
                                     </a>
                                 </div>
+
                             </div>
 
                             <div class="space-y-4">
@@ -776,7 +779,7 @@
                                                 
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                                 VALES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Rechazados y aprobados</p>
@@ -800,7 +803,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                                 SOLICITUDES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus</p>
@@ -824,7 +827,7 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2 ">
-                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                            <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-300">
                                                 Reportes (objetivos de p) MIR
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus</p>

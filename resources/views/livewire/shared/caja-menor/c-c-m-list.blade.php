@@ -72,11 +72,20 @@
                 <select wire:model.live="partida_presupuestal"
                     class="w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="" selected disabled>Partida Presupuestal</option>
+
                     @foreach ($partidas_presupuestales as $partida_presupuestal)
-                        <option value="{{ $partida_presupuestal->CvePptal }}">
-                            {{ $partida_presupuestal->PartidaEspecifica }}
-                        </option>
+
+                        @php
+                            $reduceString = (int) substr($partida_presupuestal -> CvePptal, 0, 4);
+                        @endphp
+                        @if ($reduceString >= 2000 &&  $reduceString <= 3000  )
+                            <option value="{{ $partida_presupuestal->CvePptal }}">
+                                {{ $partida_presupuestal -> PartidaEspecifica}}
+                            </option>
+                        @endif
+
                     @endforeach
+                    
                 </select>
                 @error('partida_presupuestal')
                     <div class="text-center">

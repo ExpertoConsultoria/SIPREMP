@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Compras consolidadas | borrador123')}}
+                    {{_('Compras consolidadas | borrador')}}
                 </h2>
             </div>
 

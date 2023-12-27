@@ -203,7 +203,7 @@
                     </div>
 
                     {{-- 3ra PARTE Nota: Solucionar la vista en dispositivos moviles --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 border rounded-lg w-30 text dark:text-gray-200">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 rounded-lg w-30 dark:text-gray-200">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>
@@ -304,7 +304,7 @@
                     </div>
 
                     {{-- 5ta parte  --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 border rounded-lg w-30 text dark:text-gray-400">
+                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 rounded-lg w-30 dark:text-gray-400 ">
                         <div>
                             <h1 class="text-white font-bold">Partida presupuestal</h1>
                         </div>

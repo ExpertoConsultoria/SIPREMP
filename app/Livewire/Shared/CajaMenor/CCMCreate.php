@@ -319,8 +319,16 @@ class CCMCreate extends Component
 
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
+        // No cierto. Aqui
+       
+        $sumaImporte = 0;
+
         foreach ($conceptos as $concepto) {
-            $item = new stdClass;
+            
+            $importe = floatval($concepto['Importe']);
+
+            if(floatval($concepto['Importe']) != 0 && floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario']) > 0) {
+                $item = new stdClass;
                 $item->icm_cantidad = $concepto['Cantidad'];
                 $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
                 $item->icm_concepto = $concepto['Descripcion'];
@@ -328,16 +336,31 @@ class CCMCreate extends Component
                 $item->icm_importe = floatval($concepto['Importe']);
                 $item->icm_partida_presupuestal = '';
 
-            array_push($this->elementosCompraMenor, $item);
+                array_push($this->elementosCompraMenor, $item);
+
+                $sumaImporte += $importe;
+            }
+        }
+
+        if($sumaImporte == 0){
+            $this->dispatch('simpleAlert','El archivo esta vacio','error');
+            return;
         }
         // dd($this->elementosCompraMenor);
+        // AQUI!!!!
         foreach ($this->elementosCompraMenor as $index => $element) {
             $this->selectPartida[$index] = "";
+        }
+
+        if(count($this->elementosCompraMenor) == 0){
+            $this->cleanDataXML();
+            $this->dispatch('simpleAlert','El archivo esta vacio','error');
         }
 
         $this->CalculateTotals();
         $this->dispatch('simpleAlert','Datos cargados correctamente','success');
     }
+
 
     public function cleanDataXML(){
         $this->elementosCompraMenor = [];

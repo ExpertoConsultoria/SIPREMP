@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Bandeja de entrada321') }}
+                    {{ __('Bandeja de entrada') }}
                 </h2>
             </div>
 

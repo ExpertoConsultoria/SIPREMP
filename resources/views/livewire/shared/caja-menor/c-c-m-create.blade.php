@@ -264,10 +264,19 @@
                                             <option value="" disabled selected> Partida Presupuestal </option>
 
                                             @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                    {{ $partida_presupuestal->PartidaEspecifica }}
-                                                </option>
+
+                                                @php
+                                                    $reduceString = (int) substr($partida_presupuestal -> CvePptal, 0, 4);
+                                                @endphp
+
+                                                @if ($reduceString >= 2000 &&  $reduceString <= 3000  )
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal -> PartidaEspecifica}}
+                                                    </option>
+                                                @endif
+
                                             @endforeach
+                                            
                                         </select>
                                         <div>
                                             @error('partida_masiva')
@@ -346,11 +355,20 @@
                                                     </option>
 
                                                     @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                        <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                            {{ $partida_presupuestal->PartidaEspecifica }}
-                                                        </option>
+
+                                                        @php
+                                                            $reduceString = (int) substr($partida_presupuestal -> CvePptal, 0, 4);
+                                                        @endphp
+
+                                                        @if ($reduceString >= 2000 &&  $reduceString <= 3000  )
+                                                            <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                                {{ $partida_presupuestal -> PartidaEspecifica}}
+                                                            </option>
+                                                        @endif
+
                                                     @endforeach
                                                     {{-- opciones --}}
+                                                    
                                                 </select>
                                             </td>
                                             <td class="px-6 py-4">
@@ -436,3 +454,4 @@
         </div>
     </div>
 </div>
+
