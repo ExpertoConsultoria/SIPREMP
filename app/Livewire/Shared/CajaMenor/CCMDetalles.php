@@ -32,7 +32,7 @@ class CCMDetalles extends Component
     public $details_of_folio = '';
 
     // Data
-
+        public $add_pdf;
         public $MIR;
         public $proveedor;
         public $razon_social;
@@ -77,34 +77,5 @@ class CCMDetalles extends Component
     public function render()
     {
         return view('livewire.shared.caja-menor.c-c-m-detalles');
-    }
-
-    public function getFactura(){
-
-        $xml = file_get_contents($this->factura->fcm_xml_ruta);
-
-        // clean cfdi
-        $xml = Cleaner::staticClean($xml);
-
-        // create the main node structure
-        $comprobante = XmlNodeUtils::nodeFromXmlString($xml);
-
-        // create the CfdiData object, it contains all the required information
-        $cfdiData = (new CfdiDataBuilder())->build($comprobante);
-
-        // create the converter
-        $converter = new Converter(
-            new Html2PdfBuilder()
-        );
-
-        $route = 'storage/files/FacturasCM/PDF/'.$this->details_of_folio.'.pdf';
-        // create the invoice as output.pdf
-        $converter->createPdfAs($cfdiData, $route);
-
-        $this->factura->fcm_pdf_ruta = $route;
-        $this->factura->save();
-        $this->is_pdf=true;
-
-        $this->dispatch('simpleAlert','Archivo Generado Correctamente','success');
     }
 }

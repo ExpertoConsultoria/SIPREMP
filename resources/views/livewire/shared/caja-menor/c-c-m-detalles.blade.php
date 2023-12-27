@@ -27,40 +27,49 @@
                 <div class="container px-4">
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
-                            <x-label for="fecha" value="{{ __('Fecha') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_fecha }}</p>
+                            <x-label for="fecha" value="{{ __('Fecha') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $compra_data->cm_fecha }}</p>
                         </div>
                         <div>
-                            <x-label for="folio" value="{{ __('Folio') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $details_of_folio }}</p>
+                            <x-label for="folio" value="{{ __('Folio') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $details_of_folio }}</p>
                         </div>
                         <div>
-                            <x-label for="solicitante" value="{{ __('Solicitante') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->solicitante->name }}</p>
+                            <x-label for="solicitante" value="{{ __('Solicitante') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $compra_data->solicitante->name }}</p>
                         </div>
                         <div>
-                            <x-label for="sucursal" value="{{ __('Sucursal') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->solicitante->sucursal }}</p>
+                            <x-label for="sucursal" value="{{ __('Sucursal') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $compra_data->solicitante->sucursal }}</p>
                         </div>
                         <div>
-                            <x-label for="mir" value="{{ __('MIR') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $MIR }}</p>
+                            <x-label for="mir" value="{{ __('MIR') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $MIR }}</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-6 mt-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
-                        @if (Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F','N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
+                    <div
+                        class="grid grid-cols-2 gap-6 mt-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
+                        @if (Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                             <div>
-                                <x-label for="justificacion" value="{{ __('Lugar de Entrega') }}"/>
-                                <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_entrega_sede }}</p>
+                                <x-label for="justificacion" value="{{ __('Lugar de Entrega') }}" />
+                                <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                    {{ $compra_data->cm_entrega_sede }}</p>
                             </div>
                             <div>
-                                <x-label for="justificacion" value="{{ __('Fecha de Entrega') }}"/>
-                                <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_entrega_fecha }}</p>
+                                <x-label for="justificacion" value="{{ __('Fecha de Entrega') }}" />
+                                <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                    {{ $compra_data->cm_entrega_fecha }}</p>
                             </div>
                         @endif
                         <div>
-                            <x-label for="justificacion" value="{{ __('Justificación') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $compra_data->cm_asunto }}</p>
+                            <x-label for="justificacion" value="{{ __('Justificación') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $compra_data->cm_asunto }}</p>
                         </div>
                     </div>
 
@@ -68,20 +77,32 @@
             </div>
 
             {{-- Buttons --}}
-            <div class="p-6 my-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+            <div
+                class="p-6 my-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
-                        <div class="text-center">
-                            @if (!$is_pdf)
-                                <button type="button" wire:click="getFactura"
-                                    class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                    GENERAR FACTURA (PDF)
-                                </button>
-                            @else
-                                <a type="button" href="{{ asset($factura->fcm_pdf_ruta) }}" target="_blank"
-                                    class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                    VISUALIZAR FACTURA (PDF)
-                                </a>
-                            @endif
+                    <div class="text-center">
+                        @if (!$is_pdf)
+                            <div>
+                                <input wire:model.blur="factura" type="hidden" name="factura">
+                                @error('factura')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                @enderror
+                                @if (!$add_pdf)
+                                    @livewire('shared.caja-menor.add-invoice', ['details_of_folio' => $details_of_folio])
+                                @else
+                                    <div class="text-center">
+                                        <p class="block text-lg font-bold text-gray-900 text-start dark:text-white">
+                                            ! PDF almacenado Correctamente !
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+                        @else
+                            <a type="button" href="{{ asset($factura->fcm_pdf_ruta) }}" target="_blank"
+                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                VISUALIZAR FACTURA (PDF)
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -92,19 +113,23 @@
                 <div class="container px-4">
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                         <div class="flex items-center">
-                            <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
+                            <label
+                                class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                         </div>
                         <div>
-                            <x-label for="razon_social" value="{{ __('Razón Social') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $razon_social }}</p>
+                            <x-label for="razon_social" value="{{ __('Razón Social') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $razon_social }}</p>
                         </div>
                         <div>
-                            <x-label for="rfc" value="{{ __('RFC') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $RFC }}</p>
+                            <x-label for="rfc" value="{{ __('RFC') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $RFC }}</p>
                         </div>
                         <div>
-                            <x-label for="telefono" value="{{ __('Teléfono') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $telefono }}</p>
+                            <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                {{ $telefono }}</p>
                         </div>
                     </div>
                 </div>
@@ -168,7 +193,8 @@
                                 Subtotal:</p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_subtotal }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$
+                                {{ $compra_data->cm_subtotal }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
@@ -176,7 +202,8 @@
                             </p>
                         </div>
                         <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_iva }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$
+                                {{ $compra_data->cm_iva }}
                             </p>
                         </div>
                         <div class="col-span-10 text-end">
@@ -184,7 +211,8 @@
                             </p>
                         </div>
                         <div class="col-span-2 px-3 text-end">
-                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$ {{ $compra_data->cm_total }}
+                            <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">$
+                                {{ $compra_data->cm_total }}
                             </p>
                         </div>
                     </div>
