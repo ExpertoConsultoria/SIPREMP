@@ -195,6 +195,10 @@ class CCMCreate extends Component
                 array_push($this->elementosCompraMenor, $item);
             }
 
+            foreach ($this->elementosCompraMenor as $index => $element) {
+                $this->selectPartida[$index] = $element->icm_partida_presupuestal;
+            }
+
             // Activate Editing Action
             $this->is_editing = true;
 
@@ -207,10 +211,10 @@ class CCMCreate extends Component
 
             $this->sucursal = $this->specificUserSede;
 
-            // Values that can be set here
-            $this->fecha = $this->compra_to_edit->cm_fecha;
-            $this->folio = $this->compra_to_edit->cm_folio;
-            $this->asunto = $this->compra_to_edit->cm_asunto;
+                // Values that can't be set here
+                $this->fecha = $this->compra_to_edit->cm_fecha;
+                $this->folio = $this->compra_to_edit->cm_folio;
+                $this->asunto = $this->compra_to_edit->cm_asunto;
 
             $this->subtotal = number_format($this->compra_to_edit->cm_subtotal, 2, '.', '');
             $this->iva = number_format($this->compra_to_edit->cm_iva, 2, '.', '');
