@@ -24,6 +24,8 @@ class ReporteCM extends Model
         'rcm_area',
         'rcm_sucursal',
         'rcm_monto_gral',
+        'has_been_sent',
+        'pending_review',
     ];
 
     protected $casts = [

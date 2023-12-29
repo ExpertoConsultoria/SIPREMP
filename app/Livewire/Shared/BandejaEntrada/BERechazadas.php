@@ -111,7 +111,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($vales as $vale) {
-                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F'])){
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
                         array_push($filtrados, $vale);
                     }
                 }

@@ -12,6 +12,8 @@ use stdClass;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
+use App\Models\User;
+use App\Models\Archivos;
 use App\Models\Empresa;
 use App\Models\proveedores_temporales;
 use App\Models\Plan1Fin;
@@ -43,6 +45,8 @@ class VCreate extends Component
         public $justificacion;
         public $lugar_entrega = '';
         public $fecha_entrega;
+
+        public $provedor_selected;
 
         public $subtotal = 0.00;
         public $iva = 0.00;
@@ -273,14 +277,16 @@ class VCreate extends Component
                     ->where('RazonSocial', 'like', '%' . $this->buscar . '%')
                     ->get();
                 $this->showResults = true;
-                $this -> tipo_proveedor = 'Fijo';
+                $this->tipo_proveedor = 'Fijo';
+                $this->provedor_selected = '';
             } else {
                 $this->showResults = false;
             }
         }
 
-        public function getProvedor($id){
-            if ( $this -> tipo_proveedor == 'Temporal' ) {
+        public function getProvedor(){
+            $id = $this->provedor_selected;
+            if ( $this->tipo_proveedor == 'Temporal' ) {
                 $provedorTemp = proveedores_temporales::find($id);
 
                 $this->id_proveedor = $provedorTemp->id;

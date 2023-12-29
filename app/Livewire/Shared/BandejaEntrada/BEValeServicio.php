@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use stdClass;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Support\Renderable;
 
 use Livewire\Redirector;
@@ -41,11 +42,6 @@ class BEValeServicio extends Component
 
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
-
-        if($this->vale_details->pending_review === 1){
-            $this->vale_details->pending_review = 0;
-            $this->vale_details->save();
-        }
 
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
         $this->vale_details->load('solicitante');
@@ -112,18 +108,30 @@ class BEValeServicio extends Component
 
 
         $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
-        $vale->creation_status = 'Validado';
-        $vale->token_rev_val = strtoupper(Str::random(5));
-        $vale->pending_review = 1;
-        $vale->pass_filter = 1;
-        $vale->save();
+
+        if (Auth::user()->hasRole('N3:UNTE')) {
+            $vale->creation_status = 'Validado';
+            $vale->token_rev_val = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->pass_filter = 1;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N2:CP')) {
+            $vale->creation_status = 'Presupuestado';
+            $vale->token_disp_ppta = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->pass_cp = 1;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N1:DA')) {
+            $vale->creation_status = 'Aprobado';
+            $vale->token_autorizacion = strtoupper(Str::random(5));
+            $vale->pending_review = 1;
+            $vale->save();
+        }
 
         $this->dispatch('simpleAlert',
             '¡Aprobada y Enviada!',
             'success'
         );
-
-        sleep(2);
         return redirect()->route('vales.send-revised');
 
     }
@@ -132,19 +140,31 @@ class BEValeServicio extends Component
     public function rejectVale($reason){
 
         $vale = Vales_compra::where('folio', $this->details_of_folio)->first();
-        $vale->creation_status = 'Rechazado';
-        $vale->motivo_rechazo = $reason;
-        $vale->pending_review = 1;
-        $vale->pass_filter = 0;
-        $vale->save();
+
+        if (Auth::user()->hasRole('N3:UNTE')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
+            $vale->pass_filter = 0;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N2:CP')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
+            $vale->pass_cp = 0;
+            $vale->save();
+        } elseif (Auth::user()->hasRole('N1:DA')){
+            $vale->creation_status = 'Rechazado';
+            $vale->motivo_rechazo = $reason;
+            $vale->pending_review = 1;
+            $vale->save();
+        }
 
         $this->dispatch('simpleAlert',
             'Rechazada y Retornada',
             'success'
         );
-
-        sleep(2);
-        return redirect()->route('bandejaentrada.rechazadas');
+        return redirect()->route('vales-solicitudes.rechazadas');
 
     }
 

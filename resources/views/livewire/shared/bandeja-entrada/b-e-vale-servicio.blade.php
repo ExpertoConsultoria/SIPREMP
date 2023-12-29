@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-6 gap-6 mt-6">
                 <div class="flex items-center">
                     <label class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
@@ -244,11 +244,16 @@
                         <div class="col-span-1 ml-auto text-center">
                             <button type="button" wire:click="$dispatch('alertForAprove')"
                                 class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                REVISAR Y VALIDAR
+                                @if (Auth::user()->hasRole('N3:UNTE'))
+                                    REVISAR Y VALIDAR
+                                @elseif (Auth::user()->hasRole('N2:CP'))
+                                    DISPONIBILIDAD PRESUPUESTAL
+                                @elseif (Auth::user()->hasRole('N1:DA'))
+                                    APROBAR VALE
+                                @endif
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -260,7 +265,7 @@
             Livewire.on('alertForAprove', (event) => {
                 Swal.fire({
                     title: '¿Estas seguro?',
-                    text: "¿Deseas aprobar esta Solicitud Extraordinaria?",
+                    text: "¿Deseas aprobar este Vale de Compra?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

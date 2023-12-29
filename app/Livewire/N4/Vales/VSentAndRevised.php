@@ -54,6 +54,7 @@ class VSentAndRevised extends Component
                 $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
                     ->where('creation_status','not like','Borrador')
                     ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->whereNotNull('token_solicitante')
                     ->orderby($this->ordenar, $this->direccion)
                     ->paginate($this->mostrar);
 
@@ -62,8 +63,31 @@ class VSentAndRevised extends Component
                     ->where('justificacion','like','%'.$this->buscar.'%')
                     ->where('creation_status','not like','Borrador')
                     ->where('pass_filter',1)
-                    ->whereNull('motivo_rechazo')
+                    ->whereNotNull('token_solicitante')
                     ->whereNotNull('token_rev_val')
+                    ->orderby($this->ordenar, $this->direccion)
+                    ->paginate($this->mostrar);
+            } elseif ($user->hasRole('N2:CP')) {
+                $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','not like','Borrador')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNotNull('token_solicitante')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_disp_ppta')
+                    ->orderby($this->ordenar, $this->direccion)
+                    ->paginate($this->mostrar);
+            } elseif ($user->hasRole('N1:DA')) {
+                $vales = Vales_compra::select('id','folio','fecha','justificacion','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','not like','Borrador')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNotNull('token_solicitante')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_disp_ppta')  
+                    ->whereNotNull('token_autorizacion')
                     ->orderby($this->ordenar, $this->direccion)
                     ->paginate($this->mostrar);
             }

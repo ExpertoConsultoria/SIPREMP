@@ -40,10 +40,11 @@ return new class extends Migration
 
             $table->enum('creation_status', [
                 'Enviado',
+                'Validado',
+                'Presupuestado',
+                'Aprobado',
                 'Borrador',
                 'Rechazado',
-                'Aprobado',
-                'Validado',
             ]);
             $table->enum('tipo_proveedor', [
                 'Fijo',
@@ -51,7 +52,8 @@ return new class extends Migration
             ])->nullable();
 
             $table->boolean('pending_review')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
-            $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada
+            $table->boolean('pass_filter')->default(0); // Solo cambia si ha sido Aprovada o Rechazada por N3:UT
+            $table->boolean('pass_cp')->default(0); // Solo cambia si ha sido Aprovada o Rechazada por N2:CP
             $table->text('motivo_rechazo')->nullable();
 
             $table->text("token_solicitante")->nullable();

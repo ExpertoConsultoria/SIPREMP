@@ -124,8 +124,60 @@ class BEPendientes extends Component
 
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
-            }
+            } elseif ($user->hasRole('N2:CP')){
 
+                $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','Validado')
+                    ->where('pass_filter',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+                foreach ($vales as $vale) {
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
+                        array_push($filtrados, $vale);
+                    }
+                }
+
+                $pendientes = Collection::make($filtrados);
+
+                $page = 0;
+                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+                $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
+                $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
+            } elseif ($user->hasRole('N1:DA')){
+
+                $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
+                    ->where('justificacion','like','%'.$this->buscar.'%')
+                    ->where('creation_status','Presupuestado')
+                    ->where('pass_filter',1)
+                    ->where('pass_cp',1)
+                    ->whereNull('motivo_rechazo')
+                    ->whereNull('token_autorizacion')
+                    ->whereNotNull('token_disp_ppta')
+                    ->whereNotNull('token_rev_val')
+                    ->whereNotNull('token_solicitante')
+                    ->get();
+
+                foreach ($vales as $vale) {
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
+                        array_push($filtrados, $vale);
+                    }
+                }
+
+                $pendientes = Collection::make($filtrados);
+
+                $page = 0;
+                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+                $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
+                $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
+            }
         }
 
         return view('livewire.shared.bandeja-entrada.b-e-pendientes',compact('pendientes'));
@@ -139,7 +191,7 @@ class BEPendientes extends Component
             return redirect()->to(route("bandejaentrada.details", ['details_of_folio'=>$data['memo_folio']]));
         } elseif($user->hasRole('N4:SEGE')){
             return redirect()->to(route("bandejaentrada.advanced-details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif($user->hasRole('N3:UNTE')){
+        } elseif($user->hasAnyRole(['N3:UNTE', 'N2:CP', 'N1:DA'])){
             return redirect()->to(route("bandejaentrada.valeServicio", ['details_of_folio'=>$data['folio']]));
         }
     }

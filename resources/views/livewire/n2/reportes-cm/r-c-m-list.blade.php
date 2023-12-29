@@ -1,4 +1,4 @@
-<div>
+<div wire:init="loadReports">
     <x-slot name="header">
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
@@ -24,78 +24,178 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
             <select wire:model.live="mostrar"
-                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="10">Mostrar: 10</option>
                 <option value="25">Mostrar: 25</option>
                 <option value="50">Mostrar: 50</option>
             </select>
 
-            {{-- Extraido de caja menor borradores --}}
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
                 </div>
 
-                <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
+                <x-input type="text" wire:model.live="buscar" placeholder="Buscar por fecha de inicio..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    dark:bg-zinc-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                 <button type="button" wire:click="$set('buscar','')"
                     class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
                     <i class="fa-solid fa-delete-left"></i>
                 </button>
             </div>
-        </div>
-    
 
-    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                <tr class="text-center text-black dark:text-gray-300">
-                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                        Folio
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Fecha de Creación
-                    </th>
-                    <th class="px-16 py-2 cursor-pointer">
-                        Asunto
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Origen
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
-                    <td class="px-4 py-2">
-                        <p>#88898</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>14/09/2023</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Solicitud de computadoras</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Servicios generales</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div>
-                            <x-button-icons icon="print"/>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="p-6 bg-white h-96 text dark:bg-zinc-800 dark:border-zinc-700">
         </div>
 
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            @if (count($reports))
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
+                    <tr>
+                        <th wire:click="ordenaPor('rcm_folio')" class="px-4 py-2 cursor-pointer">
+                            Folio
+                            @if ($ordenar == 'rcm_folio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_area')" class="px-4 py-2 cursor-pointer">
+                            Enviado por
+                            @if ($ordenar == 'rcm_area')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_ejercicio')" class="px-4 py-2 cursor-pointer">
+                            Ejercicio
+                            @if ($ordenar == 'rcm_ejercicio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_inicio')" class="px-4 py-2 cursor-pointer">
+                            Periodo
+                            @if ($ordenar == 'rcm_inicio')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th wire:click="ordenaPor('rcm_partida_presupuestal')" class="px-4 py-2 cursor-pointer">
+                            Partida Presupuestal
+                            @if ($ordenar == 'rcm_partida_presupuestal')
+                            @if ($direccion == 'asc')
+                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                            @else
+                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                            @endif
+                            @else
+                            <i class="float-right mt-1 fas fa-sort"></i>
+                            @endif
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reports as $report)
+                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700">
+                        <td class="px-4 py-2"> {{ $report->rcm_folio }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_area }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_ejercicio }} </td>
+                        <td class="px-4 py-2"> {{ $report->rcm_inicio }} | {{ $report->rcm_fin }}</td>
+                        <td class="px-4 py-2"> {{ $report->rcm_partida_presupuestal }} </td>
+                        <td class="text-center">
+                            <x-button-colors color="indigo" wire:click="reportDetails({{ $report }})">
+                                <i class="fas fa-eye"></i>
+                            </x-button-colors>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @if ($reports->hasPages())
+            <div class="px-6 py-3">
+                {{ $reports->links() }}
+            </div>
+            @endif
+            @else
+            <div class="bg-gray-50 dark:bg-zinc-700">
+                <p class="p-4 font-semibold text-center text-gray-700 dark:text-gray-300">
+                    !! No existen registros ¡¡
+                </p>
+            </div>
+            @endif
         </div>
     </div>
-    
+
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                setInterval(getRCMAlert, 10000); //Cada 10 segundo (10 mil milisegundos)
+            });
+
+            // On window load
+            window.onload = function () {
+                localStorage.setItem("rcmAlert", '');
+                getRCMAlert();
+            }
+
+            // On window unload
+            window.onbeforeunload = function () {
+                localStorage.removeItem("rcmAlert");
+            };
+
+            function getRCMAlert() {
+
+                var rcmAlert = localStorage.getItem("rcmAlert");
+
+                $.get('api/rcmAlert', function (data) {
+
+                    if (rcmAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != rcmAlert) {
+
+                            data = JSON.parse(data);
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} pendiente de Revisar`, `/reportes-caja-menor/${data.folios[i]}`, '#7C3AED',10000,'bottom','right']);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rcmAlert", data);
+                        }
+
+                    } else {
+
+                        for (let i = 0; i < data.folios.length; i++) {
+                            Livewire.dispatch('toastifyAlert', [`${data.folios[i]} pendiente de Revisar`, `/reportes-caja-menor/${data.folios[i]}`, '#7C3AED',10000,'bottom','right']);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("rcmAlert", data);
+                    }
+
+                });
+            }
+        </script>
+    @endpush
+
 </div>

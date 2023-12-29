@@ -23,44 +23,8 @@
 
     <div class="max-w-screen-xl py-8 mx-auto">
 
-        <div
-            class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="container w-2/3 px-4 mx-auto">
-                <div class="mb-3">
-                    <label
-                        class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
-                </div>
-                <div class="relative h-8 mb-4">
-                    {{-- Línea base de la barra de progreso  --}}
-                    <div
-                        class="h-0.5 w-[86%] sm:w-[86%] md:w-[86%] lg:w-[92%] xl:w-[86%] bg-gray-300 absolute top-3 left-0 right-0 mx-12">
-                    </div>
+        <x-vale-status vale_id="{{$vale_details->id}}" />
 
-                    {{-- Círculos y etiquetas --}}
-                    <div class="flex items-center justify-between">
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Servicios Generales</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Unidad técnica</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Control Presupuestal</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full "></div>
-                            <p class="mt-1 text-xs">Dirección Administrativa</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div
             class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="container px-4 ">

@@ -4,11 +4,11 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Bandeja de entrada')}}
+                    {{_('Compras consolidadas | borrador 345')}}
                 </h2>
             </div>
 
-            <div class="grid" style="justify-content: end; padding-right: 5.5rem" >
+            <div class="grid" style="justify-content: end; padding-right: 5.5rem">
                 <a href="{{route('dashboard')}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="none">
                         <path
@@ -24,7 +24,7 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex items-center justify-around w-10/12 px-6 py-4 space-x-4">
             <select wire:model.live="mostrar"
-                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="10">Mostrar: 10</option>
                 <option value="25">Mostrar: 25</option>
                 <option value="50">Mostrar: 50</option>
@@ -38,7 +38,7 @@
 
                 <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                 <button type="button" wire:click="$set('buscar','')"
                     class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
@@ -46,56 +46,56 @@
                 </button>
             </div>
         </div>
-    
 
-    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                <tr class="text-center text-black dark:text-gray-300">
-                    <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                        Folio
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Fecha de Creación
-                    </th>
-                    <th class="px-16 py-2 cursor-pointer">
-                        Asunto
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Origen
-                    </th>
-                    <th class="px-4 py-2 cursor-pointer">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
-                    <td class="px-4 py-2">
-                        <p>#88898</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>14/09/2023</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Solicitud de computadoras</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>Servicios generales</p>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div>
-                            <x-button-icons icon="eye"/>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
-        <div class="p-6 bg-white h-96 text dark:bg-zinc-800 dark:border-zinc-700">
-        </div>
+        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-400">
+                    <tr class="text-center">
+                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                            Folio
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Fecha de Creación
+                        </th>
+                        <th class="px-16 py-2 cursor-pointer">
+                            Asunto
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Origen
+                        </th>
+                        <th class="px-4 py-2 cursor-pointer">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
+                        <td class="px-4 py-2">
+                            <p>#88898</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>14/09/2023</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>Unidad Técnica</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <p>Usuario del que proviene</p>
+                        </td>
+                        <td class="px-4 py-2">
+                            <div>
+                                <a>
+                                    <x-button-icons icon="eye" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    
+
 </div>

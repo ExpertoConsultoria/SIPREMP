@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-span-12">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{$vale_details->justificacion}}
+                                        {{$vale_details->motivo_rechazo}}
                                     </p>
                                 </div>
                             </div>
