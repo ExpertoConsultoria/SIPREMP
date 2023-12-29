@@ -33,7 +33,7 @@ class AddInvoice extends ModalComponent
 
     protected function rules() {
         return [
-            'archivo' => 'required | mimes:pdf|max:1024',
+            'archivo' => 'required | mimes:pdf|max:2048',
             'fecha_registro' => 'required|date',
             'lugar_registro' => 'required',
             'folio' => 'required|string',

@@ -23,7 +23,7 @@
         <div class="max-w-screen-xl mx-auto">
             {{-- Datos --}}
             <div
-                class="p-6 mb-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                class="p-6 mb-6 text-gray-900 bg-white border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700 w-30 dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
@@ -68,13 +68,13 @@
             </div>
 
             {{-- Buttons --}}
-            <div class="p-6 my-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+            <div class="p-6 my-6 text-gray-900 bg-white border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700 w-30 dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                         <div class="text-center">
                             @if (!$is_pdf)
-                                <button type="button" wire:click="getFactura"
+                                <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.caja-menor.add-pdf', arguments: { id_factura: {{ $compra_data->factura->id }}, id_ccm: '{{ $compra_data->id }}' }})"
                                     class="disabled:opacity-25 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                    GENERAR FACTURA (PDF)
+                                    SUBIR FACTURA (PDF)
                                 </button>
                             @else
                                 <a type="button" href="{{ asset($factura->fcm_pdf_ruta) }}" target="_blank"
@@ -88,7 +88,7 @@
 
             {{-- Proveedor --}}
             <div
-                class="p-6 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                class="p-6 text-gray-900 bg-white border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700 w-30 dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="container px-4">
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                         <div class="flex items-center">
@@ -112,7 +112,7 @@
 
             {{-- Table --}}
             <div
-                class="pb-12 mt-4 bg-white  border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700  w-30 text-gray-900  dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
+                class="pb-12 mt-4 text-gray-900 bg-white border-gray-200 rounded-lg shadow-lg shadow-gray-300 dark:shadow-zinc-700 w-30 dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">

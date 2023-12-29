@@ -19,11 +19,12 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 
-use PhpCfdi\CfdiCleaner\Cleaner;
-use CfdiUtils\Nodes\XmlNodeUtils;
-use PhpCfdi\CfdiToPdf\CfdiDataBuilder;
-use PhpCfdi\CfdiToPdf\Converter;
-use PhpCfdi\CfdiToPdf\Builders\Html2PdfBuilder;
+// ? Paqueteria para convertir XML en PDF
+// use PhpCfdi\CfdiCleaner\Cleaner;
+// use CfdiUtils\Nodes\XmlNodeUtils;
+// use PhpCfdi\CfdiToPdf\CfdiDataBuilder;
+// use PhpCfdi\CfdiToPdf\Converter;
+// use PhpCfdi\CfdiToPdf\Builders\Html2PdfBuilder;
 
 class CCMDetalles extends Component
 {
@@ -79,32 +80,42 @@ class CCMDetalles extends Component
         return view('livewire.shared.caja-menor.c-c-m-detalles');
     }
 
-    public function getFactura(){
 
-        $xml = file_get_contents($this->factura->fcm_xml_ruta);
+    protected $listeners = ['AssignInvoice'];
 
-        // clean cfdi
-        $xml = Cleaner::staticClean($xml);
-
-        // create the main node structure
-        $comprobante = XmlNodeUtils::nodeFromXmlString($xml);
-
-        // create the CfdiData object, it contains all the required information
-        $cfdiData = (new CfdiDataBuilder())->build($comprobante);
-
-        // create the converter
-        $converter = new Converter(
-            new Html2PdfBuilder()
-        );
-
-        $route = 'storage/files/FacturasCM/PDF/'.$this->details_of_folio.'.pdf';
-        // create the invoice as output.pdf
-        $converter->createPdfAs($cfdiData, $route);
-
-        $this->factura->fcm_pdf_ruta = $route;
-        $this->factura->save();
-        $this->is_pdf=true;
-
-        $this->dispatch('simpleAlert','Archivo Generado Correctamente','success');
+    public function AssignInvoice($is_pdf){
+        $this->is_pdf = $is_pdf;
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert','Archivo Asigando Correctamente','success');
     }
+
+    //? Genera un PDF de la factura a partir del .XML de la misma
+    // public function getFactura(){
+
+    //     $xml = file_get_contents($this->factura->fcm_xml_ruta);
+
+    //     // clean cfdi
+    //     $xml = Cleaner::staticClean($xml);
+
+    //     // create the main node structure
+    //     $comprobante = XmlNodeUtils::nodeFromXmlString($xml);
+
+    //     // create the CfdiData object, it contains all the required information
+    //     $cfdiData = (new CfdiDataBuilder())->build($comprobante);
+
+    //     // create the converter
+    //     $converter = new Converter(
+    //         new Html2PdfBuilder()
+    //     );
+
+    //     $route = 'storage/files/FacturasCM/PDF/'.$this->details_of_folio.'.pdf';
+    //     // create the invoice as output.pdf
+    //     $converter->createPdfAs($cfdiData, $route);
+
+    //     $this->factura->fcm_pdf_ruta = $route;
+    //     $this->factura->save();
+    //     $this->is_pdf=true;
+
+    //     $this->dispatch('simpleAlert','Archivo Generado Correctamente','success');
+    // }
 }
