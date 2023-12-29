@@ -49,8 +49,8 @@ class AddPdf extends ModalComponent
     public function SaveInvoice(){
         $this->validate();
 
-        // $this->factura->fcm_pdf_ruta = 'storage/'.$this->archivo->store('files/FacturasCM/PDF','public');
-        $this->factura->fcm_pdf_ruta = 'storage/'.$this->archivo->storeAs('files/FacturasCM/PDF', $this->compra_menor->cm_folio.'.pdf', 'public');
+        $this->factura->fcm_pdf_ruta = 'storage/'.$this->archivo->store('files/FacturasCM/PDF','public');
+        // $this->factura->fcm_pdf_ruta = 'storage/'.$this->archivo->storeAs('files/FacturasCM/PDF', $this->compra_menor->cm_folio.'.pdf', 'public');
         $this->factura->save();
 
         $this->dispatch('AssignInvoice', true);
