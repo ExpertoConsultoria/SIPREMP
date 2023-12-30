@@ -210,4 +210,140 @@ class ApiController extends Controller
         return $reportsAlert;
 
     }
+
+    public function acendAlert($user_id){
+        $alertsAccepted = new stdClass;
+        $alertsAccepted->folios = [];
+        
+        $memorandums = Memorandum::where('solicitante_id', $user_id)
+                            ->where('memo_creation_status', 'Aprobado')
+                            ->where('pending_review', 0)
+                            ->whereNull('motivo_rechazo')
+                            ->whereNotNull('token_aceptacion')
+                            ->get();
+
+        if (count($memorandums)) {
+            $memoFolios = $memorandums->pluck('memo_folio')->toArray();
+            
+            $vales = Vales_compra::whereIn('folio_solicitud', $memoFolios)
+                            ->where('id_usuario', $user_id)
+                            ->whereNotNull('folio_solicitud')
+                            ->get();
+
+            if (count($vales)) {
+                foreach ($memorandums as $memorandum) {
+                    array_push($alertsAccepted->folios, $memorandum->memo_folio);
+                }
+            }
+        }
+        
+        return $alertsAccepted;
+    }
+
+    public function rejectionAlertVale($user_id){
+        $alertsRejected = new stdClass;
+        $alertsRejected->folios = [];
+    
+        $vales = Vales_compra::where('id_usuario', $user_id)
+                        ->where('creation_status', 'Rechazado')
+                        ->where('pass_filter', 0)
+                        ->whereNull('token_rev_val')
+                        ->whereNotNull('motivo_rechazo')
+                        ->get();
+    
+        if(count($vales)){
+            foreach ($vales as $vale) {
+                if(isset($vale->folio_solicitud)) {
+                    $alertsRejected->folios[] = [
+                        'type' => 'folio_solicitud',
+                        'value' => $vale->folio_solicitud
+                    ];
+                } else {
+                    $alertsRejected->folios[] = [
+                        'type' => 'folio',
+                        'value' => $vale->folio
+                    ];
+                }
+            }
+        }
+    
+        return $alertsRejected;
+    }
+
+
+    public function acceptanceAlertUT($user_id){
+
+        $alertsAccepted = new stdClass;
+        $alertsAccepted->folios = [];
+        // $alertsAccepted->message = '';
+
+        $vales = Vales_compra::where('id_usuario',$user_id)
+                        ->where('creation_status','Validado')
+                        ->where('pass_filter',1)
+                        ->whereNotNull('token_solicitante')
+                        ->whereNotNull('token_rev_val')
+                        ->get();
+
+        if(count($vales)){
+            foreach ($vales as $vale) {
+                array_push($alertsAccepted->folios, $vale->folio);
+            }            
+        }
+
+        return $alertsAccepted;
+
+    }
+
+    public function acceptanceAlertCP($user_id){
+
+        $alertsAccepted = new stdClass;
+        $alertsAccepted->folios = [];
+        // $alertsAccepted->message = '';
+
+        $vales = Vales_compra::where('id_usuario',$user_id)
+                        ->where('creation_status','Presupuestado')
+                        ->where('pass_cp',1)
+                        ->where('pass_filter',1)
+                        ->whereNotNull('token_solicitante')
+                        ->whereNotNull('token_rev_val')
+                        ->whereNotNull('token_disp_ppta')
+                        ->get();
+
+        if(count($vales)){
+            foreach ($vales as $vale) {
+                array_push($alertsAccepted->folios,$vale->folio);
+            }
+        }
+
+        return $alertsAccepted;
+
+    }
+
+    public function acceptanceAlertDA($user_id){
+
+        $alertsAccepted = new stdClass;
+        $alertsAccepted->folios = [];
+        // $alertsAccepted->message = '';
+
+        $vales = Vales_compra::where('id_usuario',$user_id)
+                        ->where('creation_status','Aprobado')
+                        ->where('pass_cp',1)
+                        ->where('pass_filter',1)
+                        ->whereNotNull('token_solicitante')
+                        ->whereNotNull('token_rev_val')
+                        ->whereNotNull('token_disp_ppta')
+                        ->whereNotNull('token_autorizacion')
+                        ->get();
+
+        if(count($vales)){
+            foreach ($vales as $vale) {
+                array_push($alertsAccepted->folios,$vale->folio);
+            }
+        }
+
+        return $alertsAccepted;
+
+    }
+    
+
 }

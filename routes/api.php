@@ -13,3 +13,10 @@ Route::get('/rcmAlert', [ApiController::class, 'RCMAlert']);
 Route::get('/rejectionAlert/{user_id}', [ApiController::class, 'rejectionAlert']);
 Route::get('/acceptanceAlert/{user_id}', [ApiController::class, 'acceptanceAlert']);
 Route::get('/approvedAlert/{user_id}', [ApiController::class, 'approvedAlert']);
+
+//Notificaciones de Vales
+Route::get('/acendalert/{user_id}', [ApiController::class, 'acendAlert']);
+Route::get('/rejectionAlertVale/{user_id}', [ApiController::class, 'rejectionAlertVale']);
+Route::get('/acceptanceAlertUT/{user_id}', [ApiController::class, 'acceptanceAlertUT']);
+Route::get('/acceptanceAlertCP/{user_id}', [ApiController::class, 'acceptanceAlertCP']);
+Route::get('/acceptanceAlertDA/{user_id}', [ApiController::class, 'acceptanceAlertDA']);
