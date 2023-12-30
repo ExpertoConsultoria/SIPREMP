@@ -49,8 +49,7 @@ use App\Livewire\N4\Inventario\ICrearSalida;
 use App\Livewire\N4\Inventario\IInventario;
 use App\Livewire\N4\Inventario\IHistorial;
 
-use App\Livewire\N2\BandejaEntrada\BEBandejaEntrada;
-use App\Livewire\N2\BandejaEntrada\BEValeBienOServicio;
+use App\Livewire\N2\ComprasConsolidadas\CCBandeja;
 
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
@@ -59,13 +58,17 @@ use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 use App\Livewire\N3\SolicitudesVales\VSRechazadas;
 use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
-use App\Livewire\N2\BandejaEntrada\BEBandejaEntrada;
-use App\Livewire\N2\BandejaEntrada\BEValeBienOServicio;
+use App\Livewire\N2\Vales\VBienServicio;
+use App\Livewire\N2\Vales\VSolicitud;
+
+use App\Livewire\N2\ReportesCM\RCMList;
+use App\Livewire\N2\ReportesCM\RCMDetails;
 
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
 use App\Http\Controllers\MemorandumPDF;
 use App\Http\Controllers\CotizacionPDF;
+use App\Http\Controllers\EvidenciaPDF;
 use App\Http\Controllers\ValePDF;
 /*
 |--------------------------------------------------------------------------
@@ -110,19 +113,6 @@ Route::middleware([
             return view('SG.vales.main');
         })->name('vales');
 
-<<<<<<< HEAD
-        // N2 vales
-=======
-        //N2 vales
->>>>>>> main
-        Route::get('/valesControlPresupuestal', function () {
-            return view('N2.vales.main');
-        })->name('valesconpresupuestal');
-
-<<<<<<< HEAD
-=======
-
->>>>>>> main
         Route::get('/expedientes', function () {
             return view('SG.expedientes.main');
         })->name('expedientes');
@@ -136,14 +126,21 @@ Route::middleware([
         })->name('compraconsolidada');
 
     // Reactive Pages
-    //pdf
-    Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
-    Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
-    Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
-    Route::get('/solicitudes/pdf-cotizacion', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
-    //Pendiente
-    // Route::get('/vale/pdf-vale', [ValePDF::class, 'generatePDF'])->name('pdf.vale');
+        //PDF
+        Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
+        Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
+        Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
+        Route::get('/solicitudes/pdf-cotizacion/{details_of_folio}', [CotizacionPDF::class, 'generatePDF'])->name('pdf.Cotizacion');
+        Route::get('/vale-compra-servicio/pdf-evidencia/{details_of_folio}', [EvidenciaPDF::class, 'generatePDF'])->name('pdf.Evidencia');
+        Route::get('/vale-compra-servicio/pdf-vale/{details_of_folio}', [ValePDF::class, 'generatePDF'])->name('pdf.Vale');
 
+    // N2
+        // Vales
+        Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
+        Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
+        // Reportes Caja menor
+        Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
+        Route::get('/reportes-caja-menor/{folio_report}', RCMDetails::class)->name('reportescajamenor.reportData');
 
     //Inventario
     Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');
@@ -153,7 +150,7 @@ Route::middleware([
 
     //Expedientes
     Route::get('/expediente/list',EList::class)->name('expediente.list');
-    Route::get('/expediente/list/detalles',EDetalles::class)->name('expediente.detalles');
+    Route::get('/expediente/list/detalles/{details_of_folio}',EDetalles::class)->name('expediente.detalles');
 
     //Vales
     Route::get('/vales/create-from-memorandum/{details_of_folio}',VCreateFromMemo::class)->name('vale.create-from-memo');
@@ -162,7 +159,6 @@ Route::middleware([
     Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
     Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
     Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
-
 
     Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
     Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
@@ -187,14 +183,9 @@ Route::middleware([
     Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
     Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
     Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
-    // N2
-    Route::get('/bandeja-entrada-UN', BEBandejaEntrada::class)->name('bandejaentrada.unidadcontrol');
-    Route::get('/vale-bien-servicio', BEValeBienOServicio::class)->name('valeservicio.contrpresuptl');
 
     //N2
-    Route::get('/bandeja-entrada-UN', BEBandejaEntrada::class)->name('bandejaentrada.unidadcontrol');
-    Route::get('/vale-bien-servicio', BEValeBienOServicio::class)->name('valeservicio.contrpresuptl');
-
+    Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('comprasconsolidadas.pendientes');
 
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
@@ -214,8 +205,5 @@ Route::middleware([
 
     // Inventario
     Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
-
-    // Expedientes
-    Route::get('/expediente/ExpedienteCreate', ExpedienteCreate::class)->name('expediente.create');
 
 });

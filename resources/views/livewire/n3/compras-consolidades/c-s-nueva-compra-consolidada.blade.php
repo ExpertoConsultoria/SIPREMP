@@ -88,6 +88,19 @@
                                 <div class="col-span-9" >
 
                                     <div>
+                                        <div class="absolute mt-3 ml-3">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_317_4700)">
+                                                <path d="M19.8102 18.9119L14.6466 13.8308C15.9988 12.3616 16.8296 10.4187 16.8296 8.28068C16.8289 3.7071 13.0618 0 8.41447 0C3.76713 0 0 3.7071 0 8.28068C0 12.8543 3.76713 16.5614 8.41447 16.5614C10.4224 16.5614 12.2641 15.8668 13.7107 14.7122L18.8944 19.8134C19.147 20.0622 19.5571 20.0622 19.8096 19.8134C20.0628 19.5646 20.0628 19.1607 19.8102 18.9119ZM8.41447 15.2873C4.48231 15.2873 1.29468 12.1504 1.29468 8.28068C1.29468 4.41101 4.48231 1.27403 8.41447 1.27403C12.3467 1.27403 15.5343 4.41101 15.5343 8.28068C15.5343 12.1504 12.3467 15.2873 8.41447 15.2873Z" fill="#515151"/>
+                                                </g>
+                                                <defs>
+                                                <clipPath id="clip0_317_4700">
+                                                <rect width="20" height="20" fill="white"/>
+                                                </clipPath>
+                                                </defs>
+                                                </svg>
+                                                
+                                        </div>
                                         <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
                                     dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
@@ -231,7 +244,7 @@
                     <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                                <tr class="text-center dark:text-gray-200 ">
+                                <tr class="text-center dark:text-gray-200">
                                     <th class="px-4 py-2 whitespace-nowrap">
                                         Cantidad
                                     </th>
@@ -251,12 +264,12 @@
                                     <td class="px-4 py-2"> 1</td>
                                     <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                                        <div class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
+                                        <div class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                             <span class="mx-auto">$00.00</span>
                                         </div>
                                     </td>
@@ -264,12 +277,12 @@
                             </tbody>
                         </table>
 
-                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
+                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
                         </div>
 
                         <hr class="dark:border-gray-400">
 
-                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
+                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800">
                             <div class="col-span-10 text-end">
                                 <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
                                     Subtotal:

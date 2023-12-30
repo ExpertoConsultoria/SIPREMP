@@ -165,34 +165,34 @@
         <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                    <tr class="text-center text-bla">
-                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                    <tr class="text-center dark:text-gray-200">
+                        <th class="px-4 py-2 whitespace-nowrap">
                             Cantidad
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             Concepto
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             P/U
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             Importe
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
+                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 1 Coca </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-700 border w-1/2 border-gray-400 dark:border-zinc-500 text-gray-900 dark:text-gray-300 text-sm rounded-lg p-2">
+                            class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-700 border w-1/2 border-gray-400 dark:border-zinc-500 text-gray-900 dark:text-gray-300 text-sm rounded-lg p-2">
+                                class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -203,9 +203,9 @@
             <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
             </div>
 
-            <hr>
+            <hr class="dark:border-gray-400"">
 
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white dark:bg-zinc-800 p-6 ">
+            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800">
 
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
@@ -250,34 +250,34 @@
         <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                    <tr class="text-center text-bla">
-                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                    <tr class="text-center dark:text-gray-200">
+                        <th class="px-4 py-2 whitespace-nowrap">
                             Cantidad
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             Concepto
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             P/U
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
+                        <th class="px-4 py-2">
                             Importe
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 text-center">
+                    <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
                         <td class="px-4 py-2"> 1</td>
                         <td class="px-4 py-2"> 1 Coca </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-700 border w-1/2 border-gray-400 dark:border-zinc-500 text-gray-900 dark:text-gray-300 text-sm rounded-lg p-2">
+                            class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
                         <td class="px-4 py-2">
                             <div
-                                class=" flex items-center mx-auto bg-white dark:bg-zinc-700 border w-1/2 border-gray-400 dark:border-zinc-500 text-gray-900 dark:text-gray-300 text-sm rounded-lg p-2">
+                                class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
                                 <span class="mx-auto">$00.00</span>
                             </div>
                         </td>
@@ -288,9 +288,9 @@
             <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
             </div>
 
-            <hr>
+            <hr class="dark:border-gray-400"">
 
-            <div class="grid grid-cols-12 gap-2 mb-1 bg-white dark:bg-zinc-800 p-6 ">
+            <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800">
 
                 <div class="col-span-10 text-end">
                     <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
@@ -319,7 +319,26 @@
             </div>
         </div>
 
-        <div class="mt-10">
+        <div class="container mt-16 flex relative items-center w-full">
+            <div class="">
+                <button type="button"
+                    class=" uppercase disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                    Rechazar
+                </button>
+            </div>
+
+            <div class="ml-auto sm:col-span-2">
+                <div class="text-center col-span-1 ml-auto">
+                    <button type="button"
+                        class=" uppercase disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                        Disponibilidad presupuestal
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- <div class="mt-10">
             <div class="grid grid-cols-2">
                 <div class="text-start">
                     <button type="button"
@@ -327,6 +346,7 @@
                         RECHAZAR
                     </button>
                 </div>
+
                 <div class="text-end">
                     <button type="button"
                         class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-2.5  transition-all active:translate-y-1">
@@ -334,7 +354,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </div>
