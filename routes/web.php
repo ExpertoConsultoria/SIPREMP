@@ -63,8 +63,8 @@ use App\Livewire\N3\SolicitudesVales\VSRechazado;
 use App\Livewire\N2\Vales\VBienServicio;
 use App\Livewire\N2\Vales\VSolicitud;
 
-use App\Livewire\N2\ReportesCM\RCMList;
-use App\Livewire\N2\ReportesCM\RCMDetails;
+use App\Livewire\N2\ReportesCm\RCMList;
+use App\Livewire\N2\ReportesCm\RCMDetails;
 
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
@@ -74,8 +74,8 @@ use App\Http\Controllers\EvidenciaPDF;
 use App\Http\Controllers\ValePDF;
 
 // * Proveedores
-use App\Livewire\ut\proveedores\PGeneral;
-use App\Livewire\ut\proveedores\PDetalles;
+use App\Livewire\Ut\Proveedores\PGeneral;
+use App\Livewire\Ut\Proveedores\PDetalles;
 
 /*
 |--------------------------------------------------------------------------

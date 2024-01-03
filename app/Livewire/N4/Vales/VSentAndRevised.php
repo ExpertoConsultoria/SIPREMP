@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 

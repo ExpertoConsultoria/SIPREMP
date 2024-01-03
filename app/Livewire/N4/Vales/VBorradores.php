@@ -12,7 +12,6 @@ use Livewire\Attributes\On;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 
 class VBorradores extends Component
 {

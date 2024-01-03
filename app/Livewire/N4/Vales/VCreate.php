@@ -22,7 +22,7 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
-use App\Models\User;
+
 
 class VCreate extends Component
 {

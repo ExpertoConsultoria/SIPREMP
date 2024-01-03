@@ -45,8 +45,6 @@ class BEPendientes extends Component
     public function render()
     {
         $pendientes = [];
-        $user = User::find(Auth::id());
-
         if($this->cargarLista){
 
             $filtrados = [];
@@ -99,7 +97,8 @@ class BEPendientes extends Component
 
                 $pendientes = $pendientes->sortBy([$this->ordenar, $this->direccion]);
                 $pendientes = new LengthAwarePaginator($pendientes->forPage($page, $this->mostrar), $pendientes->count(), $this->mostrar, $page);
-            } elseif (Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+
+            } elseif ($user->hasRole('N3:UNTE')){
 
                 $vales = Vales_compra::select('fecha','folio','justificacion','creation_status','id_usuario')
                     ->where('justificacion','like','%'.$this->buscar.'%')
@@ -186,11 +185,13 @@ class BEPendientes extends Component
 
     public function getDetails($data)
     {
-        if(Auth::user() -> roles[0] -> name === 'N5:18A:F'){
+        $user = User::find(Auth::id());
+
+        if($user->hasRole('N5:18A:F')){
             return redirect()->to(route("bandejaentrada.details", ['details_of_folio'=>$data['memo_folio']]));
         } elseif($user->hasRole('N4:SEGE')){
             return redirect()->to(route("bandejaentrada.advanced-details", ['details_of_folio'=>$data['memo_folio']]));
-        } elseif(Auth::user() -> roles[0] -> name === 'N3:UNTE'){
+        } elseif($user->hasAnyRole(['N3:UNTE', 'N2:CP', 'N1:DA'])){
             return redirect()->to(route("bandejaentrada.valeServicio", ['details_of_folio'=>$data['folio']]));
         }
     }

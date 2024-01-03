@@ -6,8 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-use App\Models\User;
-
 class Helper
 {
 
