@@ -20,9 +20,10 @@ return new class extends Migration
             $table -> text('precio_unitario');
             $table -> text('importe');
             $table -> text('partida_presupuestal');
-            $table -> text('subtotal');
-            $table -> text('iva');
             $table -> text('total');
+
+            // $table -> text('subtotal');
+            // $table -> text('iva');
             $table->timestamps();
         });
     }

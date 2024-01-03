@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table -> text('fecha');
             $table -> text('folio');
+            $table -> text('sucursal');
+            $table -> text('area') ;
             $table -> text('justificacion');
             $table -> text('asunto') -> nullable();
             $table -> text('objeto') -> nullable();
@@ -33,7 +35,14 @@ return new class extends Migration
             $table -> text('mir_id_fin');
             $table -> text('mir_id_proposito');
             $table -> text('mir_id_componente');
+            $table -> text('mir_id_actividad');
             $table -> text('mir_id_cotizacion');
+            
+            $table -> text('id_proveedor') -> nullable();
+            $table -> text('tipo_proveedor') -> nullable();
+
+            $table -> text('estado');
+            $table->text('token_aceptacion')->nullable();
             $table->timestamps();
         });
     }

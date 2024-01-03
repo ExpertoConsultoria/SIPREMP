@@ -4,20 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use betterapp\LaravelDbEncrypter\Traits\EncryptableDbAttribute;
 
 class item_compra_consolidada extends Model
 {
-    use HasFactory;
+    use HasFactory, EncryptableDbAttribute;
     protected $fillable = [
         'compra_consolidada_id',
         'cantidad',
         'concepto',
         'precio_unitario',
-        'importe',
         'partida_presupuestal',
-        'subtotal',
-        'iva',
         'total',
+        'importe',
+
+        // 'iva',
+        // 'subtotal',
     ];
 
     protected $encryptable = [

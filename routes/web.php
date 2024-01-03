@@ -53,6 +53,7 @@ use App\Livewire\N4\Inventario\IDetails;
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
 use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
+use App\Livewire\N3\ComprasConsolidades\CompraConsolidadaDetalles;
 
 use App\Livewire\N3\SolicitudesVales\VSRechazadas;
 use App\Livewire\N3\SolicitudesVales\VSRechazado;
@@ -167,8 +168,10 @@ Route::middleware([
 
     // compra consolidada
     Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
+    Route::get('/compra-consolidada/edit/{folioToEdit}',CSNuevaCompraConsolidada::class)->name('compraConsolidada.editBorrador');
     Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidada.borradorCompra');
     Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidada.guardado');
+    Route::get('/compra-consolidada/detallesCompra/{folio}',CompraConsolidadaDetalles::class)->name('compraConsolidada.detalles');
 
     //Bandeja Entrada
     Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');

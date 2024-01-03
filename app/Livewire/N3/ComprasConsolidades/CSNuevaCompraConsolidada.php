@@ -5,6 +5,7 @@ namespace App\Livewire\N3\ComprasConsolidades;
 use Livewire\Component;
 
 use App\Models\proveedores_temporales;
+use Illuminate\Support\Facades\Auth;
 
 // * proveedores
 use App\Models\Empresa;
@@ -22,6 +23,10 @@ use App\Models\item_compra_consolidada;
 use stdClass;
 class CSNuevaCompraConsolidada extends Component
 {
+
+    public $folioToEdit = '';
+    public $compraToEdit;
+
     //? Atributos del proveedor
     public $onAddProveedor = false;
     public $tipo_proveedor;
@@ -33,6 +38,7 @@ class CSNuevaCompraConsolidada extends Component
     public $new_razon_social;
     public $new_RFC;
     public $new_regimen;
+    public $new_datos_contacto;
     public $new_datos_banco;
     public $razon_social = '---';
     public $RFC = '---';
@@ -73,6 +79,7 @@ class CSNuevaCompraConsolidada extends Component
     // * USER DATA
     public $userSede;
     public $userSedeCode;
+    public $area = '';
     public $lugar;
 
     // ? XML DATA
@@ -95,6 +102,7 @@ class CSNuevaCompraConsolidada extends Component
     public $componente_mir = '';
     public $actividad_mir = '';
     public $mir_id_cotizacion = '';
+    public $NoActividad = '';
 
     // ? Proveedores
     public $proveedores = [];
@@ -102,12 +110,16 @@ class CSNuevaCompraConsolidada extends Component
     public $id_proveedor = 0;
     public $buscar;
     public $seleccionado;
+    
+    public $sucursal;
 
     protected $listeners = ['loadProveedor'];
     protected function rules() {
         return [
             'folio'   => 'required|string',
             'fecha' => 'required|date',
+            'lugar' => 'required|date',
+            'area' => 'required|date',
 
             'cantidad' => 'required',
             'concepto' => 'required',
@@ -118,7 +130,7 @@ class CSNuevaCompraConsolidada extends Component
             'fin_mir' => 'required',
             'proposito_mir' => 'required',
             'componente_mir' => 'required',
-            'actividad_mir' => 'required',
+            'NoActividad' => 'required',
 
             // 'id_proveedor' => 'required',
             'justificacion'   => 'required|string',
@@ -145,6 +157,9 @@ class CSNuevaCompraConsolidada extends Component
 
         'justificacion.required' => 'La justificacion es obligatoria.',
         'justificacion.string' => 'Texto Invalido.',
+        
+        'lugar.required' => 'La justificacion es obligatoria.',
+        'area.required' => 'La justificacion es obligatoria.',
 
         'lugar_entrega.required' => 'Este campo es Obligatorio.',
         'lugar_entrega.string' => 'Texto Invalido.',
@@ -156,7 +171,7 @@ class CSNuevaCompraConsolidada extends Component
         'fin_mir' => 'El campo de fin es requerido',
         'proposito_mir' => 'El campo de proposito es requerido',
         'componente_mir' => 'El campo de componente es requerido',
-        'actividad_mir' => 'El campo de actividad es requerido',
+        'NoActividad' => 'El campo de actividad es requerido',
 
         // Element List
         'cantidad.required' => 'La cantidad es un campo Obligatorio.',
@@ -197,20 +212,81 @@ class CSNuevaCompraConsolidada extends Component
     }
 
     public function mount() {
-        $this->fecha = date("Y-m-d");
-        $this->folio = "CC-EI-00000";
-
-
-        $this->is_loading_xml = false;
-        $this->is_valid_xml = false;
-        $this->is_done = false;
-
-        $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
-        $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
-        $this->lugar = $this->userSede;
+        $this->sucursal = Helper::GetSpecificUserSede(Auth::user())->SedeNombre;
 
         $this->fines_mir = Plan1Fin::all();
-        $this->partidas_presupuestales = PptoDeEgreso::all();
+        $this->partidas_presupuestales = PptoDeEgreso::all();    
+
+        if ( $this -> folioToEdit ) {
+            $this -> compraToEdit = compra_consolidada::where('folio', $this -> folioToEdit) -> first();
+            $items = item_compra_consolidada::where('compra_consolidada_id', $this -> compraToEdit -> id) -> get();
+            foreach( $items as $itemList ) {
+                $item = new stdClass;
+                $item -> cantidad = $itemList -> cantidad;
+                $item -> concepto = $itemList -> concepto;
+                $item -> importe = $itemList -> importe;
+                $item -> status = 'fromDraft';
+                $item -> precio_unitario = $itemList -> precio_unitario;
+                $item -> partida_presupuestal_id = $itemList -> partida_presupuestal;
+                $item -> total = $itemList -> total;
+                $item -> compra_consolidada_id = $itemList -> compra_consolidada_id;
+                array_push($this -> itemsCompra, $item);          
+            }
+            // dd($this -> itemsCompra);
+            // dd($this -> compraToEdit);
+            $this -> fecha = $this -> compraToEdit -> fecha;
+            // * TODO GENERAR FOLIO EN BORRADOR
+            $this -> folio = $this -> compraToEdit -> folio;
+            $this -> justificacion = $this -> compraToEdit -> justificacion;
+            $this -> area = $this -> compraToEdit -> area;
+            $this -> sucursal = $this -> compraToEdit -> sucursal;
+            // ? Anexo CompraCons
+            $this -> asunto = $this -> compraToEdit -> asunto;
+            $this -> objeto = $this -> compraToEdit -> objeto;
+            $this -> alcance = $this -> compraToEdit -> alcance;
+            $this -> procEntrega = $this -> compraToEdit -> procedimiento_entrega;
+            $this -> entregables = $this -> compraToEdit -> entregables;
+            $this -> muestras = $this -> compraToEdit -> muestras;
+            $this -> RRHH = $this -> compraToEdit -> recursos_humanos;
+            $this -> soporte_tecnico = $this -> compraToEdit -> soporte_tecnico;
+            $this -> mantenimiento = $this -> compraToEdit -> mantenimiento;
+            $this -> capacitacion = $this -> compraToEdit -> capacitacion;
+            $this -> vigencia = $this -> compraToEdit -> vigencia;
+            $this -> forma_pago = $this -> compraToEdit -> forma_pago;
+            $this -> garantia = $this -> compraToEdit -> garantia;
+
+            // ATRIBUTOS MIR
+            $this -> fin_mir = $this -> compraToEdit -> fin_mir;
+            $this -> proposito_mir = $this -> compraToEdit -> proposito_mir;
+            $this -> componente_mir = $this -> compraToEdit -> componente_mir;
+            $this -> mir_id_cotizacion = $this -> compraToEdit -> mir_id_cotizacion;
+            $this -> NoActividad = $this -> compraToEdit -> mir_id_actividad;
+            
+            $this -> id_proveedor = $this -> compraToEdit -> id_proveedor;
+            $this -> tipo_proveedor = $this -> compraToEdit -> tipo_proveedor;
+            
+            $this -> getProvedor( $this -> id_proveedor );
+            // $this -> estado = $compra_consolidada -> estado;
+
+            $this->fin_mir = $this->compraToEdit -> mir_id_fin;
+            $this->GetProposes($this -> fin_mir);
+            $this->proposito_mir = $this -> compraToEdit -> mir_id_proposito;
+            $this->GetComponents($this -> proposito_mir);
+            $this->componente_mir = $this -> compraToEdit -> mir_id_componente;
+            $this->GetActivities($this -> componente_mir);
+            $this->actividad_mir = $this -> compraToEdit -> mir_id_actividad;
+
+            $this -> DesglosarPorPartidas();
+            $this -> CalculateTotals();  
+        } else if ( !$this -> folioToEdit ) {
+            $this->fecha = date("Y-m-d");
+            $this->folio = "CC-EI-00000";
+    
+            $this->userSede = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->SedeNombre;
+            $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
+            $this->lugar = $this->userSede;
+            $this->area = 'N/D';
+        }
     }
 
     /**
@@ -230,6 +306,7 @@ class CSNuevaCompraConsolidada extends Component
             $this -> new_RFC = $data_proveedor['new_RFC'];
             $this -> new_regimen = $data_proveedor['new_regimen'];
             $this -> new_datos_banco = $data_proveedor['new_datos_banco'];
+            $this -> new_datos_contacto = $data_proveedor['new_datos_contacto'];
 
             $this -> razon_social = $this -> new_razon_social;
             $this -> RFC = $this -> new_RFC;
@@ -242,7 +319,6 @@ class CSNuevaCompraConsolidada extends Component
     }
 
     // ? Buscar proveedor
-
     public function searchProveedor(){
         if(!empty($this->buscar)) {
             $this->proveedores = Empresa::orderby('RazonSocial', 'asc')
@@ -296,6 +372,7 @@ class CSNuevaCompraConsolidada extends Component
         $itemCompra -> concepto = $this -> concepto;
         $itemCompra -> precio_unitario = $this -> precio_unitario;
         $itemCompra -> importe = $this -> importe;
+        $itemCompra -> status = 'new';
         $itemCompra -> partida_presupuestal_id = $this -> partida_presupuestal_id;
         array_push($this -> itemsCompra, $itemCompra);
 
@@ -414,19 +491,19 @@ class CSNuevaCompraConsolidada extends Component
         }
     }
 
-    public function DesglosarPorPartidas() {
+
+    public function DesglosarPorPartidas(){
 
         $this->partidas_data = [];
 
-        foreach ($this -> partidas_presupuestales as $partida) {
+        foreach ($this->partidas_presupuestales as $partida) {
 
             $dataPartida = new stdClass;
-            $dataPartida -> nombre = $partida -> CvePptal;
+            $dataPartida->nombre = $partida->CvePptal;
 
             // Obtenemos los elementos que concuerden con esta partida
             $dataPartida->elementos = [];
             foreach ($this->itemsCompra as $item) {
-                // dd($item);
                 if($item->partida_presupuestal_id === $partida->CvePptal){
                     array_push($dataPartida->elementos,$item);
                 }
@@ -444,7 +521,7 @@ class CSNuevaCompraConsolidada extends Component
             $dataPartida->total_compra = $dataPartida->subtotal * 1.16;
             $dataPartida->total_compra = number_format($dataPartida->total_compra, 2, '.', '');
 
-            // TODO RECTIFICAR ESTE WE
+            // Definimos el estado a partir del total
             if ($dataPartida->total_compra <= 172000) {
                 $dataPartida->estado = 'DISPONIBLE';
             }else{
@@ -453,47 +530,123 @@ class CSNuevaCompraConsolidada extends Component
 
             // Si hay algun elemento con esta partida
             if(count($dataPartida->elementos)){
-                array_push($this->partidas_data, $dataPartida);
+                array_push($this->partidas_data,$dataPartida);
             }
         }
     }
 
     
-    public function saveDraft() {
+    public function saveDraft() 
+    {
         try {
             //code...
             $this -> validate([
-                'folio'   => 'required|string',
+                'folio' => 'required|string',
                 'fecha' => 'required|date',
     
                 'fin_mir' => 'required',
                 'proposito_mir' => 'required',
                 'componente_mir' => 'required',
-                'actividad_mir' => 'required',
+                'NoActividad' => 'required',
     
                 // 'id_proveedor' => 'required',
                 'justificacion'   => 'required|string',
     
                 // ? datos del anexo
-                'asunto' => 'required',
-                'objeto' => 'required',
-                'alcance' => 'required',
-                'procEntrega' => 'required',
-                'entregables' => 'required',
-                'muestras' => 'required',
-                'RRHH' => 'required',
-                'soporte_tecnico' => 'required',
-                'mantenimiento' => 'required',
-                'capacitacion' => 'required',
-                'vigencia' => 'required',
-                'forma_pago' => 'required',
-                'garantia' => 'required',
+                // 'asunto' => 'required',
+                // 'objeto' => 'required',
+                // 'alcance' => 'required',
+                // 'procEntrega' => 'required',
+                // 'entregables' => 'required',
+                // 'muestras' => 'required',
+                // 'RRHH' => 'required',
+                // 'soporte_tecnico' => 'required',
+                // 'mantenimiento' => 'required',
+                // 'capacitacion' => 'required',
+                // 'vigencia' => 'required',
+                // 'forma_pago' => 'required',
+                // 'garantia' => 'required',
             ]);
+
+            if ( $this -> folioToEdit ) {
+                // Update the attributes
+                $this -> compraToEdit -> fecha = $this->fecha;
+                $this -> compraToEdit -> folio = $this->folio;
+                $this -> compraToEdit -> justificacion = $this->justificacion;
+                $this -> compraToEdit -> sucursal = $this->sucursal;
+                $this -> compraToEdit -> area = $this->area;
+                // Anexo CompraCons
+                $this -> compraToEdit -> asunto = $this -> asunto;
+                $this -> compraToEdit -> objeto = $this -> objeto;
+                $this -> compraToEdit -> alcance = $this -> alcance;
+                $this -> compraToEdit -> procedimiento_entrega = $this -> procEntrega;
+                $this -> compraToEdit -> entregables = $this -> entregables;
+                $this -> compraToEdit -> muestras = $this -> muestras;
+                $this -> compraToEdit -> recursos_humanos = $this -> RRHH;
+                $this -> compraToEdit -> soporte_tecnico = $this -> soporte_tecnico;
+                $this -> compraToEdit -> mantenimiento = $this -> mantenimiento;
+                $this -> compraToEdit -> capacitacion = $this -> capacitacion;
+                $this -> compraToEdit -> vigencia = $this -> vigencia;
+                $this -> compraToEdit -> forma_pago = $this -> forma_pago;
+                $this -> compraToEdit -> garantia = $this -> garantia;
+                // ... (Repeat the above for other properties)
+
+                // ATRIBUTOS MIR
+                $this -> compraToEdit -> mir_id_fin = $this->fin_mir;
+                $this -> compraToEdit -> mir_id_proposito = $this->proposito_mir;
+                $this -> compraToEdit -> mir_id_componente = $this->componente_mir;
+                $this -> compraToEdit -> mir_id_cotizacion = $this->mir_id_cotizacion;
+                $this -> compraToEdit -> mir_id_actividad = $this->NoActividad;
+
+                $this -> compraToEdit -> id_proveedor = $this->id_proveedor;
+                $this -> compraToEdit -> tipo_proveedor = $this->tipo_proveedor;
+
+                // Save the changes
+                $this -> compraToEdit -> save();
+                
+                foreach ($this -> itemsCompra as $item) {
+                    # code...
+                // dd($this -> itemsCompra);
+                if ( $item -> status == 'new' ) {
+                    item_compra_consolidada::create([
+                        'cantidad' => $item -> cantidad,
+                        'concepto' => $item -> concepto,
+                        'precio_unitario' => $item -> precio_unitario,
+                        'importe' => $item -> importe,
+                        'partida_presupuestal' => $item -> partida_presupuestal_id,
+                        'compra_consolidada_id' => $this -> compraToEdit -> id,
+                        'total' => $item -> cantidad * $item -> precio_unitario
+                    ]);
+                }
+                }
+                $this->dispatch('alertCRUD', 'Compra consolidada actualizada', 'Se actualizó el borrador de esta compra consolidada!', 'success');
+                return redirect()->route('compraconsolidada');    
+            }
+            
+            $this -> folio = Helper::FakeFolioGenerator(5, 'DRAFT-CC');
+
+            if ( $this -> tipo_proveedor == 'Temporal' ) {
+                $provedor_temporal = proveedores_temporales::create([
+                    'RFC' => $this -> new_RFC,
+                    'RazonSocial' => $this -> new_razon_social,
+                    'Persona' => $this -> new_persona,
+                    'Nombre' => $this -> new_nombre,
+                    'Telefono' => $this -> new_telefono,
+                    'Regimen' => $this -> new_regimen,
+                    'Direccion' => $this -> new_direccion,
+                    'CodigoPostal' => $this -> new_codigo_postal,
+                    'DatosContacto' => $this -> new_datos_contacto,
+                    'DatosBanco' => $this -> new_datos_banco,
+                ]);
+                $this -> id_proveedor = $provedor_temporal -> id;
+            }
             $compra_consolidada = compra_consolidada::create([
                 'fecha' => $this -> fecha,
-                // GENERAR FOLIO EN BORRADOR
+                // * TODO GENERAR FOLIO EN BORRADOR
                 'folio' => $this -> folio,
                 'justificacion' => $this -> justificacion,
+                'sucursal' => $this -> sucursal,
+                'area' => $this -> area,
                 // ? Anexo CompraCons
                 'asunto' => $this -> asunto,
                 'objeto' => $this -> objeto,
@@ -513,7 +666,260 @@ class CSNuevaCompraConsolidada extends Component
                 'mir_id_proposito' => $this -> proposito_mir,
                 'mir_id_componente' => $this -> componente_mir,
                 'mir_id_cotizacion' => $this -> mir_id_cotizacion,
+                'mir_id_actividad' => $this -> NoActividad,
+                
+                'id_proveedor' => $this -> id_proveedor,
+                'tipo_proveedor' => $this -> tipo_proveedor,
+                
+                'estado' => 'Borrador',
             ]);
+            foreach ($this -> itemsCompra as $item) {
+                # code...
+                item_compra_consolidada::create([
+                    'cantidad' => $item -> cantidad,
+                    'concepto' => $item -> concepto,
+                    'precio_unitario' => $item -> precio_unitario,
+                    'importe' => $item -> importe,
+                    'partida_presupuestal' => $item -> partida_presupuestal_id,
+                    'compra_consolidada_id' => $compra_consolidada -> id,
+                    'total' => $item -> cantidad * $item -> precio_unitario
+                ]);
+            }
+            $this->dispatch('alertCRUD', 'Compra consolidada cargada', 'La compra consolidada se guardó como borrador!', 'success');
+            return redirect()->route('compraconsolidada');
+        } catch (\Throwable $th) {
+            //throw $th;
+            $this -> dispatch('alertCRUD', 
+            'Datos insuficientes', 
+            'Antes de guardar el borrador, rellene los campos principales del vale!', 
+            'error');
+            $this -> validate([
+                'folio'   => 'required|string',
+                'fecha' => 'required|date',
+    
+                // 'cantidad' => 'required',
+                // 'concepto' => 'required',
+                // 'precio_unitario' => 'required',
+                // 'importe' => 'required',
+                // 'partida_presupuestal_id' => 'required',
+    
+                'fin_mir' => 'required',
+                'proposito_mir' => 'required',
+                'componente_mir' => 'required',
+                'NoActividad' => 'required',
+    
+                // 'id_proveedor' => 'required',
+                'justificacion'   => 'required|string',
+    
+                // ? datos del anexo
+                // 'asunto' => 'required',
+                // 'objeto' => 'required',
+                // 'alcance' => 'required',
+                // 'procEntrega' => 'required',
+                // 'entregables' => 'required',
+                // 'muestras' => 'required',
+                // 'RRHH' => 'required',
+                // 'soporte_tecnico' => 'required',
+                // 'mantenimiento' => 'required',
+                // 'capacitacion' => 'required',
+                // 'vigencia' => 'required',
+                // 'forma_pago' => 'required',
+                // 'garantia' => 'required',
+            ]);
+            dd($th);
+        }
+    }
+
+    public function saveCompra() {
+        if ( count($this -> itemsCompra) == 0 ) {
+            $this -> dispatch('alertCRUD', 
+            'Datos insuficientes', 
+            'No mande solicitudes sin conceptos de compra!', 
+            'error');
+            $this -> validate([
+                'folio'   => 'required|string',
+                'fecha' => 'required|date',
+    
+                'fin_mir' => 'required',
+                'proposito_mir' => 'required',
+                'componente_mir' => 'required',
+                'NoActividad' => 'required',
+    
+                // 'id_proveedor' => 'required',
+                'justificacion'   => 'required|string',
+    
+                // ? datos del anexo
+                'asunto' => 'required',
+                'objeto' => 'required',
+                'alcance' => 'required',
+                'procEntrega' => 'required',
+                'entregables' => 'required',
+                'muestras' => 'required',
+                'RRHH' => 'required',
+                'soporte_tecnico' => 'required',
+                'mantenimiento' => 'required',
+                'capacitacion' => 'required',
+                'vigencia' => 'required',
+                'forma_pago' => 'required',
+                'garantia' => 'required',
+            ]);
+            return;
+        }
+
+        try {
+            $this -> validate([
+                'folio'   => 'required|string',
+                'fecha' => 'required|date',
+    
+                'fin_mir' => 'required',
+                'proposito_mir' => 'required',
+                'componente_mir' => 'required',
+                'NoActividad' => 'required',
+    
+                // 'id_proveedor' => 'required',
+                'justificacion'   => 'required|string',
+    
+                // ? datos del anexo
+                'asunto' => 'required',
+                'objeto' => 'required',
+                'alcance' => 'required',
+                'procEntrega' => 'required',
+                'entregables' => 'required',
+                'muestras' => 'required',
+                'RRHH' => 'required',
+                'soporte_tecnico' => 'required',
+                'mantenimiento' => 'required',
+                'capacitacion' => 'required',
+                'vigencia' => 'required',
+                'forma_pago' => 'required',
+                'garantia' => 'required',
+            ]);
+            $this -> folio = Helper::FolioGenerator(new compra_consolidada, 'folio', 4, 'CC', $this -> sucursal);
+            if ( $this -> tipo_proveedor == 'Temporal' ) {
+                try {
+                    $provedor_temporal = proveedores_temporales::create([
+                        'RFC' => $this -> new_RFC,
+                        'RazonSocial' => $this -> new_razon_social,
+                        'Persona' => $this -> new_persona,
+                        'Nombre' => $this -> new_nombre,
+                        'Telefono' => $this -> new_telefono,
+                        'Regimen' => $this -> new_regimen,
+                        'Direccion' => $this -> new_direccion,
+                        'CodigoPostal' => $this -> new_codigo_postal,
+                        'DatosContacto' => $this -> new_datos_contacto,
+                        'DatosBanco' => $this -> new_datos_banco,
+                    ]);
+                } catch ( \Exception $e) {
+                    dd($e);
+                }
+                $this -> id_proveedor = $provedor_temporal -> id;
+            }
+            //code...
+            if ( $this -> folioToEdit ) {
+                // Update the attributes
+                $this -> compraToEdit -> fecha = $this -> fecha;
+                $this -> compraToEdit -> folio = $this -> folio;
+                $this -> compraToEdit -> justificacion = $this->justificacion;
+                $this -> compraToEdit -> sucursal = $this->sucursal;
+                $this -> compraToEdit -> area = $this->area;
+                // Anexo CompraCons
+                $this -> compraToEdit -> asunto = $this -> asunto;
+                $this -> compraToEdit -> objeto = $this -> objeto;
+                $this -> compraToEdit -> alcance = $this -> alcance;
+                $this -> compraToEdit -> procedimiento_entrega = $this -> procEntrega;
+                $this -> compraToEdit -> entregables = $this -> entregables;
+                $this -> compraToEdit -> muestras = $this -> muestras;
+                $this -> compraToEdit -> recursos_humanos = $this -> RRHH;
+                $this -> compraToEdit -> soporte_tecnico = $this -> soporte_tecnico;
+                $this -> compraToEdit -> mantenimiento = $this -> mantenimiento;
+                $this -> compraToEdit -> capacitacion = $this -> capacitacion;
+                $this -> compraToEdit -> vigencia = $this -> vigencia;
+                $this -> compraToEdit -> forma_pago = $this -> forma_pago;
+                $this -> compraToEdit -> garantia = $this -> garantia;
+                $this -> compraToEdit -> estado = 'Enviado';
+                // ... (Repeat the above for other properties)
+
+                // ATRIBUTOS MIR
+                $this -> compraToEdit -> mir_id_fin = $this->fin_mir;
+                $this -> compraToEdit -> mir_id_proposito = $this->proposito_mir;
+                $this -> compraToEdit -> mir_id_componente = $this->componente_mir;
+                $this -> compraToEdit -> mir_id_cotizacion = $this->mir_id_cotizacion;
+                $this -> compraToEdit -> mir_id_actividad = $this->NoActividad;
+
+                $this -> compraToEdit -> id_proveedor = $this->id_proveedor;
+                $this -> compraToEdit -> tipo_proveedor = $this->tipo_proveedor;
+
+                // Save the changes
+                $this -> compraToEdit -> save();
+                
+                foreach ($this -> itemsCompra as $item) {
+                    # code...
+                // dd($this -> itemsCompra);
+                if ( $item -> status == 'new' ) {
+                    item_compra_consolidada::create([
+                        'cantidad' => $item -> cantidad,
+                        'concepto' => $item -> concepto,
+                        'precio_unitario' => $item -> precio_unitario,
+                        'importe' => $item -> importe,
+                        'partida_presupuestal' => $item -> partida_presupuestal_id,
+                        'compra_consolidada_id' => $this -> compraToEdit -> id,
+                        'total' => $item -> cantidad * $item -> precio_unitario
+                    ]);
+                }
+                }
+                $this->dispatch('alertCRUD', 'Compra consolidada actualizada', 'Se actualizó el borrador de esta compra consolidada!', 'success');
+                return redirect()->route('compraconsolidada');   
+            } else {
+                $compra_consolidada = compra_consolidada::create([
+                    'fecha' => $this -> fecha,
+                    'folio' => $this -> folio,
+                    'justificacion' => $this -> justificacion,
+                    'sucursal' => $this -> sucursal,
+                    'area' => $this -> area,
+                    // 'area' => $this -> justificacion,
+                    // ? Anexo CompraCons
+                    'asunto' => $this -> asunto,
+                    'objeto' => $this -> objeto,
+                    'alcance' => $this -> alcance,
+                    'procedimiento_entrega' => $this -> procEntrega,
+                    'entregables' => $this -> entregables,
+                    'muestras' => $this -> muestras,
+                    'recursos_humanos' => $this -> RRHH,
+                    'soporte_tecnico' => $this -> soporte_tecnico,
+                    'mantenimiento' => $this -> mantenimiento,
+                    'capacitacion' => $this -> capacitacion,
+                    'vigencia' => $this -> vigencia,
+                    'forma_pago' => $this -> forma_pago,
+                    'garantia' => $this -> garantia,
+                    // ATRIBUTOS MIR
+                    'mir_id_fin' => $this -> fin_mir,
+                    'mir_id_proposito' => $this -> proposito_mir,
+                    'mir_id_componente' => $this -> componente_mir,
+                    'mir_id_cotizacion' => $this -> mir_id_cotizacion,
+                    'mir_id_actividad' => $this -> NoActividad,
+                    
+                    'id_proveedor' => $this -> id_proveedor,
+                    'tipo_proveedor' => $this -> tipo_proveedor,
+                    
+                    'estado' => 'Enviado',
+                ]);
+                foreach ($this -> itemsCompra as $item) {
+                    # code...
+                    if ( $item -> status == 'new' ) {
+                        item_compra_consolidada::create([
+                            'cantidad' => $item -> cantidad,
+                            'concepto' => $item -> concepto,
+                            'precio_unitario' => $item -> precio_unitario,
+                            'importe' => $item -> importe,
+                            'partida_presupuestal' => $item -> partida_presupuestal_id,
+                            'compra_consolidada_id' => $compra_consolidada -> id,
+                            'total' => $item -> cantidad * $item -> precio_unitario
+                        ]);
+                    }
+                }
+                $this->dispatch('alertCRUD', 'Compra consolidada cargada', 'La compra consolidada se guardó como borrador!', 'success');
+                return redirect()->route('compraconsolidada');
+            }
         } catch (\Throwable $th) {
             //throw $th;
             $this -> validate([
@@ -529,7 +935,7 @@ class CSNuevaCompraConsolidada extends Component
                 'fin_mir' => 'required',
                 'proposito_mir' => 'required',
                 'componente_mir' => 'required',
-                'actividad_mir' => 'required',
+                'NoActividad' => 'required',
     
                 // 'id_proveedor' => 'required',
                 'justificacion'   => 'required|string',

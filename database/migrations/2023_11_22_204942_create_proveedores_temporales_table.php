@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('proveedores_temporales', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->text('RFC', 13)->unique();
+            $table->text('RFC', 13);
             $table->text('RazonSocial', 128);
             $table->text('Persona', 1)->default('M'); //(F)Fisica o (M)Moral
             $table->text('Nombre', 128)->nullable();

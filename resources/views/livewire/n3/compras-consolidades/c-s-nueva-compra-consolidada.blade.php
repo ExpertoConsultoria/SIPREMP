@@ -41,15 +41,14 @@
                                     class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required>
                                 </div>
-                                <div class="col-span-2 ">
-                                    <x-label for="area" value="{{_('Área')}}"/>
-                                    <input name="area" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required
-                                    >
+                                <div class="col-span-2">
+                                    <x-label for="sucursal" value="{{ __('Sucursal') }}" />
+                                    <input wire:model.blur="sucursal" type="text" name="sucursal" readonly
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
                                 </div>
                                 <div class="col-span-2">
-                                    <x-label for="lugar" value="{{ __('Sucursal') }}" />
+                                    <x-label for="lugar" value="{{ __('Area') }}" />
                                     <input wire:model.blur="lugar" type="text" name="lugar" readonly
                                         class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required>
@@ -89,6 +88,7 @@
                                         <select wire:change="getProvedor($event.target.value)"
                                         class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             @if (!empty($proveedores))
+                                            <option selected disabled value="">Selecciona una Opción</option>
                                                 @foreach ($proveedores as $proveedor)
                                                     <option value="{{$proveedor ->id}}">
                                                         {{ $proveedor->RazonSocial }}
@@ -102,7 +102,7 @@
                                         class="text-sm text-blue-400 uppercase">
                                         Agregar provedor
                                     </button>
-                                    {{ $onAddProveedor ? 'prov_temporal' : 'prov_fijo' }}
+                                    {{ $onAddProveedor ? 'Seleccionado un proveedor temporal' : 'Seleccionado un proveedor fijo' }}
                                 </div>
                             </div>
                         </div>
@@ -223,18 +223,18 @@
                                     @enderror
                                 </div>
                                 <div class="mt-4">
-                                    <x-label for="actividad_mir" value="{{ __('Actividad *') }}" />
-                                    <select wire:model.blur="actividad_mir" name="actividad_mir"
-                                        @if (!$mir4) disabled @endif
-                                        class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <x-label for="NoActividad" value="{{ __('Actividad *') }}" />
+                                    <select wire:model.blur="NoActividad" name="NoActividad" @if (!$mir4) disabled
+                                        @endif
+                                        class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">Selecciona una Opción</option>
                                         @foreach ($actividades_mir as $actividad_mir)
-                                            <option value="{{ $actividad_mir['NoActividad'] }}">
-                                                {{ $actividad_mir['DescActividad'] }}</option>
+                                        <option value="{{ $actividad_mir['NoActividad'] }}">
+                                            {{ $actividad_mir['DescActividad'] }}</option>
                                         @endforeach
                                     </select>
-                                    @error('actividad_mir')
-                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @error('NoActividad')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -682,7 +682,7 @@
 
                         <div class="ml-auto sm:col-span-2">
                             <div class="text-center col-span-1 ml-auto">
-                                <button type="button"
+                                <button type="button" wire:click="saveCompra"
                                     class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                                     Guardar
                                 </button>

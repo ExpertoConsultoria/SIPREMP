@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('Direccion del proveedor') }}" />
+                <x-label for="new_direccion" value="{{ __('Direccion del proveedor') }}" />
                 <input wire:model="new_direccion" type="text" name="new_direccion" id="new_direccion"
                     placeholder="Direccion del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('Codigo postal del proveedor') }}" />
+                <x-label for="new_codigo_postal" value="{{ __('Codigo postal del proveedor') }}" />
                 <input wire:model="new_codigo_postal" type="text" name="new_codigo_postal" id="new_codigo_postal"
                     placeholder="Codigo postal del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('Razon social del proveedor') }}" />
+                <x-label for="new_razon_social" value="{{ __('Razon social del proveedor') }}" />
                 <input wire:model="new_razon_social" type="text" name="new_razon_social" id="new_razon_social"
                     placeholder="Ingrese la razon social del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('RFC del proveedor') }}" />
+                <x-label for="new_RFC" value="{{ __('RFC del proveedor') }}" />
                 <input wire:model="new_RFC" type="text" name="new_RFC" id="new_RFC"
                     placeholder="Ingrese el RFC del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('Regimen del proveedor') }}" />
+                <x-label for="new_regimen" value="{{ __('Regimen del proveedor') }}" />
                 <input wire:model="new_regimen" type="text" name="new_regimen" id="new_regimen"
                     placeholder="Ingrese el regimen del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -77,11 +77,21 @@
             </div>
 
             <div class="col-span-4">
-                <x-label for="nombre" value="{{ __('Datos bancarios del proveedor') }}" />
+                <x-label for="new_datos_banco" value="{{ __('Datos bancarios del proveedor') }}" />
                 <input wire:model="new_datos_banco" type="text" name="new_datos_banco" id="new_datos_banco"
                     placeholder="Ingrese los datos bancarios del proveedor"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 @error('new_datos_banco') <span class="text-xs text-rose-600">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="col-span-4">
+                <x-label for="new_datos_contacto" value="{{ __('Datos de contacto del proveedor') }}" />
+                <input wire:model="new_datos_contacto" type="text" name="new_datos_contacto" id="new_datos_contacto"
+                    placeholder="Ingrese los datos de contacto del proveedor"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                @error('new_datos_contacto') 
+                <span class="text-xs text-rose-600">{{ $message }}</span>
                 @enderror
             </div>
 

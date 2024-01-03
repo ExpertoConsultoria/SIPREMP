@@ -18,6 +18,7 @@ class TemporaryProviders extends ModalComponent
     public $new_RFC;
     public $new_regimen;
     public $new_datos_banco;
+    public $new_datos_contacto;
 
     protected function rules() {
         return [
@@ -30,6 +31,7 @@ class TemporaryProviders extends ModalComponent
             'new_RFC' => 'required',
             'new_regimen' => 'required',
             'new_datos_banco' => 'required',
+            'new_datos_contacto' => 'required',
         ];
     }
 
@@ -43,6 +45,7 @@ class TemporaryProviders extends ModalComponent
         'new_RFC.required' => 'El RFC campo es Obligatorio',
         'new_regimen.required' => 'El regimen campo es Obligatorio',
         'new_datos_banco.required' => 'Los datos del banco campo es Obligatorio',
+        'new_datos_contacto.required' => 'Los datos de contacto campo es Obligatorio',
     ];
 
 
@@ -65,6 +68,7 @@ class TemporaryProviders extends ModalComponent
                 'new_direccion' => 'required',
                 'new_codigo_postal' => 'required',
                 'new_datos_banco' => 'required',
+                'new_datos_contacto' => 'required',
             ]);
             $proveedor = new stdClass;
             $proveedor -> new_nombre = $this -> new_nombre;
@@ -76,6 +80,7 @@ class TemporaryProviders extends ModalComponent
             $proveedor -> new_RFC = $this -> new_RFC;
             $proveedor -> new_regimen = $this -> new_regimen;
             $proveedor -> new_datos_banco = $this -> new_datos_banco;
+            $proveedor -> new_datos_contacto = $this -> new_datos_contacto;
             $this->dispatch('loadProveedor', $proveedor);
         } catch (\Exception $th) {
             //throw $th;
@@ -89,6 +94,7 @@ class TemporaryProviders extends ModalComponent
                 'new_direccion' => 'required',
                 'new_codigo_postal' => 'required',
                 'new_datos_banco' => 'required',
+                'new_datos_contacto' => 'required',
             ]);
             dd($th);
         }
