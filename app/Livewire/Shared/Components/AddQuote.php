@@ -32,7 +32,7 @@ class AddQuote extends ModalComponent
 
     protected function rules() {
         return [
-            'archivo' => 'required | mimes:jpg,jpeg,png,pdf,txt,webp|max:1024',
+            'archivo' => 'required | mimes:jpg,jpeg,png,pdf,txt,webp|max:2048',
             'fecha_registro' => 'required|date',
             'lugar_registro' => 'required',
             'folio' => 'required|string',

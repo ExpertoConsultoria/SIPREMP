@@ -49,8 +49,7 @@ use App\Livewire\N4\Inventario\ICrearSalida;
 use App\Livewire\N4\Inventario\IInventario;
 use App\Livewire\N4\Inventario\IHistorial;
 
-use App\Livewire\N2\BandejaEntrada\BEBandejaEntrada;
-use App\Livewire\N2\BandejaEntrada\BEValeBienOServicio;
+use App\Livewire\N2\ComprasConsolidadas\CCBandeja;
 use App\Livewire\N4\Inventario\IDetails;
 
 use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
@@ -63,8 +62,9 @@ use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
 use App\Livewire\N2\Vales\VBienServicio;
 use App\Livewire\N2\Vales\VSolicitud;
-use App\Livewire\N2\BandejaEntrada\BELista;
+
 use App\Livewire\N2\ReportesCM\RCMList;
+use App\Livewire\N2\ReportesCM\RCMDetails;
 
 use App\Http\Controllers\CompraCMPDF;
 use App\Http\Controllers\ReporteCMPDF;
@@ -120,11 +120,6 @@ Route::middleware([
             return view('SG.vales.main');
         })->name('vales');
 
-        // N2 vales
-        Route::get('/valesControlPresupuestal', function () {
-            return view('N2.vales.main');
-        })->name('valesconpresupuestal');
-
         Route::get('/expedientes', function () {
             return view('SG.expedientes.main');
         })->name('expedientes');
@@ -151,13 +146,12 @@ Route::middleware([
         Route::get('/vale-compra-servicio/pdf-vale/{details_of_folio}', [ValePDF::class, 'generatePDF'])->name('pdf.Vale');
 
     // N2
-    // Vales
-    Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
-    Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
-    // Bandeja de entrada
-    Route::get('/bandeja-entrada/list',BELista::class)->name('bandejaentrada.list');
-    // Reportes Caja menor
-    Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
+        // Vales
+        Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
+        Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
+        // Reportes Caja menor
+        Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
+        Route::get('/reportes-caja-menor/{folio_report}', RCMDetails::class)->name('reportescajamenor.reportData');
 
     //Inventario
     Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');
@@ -206,9 +200,7 @@ Route::middleware([
     Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
 
     //N2
-    Route::get('/bandeja-entrada-UN', BEBandejaEntrada::class)->name('bandejaentrada.unidadcontrol');
-    Route::get('/vale-bien-servicio', BEValeBienOServicio::class)->name('valeservicio.contrpresuptl');
-
+    Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('comprasconsolidadas.pendientes');
 
     // Caja Menor
     Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');

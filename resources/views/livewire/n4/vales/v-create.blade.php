@@ -43,9 +43,6 @@
 
                     {{-- Default --}}
                     <div class="grid grid-cols-6 gap-6">
-                        @if (!$is_quote)
-                            <div></div>
-                        @endif
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
@@ -111,12 +108,12 @@
                     </div>
 
                     {{-- Proveedor --}}
-                    <div class="grid grid-cols-12 gap-6 mt-6">
+                    <div class="grid grid-cols-12 gap-6 mt-8">
                         <div class="col-span-2">
                             <label
                                 class="block m-auto text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
                         </div>
-                        {{-- Cambiar estetica --}}
+
                         <div class="col-span-4">
                             <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
                                 placeholder="Buscar..." autofocus
@@ -124,10 +121,12 @@
                                 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                             @if ($showResults)
-                                <select class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <select wire:model.live="provedor_selected" wire:change='getProvedor()'
+                                    class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" selected disabled>-- Selecciona una opción --</option>
                                     @if (!empty($resultados))
                                         @foreach ($resultados as $resultado)
-                                            <option wire:click='getProvedor({{ $resultado->id }})'>
+                                            <option value="{{ $resultado->id }}">
                                                 {{ $resultado->RazonSocial }}</option>
                                         @endforeach
                                     @endif
@@ -161,57 +160,6 @@
                             </p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-12 gap-6 mt-6">
-                        <button type="button"
-                            onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
-                            class="relative items-center col-span-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                            Agregar provedor
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="flex items-center col-span-2">
-                            <label
-                                class="block text-lg font-bold text-gray-900 text-start dark:text-white">Proveedor</label>
-                        </div>
-                        <div class="col-span-4">
-                            <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
-                                placeholder="Buscar..." autofocus
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
-                                    dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-
-                            @if($showResults)
-                            <ul>
-                                @if(!empty($resultados))
-                                @foreach($resultados as $resultado)
-                                <li wire:click='getProvedor({{ $resultado->id }})'>{{ $resultado->RazonSocial }}</li>
-                                @endforeach
-                                @endif
-                            </ul>
-                            @endif
-
-                            <x-input type="hidden" wire:model.live="id_proveedor" name='id_proveedor' />
-                            @error('id_proveedor')
-                            <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-
-                        <div class="col-span-2">
-                            <x-label for="razonsocial" value="{{ __('Razón social') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $razon_social }}</p>
-                        </div>
-                        <div class="col-span-2">
-                            <x-label for="rfc" value="{{ __('RFC') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $RFC }}</p>
-                        </div>
-                        <div class="col-span-2">
-                            <x-label for="telefono" value="{{ __('Teléfono') }}" />
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                {{ $telefono }}
-                            </p>
-                        </div>
-                    </div>
-
 
                     {{-- Justificacion y MIR --}}
                     <div class="container py-6">
@@ -409,8 +357,12 @@
                             <select wire:model.blur="partida_presupuestal" name="partida_presupuestal"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled value="">Selecciona una Opción</option>
-                                @foreach ($partidas_presupuestales as $pp)
-                                    <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
+                                @foreach ($partidas_presupuestales as $partida_presupuestal)
+                                    @if (str_starts_with($partida_presupuestal->CvePptal, '2000') || str_starts_with($partida_presupuestal->CvePptal, '3000'))
+                                        <option value="{{ $partida_presupuestal->CvePptal }}">
+                                            {{ $partida_presupuestal->PartidaEspecifica }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('partida_presupuestal')

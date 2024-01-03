@@ -39,11 +39,6 @@ class VApprovedDetails extends Component
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
 
-        if($this->vale_details->pending_review === 1){
-            $this->vale_details->pending_review = 0;
-            $this->vale_details->save();
-        }
-
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
         $this->vale_details->load('solicitante');
 

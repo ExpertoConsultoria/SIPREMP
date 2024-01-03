@@ -810,7 +810,7 @@
                             <div>
                                 <div
                                     class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="{{ route('bandejaentrada.list') }}"
+                                    <a href="{{ route('bandejaentrada.pendientes') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
@@ -834,7 +834,7 @@
                                                 class="mt-2 text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
                                                 BANDEJA DE ENTRADA
                                             </p>
-                                            <p class="mt-2 text-gray-800 dark:text-gray-400">Solicitudes por revisar</p>
+                                            <p class="mt-2 text-gray-800 dark:text-gray-400">Vales de Bienes/Servicios por revisar</p>
                                         </div>
                                     </a>
                                 </div>
@@ -929,7 +929,7 @@
                     </div>
 
                     {{-- 2da parte, Parte que puede que se mueva. O no --}}
-                        <div class="grid justify-center">
+                        {{-- <div class="grid justify-center">
                             <div
                                 class="grid grid-cols-1 gap-5 mt-5 mb-3 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
@@ -938,7 +938,7 @@
                                     <div
                                         class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
 
-                                        <a href="{{route('bandejaentrada.unidadcontrol')}}"
+                                        <a href="{{route('comprasconsolidadas.pendientes')}}"
                                             class="grid items-center grid-cols-3 p-5 h-60 justify-items-center ">
                                             <div class="">
                                                 <svg width="83" height="60" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1079,8 +1079,100 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     {{-- Fin de la parte 2. Puede que se mueva, O nadota --}}
+
+                </div>
+            </div>
+        </div>
+    @elseif(Auth::user()->hasRole('N1:DA'))
+        <div class="py-12">
+            <div class="mx-auto max-w-7xl lg:px-8">
+                <div class="bg-transparent">
+
+                    <div
+                        class="p-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        <p class="mb-3 text-lg font-semibold text-center text-gray-700 dark:text-gray-300">¡HOLA,
+                            {{ strtoupper(Auth::user()->username) }}! BIENVENIDO AL SIPREMP</p>
+                    </div>
+
+                    <div
+                        class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                        <div
+                            class="grid grid-cols-3 gap-4 text-gray-700 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 dark:text-gray-300">
+
+                            <div class="grid justify-center">
+                                <x-user-icon class="block w-auto h-9" />
+                            </div>
+                            <div class="grid justify-center">
+                                <x-building-icon class="block w-auto h-9" />
+                            </div>
+                            <div class="grid justify-center">
+                                <x-localization-icon class="block w-auto h-9" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grid justify-center">
+                        <div
+                            class="grid grid-cols-2 gap-5 mb-6 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+
+                            <div>
+                                <div
+                                    class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                    <a href="{{ route('bandejaentrada.pendientes') }}"
+                                        class="grid grid-cols-3 p-10 text-start justify-items-start ">
+                                        <div>
+                                            <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M53.7812 44.9449L46.8298 51.9199C44.0109 54.7487 39.051 54.8096 36.1711 51.9199L29.2194 44.9449L4.25195 69.9934C5.18133 70.4232 6.20602 70.6796 7.29539 70.6796H75.7056C76.7949 70.6796 77.8193 70.4235 78.7483 69.9936L53.7812 44.9449Z"
+                                                    class="fill-neutral-600 dark:fill-neutral-500" />
+                                                <path
+                                                    d="M75.7052 12.3203H7.29507C6.2057 12.3203 5.181 12.5768 4.25195 13.0065L30.9314 39.7745C30.9332 39.7763 30.9353 39.7766 30.9371 39.7784C30.9389 39.7802 30.9392 39.7826 30.9392 39.7826L39.6142 48.4863C40.5356 49.4077 42.465 49.4077 43.3865 48.4863L52.0596 39.7841C52.0596 39.7841 52.0617 39.7802 52.0635 39.7784C52.0635 39.7784 52.0674 39.7763 52.0692 39.7745L78.748 13.0064C77.819 12.5764 76.7946 12.3203 75.7052 12.3203Z"
+                                                    class="fill-neutral-600 dark:fill-neutral-500" />
+                                                <path
+                                                    d="M0.775855 16.4075C0.295039 17.3798 0 18.4591 0 19.6153V63.3848C0 64.541 0.294715 65.6203 0.775693 66.5926L25.7864 41.5009L0.775855 16.4075Z"
+                                                    class="fill-neutral-600 dark:fill-neutral-500" />
+                                                <path
+                                                    d="M82.2243 16.4071L57.2139 41.5008L82.2243 66.5929C82.7051 65.6206 83.0001 64.5413 83.0001 63.3848V19.6152C83.0001 18.4588 82.7051 17.3794 82.2243 16.4071Z"
+                                                    class="fill-neutral-600 dark:fill-neutral-500" />
+                                            </svg>
+                                        </div>
+                                        <div class="col-span-2 ">
+                                            <p
+                                                class="mt-2 text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
+                                                BANDEJA DE ENTRADA
+                                            </p>
+                                            <p class="mt-2 text-gray-800 dark:text-gray-400">Vales de Bienes/Servicios por revisar</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div
+                                class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
+                                <a href="{{ route('vales') }}"
+                                    class="grid grid-cols-3 p-10 text-start justify-items-start">
+                                    <div>
+                                        <svg width="83" height="83" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.1836 83H65.8164C69.839 83 73.1113 79.7277 73.1113 75.7051V24.3164H56.0898C52.0673 24.3164 48.7949 21.0441 48.7949 17.0215V0H17.1836C13.161 0 9.88867 3.27234 9.88867 7.29492V75.7051C9.88867 79.7277 13.161 83 17.1836 83ZM26.9102 34.2051H56.0898C57.4339 34.2051 58.5215 35.2927 58.5215 36.6367C58.5215 37.9808 57.4339 39.0684 56.0898 39.0684H26.9102C25.5661 39.0684 24.4785 37.9808 24.4785 36.6367C24.4785 35.2927 25.5661 34.2051 26.9102 34.2051ZM26.9102 43.9316H56.0898C57.4339 43.9316 58.5215 45.0192 58.5215 46.3633C58.5215 47.7073 57.4339 48.7949 56.0898 48.7949H26.9102C25.5661 48.7949 24.4785 47.7073 24.4785 46.3633C24.4785 45.0192 25.5661 43.9316 26.9102 43.9316ZM26.9102 53.6582H56.0898C57.4339 53.6582 58.5215 54.7458 58.5215 56.0898C58.5215 57.4339 57.4339 58.5215 56.0898 58.5215H26.9102C25.5661 58.5215 24.4785 57.4339 24.4785 56.0898C24.4785 54.7458 25.5661 53.6582 26.9102 53.6582ZM26.9102 63.3848H46.3633C47.7073 63.3848 48.7949 64.4724 48.7949 65.8164C48.7949 67.1605 47.7073 68.248 46.3633 68.248H26.9102C25.5661 68.248 24.4785 67.1605 24.4785 65.8164C24.4785 64.4724 25.5661 63.3848 26.9102 63.3848Z" class="fill-neutral-600 dark:fill-neutral-500"/>
+                                            <path d="M56.0898 19.4532H71.6865L53.6582 1.4248V17.0215C53.6582 18.3631 54.7482 19.4532 56.0898 19.4532Z" class="fill-neutral-600 dark:fill-neutral-500"/>
+                                        </svg>
+                                    </div>
+                                    <div class="col-span-2 ">
+                                        <p
+                                            class="mt-2 text-xl font-semibold leading-tight text-gray-800 dark:text-gray-300">
+                                            VALES
+                                        </p>
+                                        <p class="mt-2 text-gray-800 dark:text-gray-400">Rechazados y aprobados</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -1231,17 +1323,18 @@
             @else
 
                 $(document).ready(function() {
-                $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        setInterval(getRCMAlert, 10000);
+                    @endif
                 });
 
                 // On window load
-                window.onload = function() {
                 window.onload = function() {
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
@@ -1250,6 +1343,10 @@
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
                     @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        localStorage.setItem("rcmAlert", '');
+                        getRCMAlert();
+                    @endif
                     getRejectionAlert();
                     getAcceptanceAlert();
                     getApprovedAlert();
@@ -1257,11 +1354,14 @@
 
                 // On window unload
                 window.onbeforeunload = function() {
-                window.onbeforeunload = function() {
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
+                    localStorage.removeItem("approvedAlert");
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.removeItem("trayAlert");
+                    @endif
+                    @if (Auth::user()->hasRole('N2:CP'))
+                        localStorage.removeItem("rcmAlert");
                     @endif
                 };
 
@@ -1400,6 +1500,41 @@
                             }
                             data = JSON.stringify(data);
                             localStorage.setItem("trayAlert", data);
+                        }
+
+                    });
+                }
+
+                function getRCMAlert() {
+
+                    var rcmAlert = localStorage.getItem("rcmAlert");
+
+                    $.get('api/rcmAlert', function(data) {
+
+                        if (rcmAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != rcmAlert) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                        '#7C3AED', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rcmAlert", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                    '#7C3AED', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rcmAlert", data);
                         }
 
                     });

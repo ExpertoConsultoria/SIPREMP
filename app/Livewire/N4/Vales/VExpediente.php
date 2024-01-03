@@ -54,11 +54,6 @@ class VExpediente extends Component
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
         $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
 
-        if($this->vale_details->pending_review === 1){
-            $this->vale_details->pending_review = 0;
-            $this->vale_details->save();
-        }
-
         if($this->vale_details->id_vale_firmado != null){
             $this->is_signed = true;
         }

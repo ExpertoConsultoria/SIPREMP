@@ -4,7 +4,11 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Solicitudes Nuevas por Revisar') }}
+                    @if (Auth::user()->hasAnyRole(['N3:UNTE', 'N2:CP']))
+                        {{ __('Vales Pendientes por Revisar') }}
+                    @else
+                        {{ __('Solicitudes Nuevas por Revisar') }}
+                    @endif
                 </h2>
             </div>
 
@@ -50,7 +54,7 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if (count($pendientes))
 
-                @if (Auth::user()->hasRole('N3:UNTE'))
+                @if (Auth::user()->hasAnyRole(['N3:UNTE', 'N2:CP', 'N1:DA']))
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
                             <tr>
