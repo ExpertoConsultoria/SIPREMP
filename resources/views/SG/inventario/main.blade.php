@@ -46,7 +46,7 @@
 
                     <div
                         class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{ route('solicitudes.borradores') }}" class="text-right">
+                        <a href="{{ route('inventario.salida') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M28.4912 3.55905L21.1063 10.9604H24.5883C25.1359 10.9539 25.5826 11.4005 25.5762 11.9481V20.7233H31.4201V11.9481C31.4139 11.4065 31.8524 10.9625 32.3941 10.9604H35.89L28.4912 3.55905ZM33.3785 20.6467V21.6971C33.3764 22.2388 32.9358 22.6738 32.3941 22.6675H24.5883C24.0526 22.6654 23.62 22.2328 23.6178 21.6971V20.6711C19.2562 22.0499 14.8513 23.4107 10.4446 24.6882C16.4619 26.5428 22.48 28.3945 28.4982 30.2462L46.5378 24.6987L33.3785 20.6467ZM24.5396 24.2535C27.1526 24.2535 29.7771 24.2535 32.3941 24.2535C32.9418 24.247 33.385 24.6901 33.3785 25.2378C33.3764 25.7795 32.9358 26.218 32.3941 26.2116H24.5883C24.0526 26.2096 23.6199 25.7735 23.6178 25.2378C23.6117 24.713 24.0215 24.2818 24.5396 24.2535ZM7.56092 25.8499L3.64062 32.2669L23.096 38.2457L27.0128 31.8322L7.56092 25.8499ZM49.4354 25.8499L29.987 31.8322L33.9038 38.2457C40.3923 36.2508 46.8716 34.2564 53.3557 32.2669L49.4354 25.8499ZM27.5172 34.7364L24.3622 39.9047C24.1283 40.2839 23.6674 40.4581 23.2421 40.3256L8.08618 35.6685L7.93312 45.9287L27.5172 53.4205V34.7364ZM29.4791 34.7364V53.4205L48.8997 45.9287V35.672L33.7542 40.3256C33.2194 40.5208 32.7819 40.1221 32.6341 39.9047L29.4791 34.7364Z" class="fill-neutral-600 dark:fill-neutral-500"/>
@@ -58,7 +58,7 @@
 
                     <div
                         class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{ route('solicitudes.list') }}" class="text-right">
+                        <a href="{{ route('inventario.list') }}" class="text-right">
 
                             <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_154_3643)">
@@ -79,7 +79,7 @@
 
                     <div
                         class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg w-52 shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                        <a href="{{ route('solicitudes.list') }}" class="text-right">
+                        <a href="{{ route('inventario.historial') }}" class="text-right">
 
                             <svg width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M33.7506 40.33C33.2206 40.52 32.7806 40.12 32.6306 39.9L29.4806 34.74V53.42L48.9006 45.93V35.67L33.7506 40.33ZM24.3606 39.9C24.1306 40.28 23.6706 40.46 23.2406 40.33L8.09062 35.67L7.93062 45.93L27.5206 53.42V34.74L24.3606 39.9ZM49.4406 25.85L29.9906 31.83L33.9006 38.25C40.3906 36.25 46.8706 34.26 53.3606 32.27L49.4406 25.85ZM7.56062 25.85L3.64062 32.27L23.1006 38.25L27.0106 31.83L7.56062 25.85Z" class="fill-neutral-600 dark:fill-neutral-500"/>

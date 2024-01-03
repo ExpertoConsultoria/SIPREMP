@@ -3,15 +3,14 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-2xl font-black leading-tight text-gray-800 dark:text-gray-200">
-                    {{ _('Inventario') }}
+                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                    {{ __('Proveedores pendientes por aceptar') }}
                 </h2>
             </div>
 
             <div class="grid" style="justify-content: end; padding-right: 5.5rem">
-                <a href="{{ route('inventario') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40"
-                        fill="none">
+                <a href="{{ route('bandejaentrada') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 40 40" fill="">
                         <path
                             d="M36.6666 18.3334H7.35664L16.1783 9.51172C16.3375 9.35798 16.4645 9.17407 16.5518 8.97073C16.6392 8.76739 16.6851 8.54869 16.6871 8.32739C16.689 8.10609 16.6468 7.88662 16.563 7.6818C16.4792 7.47697 16.3554 7.29088 16.199 7.1344C16.0425 6.97791 15.8564 6.85415 15.6516 6.77035C15.4467 6.68655 15.2273 6.64438 15.006 6.6463C14.7847 6.64823 14.566 6.6942 14.3626 6.78155C14.1593 6.8689 13.9754 6.99587 13.8216 7.15505L2.15497 18.8217C1.84252 19.1343 1.66699 19.5581 1.66699 20.0001C1.66699 20.442 1.84252 20.8658 2.15497 21.1784L13.8216 32.8451C14.136 33.1487 14.557 33.3166 14.994 33.3128C15.431 33.309 15.849 33.1338 16.158 32.8248C16.467 32.5157 16.6423 32.0977 16.6461 31.6607C16.6499 31.2237 16.4819 30.8027 16.1783 30.4884L7.35664 21.6667H36.6666C37.1087 21.6667 37.5326 21.4911 37.8451 21.1786C38.1577 20.866 38.3333 20.4421 38.3333 20.0001C38.3333 19.558 38.1577 19.1341 37.8451 18.8215C37.5326 18.509 37.1087 18.3334 36.6666 18.3334Z"
                             fill="#515151" />
@@ -31,7 +30,6 @@
                 <option value="50">Mostrar: 50</option>
             </select>
 
-            {{-- Extraido de caja menor borradores --}}
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i class="z-20 text-gray-400 fa fa-search dark:text-gray-400"></i>
@@ -39,67 +37,73 @@
 
                 <x-input type="text" wire:model.live="buscar" placeholder="Buscar..." autofocus
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                 <button type="button" wire:click="$set('buscar','')"
                     class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-white">
                     <i class="fa-solid fa-delete-left"></i>
                 </button>
             </div>
+
         </div>
 
-
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                    <tr class="text-center text-black">
-                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
-                            SKU
-                        </th>
+                    <tr>
                         <th class="px-4 py-2 cursor-pointer">
-                            Fecha
+                            #
                         </th>
-                        <th class="px-16 py-2 cursor-pointer">
-                            Cant.
+                        <th wire:click="ordenaPor('Nombre')" class="px-4 py-2 cursor-pointer">
+                            Nombre
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
-                            Concepto
+                        <th wire:click="ordenaPor('RazonSocial')" class="px-4 py-2 cursor-pointer">
+                            Razón social
                         </th>
-                        <th class="px-4 py-2 cursor-pointer">
-                            Acciones
+                        <th wire:click="ordenaPor('Persona')" class="px-4 py-2 cursor-pointer">
+                            Clasificación
                         </th>
+                        <th wire:click="ordenaPor('RFC')" class="px-4 py-2 cursor-pointer">
+                            RFC
+                        </th>
+                        <th wire:click="ordenaPor('Contacto')" class="px-4 py-2 cursor-pointer">
+                            Contacto
+                        </th>
+                        <th class="px-4 py-2 text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($valesInventario as $vale)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    @foreach($allProveedores as $proveedor)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-4 py-2">
-                            <p>{{$vale -> folio}}</p>
+                            {{$loop->iteration}}
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> fecha}}</p>
+                            {{$proveedor -> Nombre}}
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> totalCantidad}}</p>
+                            {{$proveedor -> RazonSocial}}
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> asunto}}</p>
+                            @if( $proveedor -> Persona == 'F')
+                                Persona Fisica
+                            @else
+                                Persona Moral
+                            @endif
                         </td>
                         <td class="px-4 py-2">
-                            <div>
-                                <x-button-icons wire:click="registroDetail({{$vale}})" icon="eye" />
-                                <x-button-icons icon="box" />
-                            </div>
+                            {{$proveedor -> RFC}}
+                        </td>
+                        <td class="px-4 py-2">
+                            {{$proveedor -> DatosContacto}}
+                        </td>
+                        <td class="px-4 py-2 text-center">
+                            <x-button-icons icon="eye"  wire:click="getDetails({{$proveedor -> id}})"/>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
-            <div class="p-6 bg-white h-96 text dark:bg-gray-800 dark:border-gray-700">
-            </div>
-
         </div>
     </div>
-
 </div>

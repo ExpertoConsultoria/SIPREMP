@@ -18,14 +18,14 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use PhpCfdi\CfdiToJson\JsonConverter;
-use Livewire\WithFileUploads;
+use Livewire\With3Uploads;
 use Livewire\Component;
 
 use stdClass;
 
 class CCMCreate extends Component
 {
-    use WithFileUploads;
+    // use WithFileUploads;
 
     // Edit Class
     public $edit_to_folio = '';
