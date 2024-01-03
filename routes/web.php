@@ -225,4 +225,5 @@ Route::middleware([
     Route::get('/proveedores/proveedores-pendientes', PGeneral::class)->name('proveedores.pendientes');
     Route::get('/proveedores/proveedor-detalles/{id_proveedor}', PDetalles::class)->name('proveedores.detalles');
 
+    
 });
