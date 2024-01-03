@@ -55,5 +55,21 @@ class UserSeeder extends Seeder
                 'email' => 'iver@gmail.com',
                 'password' => Hash::make('holamundo')
         ])->assignRole('N3:UNTE');
+
+        User::create([
+                'name' => 'Eliana Rodriguez Reyes',
+                'username' => 'Eliana',
+                'phone' => '951-584-3456',
+                'email' => 'eliana@gmail.com',
+                'password' => Hash::make('holamundo')
+        ])->assignRole('N2:CP');
+
+        User::create([
+                'name' => 'Lesly Anette Fernandez Robles',
+                'username' => 'Lesly Anette',
+                'phone' => '951-444-3106',
+                'email' => 'lesly@gmail.com',
+                'password' => Hash::make('holamundo')
+        ])->assignRole('N1:DA');
     }
 }

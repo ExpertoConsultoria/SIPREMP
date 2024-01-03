@@ -180,7 +180,7 @@
 
                             data = JSON.parse(data);
                             for (let i = 0; i < data.folios.length; i++) {
-                                @if (Auth::user()->hasRole('N6:17A') || Auth::user()->hasRole('N7:GS:17A'))
+                                @if (Auth::user()->hasAnyRole(['N7:GS:17A', 'N6:17A']))
                                     Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
                                 @endif
                             }
@@ -192,7 +192,7 @@
 
                         for (let i = 0; i < data.folios.length; i++) {
 
-                            @if (Auth::user()->hasRole('N6:17A') || Auth::user()->hasRole('N7:GS:17A'))
+                            @if (Auth::user()->hasAnyRole(['N7:GS:17A', 'N6:17A']))
                                 Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
                             @endif
                         }

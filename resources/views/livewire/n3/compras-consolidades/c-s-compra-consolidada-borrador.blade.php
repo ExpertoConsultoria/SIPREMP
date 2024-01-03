@@ -71,27 +71,34 @@
             </thead>
 
             <tbody>
+                @foreach($comprasConsolidadas as $compra)
                 <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
                     <td class="px-4 py-2">
-                        <p>#88898</p>
+                        <p>{{ $compra -> folio }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>14/09/2023</p>
+                        <p>{{ $compra -> created_at -> format('d-m-Y') }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>Solicitud de computadoras</p>
+                        <p>{{ $compra -> justificacion }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>Usuario del que proviene</p>
+                        <p>{{ $user -> username}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <div>
-                            <a href="{{route('compraConsolidadaBorrador.guardado')}}">
+                        <!-- <div>
+                            <a href="{{route('compraConsolidada.nuevaCompra')}}">
                                 <x-button-icons icon="eye" />
                             </a>
+                        </div> -->
+                        <div>
+                            <x-button-colors color="green" wire:click="editBorrador({{ $compra }})">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </x-button-colors>
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
 

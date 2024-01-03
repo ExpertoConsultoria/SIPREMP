@@ -73,28 +73,35 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- ** CHECAR SI AQUI SE ITERAN LOS ITEMS O LOS VALES ** -->
+                @foreach($items_vale_salida as $item)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                     <td class="px-4 py-2">
-                        <p>#88898</p>
+                        <p>{{$item -> folio_vale_salida}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>14/09/2023</p>
+                        <p>{{$item -> created_at -> format('d-m-Y') }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>10</p>
+                        <p>{{$item -> cantidad}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>Lapiceros</p>
+                        <p>{{$item -> concepto}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p></p>
+                        @if ( $item -> sg_status ) 
+                        <p>Ya fue procesado</p>
+                        @else
+                        <p>No ha sido procesado</p>
+                        @endif
                     </td>
                     <td class="px-4 py-2">
                         <div>
-                            <x-button-icons icon="eye" />
+                            <x-button-icons wire:click="registroDetail({{$item}})" icon="eye" />
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
 

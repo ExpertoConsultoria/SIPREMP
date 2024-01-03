@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\proveedores_temporales;
+use App\Models\compra_consolidada;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProveedoresTemporalesController extends Controller
+class CompraConsolidadaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ProveedoresTemporalesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(proveedores_temporales $proveedores_temporales)
+    public function show(compra_consolidada $compra_consolidada)
     {
         //
     }
@@ -43,7 +43,7 @@ class ProveedoresTemporalesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(proveedores_temporales $proveedores_temporales)
+    public function edit(compra_consolidada $compra_consolidada)
     {
         //
     }
@@ -51,7 +51,7 @@ class ProveedoresTemporalesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, proveedores_temporales $proveedores_temporales)
+    public function update(Request $request, compra_consolidada $compra_consolidada)
     {
         //
     }
@@ -59,7 +59,7 @@ class ProveedoresTemporalesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(proveedores_temporales $proveedores_temporales)
+    public function destroy(compra_consolidada $compra_consolidada)
     {
         //
     }

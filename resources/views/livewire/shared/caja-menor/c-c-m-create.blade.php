@@ -63,7 +63,7 @@
                                 </div>
                             </div>
 
-                            @if (!Auth::user()->hasRole('N7:GS:17A'))
+                            @if (Auth::user()->hasAnyRole(['N6:17A', 'N5:18A:F','N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                                 <div
                                     class="grid grid-cols-2 gap-3 mb-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-9">
                                     <div class="flex items-center justify-center col-span-2">
@@ -251,7 +251,7 @@
 
                     {{-- Masive Partida Presupuestal --}}
                     @if ($massive)
-                        <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-zinc-800 dark:border-zinc-700">
                             <div class="container px-4">
                                 <div class="grid grid-cols-12 gap-6">
                                     <div class="flex items-center justify-center col-span-4">
@@ -259,14 +259,16 @@
                                     </div>
                                     <div class="flex items-center justify-center col-span-5">
                                         <select wire:model.blur="partida_masiva"
-                                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             <option value="" disabled selected> Partida Presupuestal </option>
 
                                             @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                    {{ $partida_presupuestal->PartidaEspecifica }}
-                                                </option>
+                                                @if (str_starts_with($partida_presupuestal->CvePptal, '2000') || str_starts_with($partida_presupuestal->CvePptal, '3000'))
+                                                    <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                        {{ $partida_presupuestal->PartidaEspecifica }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         <div>
@@ -346,9 +348,11 @@
                                                     </option>
 
                                                     @foreach ($partidas_presupuestales as $partida_presupuestal)
-                                                        <option value="{{ $partida_presupuestal->CvePptal }}">
-                                                            {{ $partida_presupuestal->PartidaEspecifica }}
-                                                        </option>
+                                                        @if (str_starts_with($partida_presupuestal->CvePptal, '2000') || str_starts_with($partida_presupuestal->CvePptal, '3000'))
+                                                            <option value="{{ $partida_presupuestal->CvePptal }}">
+                                                                {{ $partida_presupuestal->PartidaEspecifica }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                     {{-- opciones --}}
                                                 </select>

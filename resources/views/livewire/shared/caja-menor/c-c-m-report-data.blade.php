@@ -3,8 +3,8 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Reportes | ') }}{{ $report->rcm_folio }}{{ __(' | ') }}{{ $fecha_creacion }}
+                <h2 class="text-xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
+                    {{ __('Reporte | ') }}{{ $report->rcm_folio }}{{ __(' | ') }}{{ $fecha_creacion }}
                 </h2>
             </div>
 
@@ -88,10 +88,12 @@
                 <div class="container">
                     <div class="grid grid-cols-2 gap-10">
                         <div class="text-end">
-                            <button type="button" wire:click="$dispatch('openModal', { component: 'shared.components.in-progress' })"
-                                class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
-                                ENVIAR A CONTROL PRESUPUESTAL
-                            </button>
+                            @if (!$has_been_sent)
+                                <button type="button" wire:click="$dispatch('reportCMMAlert')"
+                                    class="disabled:opacity-25 focus:outline- text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
+                                    ENVIAR A CONTROL PRESUPUESTAL
+                                </button>
+                            @endif
                         </div>
                         <div class="text-end">
                             <a href="{{ route('pdf.ReporteCM', ['id_of_report' => $report->id]) }}"  target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">

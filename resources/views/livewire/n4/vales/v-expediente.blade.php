@@ -23,59 +23,23 @@
 
     <div class="max-w-screen-xl py-8 mx-auto">
 
-        <div
-            class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="container w-2/3 px-4 mx-auto">
-                <div class="mb-3">
-                    <label
-                        class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
-                </div>
-                <div class="relative h-8 mb-4">
-                    {{-- Línea base de la barra de progreso  --}}
-                    <div
-                        class="h-0.5 w-[86%] sm:w-[86%] md:w-[86%] lg:w-[92%] xl:w-[86%] bg-gray-300 absolute top-3 left-0 right-0 mx-12">
-                    </div>
+        <x-vale-status vale_id="{{$vale_details->id}}" />
 
-                    {{-- Círculos y etiquetas --}}
-                    <div class="flex items-center justify-between">
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Servicios Generales</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Unidad técnica</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full"></div>
-                            <p class="mt-1 text-xs">Control Presupuestal</p>
-                        </div>
-
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-6 h-6 bg-green-400 rounded-full "></div>
-                            <p class="mt-1 text-xs">Dirección Administrativa</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div
             class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="container px-4 ">
                 <div class="text-center">
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $vale_details->id_cotizacion }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         COTIZACIÓN
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-invoice', arguments: { invoice_id: {{ $vale_details->id_factura }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         FACTURA
                     </button>
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-evidence', arguments: { evidence_id: {{ $vale_details->id_evidencia }} } })"
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         <i class="mr-2 fas fa-eye"></i>
                         EVIDENCIAS
@@ -285,15 +249,15 @@
         <div class="mt-10">
             <div class="grid grid-cols-2">
                 <div class="text-start">
-                    <button type="button"
+                    <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.add-signed-voucher' })" @if($vale_details->id_factura === null || $vale_details->id_evidencia === null) disabled @endif
                         class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                         ADJUNTAR VALE FIRMADO
                     </button>
                 </div>
                 <div class="text-end">
-                    <button type="button"
+                    <button type="button" @if(!$is_signed) disabled @endif wire:click="$dispatch('expedientAlert')"
                         class="disabled:opacity-25 focus:outline-none text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 transition-all active:translate-y-1">
-                        ADJUNTAR VALE FIRMADO
+                        CREAR EXPEDIENTE
                     </button>
                 </div>
             </div>

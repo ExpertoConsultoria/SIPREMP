@@ -193,6 +193,6 @@ EOF;
 
 $pdf->writeHTML($html, true, false, true, false, '');
 
-$pdf->Output('ejemplo.pdf', 'I');
+$pdf->Output('CompraCM '.$folio . '.pdf', 'I');
     }
 }

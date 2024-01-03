@@ -30,6 +30,8 @@ return new class extends Migration
             $table->text('rcm_sucursal');
             $table->text('rcm_monto_gral');
 
+            $table->boolean('pending_review')->default(0); // Ayuda a las notificaciones del Dashboard
+            $table->boolean('has_been_sent')->default(0); // Especifica si el reporte ha sido enviado a Control Presupuestal
 
             $table->timestamps();
         });

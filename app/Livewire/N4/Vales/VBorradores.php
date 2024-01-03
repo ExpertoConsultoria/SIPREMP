@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 
+use Livewire\Attributes\On;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 use Illuminate\Support\Facades\Auth;

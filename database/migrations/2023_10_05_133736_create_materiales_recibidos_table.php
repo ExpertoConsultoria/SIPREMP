@@ -19,12 +19,10 @@ return new class extends Migration
             $table->text("concepto");
             $table->text("precio_unitario");
             $table->text("importe");
-            // $table->text("info_extra")->nullable();
-
-            $table->unsignedBigInteger('partidas_presupuestales_id')->unique();//id_par_ppta
-
-            $table->foreign('partidas_presupuestales_id')->references('id')->on('ppto_de_egresos')->onDelete('cascade');
-
+            $table->text("folio_vale_entrada");
+            $table->text('partida_presupuestal_id');
+            // $table->unsignedBigInteger('partidas_presupuestales_id')->unique();//id_par_ppta
+            // $table->foreign('partidas_presupuestales_id')->references('id')->on('ppto_de_egresos')->onDelete('cascade');
             $table->timestamps();
         });
     }

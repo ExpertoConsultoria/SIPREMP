@@ -50,7 +50,7 @@ class CCMBorradores extends Component
 
             $drafts = CompraMenor::select('id','cm_folio','cm_fecha','cm_asunto')
                 ->where('cm_creation_status','Borrador')
-                ->where('solicitante_id', Auth::user() -> id)
+                ->where('solicitante_id', Auth::user()->id)
                 ->where('cm_asunto','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);

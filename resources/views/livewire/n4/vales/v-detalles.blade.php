@@ -56,7 +56,7 @@
                         </p>
                     </div>
                     <div>
-                        <button type="button"
+                        <button type="button" onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $vale_details->id_cotizacion }} } })"
                             class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
                             <i class="fas fa-eye"></i>
                             COTIZACIÓN
@@ -86,15 +86,30 @@
                 </div>
 
                 <div class="container py-6">
-                    <div class="grid grid-cols-1 gap-2 mb-1">
-                        <div class="text-left">
-                            <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación:</label>
+                    <div class="grid grid-cols-2 gap-2 mb-1">
+                        <div>
+                            <div class="text-left">
+                                <label class="block text-lg font-bold text-gray-900 dark:text-white">Justificación:</label>
+                            </div>
+                            <div class="col-span-12">
+                                <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                    {{$vale_details->justificacion}}
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-span-9">
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{$vale_details->justificacion}}
-                            </p>
-                        </div>
+
+                        @if ($vale_details->motivo_rechazo != null)
+                            <div>
+                                <div class="text-left">
+                                    <label class="block text-lg font-bold text-gray-900 dark:text-white">Motivo de Rechazo:</label>
+                                </div>
+                                <div class="col-span-12">
+                                    <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                        {{$vale_details->motivo_rechazo}}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 

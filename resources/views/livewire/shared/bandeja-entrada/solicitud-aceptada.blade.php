@@ -124,9 +124,11 @@
                 <div class="container">
                     <div class="grid grid-cols-2 gap-10">
                         <div class="text-start">
-                            <a href="{{ route('pdf.Cotizacion') }}" target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button type="button"
+                                onclick="Livewire.dispatch('openModal', { component: 'shared.components.see-quote', arguments: { quote_id: {{ $memorandum_details->memo_id_cotizacion }} } })"
+                                class="disabled:opacity-25 focus:outline-none text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Cotización
-                            </a>
+                            </button>
                         </div>
                         <div class="text-end">
                             <a href="{{ route('pdf.Memorandum', ['details_of_folio' => $memorandum_details->memo_folio]) }}"  target="_blank" class="disabled:opacity-25 focus:outline-none text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">

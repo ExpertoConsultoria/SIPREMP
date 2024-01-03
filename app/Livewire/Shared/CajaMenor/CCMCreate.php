@@ -18,14 +18,14 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use PhpCfdi\CfdiToJson\JsonConverter;
-use Livewire\WithFileUploads;
+use Livewire\With3Uploads;
 use Livewire\Component;
 
 use stdClass;
 
 class CCMCreate extends Component
 {
-    use WithFileUploads;
+    // use WithFileUploads;
 
     // Edit Class
     public $edit_to_folio = '';
@@ -163,7 +163,7 @@ class CCMCreate extends Component
             $this->componente_mir = '';
             $this->actividad_mir = '';
 
-            if($user->hasRole('N7:GS:17A')){
+            if(Auth::user()->hasRole('N7:GS:17A')){
                 $this->sede_entrega = 'Ninguno';
                 $this->fecha_entrega = 'Ninguno';
             }else{
@@ -196,6 +196,10 @@ class CCMCreate extends Component
                 array_push($this->elementosCompraMenor, $item);
             }
 
+            foreach ($this->elementosCompraMenor as $index => $element) {
+                $this->selectPartida[$index] = $element->icm_partida_presupuestal;
+            }
+
             // Activate Editing Action
             $this->is_editing = true;
 
@@ -208,10 +212,10 @@ class CCMCreate extends Component
 
             $this->sucursal = $this->specificUserSede;
 
-            // Values that can be set here
-            $this->fecha = $this->compra_to_edit->cm_fecha;
-            $this->folio = $this->compra_to_edit->cm_folio;
-            $this->asunto = $this->compra_to_edit->cm_asunto;
+                // Values that can't be set here
+                $this->fecha = $this->compra_to_edit->cm_fecha;
+                $this->folio = $this->compra_to_edit->cm_folio;
+                $this->asunto = $this->compra_to_edit->cm_asunto;
 
             $this->subtotal = number_format($this->compra_to_edit->cm_subtotal, 2, '.', '');
             $this->iva = number_format($this->compra_to_edit->cm_iva, 2, '.', '');
@@ -321,17 +325,19 @@ class CCMCreate extends Component
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
         foreach ($conceptos as $concepto) {
-            $item = new stdClass;
-                $item->icm_cantidad = $concepto['Cantidad'];
-                $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
-                $item->icm_concepto = $concepto['Descripcion'];
-                $item->icm_precio_u = $concepto['ValorUnitario'];
-                $item->icm_importe = floatval($concepto['Importe']);
-                $item->icm_partida_presupuestal = '';
+            if(floatval($concepto['Importe']) > 0 && floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario']) > 0) {
+                $item = new stdClass;
+                    $item->icm_cantidad = $concepto['Cantidad'];
+                    $item->icm_unidad_medida = in_array('Unidad',$concepto) ? $concepto['Unidad'] : $concepto['ClaveUnidad'];
+                    $item->icm_concepto = $concepto['Descripcion'];
+                    $item->icm_precio_u = $concepto['ValorUnitario'];
+                    $item->icm_importe = floatval($concepto['Importe']);
+                    $item->icm_partida_presupuestal = '';
 
-            array_push($this->elementosCompraMenor, $item);
+                array_push($this->elementosCompraMenor, $item);
+            }
         }
-        // dd($this->elementosCompraMenor);
+
         foreach ($this->elementosCompraMenor as $index => $element) {
             $this->selectPartida[$index] = "";
         }

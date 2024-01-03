@@ -5,14 +5,18 @@ namespace App\Livewire\N4\Vales;
 use Livewire\Component;
 
 use stdClass;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\File;
 
+use App\Helpers\Helper;
 use Livewire\Redirector;
 use App\Models\Vales_compra;
 use App\Models\Elementos_Vale_compra;
 
 use App\Models\Empresa;
+use App\Models\Archivos;
 use App\Models\Plan1Fin;
+use App\Models\Memorandum;
+use App\Models\Expediente;
 use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
@@ -32,6 +36,15 @@ class VExpediente extends Component
     public $MIR;
     public $proveedor;
 
+    public $is_signed = false;
+
+    // For Files
+    public $signed_voucher;
+
+    // For Expedient
+    public $expediente;
+    public $userSedeCode;
+
     public function render()
     {
         return view('livewire.n4.vales.v-expediente');
@@ -39,10 +52,10 @@ class VExpediente extends Component
 
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
+        $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
 
-        if($this->vale_details->pending_review === 1){
-            $this->vale_details->pending_review = 0;
-            $this->vale_details->save();
+        if($this->vale_details->id_vale_firmado != null){
+            $this->is_signed = true;
         }
 
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
@@ -104,4 +117,53 @@ class VExpediente extends Component
 
         }
     }
+
+    protected $listeners = ['AssignSignedVoucher', 'CreateExpedient'];
+
+    // Vales Firmados
+    public function AssignSignedVoucher($voucher_id){
+
+        if($this->vale_details->id_vale_firmado != null){
+            $this->voucher = Archivos::find($this->vale_details->id_vale_firmado);
+                File::delete($this->voucher->arch_ruta);
+                $this->voucher->delete();
+        }
+
+        $this->vale_details->id_vale_firmado = $voucher_id;
+        $this->vale_details->save();
+        $this->is_signed = true;
+
+        $this->dispatch('closeModal');
+        $this->dispatch('simpleAlert', 'Asigando correctamente', 'success');
+
+    }
+
+    public function CreateExpedient(){
+
+        $vale_has_expedient = Expediente::where('vales_compra_id',$this->vale_details->id)->first();
+
+        if(!$vale_has_expedient){
+
+            $memorandum = Memorandum::where('memo_folio',$this->vale_details->folio_solicitud)->first();
+
+            $this->expediente = new Expediente();
+                $this->expediente->exp_folio = Helper::FolioGenerator(new Expediente, "exp_folio", 6, "EXP", $this->userSedeCode);
+                $this->expediente->fecha = date('Y-m-d');
+                $this->expediente->concepto = $this->vale_details->justificacion;
+                $this->expediente->id_cotizacion = $this->vale_details->id_cotizacion;
+                $this->expediente->id_factura = $this->vale_details->id_factura;
+                $this->expediente->id_evd_foto = $this->vale_details->id_evidencia;
+                $this->expediente->id_vale_firmado = $this->vale_details->id_vale_firmado;
+                $this->expediente->memoranda_id = $memorandum->id;
+                $this->expediente->vales_compra_id = $this->vale_details->id;
+            $this->expediente->save();
+
+            $this->dispatch('alertCRUD', 'Exito!', 'Expediente Generado Correctamente', 'success');
+            sleep(2);
+            return redirect()->route("expediente.detalles", ['details_of_folio'=>$this->expediente->exp_folio]);
+        }else{
+            return redirect()->route("expediente.detalles", ['details_of_folio'=>$vale_has_expedient->exp_folio]);
+        }
+    }
+
 }

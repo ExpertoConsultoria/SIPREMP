@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\ReporteCM;
+use App\Models\User;
 
 class CCMListaReportes extends Component
 {
@@ -45,9 +46,10 @@ class CCMListaReportes extends Component
         if($this->cargarLista){
 
             $reports = ReporteCM::select('id','rcm_folio','rcm_ejercicio','rcm_inicio','rcm_fin','rcm_partida_presupuestal')
-                ->where('rcm_inicio','like','%'.$this->buscar.'%')
-                ->orWhere('rcm_fin','like','%'.$this->buscar.'%')
                 ->where('solicitante_id', Auth::user()->id)
+                ->where('rcm_inicio','like','%'.$this->buscar.'%')
+                    // ToDo: Revisar si esta consulta es viable | Al estar activa ignora la condición del Solicitante
+                    //? ->orWhere('rcm_fin','like','%'.$this->buscar.'%')
                 ->orderby($this->ordenar, $this->direccion)
                 ->paginate($this->mostrar);
         }

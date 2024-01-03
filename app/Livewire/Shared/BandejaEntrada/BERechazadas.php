@@ -61,7 +61,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A'){
+                    if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A']) ){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -85,7 +85,7 @@ class BERechazadas extends Component
                     ->get();
 
                 foreach ($memorandums as $memorandum) {
-                    if(($memorandum->solicitante->roles[0]->name === 'N7:GS:17A' || $memorandum->solicitante->roles[0]->name === 'N6:17A' || $memorandum->solicitante->roles[0]->name === 'N5:18A:F') && $memorandum->destinatario === "Servicos Generales"){
+                    if($memorandum->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F']) && $memorandum->destinatario === "Servicos Generales"){
                         array_push($filtrados, $memorandum);
                     }
                 }
@@ -104,12 +104,14 @@ class BERechazadas extends Component
                     ->where('creation_status','Rechazado')
                     ->where('pass_filter',0)
                     ->whereNull('token_rev_val')
+                    ->whereNull('token_disp_ppta')
+                    ->whereNull('token_autorizacion')
                     ->whereNotNull('token_solicitante')
                     ->whereNotNull('motivo_rechazo')
                     ->get();
 
                 foreach ($vales as $vale) {
-                    if($vale->solicitante->roles[0]->name === 'N7:GS:17A' || $vale->solicitante->roles[0]->name === 'N6:17A' || $vale->solicitante->roles[0]->name === 'N5:18A:F'){
+                    if($vale->solicitante->hasAnyRole(['N7:GS:17A', 'N6:17A', 'N5:18A:F','N4:SEGE'])){
                         array_push($filtrados, $vale);
                     }
                 }
@@ -129,8 +131,13 @@ class BERechazadas extends Component
         return view('livewire.shared.bandeja-entrada.b-e-rechazadas',compact('rechazadas'));
     }
 
-    public function getDetails($memorandum)
+    public function getDetails($element)
     {
-        return redirect()->to(route("bandejaentrada.rechazada", ['details_of_folio'=>$memorandum['memo_folio']]));
+        if(Auth::user()->hasAnyRole(['N5:18A:F','N4:SEGE'])){
+            return redirect()->to(route("bandejaentrada.rechazada", ['details_of_folio'=>$element['memo_folio']]));
+        } elseif(Auth::user()->hasRole('N3:UNTE')){
+            return redirect()->to(route("vales-solicitudes.details", ['details_of_folio' => $element['folio']]));
+
+        }
     }
 }

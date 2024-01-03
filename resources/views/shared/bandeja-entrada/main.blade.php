@@ -89,7 +89,7 @@
                         </div>
 
                     </div>
-                @elseif( Auth::user()->hasRole('N4:SEGE') || Auth::user()->hasRole('N3:UNTE'))
+                @elseif( Auth::user()->hasAnyRole(['N4:SEGE', 'N3:UNTE']))
                     <div class="container grid grid-cols-1 gap-16 m-auto px-28 justify-content-center sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
