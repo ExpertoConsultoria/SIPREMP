@@ -12,9 +12,27 @@ class compra_consolidada extends Model
     protected $fillable = [
         'fecha',
         'folio',
+
+
+        // ATRIBUTOS MIR
+        'mir_id_fin',
+        'mir_id_proposito',
+        'mir_id_componente',
+        'mir_id_actividad',
+        'mir_id_cotizacion',
+
+        'id_proveedor',
+        'tipo_proveedor',
+
+        'estado',
+        'token_aceptacion',
+    ];
+
+    protected $encryptable  = [
         'justificacion',
         'sucursal',
         'area',
+        
         // ? Anexo CompraCons
         'asunto',
         'objeto',
@@ -29,21 +47,5 @@ class compra_consolidada extends Model
         'vigencia',
         'forma_pago',
         'garantia',
-        // ATRIBUTOS MIR
-        'mir_id_fin',
-        'mir_id_proposito',
-        'mir_id_componente',
-        'mir_id_actividad',
-        'mir_id_cotizacion',
-
-        'id_proveedor',
-        'tipo_proveedor',
-        
-        'estado',
-        'token_aceptacion',
-    ];
-
-    protected $encryptable = [
-
     ];
 }

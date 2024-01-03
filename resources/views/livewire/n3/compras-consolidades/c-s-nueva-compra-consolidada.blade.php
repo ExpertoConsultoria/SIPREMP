@@ -515,13 +515,13 @@
                                         <p>{{$elemento -> cantidad}}</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>COMO QUE UNIDAD DE MEDIDA!</p>
+                                        <p>pz</p>
                                     </td>
                                     <td class="px-4 py-2">
                                         <p>{{$elemento -> concepto}}</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>ATRIBUTOS DE QUE</p>
+                                        <p>Lapiceros</p>
                                     </td>
                                 </tr>
                                 @endforeach
