@@ -2,83 +2,91 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Shared Components
-use App\Livewire\Shared\CajaMenor\CCMCreate;
-use App\Livewire\Shared\CajaMenor\CCMBorradores;
-use App\Livewire\Shared\CajaMenor\CCMList;
-use App\Livewire\Shared\CajaMenor\CCMDetalles;
-use App\Livewire\Shared\CajaMenor\CCMListaReportes;
-use App\Livewire\Shared\CajaMenor\CCMReportData;
+//* Shared Components *//
+    // Compras de Caja Menor //
+    use App\Livewire\Shared\CajaMenor\CCMCreate;
+    use App\Livewire\Shared\CajaMenor\CCMBorradores;
+    use App\Livewire\Shared\CajaMenor\CCMList;
+    use App\Livewire\Shared\CajaMenor\CCMDetalles;
+    use App\Livewire\Shared\CajaMenor\CCMListaReportes;
+    use App\Livewire\Shared\CajaMenor\CCMReportData;
 
-use App\Livewire\Shared\BandejaEntrada\BEPendientes;
-use App\Livewire\Shared\BandejaEntrada\BERechazadas;
-use App\Livewire\Shared\BandejaEntrada\BEAprobadas;
-use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
-use App\Livewire\Shared\BandejaEntrada\SolicitudAceptada;
-use App\Livewire\Shared\BandejaEntrada\BEDetalles;
-use App\Livewire\Shared\BandejaEntrada\BEAdvancedDetails;
-use App\Livewire\Shared\BandejaEntrada\BEValeServicio;
+    // Bandeja de Entrada Memorandum & Vales //
+    use App\Livewire\Shared\BandejaEntrada\BEPendientes; //
+    use App\Livewire\Shared\BandejaEntrada\BERechazadas;
+    use App\Livewire\Shared\BandejaEntrada\BEAprobadas;
+    use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
+    use App\Livewire\Shared\BandejaEntrada\SolicitudAceptada;
+    use App\Livewire\Shared\BandejaEntrada\BEDetalles;
+    use App\Livewire\Shared\BandejaEntrada\BEAdvancedDetails;
+    use App\Livewire\Shared\BandejaEntrada\BEValeServicio;
 
-use App\Livewire\Shared\Solicitud\SolicitudesCreate;
-use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
-use App\Livewire\Shared\Solicitud\SolicitudesList;
-use App\Livewire\Shared\Solicitud\SolicitudStatus;
+    // Memorandums //
+    use App\Livewire\Shared\Solicitud\SolicitudesCreate;
+    use App\Livewire\Shared\Solicitud\SolicitudesBorradores;
+    use App\Livewire\Shared\Solicitud\SolicitudesList;
+    use App\Livewire\Shared\Solicitud\SolicitudStatus;
 
-// For Specific Users
+//* Specific Users' Components *//
 
-// Pendiente
-use App\Livewire\N4\Expediente\EList;
-use App\Livewire\N4\Expediente\EDetalles;
-use App\Livewire\N4\Expediente\ExpedienteCreate;
-use App\Livewire\N4\Inventario\EntradaInventario;
+    /* Nivel N4 */
+        // Expedientes //
+        use App\Livewire\N4\Expediente\EList;
+        use App\Livewire\N4\Expediente\EDetalles;
 
+        // Vales de Compra y Servicios //
+        use App\Livewire\N4\Vales\VCreateFromMemo;
+        use App\Livewire\N4\Vales\VCreate;
+        use App\Livewire\N4\Vales\VBorradores;
+        use App\Livewire\N4\Vales\VSentAndRevised;
+        use App\Livewire\N4\Vales\VDetalles;
+        use App\Livewire\N4\Vales\VAprobados; //
+        use App\Livewire\N4\Vales\VApprovedDetails;
+        use App\Livewire\N4\Vales\VAgregar;
+        use App\Livewire\N4\Vales\VImprimir;
+        use App\Livewire\N4\Vales\VExpediente;
 
-use App\Livewire\N4\Vales\VCreateFromMemo;
-use App\Livewire\N4\Vales\VCreate;
-use App\Livewire\N4\Vales\VBorradores;
-use App\Livewire\N4\Vales\VSentAndRevised;
-use App\Livewire\N4\Vales\VDetalles;
-use App\Livewire\N4\Vales\VAprobados;
-use App\Livewire\N4\Vales\VApprovedDetails;
-use App\Livewire\N4\Vales\VAgregar;
-use App\Livewire\N4\Vales\VImprimir;
-use App\Livewire\N4\Vales\VExpediente;
+        // Inventario //
+        use App\Livewire\N4\Inventario\EntradaInventario;
+        use App\Livewire\N4\Inventario\ICrearEntrada;
+        use App\Livewire\N4\Inventario\ICrearSalida;
+        use App\Livewire\N4\Inventario\IInventario;
+        use App\Livewire\N4\Inventario\IHistorial;
 
-use App\Livewire\N4\Inventario\ICrearEntrada;
-use App\Livewire\N4\Inventario\ICrearSalida;
-use App\Livewire\N4\Inventario\IInventario;
-use App\Livewire\N4\Inventario\IHistorial;
+    /* Nivel N3 */
+        // Compras Consolidadas //
+        use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
+        use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
+        use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
 
-use App\Livewire\N2\ComprasConsolidadas\CCBandeja;
+        // Solicitudes de Vales (Compra y Servicios) //
+        use App\Livewire\N3\SolicitudesVales\VSRechazadas;
+        use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
-use App\Livewire\N3\ComprasConsolidades\CSNuevaCompraConsolidada;
-use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaBorrador;
-use App\Livewire\N3\ComprasConsolidades\CSCompraConsolidadaGuardado;
+    /* Nivel N2 */
+        // Bandeja de Entrada (Compras Consolidadas) //
+        use App\Livewire\N2\ComprasConsolidadas\CCBandeja;
 
-use App\Livewire\N3\SolicitudesVales\VSRechazadas;
-use App\Livewire\N3\SolicitudesVales\VSRechazado;
+        // Vales de Bienes y Servicios //
+        use App\Livewire\N2\Vales\VBienServicio;
+        use App\Livewire\N2\Vales\VSolicitud;
 
-use App\Livewire\N2\Vales\VBienServicio;
-use App\Livewire\N2\Vales\VSolicitud;
+        //  Bandeja de Entrada (Reportes de Compra Menor) //
+        use App\Livewire\N2\ReportesCm\RCMList;
+        use App\Livewire\N2\ReportesCm\RCMDetails;
 
-use App\Livewire\N2\ReportesCM\RCMList;
-use App\Livewire\N2\ReportesCM\RCMDetails;
+//* PDF Generator Controllers *//
+    use App\Http\Controllers\CompraCMPDF;
+    use App\Http\Controllers\ReporteCMPDF;
+    use App\Http\Controllers\MemorandumPDF;
+    use App\Http\Controllers\CotizacionPDF;
+    use App\Http\Controllers\EvidenciaPDF;
+    use App\Http\Controllers\ValePDF;
 
-use App\Http\Controllers\CompraCMPDF;
-use App\Http\Controllers\ReporteCMPDF;
-use App\Http\Controllers\MemorandumPDF;
-use App\Http\Controllers\CotizacionPDF;
-use App\Http\Controllers\EvidenciaPDF;
-use App\Http\Controllers\ValePDF;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
 Route::get('/', function () {
@@ -91,12 +99,12 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
-    // DashBoard
+    //* DashBoard *//
         Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
 
-    // Rest Screens
+    //* Rest Screens *//
         Route::get('/caja-menor', function () {
             return view('shared.caja-menor.main');
         })->name('cajamenor');
@@ -125,8 +133,7 @@ Route::middleware([
             return view('UT.compras-consolidadas.main');
         })->name('compraconsolidada');
 
-    // Reactive Pages
-        //PDF
+    //* PDF Views *//
         Route::get('/caja-menor/pdf-compra/{folio}', [CompraCMPDF::class, 'generatePDF'])->name('pdf.CompraCM');
         Route::get('/caja-menor/pdf-reporte/RCM-{id_of_report}', [ReporteCMPDF::class, 'generatePDF'])->name('pdf.ReporteCM');
         Route::get('/solicitudes/pdf-reporte/{details_of_folio}', [MemorandumPDF::class, 'generatePDF'])->name('pdf.Memorandum');
@@ -134,7 +141,8 @@ Route::middleware([
         Route::get('/vale-compra-servicio/pdf-evidencia/{details_of_folio}', [EvidenciaPDF::class, 'generatePDF'])->name('pdf.Evidencia');
         Route::get('/vale-compra-servicio/pdf-vale/{details_of_folio}', [ValePDF::class, 'generatePDF'])->name('pdf.Vale');
 
-    // N2
+    //* Reactive Pages *//
+
         // Vales
         Route::get('/vales/de-bien-o-servicio',VBienServicio::class)->name('vales.bienoservicio');
         Route::get('/vales/solicitud',VSolicitud::class)->name('vales.solicitud');
@@ -142,68 +150,64 @@ Route::middleware([
         Route::get('/reportes-caja-menor',RCMList::class)->name('reportescajamenor');
         Route::get('/reportes-caja-menor/{folio_report}', RCMDetails::class)->name('reportescajamenor.reportData');
 
-    //Inventario
-    Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');
-    Route::get('/inventario/salida',ICrearSalida::class)->name('inventario.salida');
-    Route::get('/inventario/list',IInventario::class)->name('inventario.list');
-    Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
+        // Inventario
+        Route::get('/inventario/entrada',ICrearEntrada::class)->name('inventario.entrada');
+        Route::get('/inventario/salida',ICrearSalida::class)->name('inventario.salida');
+        Route::get('/inventario/list',IInventario::class)->name('inventario.list');
+        Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
+        Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
 
-    //Expedientes
-    Route::get('/expediente/list',EList::class)->name('expediente.list');
-    Route::get('/expediente/list/detalles/{details_of_folio}',EDetalles::class)->name('expediente.detalles');
+        // Expedientes
+        Route::get('/expediente/list',EList::class)->name('expediente.list');
+        Route::get('/expediente/list/detalles/{details_of_folio}',EDetalles::class)->name('expediente.detalles');
 
-    //Vales
-    Route::get('/vales/create-from-memorandum/{details_of_folio}',VCreateFromMemo::class)->name('vale.create-from-memo');
-    Route::get('/vales/create',VCreate::class)->name('vales.create');
-    Route::get('/vales/edit/{edit_to_folio}',VCreate::class)->name('vales.edit');
-    Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
-    Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
-    Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
+        // Vales
+        Route::get('/vales/create-from-memorandum/{details_of_folio}',VCreateFromMemo::class)->name('vale.create-from-memo');
+        Route::get('/vales/create',VCreate::class)->name('vales.create');
+        Route::get('/vales/edit/{edit_to_folio}',VCreate::class)->name('vales.edit');
+        Route::get('/vales/borradores',VBorradores::class)->name('vales.borradores');
+        Route::get('/vales/send-and-revised',VSentAndRevised::class)->name('vales.send-revised');
+        Route::get('/vales/send-and-revised/detalles/{details_of_folio}',VDetalles::class)->name('vales.detalles');
 
-    Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
-    Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
-    Route::get('/vales/aprobados/{details_of_folio}/agregar',VAgregar::class)->name('vales.add-to-approved');
-    Route::get('/vales/aprobados/{details_of_folio}/imprimir',VImprimir::class)->name('vales.print-approved');
-    Route::get('/vales/aprobados/{details_of_folio}/expediente',VExpediente::class)->name('vales.expediente');
+        Route::get('/vales/aprobados',VAprobados::class)->name('vales.aprobados');
+        Route::get('/vales/aprobados/{details_of_folio}/detalles',VApprovedDetails::class)->name('vales.approved-details');
+        Route::get('/vales/aprobados/{details_of_folio}/agregar',VAgregar::class)->name('vales.add-to-approved');
+        Route::get('/vales/aprobados/{details_of_folio}/imprimir',VImprimir::class)->name('vales.print-approved');
+        Route::get('/vales/aprobados/{details_of_folio}/expediente',VExpediente::class)->name('vales.expediente');
 
-    Route::get('/solicitudes-de-vales/rechazadas',VSRechazadas::class)->name('vales-solicitudes.rechazadas');
-    Route::get('/solicitudes-de-vales/rechazadas/{details_of_folio}/detalles',VSRechazado::class)->name('vales-solicitudes.details');
+        Route::get('/solicitudes-de-vales/rechazadas',VSRechazadas::class)->name('vales-solicitudes.rechazadas');
+        Route::get('/solicitudes-de-vales/rechazadas/{details_of_folio}/detalles',VSRechazado::class)->name('vales-solicitudes.details');
 
-    // compra consolidada
-    Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
-    Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidadaBorrador.borradorCompra');
-    Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidadaBorrador.guardado');
+        // Compra Consolidada
+        Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('comprasconsolidadas.pendientes');
+        Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
+        Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidadaBorrador.borradorCompra');
+        Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidadaBorrador.guardado');
 
-    //Bandeja Entrada
-    Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
-    Route::get('/bandeja-entrada/rechazadas', BERechazadas::class)->name('bandejaentrada.rechazadas');
-    Route::get('/bandeja-entrada/aprobadas', BEAprobadas::class)->name('bandejaentrada.aprobadas');
-    Route::get('/bandeja-entrada/{details_of_folio}/rechazada', SolicitudRechazada::class)->name('bandejaentrada.rechazada');
-    Route::get('/bandeja-entrada/{details_of_folio}/aprobada', SolicitudAceptada::class)->name('bandejaentrada.aprobada');
-    Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
-    Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
-    Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
+        // Bandeja Entrada
+        Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
+        Route::get('/bandeja-entrada/rechazadas', BERechazadas::class)->name('bandejaentrada.rechazadas');
+        Route::get('/bandeja-entrada/aprobadas', BEAprobadas::class)->name('bandejaentrada.aprobadas');
+        Route::get('/bandeja-entrada/{details_of_folio}/rechazada', SolicitudRechazada::class)->name('bandejaentrada.rechazada');
+        Route::get('/bandeja-entrada/{details_of_folio}/aprobada', SolicitudAceptada::class)->name('bandejaentrada.aprobada');
+        Route::get('/bandeja-entrada/{details_of_folio}/details', BEDetalles::class)->name('bandejaentrada.details');
+        Route::get('/bandeja-entrada/{details_of_folio}/advanced-details', BEAdvancedDetails::class)->name('bandejaentrada.advanced-details');
+        Route::get('/bandeja-entrada/valeServicio/{details_of_folio}', BEValeServicio::class)->name('bandejaentrada.valeServicio');
 
-    //N2
-    Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('comprasconsolidadas.pendientes');
+        // Caja Menor
+        Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
+        Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
+        Route::get('/caja-menor/create', CCMCreate::class)->name('cajamenor.create');
+        Route::get('/caja-menor/borradores', CCMBorradores::class)->name('cajamenor.borradores');
+        Route::get('/caja-menor/list', CCMList::class)->name('cajamenor.compras');
+        Route::get('/caja-menor/{details_of_folio}', CCMDetalles::class)->name('cajamenor.show');
+        Route::get('/caja-menor/{edit_to_folio}/edit', CCMCreate::class)->name('cajamenor.edit');
 
-    // Caja Menor
-    Route::get('/caja-menor/reportes', CCMListaReportes::class)->name('cajamenor.reportes');
-    Route::get('/caja-menor/reporte/RCM-{id_of_report}', CCMReportData::class)->name('cajamenor.reportData');
-    Route::get('/caja-menor/create', CCMCreate::class)->name('cajamenor.create');
-    Route::get('/caja-menor/borradores', CCMBorradores::class)->name('cajamenor.borradores');
-    Route::get('/caja-menor/list', CCMList::class)->name('cajamenor.compras');
-    Route::get('/caja-menor/{details_of_folio}', CCMDetalles::class)->name('cajamenor.show');
-    Route::get('/caja-menor/{edit_to_folio}/edit', CCMCreate::class)->name('cajamenor.edit');
-
-    // Solicitud
-    Route::get('/solicitudes/create', SolicitudesCreate::class)->name('solicitudes.create');
-    Route::get('/solicitudes/borradores', SolicitudesBorradores::class)->name('solicitudes.borradores');
-    Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
-    Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
-    Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
-
-    // Inventario
-    Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
+        // Solicitud
+        Route::get('/solicitudes/create', SolicitudesCreate::class)->name('solicitudes.create');
+        Route::get('/solicitudes/borradores', SolicitudesBorradores::class)->name('solicitudes.borradores');
+        Route::get('/solicitudes/list', SolicitudesList::class)->name('solicitudes.list');
+        Route::get('/solicitudes/{details_of_folio}', SolicitudStatus::class)->name('solicitudes.show');
+        Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
 
 });
