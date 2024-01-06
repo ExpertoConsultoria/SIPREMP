@@ -10,7 +10,7 @@
 <div class="p-6 my-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-zinc-800 dark:border-zinc-700">
     <div class="container w-2/3 px-4 mx-auto">
         <div class="mb-3">
-            <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-white">ESTATUS</label>
+            <label class="block mb-2 text-lg font-bold text-center text-gray-900 dark:text-gray-200">ESTATUS</label>
         </div>
         <div class="relative h-8 mb-4">
             {{-- Línea base de la barra de progreso --}}
@@ -19,7 +19,7 @@
             </div>
 
             {{-- Círculos y etiquetas --}}
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between dark:text-gray-200">
                 <div class="relative flex flex-col items-center">
                     <div class="w-6 h-6 bg-green-400 rounded-full"></div>
                     <p class="mt-1 text-xs">Servicios Generales</p>

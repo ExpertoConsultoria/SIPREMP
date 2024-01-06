@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
     use App\Livewire\Shared\CajaMenor\CCMReportData;
 
     // Bandeja de Entrada Memorandum & Vales //
-    use App\Livewire\Shared\BandejaEntrada\BEPendientes; //
+    use App\Livewire\Shared\BandejaEntrada\BEPendientes;
     use App\Livewire\Shared\BandejaEntrada\BERechazadas;
     use App\Livewire\Shared\BandejaEntrada\BEAprobadas;
     use App\Livewire\Shared\BandejaEntrada\SolicitudRechazada;
@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
         use App\Livewire\N4\Vales\VBorradores;
         use App\Livewire\N4\Vales\VSentAndRevised;
         use App\Livewire\N4\Vales\VDetalles;
-        use App\Livewire\N4\Vales\VAprobados; //
+        use App\Livewire\N4\Vales\VAprobados;
         use App\Livewire\N4\Vales\VApprovedDetails;
         use App\Livewire\N4\Vales\VAgregar;
         use App\Livewire\N4\Vales\VImprimir;

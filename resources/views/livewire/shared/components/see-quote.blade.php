@@ -1,5 +1,5 @@
 <div>
-    <div class="pt-4 pb-4 ps-3 pe-3">
+    <div class="pt-4 pb-4 ps-3 pe-3 dark:bg-zinc-800 dark:border-zinc-700">
         <h2 class="mb-3 text-xl font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
             Detalles de Cotización
             <br>
@@ -7,9 +7,9 @@
         </h2>
 
         @if ($quote->arch_extension === 'pdf')
-            <div class=" ps-16 pe-16">
+            <div class=" ps-16 pe-16 ">
                 <a href="{{ asset($quote->arch_ruta) }}" target="_blank"
-                    class="flex items-center justify-center p-6 bg-white border border-gray-200 rounded-lg shadow max-w-s hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    class="flex items-center justify-center p-6 bg-white border border-gray-200 rounded-lg shadow max-w-s hover:bg-gray-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="58" height="77" viewBox="0 0 58 77" fill="none">
                         <path
@@ -24,7 +24,7 @@
                 </a>
             </div>
         @elseif ($quote->arch_extension === 'txt')
-            <div class="max-w-2xl p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-2xl p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-800 dark:border-zinc-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400">
                     {{ File::get($quote->arch_ruta) }}
                 </p>
@@ -37,7 +37,7 @@
                 </a>
             </div>
         @else
-            <div class="max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-800 dark:border-zinc-700">
                 <img class="rounded-t-lg" src="{{ asset($quote->arch_ruta) }}" alt="{{ $quote->arch_descripcion }}" />
             </div>
 
