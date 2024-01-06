@@ -54,7 +54,7 @@ class ICrearSalida extends Component
     public $precio_unitario;
     public $concepto;
     public $partida_presupuestal;
-    
+
     public $subtotal = 0;
 
 
@@ -94,8 +94,8 @@ class ICrearSalida extends Component
         $this->userSedeCode = is_string(Helper::GetUserSede()) ? Helper::GetUserSede() : Helper::GetUserSede()->Serie;
         $this->lugar = $this->userSede;
 
-        $this -> solicitante = Auth::user() -> name;
-        $this -> id_solicitante = Auth::user() -> id;
+        $this->solicitante = Auth::user()->name;
+        $this->id_solicitante = Auth::user()->id;
 
         $this->fines_mir = Plan1Fin::all();
         $this->partidas_presupuestales = PptoDeEgreso::all();
@@ -139,11 +139,11 @@ class ICrearSalida extends Component
         // dd($validatedData);
 
         $item = new stdClass;
-        $item -> cantidad = $this -> cantidad;
-        $item -> unidad_medida = $this -> unidad_medida;
-        $item -> concepto = $this -> concepto;
-        $item -> precio_unitario = $this -> precio_unitario;
-        $item -> partida_presupuestal_id = $this -> partida_presupuestal;
+        $item->cantidad = $this->cantidad;
+        $item->unidad_medida = $this->unidad_medida;
+        $item->concepto = $this->concepto;
+        $item->precio_unitario = $this->precio_unitario;
+        $item->partida_presupuestal_id = $this->partida_presupuestal;
 
         array_push($this->itemSalida, $item);
 
@@ -171,35 +171,35 @@ class ICrearSalida extends Component
 
     public function saveSalida() {
         try {
-            // $this -> validate();
-            if ( $this -> itemSalida ) {
+            // $this->validate();
+            if ( $this->itemSalida ) {
                 $this->folio = Helper::FolioGenerator(new ValeSalidaMateriales, 'folio', 5, 'SI', $this->userSedeCode);
-        
+
                 $valeSalida = ValeSalidaMateriales::create([
-                    'folio' => $this -> folio,
-                    'fecha' => $this -> fecha,
-                    'lugar' => $this -> lugar,
-                    'id_solicitante' => $this -> id_solicitante
+                    'folio' => $this->folio,
+                    'fecha' => $this->fecha,
+                    'lugar' => $this->lugar,
+                    'id_solicitante' => $this->id_solicitante
                 ]);
-        
-                foreach($this -> itemSalida as $item) {
+
+                foreach($this->itemSalida as $item) {
                     $item_salida = new MaterialesEntregados();
-                    $item_salida -> folio_vale_salida = $valeSalida -> folio;
-                    $item_salida -> cantidad = $item -> cantidad;
-                    $item_salida -> unidad_medida = $item -> unidad_medida;
-                    $item_salida -> concepto = $item -> concepto;
-                    $item_salida -> precio_unitario = $item -> precio_unitario;
-                    $item_salida -> partida_presupuestal_id = $item -> partida_presupuestal_id;
-                    $item_salida -> save();
+                    $item_salida->folio_vale_salida = $valeSalida->folio;
+                    $item_salida->cantidad = $item->cantidad;
+                    $item_salida->unidad_medida = $item->unidad_medida;
+                    $item_salida->concepto = $item->concepto;
+                    $item_salida->precio_unitario = $item->precio_unitario;
+                    $item_salida->partida_presupuestal_id = $item->partida_presupuestal_id;
+                    $item_salida->save();
                 }
-                // $itemsSalida = MaterialesEntregados::insert($this -> itemSalida);
+                // $itemsSalida = MaterialesEntregados::insert($this->itemSalida);
                 $this->dispatch('simpleAlert','Se registró la salida correctamente!','success');
-                return redirect() -> route('inventario.historial');
+                return redirect()->route('inventario.historial');
             } else {
                 $this->dispatch('simpleAlert','Hay campos vacios!','error');
             }
         } catch ( \Exception $e ) {
-            
+
             dd($e);
         }
     }

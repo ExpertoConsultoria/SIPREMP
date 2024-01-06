@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Compras consolidadas | borrador')}}
+                    {{_('Compras consolidadas | Borradores')}}
                 </h2>
             </div>
 
@@ -74,16 +74,16 @@
                 @foreach($comprasConsolidadas as $compra)
                 <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-400 text-center">
                     <td class="px-4 py-2">
-                        <p>{{ $compra -> folio }}</p>
+                        <p>{{ $compra->folio }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{ $compra -> created_at -> format('d-m-Y') }}</p>
+                        <p>{{ $compra->created_at->format('d-m-Y') }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{ $compra -> justificacion }}</p>
+                        <p>{{ $compra->justificacion }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{ $user -> username}}</p>
+                        <p>{{ $user->username}}</p>
                     </td>
                     <td class="px-4 py-2">
                         <!-- <div>

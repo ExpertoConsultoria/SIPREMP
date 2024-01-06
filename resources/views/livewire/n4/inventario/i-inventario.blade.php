@@ -74,16 +74,16 @@
                     @foreach($valesInventario as $vale)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td class="px-4 py-2">
-                            <p>{{$vale -> folio}}</p>
+                            <p>{{$vale->folio}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> fecha}}</p>
+                            <p>{{$vale->fecha}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> totalCantidad}}</p>
+                            <p>{{$vale->totalCantidad}}</p>
                         </td>
                         <td class="px-4 py-2">
-                            <p>{{$vale -> asunto}}</p>
+                            <p>{{$vale->asunto}}</p>
                         </td>
                         <td class="px-4 py-2">
                             <div>

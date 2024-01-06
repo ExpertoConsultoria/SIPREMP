@@ -21,8 +21,7 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="py-12 mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center bg-transparent">
 
                 @if( Auth::user()->hasRole('N5:18A:F'))
@@ -89,7 +88,7 @@
                         </div>
 
                     </div>
-                @elseif( Auth::user()->hasAnyRole(['N4:SEGE', 'N3:UNTE']))
+                @elseif( Auth::user()->hasAnyRole(['N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                     <div class="container grid grid-cols-1 gap-16 m-auto px-28 justify-content-center sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                         <div
                             class="p-6 mt-8 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
@@ -101,7 +100,6 @@
                                     <path d="M0.373906 7.90723C0.142187 8.37582 0 8.89598 0 9.45316V30.5469C0 31.1041 0.142031 31.6243 0.373828 32.0928L12.4272 20.0004L0.373906 7.90723Z" class="fill-neutral-600 dark:fill-neutral-500"/>
                                     <path d="M39.6261 7.90698L27.5729 20.0003L39.6261 32.0929C39.8578 31.6243 40 31.1042 40 30.5468V9.45308C40 8.89573 39.8578 8.37558 39.6261 7.90698Z" class="fill-neutral-600 dark:fill-neutral-500"/>
                                 </svg>
-
 
                                 <p class="mt-32 text-lg text-gray-800 dark:text-gray-400">Solicitudes nuevas <br /> por revisar </p>
                             </a>
@@ -131,6 +129,6 @@
 
             </div>
         </div>
-    </div>
+
 
 </x-app-layout>

@@ -324,6 +324,8 @@ class CCMCreate extends Component
 
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
+        $sumaImporte = 0;
+
         foreach ($conceptos as $concepto) {
             if(floatval($concepto['Importe']) > 0 && floatval( $concepto['Cantidad']) * floatval( $concepto['ValorUnitario']) > 0) {
                 $item = new stdClass;
@@ -342,9 +344,15 @@ class CCMCreate extends Component
             $this->selectPartida[$index] = "";
         }
 
+        if(count($this->elementosCompraMenor) == 0){
+            $this->cleanDataXML();
+            $this->dispatch('simpleAlert','El archivo esta vacio','error');
+        }
+
         $this->CalculateTotals();
         $this->dispatch('simpleAlert','Datos cargados correctamente','success');
     }
+
 
     public function cleanDataXML(){
         $this->elementosCompraMenor = [];

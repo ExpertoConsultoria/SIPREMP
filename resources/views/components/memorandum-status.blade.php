@@ -66,6 +66,8 @@
                                 w-6 h-6 bg-green-400 rounded-full
                             @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_rev_val===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_filter===0)
                                 w-6 h-6 bg-red-400 rounded-full
+                            @else
+                                w-6 h-6 bg-stone-400 rounded-full
                             @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
@@ -83,6 +85,8 @@
                                 w-6 h-6 bg-green-400 rounded-full
                             @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_disp_ppta===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===0 &&  $vale_data->pass_filter===1)
                                 w-6 h-6 bg-red-400 rounded-full
+                            @else
+                                w-6 h-6 bg-stone-400 rounded-full
                             @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full
@@ -100,6 +104,8 @@
                                 w-6 h-6 bg-green-400 rounded-full
                             @elseif( $vale_data->creation_status === 'Rechazado' &&  $vale_data->token_autorizacion===null &&  $vale_data->motivo_rechazo != null &&  $vale_data->pass_cp===1 &&  $vale_data->pass_filter===1)
                                 w-6 h-6 bg-red-400 rounded-full
+                            @else
+                                w-6 h-6 bg-stone-400 rounded-full
                             @endif
                         @else
                             w-6 h-6 bg-stone-400 rounded-full

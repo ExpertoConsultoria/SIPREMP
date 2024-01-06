@@ -69,16 +69,16 @@ class TemporaryProviders extends ModalComponent
                 'new_datos_contacto' => 'required',
             ]);
             $proveedor = new stdClass;
-            $proveedor -> new_nombre = $this -> new_nombre;
-            $proveedor -> new_telefono = $this -> new_telefono;
-            $proveedor -> new_persona = $this -> new_persona;
-            $proveedor -> new_direccion = $this -> new_direccion;
-            $proveedor -> new_codigo_postal = $this -> new_codigo_postal;
-            $proveedor -> new_razon_social = $this -> new_razon_social;
-            $proveedor -> new_RFC = $this -> new_RFC;
-            $proveedor -> new_regimen = $this -> new_regimen;
-            $proveedor -> new_datos_banco = $this -> new_datos_banco;
-            $proveedor -> new_datos_contacto = $this -> new_datos_contacto;
+            $proveedor->new_nombre = $this->new_nombre;
+            $proveedor->new_telefono = $this->new_telefono;
+            $proveedor->new_persona = $this->new_persona;
+            $proveedor->new_direccion = $this->new_direccion;
+            $proveedor->new_codigo_postal = $this->new_codigo_postal;
+            $proveedor->new_razon_social = $this->new_razon_social;
+            $proveedor->new_RFC = $this->new_RFC;
+            $proveedor->new_regimen = $this->new_regimen;
+            $proveedor->new_datos_banco = $this->new_datos_banco;
+            $proveedor->new_datos_contacto = $this->new_datos_contacto;
             $this->dispatch('loadProveedor', $proveedor);
         } catch (\Exception $th) {
             //throw $th;

@@ -19,10 +19,10 @@ class CSCompraConsolidadaGuardado extends Component
     }
 
     public function mount() {
-        $this -> comprasConsolidadas = compra_consolidada::where('estado', 'Enviado') -> get();
+        $this->comprasConsolidadas = compra_consolidada::where('estado', 'Enviado')->get();
     }
 
-    
+
     public function getDetails($compra)
     {
         return redirect()->to(route("compraConsolidada.detalles", ['folio' => $compra['folio']]));

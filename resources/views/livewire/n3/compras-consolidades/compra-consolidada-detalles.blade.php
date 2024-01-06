@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Detalles de compra consolidada')}} {{$compra -> folio}}
+                    {{_('Detalles de Compra Consolidada')}} {{$compra->folio}}
                 </h2>
             </div>
 
@@ -32,25 +32,25 @@
                                     <div class="col-span-2">
                                         <x-label for="razonsocial" value="{{ __('Fecha') }}" />
                                         <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                            {{ $compra -> fecha }}
+                                            {{ $compra->fecha }}
                                         </p>
                                     </div>
                                 <div class="col-span-2 ">
                                     <x-label for="sku" value="{{ __('Folio SKU') }}" />
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> folio }}
-                                    </p>                                
+                                        {{ $compra->folio }}
+                                    </p>
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="area" value="{{ __('Sucursal') }}" />
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> sucursal }}
+                                        {{ $compra->sucursal }}
                                     </p>
                                 </div>
                                 <div class="col-span-2">
                                     <x-label for="lugar" value="{{ __('Area') }}" />
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> area }}
+                                        {{ $compra->area }}
                                     </p>
                                 </div>
                                 <div class="col-span-2">
@@ -98,12 +98,12 @@
                                     </div>
                                     <div class="col-span-2">
                                         <x-label for="rfc" value="{{ __('RFC') }}" />
-                                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor -> RFC }}</p>
+                                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $proveedor->RFC }}</p>
                                     </div>
                                     <div class="col-span-2">
                                         <x-label for="telefono" value="{{ __('Teléfono') }}" />
                                         <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
-                                            {{ $proveedor -> telefono }}
+                                            {{ $proveedor->telefono }}
                                         </p>
                                     </div>
                                     <div class="col-span-2">
@@ -121,7 +121,7 @@
                         </div>
                         <div class="col-span-4">
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $compra -> asunto }}
+                                {{ $compra->asunto }}
                             </p>
                         </div>
                     </div>
@@ -251,8 +251,8 @@
                         </div>
                         <div class="col-span-4">
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $compra -> asunto }}
-                            </p>                        
+                                {{ $compra->asunto }}
+                            </p>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
@@ -261,8 +261,8 @@
                                 </div>
                                 <div class="col-span-4">
                                 <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                    {{ $compra -> objeto }}
-                                </p>                                  
+                                    {{ $compra->objeto }}
+                                </p>
                             </div>
                             </div>
                             <div class="col-span-5 ml-2">
@@ -271,8 +271,8 @@
                                 </div>
                                 <div class="col-span-4">
                                 <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                    {{ $compra -> alcance }}
-                                </p>  
+                                    {{ $compra->alcance }}
+                                </p>
                                 </div>
                             </div>
                         </div>
@@ -306,13 +306,13 @@
                                 @foreach($data->elementos as $elemento)
                                 <tr class="bg-white dark dark:bg-zinc-800 dark:border-gray-700 text-center">
                                     <td class="px-4 py-2">
-                                        <p>{{$elemento -> cantidad}}</p>
+                                        <p>{{$elemento->cantidad}}</p>
                                     </td>
                                     <td class="px-4 py-2">
                                         <p>pz</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>{{$elemento -> concepto}}</p>
+                                        <p>{{$elemento->concepto}}</p>
                                     </td>
                                     <td class="px-4 py-2">
                                         <p>prueba ####</p>
@@ -333,8 +333,8 @@
                         </div>
                         <div class="col-span-4">
                         <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                            {{ $compra -> procedimiento_entrega }}
-                        </p>  
+                            {{ $compra->procedimiento_entrega }}
+                        </p>
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
@@ -343,8 +343,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> entregables }}
-                                    </p>  
+                                        {{ $compra->entregables }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
@@ -353,8 +353,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> muestras }}
-                                    </p>  
+                                        {{ $compra->muestras }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -365,8 +365,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> recursos_humanos }}
-                                    </p>  
+                                        {{ $compra->recursos_humanos }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
@@ -375,8 +375,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> soporte_tecnico }}
-                                    </p>  
+                                        {{ $compra->soporte_tecnico }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -387,8 +387,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> mantenimiento }}
-                                    </p>  
+                                        {{ $compra->mantenimiento }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
@@ -397,8 +397,8 @@
                                 </div>
                                 <div class="col-span-4">
                                     <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                        {{ $compra -> capacitacion }}
-                                    </p>  
+                                        {{ $compra->capacitacion }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -407,24 +407,24 @@
                         </div>
                         <div class="col-span-4">
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $compra -> vigencia }}
-                            </p>  
+                                {{ $compra->vigencia }}
+                            </p>
                         </div>
                         <div class="mt-3 text-lg font-bold">
                             <span>Forma de pago</span>
                         </div>
                         <div class="col-span-4">
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $compra -> forma_pago }}
-                            </p>  
+                                {{ $compra->forma_pago }}
+                            </p>
                         </div>
                         <div class="mt-3 text-lg font-bold">
                             <span>Garantias</span>
                         </div>
                         <div class="col-span-4">
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-                                {{ $compra -> garantia }}
-                            </p>  
+                                {{ $compra->garantia }}
+                            </p>
                         </div>
 
                         <!-- <div class="py-4">

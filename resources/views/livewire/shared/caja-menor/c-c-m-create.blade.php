@@ -270,6 +270,7 @@
                                                     </option>
                                                 @endif
                                             @endforeach
+
                                         </select>
                                         <div>
                                             @error('partida_masiva')
@@ -355,6 +356,7 @@
                                                         @endif
                                                     @endforeach
                                                     {{-- opciones --}}
+
                                                 </select>
                                             </td>
                                             <td class="px-6 py-4">
@@ -440,3 +442,4 @@
         </div>
     </div>
 </div>
+

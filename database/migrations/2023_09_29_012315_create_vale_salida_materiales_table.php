@@ -17,15 +17,15 @@ return new class extends Migration
             $table->string('fecha', 10);
             $table->string('lugar');
 
-            $table->unsignedBigInteger('id_encargado_entrega') -> nullable();
-            // $table->foreign('id_encargado_entrega') -> references('id') -> on ('users') -> nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('id_encargado_entrega')->nullable();
+            // $table->foreign('id_encargado_entrega')->references('id')->on ('users')->nullable()->constrained()->nullOnDelete();
 
             $table->unsignedBigInteger('id_solicitante');
             // $table->foreign('id_solicitante')->references('id')->on ('users')->nullable()->constrained()->nullOnDelete();
 
-            $table->text('token_entrega') -> nullable();
-            $table->text('token_solicitante') -> nullable();
-            $table->text('estatus_SG') -> nullable();
+            $table->text('token_entrega')->nullable();
+            $table->text('token_solicitante')->nullable();
+            $table->text('estatus_SG')->nullable();
             $table->timestamps();
         });
     }

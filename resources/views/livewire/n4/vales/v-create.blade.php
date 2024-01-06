@@ -42,7 +42,7 @@
                 <div class="container px-4">
 
                     {{-- Default --}}
-                    <div class="grid grid-cols-6 gap-6">
+                    <div class="grid @if (!$is_quote) grid-cols-6 @else grid-cols-7 @endif gap-6">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
@@ -68,7 +68,7 @@
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}" />
                             <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
-
+                                A-A-A-A
                             </p>
                         </div>
                         <div>

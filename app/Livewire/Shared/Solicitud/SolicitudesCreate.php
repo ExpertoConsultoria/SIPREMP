@@ -465,7 +465,7 @@ class SolicitudesCreate extends Component
                 $this->actividad_mir = '';
                 $this->destinatario = '';
                 $this->cotizacion = null;
-                return $this->redirectRoute($this -> redirectTo());
+                return $this->redirectRoute($this->redirectTo());
             } else {
                 $this->dispatch('alertCRUD', 'Error!', 'No se puede generar una solicitud sin elementos de compra', 'error');
                 return;
@@ -564,7 +564,7 @@ class SolicitudesCreate extends Component
         $this->actividad_mir = '';
         $this->destinatario = '';
         $this->cotizacion = null;
-        return $this->redirectRoute($this -> redirectTo());
+        return $this->redirectRoute($this->redirectTo());
     }
 
     public function redirectTo() {

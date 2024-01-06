@@ -317,4 +317,184 @@
         </div>
     </div>
 
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            @if (Auth::user()->hasRole('N4:SEGE'))
+                $(document).ready(function() {
+                    setInterval(getRejectionAlertVale, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getAcceptanceAlertUT, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getAcceptanceAlertCP, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    setInterval(getAcceptanceAlertDA, 10000); //Cada 10 segundo (30 mil milisegundos)
+                });
+
+                // On window load
+                window.onload = function() {
+                    localStorage.setItem("rejectionAlertVale", '');
+                    localStorage.setItem("acceptanceAlertUT", '');
+                    localStorage.setItem("acceptanceAlertCP", '');
+                    localStorage.setItem("acceptanceAlertDA", '');
+                    getRejectionAlertVale();
+                    getAcceptanceAlertUT();
+                    getAcceptanceAlertCP();
+                    getAcceptanceAlertDA();
+                }
+
+                // On window unload
+                window.onbeforeunload = function() {
+                    localStorage.removeItem("rejectionAlertVale");
+                    localStorage.removeItem("acceptanceAlertUT");
+                    localStorage.removeItem("acceptanceAlertCP");
+                    localStorage.removeItem("acceptanceAlertDA");
+                };
+
+                function getAcceptanceAlertUT() {
+
+                    var acceptanceAlertUT = localStorage.getItem("acceptanceAlertUT");
+
+                    $.get('api/acceptanceAlertUT/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertUT != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertUT) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `${data.folios[i]} ha sido Aprobada por Unidad Técnica`,
+                                        `/vales/send-and-revised/detalles/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertUT", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `${data.folios[i]} ha sido Aprobada por Unidad Técnica`,
+                                    `/vales/send-and-revised/detalles/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertUT", data);
+                        }
+
+                    });
+                }
+
+                function getAcceptanceAlertCP() {
+
+                    var acceptanceAlertCP = localStorage.getItem("acceptanceAlertCP");
+
+                    $.get('api/acceptanceAlertCP/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertCP != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertCP) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `${data.folios[i]} ha sido Aprobada por Control Presupuestal`,
+                                        `/vales/send-and-revised/detalles/${data.folios[i]}`, '#7C3AED', 10000, 'bottom', 'right'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertCP", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `${data.folios[i]} ha sido Aprobada por Control Presupuestal`,
+                                    `/vales/send-and-revised/detalles/${data.folios[i]}`, '#7C3AED', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertCP", data);
+                        }
+
+                    });
+                }
+
+                function getAcceptanceAlertDA() {
+
+                    var acceptanceAlertDA = localStorage.getItem("acceptanceAlertDA");
+
+                    $.get('api/acceptanceAlertDA/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertDA != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertDA) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `${data.folios[i]} ha sido Aprobada por Dirreción Administrativa`,
+                                        `/vales/send-and-revised/detalles/${data.folios[i]}`, '#0b8750', 10000, 'bottom', 'right'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertDA", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `${data.folios[i]} ha sido Aprobada por Dirreción Administrativa`,
+                                    `/vales/send-and-revised/detalles/${data.folios[i]}`, '#0b8750', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertDA", data);
+                        }
+
+                    });
+                }
+
+                function getRejectionAlertVale() {
+                    var rejectionAlertVale = localStorage.getItem("rejectionAlertVale");
+
+                    $.get('api/rejectionAlertVale/{{ Auth::user()->id }}', function(data) {
+                        if (rejectionAlertVale != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != rejectionAlertVale) {
+                                data = JSON.parse(data);
+                                data.folios.forEach(folio => {
+                                    if (folio.type === 'folio') {
+                                        Livewire.dispatch('toastifyAlert', [`${folio.value} ha sido Rechazada`,
+                                            `/vales/send-and-revised/detalles/${folio.value}`,
+                                            '#F05252', 10000, 'bottom', 'right'
+                                        ]);
+                                    }
+                                });
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rejectionAlertVale", data);
+                            }
+                        } else {
+                            data.folios.forEach(folio => {
+                                if (folio.type === 'folio') {
+                                    Livewire.dispatch('toastifyAlert', [`${folio.value} ha sido Rechazada`,
+                                        `/vales/send-and-revised/detalles/${folio.value}`, '#F05252',
+                                        10000, 'bottom', 'right'
+                                    ]);
+                                }
+                            });
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlertVale", data);
+                        }
+                    });
+                }
+            @endif
+        </script>
+    @endpush
+
 </x-app-layout>

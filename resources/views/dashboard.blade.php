@@ -582,7 +582,7 @@
                         <div
                             class="grid grid-cols-1 gap-5 mt-5 mb-3 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
-                            <div class="space-y-16">
+                            <div class="space-y-4">
                                 <div
                                     class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
                                     <a href="{{route('bandejaentrada')}}" class="grid grid-cols-3 p-5 text-start justify-items-start">
@@ -603,8 +603,9 @@
                                             </svg>
                                         </div>
                                         <div class="col-span-2">
+
                                             <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                BANDEJA DE ENTRADA
+                                            BANDEJA DE ENTRADA
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Solicitudes por revisar</p>
                                         </div>
@@ -650,7 +651,7 @@
                                         </div>
                                         <div class="col-span-2 ">
                                             <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                COMPRAS CONSOLIDADAS
+                                            COMPRAS CONSOLIDADAS
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Generación de vales, borradores, estatus </p>
                                         </div>
@@ -681,7 +682,7 @@
                                         </div>
                                         <div class="col-span-2 ">
                                             <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                SOLICITUDES / VALES
+                                            SOLICITUDES / VALES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Rechazadas y aprobadas</p>
                                         </div>
@@ -722,7 +723,7 @@
                                         </div>
                                         <div class="col-span-2 ">
                                             <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                EXPEDIENTES
+                                            EXPEDIENTES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Contiene los expedientes completos </p>
                                         </div>
@@ -762,7 +763,7 @@
                                         </div>
                                         <div class="col-span-2 ">
                                             <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                PROVEEDORES
+                                            PROVEEDORES
                                             </p>
                                             <p class="mt-2 dark:text-gray-400">Contiene los expedientes completos </p>
                                         </div>
@@ -810,7 +811,7 @@
                             <div>
                                 <div
                                     class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="{{ route('bandejaentrada.pendientes') }}"
+                                    <a href="{{ route('bandejaentrada') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
@@ -927,161 +928,6 @@
 
                         </div>
                     </div>
-
-                    {{-- 2da parte, Parte que puede que se mueva. O no --}}
-                        {{-- <div class="grid justify-center">
-                            <div
-                                class="grid grid-cols-1 gap-5 mt-5 mb-3 md:gap-12 xl:gap-12 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-
-                                <div class="space-y-4">
-
-                                    <div
-                                        class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-
-                                        <a href="{{route('comprasconsolidadas.pendientes')}}"
-                                            class="grid items-center grid-cols-3 p-5 h-60 justify-items-center ">
-                                            <div class="">
-                                                <svg width="83" height="60" viewBox="0 0 83 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M53.7812 44.9449L46.8298 51.9199C44.0109 54.7487 39.051 54.8096 36.1711 51.9199L29.2194 44.9449L4.25195 69.9934C5.18133 70.4232 6.20602 70.6796 7.29539 70.6796H75.7056C76.7949 70.6796 77.8193 70.4235 78.7483 69.9936L53.7812 44.9449Z"
-                                                        fill="#515151" />
-                                                    <path
-                                                        d="M75.7052 12.3203H7.29507C6.2057 12.3203 5.181 12.5768 4.25195 13.0065L30.9314 39.7745C30.9332 39.7763 30.9353 39.7766 30.9371 39.7784C30.9389 39.7802 30.9392 39.7826 30.9392 39.7826L39.6142 48.4863C40.5356 49.4077 42.465 49.4077 43.3865 48.4863L52.0596 39.7841C52.0596 39.7841 52.0617 39.7802 52.0635 39.7784C52.0635 39.7784 52.0674 39.7763 52.0692 39.7745L78.748 13.0064C77.819 12.5764 76.7946 12.3203 75.7052 12.3203Z"
-                                                        fill="#515151" />
-                                                    <path
-                                                        d="M0.775855 16.4075C0.295039 17.3798 0 18.4591 0 19.6153V63.3848C0 64.541 0.294715 65.6203 0.775693 66.5926L25.7864 41.5009L0.775855 16.4075Z"
-                                                        fill="#515151" />
-                                                    <path
-                                                        d="M82.2243 16.4071L57.2139 41.5008L82.2243 66.5929C82.7051 65.6206 83.0001 64.5413 83.0001 63.3848V19.6152C83.0001 18.4588 82.7051 17.3794 82.2243 16.4071Z"
-                                                        fill="#515151" />
-                                                </svg>
-                                            </div>
-                                            <div class="col-span-2">
-                                                <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                    BANDEJA DE ENTRADA
-                                                </p>
-                                                <p class="mt-2 dark:text-gray-400">Solicitudes por revisar</p>
-                                            </div>
-                                        </a>
-
-                                    </div>
-
-                                    <div
-                                        class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-                                        <a href="" class="grid grid-cols-3 p-5 text-start justify-items-start ">
-                                            <div>
-                                                <svg width="60" height="60" viewBox="0 0 66 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_51_1154)">
-                                                        <path
-                                                            d="M49.5588 6.7926H7.63521C5.61022 6.7926 3.66818 7.59671 2.2363 9.02802C0.804421 10.4593 0 12.4006 0 14.4248L0 75.3932C0 77.4174 0.804421 79.3587 2.2363 80.79C3.66818 82.2213 5.61022 83.0254 7.63521 83.0254H49.5588C51.5838 83.0254 53.5259 82.2213 54.9578 80.79C56.3896 79.3587 57.1941 77.4174 57.1941 75.3932V14.4121C57.1907 12.3901 56.3848 10.4521 54.9533 9.02352C53.5217 7.59496 51.5816 6.7926 49.5588 6.7926ZM30.4708 71.5708H15.2704C14.2579 71.5708 13.2869 71.1687 12.571 70.4531C11.855 69.7374 11.4528 68.7668 11.4528 67.7547C11.4528 66.7426 11.855 65.7719 12.571 65.0563C13.2869 64.3406 14.2579 63.9386 15.2704 63.9386H30.5408C31.5533 63.9386 32.5243 64.3406 33.2403 65.0563C33.9562 65.7719 34.3584 66.7426 34.3584 67.7547C34.3584 68.7668 33.9562 69.7374 33.2403 70.4531C32.5243 71.1687 31.5533 71.5708 30.5408 71.5708H30.4708ZM41.9236 56.3064H15.2704C14.2579 56.3064 13.2869 55.9044 12.571 55.1887C11.855 54.473 11.4528 53.5024 11.4528 52.4903C11.4528 51.4782 11.855 50.5076 12.571 49.7919C13.2869 49.0763 14.2579 48.6742 15.2704 48.6742H41.93C42.9425 48.6742 43.9135 49.0763 44.6295 49.7919C45.3454 50.5076 45.7476 51.4782 45.7476 52.4903C45.7476 53.5024 45.3454 54.473 44.6295 55.1887C43.9135 55.9044 42.9425 56.3064 41.93 56.3064H41.9236ZM41.9236 41.042H15.2704C14.7611 41.0726 14.2511 40.9949 13.774 40.8139C13.297 40.633 12.8638 40.3529 12.503 39.9923C12.1422 39.6316 11.862 39.1986 11.681 38.7217C11.5 38.2449 11.4222 37.7351 11.4528 37.2259C11.4222 36.7168 11.5 36.207 11.681 35.7301C11.862 35.2533 12.1422 34.8202 12.503 34.4596C12.8638 34.0989 13.297 33.8189 13.774 33.6379C14.2511 33.457 14.7611 33.3792 15.2704 33.4098H41.93C42.4393 33.3792 42.9493 33.457 43.4264 33.6379C43.9034 33.8189 44.3367 34.0989 44.6975 34.4596C45.0583 34.8202 45.3384 35.2533 45.5194 35.7301C45.7005 36.207 45.7782 36.7168 45.7476 37.2259C45.7848 37.7387 45.712 38.2534 45.5339 38.7357C45.3559 39.2179 45.0767 39.6566 44.7152 40.0222C44.3536 40.3878 43.9181 40.6719 43.4377 40.8554C42.9574 41.039 42.4433 41.1178 41.93 41.0865L41.9236 41.042ZM41.9236 25.7777H15.2704C14.7608 25.8093 14.2504 25.7323 13.7729 25.5517C13.2953 25.3711 12.8617 25.0911 12.5007 24.7302C12.1397 24.3693 11.8595 23.9359 11.6789 23.4585C11.4982 22.9812 11.4212 22.4709 11.4528 21.9616C11.4222 21.4524 11.5 20.9426 11.681 20.4658C11.862 19.9889 12.1422 19.5559 12.503 19.1952C12.8638 18.8346 13.297 18.5545 13.774 18.3736C14.2511 18.1926 14.7611 18.1149 15.2704 18.1455H41.93C42.4393 18.1149 42.9493 18.1926 43.4264 18.3736C43.9034 18.5545 44.3367 18.8346 44.6975 19.1952C45.0583 19.5559 45.3384 19.9889 45.5194 20.4658C45.7005 20.9426 45.7782 21.4524 45.7476 21.9616C45.7888 22.4761 45.7188 22.9934 45.5424 23.4785C45.366 23.9635 45.0873 24.405 44.7253 24.773C44.3632 25.1409 43.9262 25.4268 43.4439 25.6111C42.9616 25.7954 42.4453 25.8739 41.93 25.8413L41.9236 25.7777Z"
-                                                            fill="#515151" />
-                                                        <path
-                                                            d="M58.3709 2.65031e-06H16.4409C15.0938 0.00315635 13.7714 0.362555 12.6081 1.04171C11.4448 1.72087 10.482 2.69561 9.81738 3.86698C10.1174 3.83399 10.419 3.81701 10.7209 3.81609H52.6573C54.6822 3.81609 56.6243 4.6202 58.0562 6.05151C59.488 7.48282 60.2925 9.4241 60.2925 11.4483V72.4167C60.2919 73.7331 59.9476 75.0266 59.2935 76.1692C61.1438 75.9456 62.8484 75.0533 64.0861 73.6603C65.3237 72.2674 66.0089 70.47 66.0125 68.607V7.63219C66.0125 6.62938 65.8148 5.6364 65.4307 4.71001C65.0466 3.78361 64.4836 2.94196 63.7739 2.23317C63.0643 1.52437 62.2218 0.962321 61.2948 0.579142C60.3677 0.195963 59.3741 -0.000833023 58.3709 2.65031e-06Z"
-                                                            fill="#515151" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_51_1154">
-                                                            <rect width="66" height="83" fill="white" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </div>
-                                            <div class="col-span-2 ">
-                                                <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                    Reporte $ caja menor
-                                                </p>
-                                                <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-4">
-                                    <div
-                                        class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800 ">
-                                        <a href="{{route('valesconpresupuestal')}}" class="grid grid-cols-3 p-5 text-start justify-items-start">
-                                            <div class="">
-                                                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12.4219 60H47.5781C50.486 60 52.8516 57.6345 52.8516 54.7266V17.5781H40.5469C37.639 17.5781 35.2734 15.2126 35.2734 12.3047V0H12.4219C9.51398 0 7.14844 2.36555 7.14844 5.27344V54.7266C7.14844 57.6345 9.51398 60 12.4219 60ZM19.4531 24.7266H40.5469C41.5185 24.7266 42.3047 25.5128 42.3047 26.4844C42.3047 27.456 41.5185 28.2422 40.5469 28.2422H19.4531C18.4815 28.2422 17.6953 27.456 17.6953 26.4844C17.6953 25.5128 18.4815 24.7266 19.4531 24.7266ZM19.4531 31.7578H40.5469C41.5185 31.7578 42.3047 32.544 42.3047 33.5156C42.3047 34.4872 41.5185 35.2734 40.5469 35.2734H19.4531C18.4815 35.2734 17.6953 34.4872 17.6953 33.5156C17.6953 32.544 18.4815 31.7578 19.4531 31.7578ZM19.4531 38.7891H40.5469C41.5185 38.7891 42.3047 39.5753 42.3047 40.5469C42.3047 41.5185 41.5185 42.3047 40.5469 42.3047H19.4531C18.4815 42.3047 17.6953 41.5185 17.6953 40.5469C17.6953 39.5753 18.4815 38.7891 19.4531 38.7891ZM19.4531 45.8203H33.5156C34.4872 45.8203 35.2734 46.6065 35.2734 47.5781C35.2734 48.5497 34.4872 49.3359 33.5156 49.3359H19.4531C18.4815 49.3359 17.6953 48.5497 17.6953 47.5781C17.6953 46.6065 18.4815 45.8203 19.4531 45.8203Z"
-                                                        fill="#515151" />
-                                                    <path
-                                                        d="M40.5469 14.0628H51.8216L38.7891 1.03027V12.305C38.7891 13.2748 39.577 14.0628 40.5469 14.0628Z"
-                                                        fill="#515151" />
-                                                </svg>
-
-                                            </div>
-                                            <div class="col-span-2 ">
-                                                <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                    VALES
-                                                </p>
-                                                <p class="mt-2 dark:text-gray-400">Rechazados y aprobados</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div
-                                        class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                        <a href="" class="grid grid-cols-3 p-5 text-start justify-items-start">
-                                            <div>
-                                                <svg width="60" height="60" viewBox="0 0 66 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_51_1154)">
-                                                        <path
-                                                            d="M49.5588 6.7926H7.63521C5.61022 6.7926 3.66818 7.59671 2.2363 9.02802C0.804421 10.4593 0 12.4006 0 14.4248L0 75.3932C0 77.4174 0.804421 79.3587 2.2363 80.79C3.66818 82.2213 5.61022 83.0254 7.63521 83.0254H49.5588C51.5838 83.0254 53.5259 82.2213 54.9578 80.79C56.3896 79.3587 57.1941 77.4174 57.1941 75.3932V14.4121C57.1907 12.3901 56.3848 10.4521 54.9533 9.02352C53.5217 7.59496 51.5816 6.7926 49.5588 6.7926ZM30.4708 71.5708H15.2704C14.2579 71.5708 13.2869 71.1687 12.571 70.4531C11.855 69.7374 11.4528 68.7668 11.4528 67.7547C11.4528 66.7426 11.855 65.7719 12.571 65.0563C13.2869 64.3406 14.2579 63.9386 15.2704 63.9386H30.5408C31.5533 63.9386 32.5243 64.3406 33.2403 65.0563C33.9562 65.7719 34.3584 66.7426 34.3584 67.7547C34.3584 68.7668 33.9562 69.7374 33.2403 70.4531C32.5243 71.1687 31.5533 71.5708 30.5408 71.5708H30.4708ZM41.9236 56.3064H15.2704C14.2579 56.3064 13.2869 55.9044 12.571 55.1887C11.855 54.473 11.4528 53.5024 11.4528 52.4903C11.4528 51.4782 11.855 50.5076 12.571 49.7919C13.2869 49.0763 14.2579 48.6742 15.2704 48.6742H41.93C42.9425 48.6742 43.9135 49.0763 44.6295 49.7919C45.3454 50.5076 45.7476 51.4782 45.7476 52.4903C45.7476 53.5024 45.3454 54.473 44.6295 55.1887C43.9135 55.9044 42.9425 56.3064 41.93 56.3064H41.9236ZM41.9236 41.042H15.2704C14.7611 41.0726 14.2511 40.9949 13.774 40.8139C13.297 40.633 12.8638 40.3529 12.503 39.9923C12.1422 39.6316 11.862 39.1986 11.681 38.7217C11.5 38.2449 11.4222 37.7351 11.4528 37.2259C11.4222 36.7168 11.5 36.207 11.681 35.7301C11.862 35.2533 12.1422 34.8202 12.503 34.4596C12.8638 34.0989 13.297 33.8189 13.774 33.6379C14.2511 33.457 14.7611 33.3792 15.2704 33.4098H41.93C42.4393 33.3792 42.9493 33.457 43.4264 33.6379C43.9034 33.8189 44.3367 34.0989 44.6975 34.4596C45.0583 34.8202 45.3384 35.2533 45.5194 35.7301C45.7005 36.207 45.7782 36.7168 45.7476 37.2259C45.7848 37.7387 45.712 38.2534 45.5339 38.7357C45.3559 39.2179 45.0767 39.6566 44.7152 40.0222C44.3536 40.3878 43.9181 40.6719 43.4377 40.8554C42.9574 41.039 42.4433 41.1178 41.93 41.0865L41.9236 41.042ZM41.9236 25.7777H15.2704C14.7608 25.8093 14.2504 25.7323 13.7729 25.5517C13.2953 25.3711 12.8617 25.0911 12.5007 24.7302C12.1397 24.3693 11.8595 23.9359 11.6789 23.4585C11.4982 22.9812 11.4212 22.4709 11.4528 21.9616C11.4222 21.4524 11.5 20.9426 11.681 20.4658C11.862 19.9889 12.1422 19.5559 12.503 19.1952C12.8638 18.8346 13.297 18.5545 13.774 18.3736C14.2511 18.1926 14.7611 18.1149 15.2704 18.1455H41.93C42.4393 18.1149 42.9493 18.1926 43.4264 18.3736C43.9034 18.5545 44.3367 18.8346 44.6975 19.1952C45.0583 19.5559 45.3384 19.9889 45.5194 20.4658C45.7005 20.9426 45.7782 21.4524 45.7476 21.9616C45.7888 22.4761 45.7188 22.9934 45.5424 23.4785C45.366 23.9635 45.0873 24.405 44.7253 24.773C44.3632 25.1409 43.9262 25.4268 43.4439 25.6111C42.9616 25.7954 42.4453 25.8739 41.93 25.8413L41.9236 25.7777Z"
-                                                            fill="#515151" />
-                                                        <path
-                                                            d="M58.3709 2.65031e-06H16.4409C15.0938 0.00315635 13.7714 0.362555 12.6081 1.04171C11.4448 1.72087 10.482 2.69561 9.81738 3.86698C10.1174 3.83399 10.419 3.81701 10.7209 3.81609H52.6573C54.6822 3.81609 56.6243 4.6202 58.0562 6.05151C59.488 7.48282 60.2925 9.4241 60.2925 11.4483V72.4167C60.2919 73.7331 59.9476 75.0266 59.2935 76.1692C61.1438 75.9456 62.8484 75.0533 64.0861 73.6603C65.3237 72.2674 66.0089 70.47 66.0125 68.607V7.63219C66.0125 6.62938 65.8148 5.6364 65.4307 4.71001C65.0466 3.78361 64.4836 2.94196 63.7739 2.23317C63.0643 1.52437 62.2218 0.962321 61.2948 0.579142C60.3677 0.195963 59.3741 -0.000833023 58.3709 2.65031e-06Z"
-                                                            fill="#515151" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_51_1154">
-                                                            <rect width="66" height="83" fill="white" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </div>
-                                            <div class="col-span-2 ">
-                                                <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                    SOLICITUDES
-                                                </p>
-                                                <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div
-                                        class="p-2 bg-white border border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                        <a href="" class="grid grid-cols-3 p-5 text-start justify-items-start">
-                                            <div>
-                                                <svg width="60" height="60" viewBox="0 0 66 83" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_51_1154)">
-                                                        <path
-                                                            d="M49.5588 6.7926H7.63521C5.61022 6.7926 3.66818 7.59671 2.2363 9.02802C0.804421 10.4593 0 12.4006 0 14.4248L0 75.3932C0 77.4174 0.804421 79.3587 2.2363 80.79C3.66818 82.2213 5.61022 83.0254 7.63521 83.0254H49.5588C51.5838 83.0254 53.5259 82.2213 54.9578 80.79C56.3896 79.3587 57.1941 77.4174 57.1941 75.3932V14.4121C57.1907 12.3901 56.3848 10.4521 54.9533 9.02352C53.5217 7.59496 51.5816 6.7926 49.5588 6.7926ZM30.4708 71.5708H15.2704C14.2579 71.5708 13.2869 71.1687 12.571 70.4531C11.855 69.7374 11.4528 68.7668 11.4528 67.7547C11.4528 66.7426 11.855 65.7719 12.571 65.0563C13.2869 64.3406 14.2579 63.9386 15.2704 63.9386H30.5408C31.5533 63.9386 32.5243 64.3406 33.2403 65.0563C33.9562 65.7719 34.3584 66.7426 34.3584 67.7547C34.3584 68.7668 33.9562 69.7374 33.2403 70.4531C32.5243 71.1687 31.5533 71.5708 30.5408 71.5708H30.4708ZM41.9236 56.3064H15.2704C14.2579 56.3064 13.2869 55.9044 12.571 55.1887C11.855 54.473 11.4528 53.5024 11.4528 52.4903C11.4528 51.4782 11.855 50.5076 12.571 49.7919C13.2869 49.0763 14.2579 48.6742 15.2704 48.6742H41.93C42.9425 48.6742 43.9135 49.0763 44.6295 49.7919C45.3454 50.5076 45.7476 51.4782 45.7476 52.4903C45.7476 53.5024 45.3454 54.473 44.6295 55.1887C43.9135 55.9044 42.9425 56.3064 41.93 56.3064H41.9236ZM41.9236 41.042H15.2704C14.7611 41.0726 14.2511 40.9949 13.774 40.8139C13.297 40.633 12.8638 40.3529 12.503 39.9923C12.1422 39.6316 11.862 39.1986 11.681 38.7217C11.5 38.2449 11.4222 37.7351 11.4528 37.2259C11.4222 36.7168 11.5 36.207 11.681 35.7301C11.862 35.2533 12.1422 34.8202 12.503 34.4596C12.8638 34.0989 13.297 33.8189 13.774 33.6379C14.2511 33.457 14.7611 33.3792 15.2704 33.4098H41.93C42.4393 33.3792 42.9493 33.457 43.4264 33.6379C43.9034 33.8189 44.3367 34.0989 44.6975 34.4596C45.0583 34.8202 45.3384 35.2533 45.5194 35.7301C45.7005 36.207 45.7782 36.7168 45.7476 37.2259C45.7848 37.7387 45.712 38.2534 45.5339 38.7357C45.3559 39.2179 45.0767 39.6566 44.7152 40.0222C44.3536 40.3878 43.9181 40.6719 43.4377 40.8554C42.9574 41.039 42.4433 41.1178 41.93 41.0865L41.9236 41.042ZM41.9236 25.7777H15.2704C14.7608 25.8093 14.2504 25.7323 13.7729 25.5517C13.2953 25.3711 12.8617 25.0911 12.5007 24.7302C12.1397 24.3693 11.8595 23.9359 11.6789 23.4585C11.4982 22.9812 11.4212 22.4709 11.4528 21.9616C11.4222 21.4524 11.5 20.9426 11.681 20.4658C11.862 19.9889 12.1422 19.5559 12.503 19.1952C12.8638 18.8346 13.297 18.5545 13.774 18.3736C14.2511 18.1926 14.7611 18.1149 15.2704 18.1455H41.93C42.4393 18.1149 42.9493 18.1926 43.4264 18.3736C43.9034 18.5545 44.3367 18.8346 44.6975 19.1952C45.0583 19.5559 45.3384 19.9889 45.5194 20.4658C45.7005 20.9426 45.7782 21.4524 45.7476 21.9616C45.7888 22.4761 45.7188 22.9934 45.5424 23.4785C45.366 23.9635 45.0873 24.405 44.7253 24.773C44.3632 25.1409 43.9262 25.4268 43.4439 25.6111C42.9616 25.7954 42.4453 25.8739 41.93 25.8413L41.9236 25.7777Z"
-                                                            fill="#515151" />
-                                                        <path
-                                                            d="M58.3709 2.65031e-06H16.4409C15.0938 0.00315635 13.7714 0.362555 12.6081 1.04171C11.4448 1.72087 10.482 2.69561 9.81738 3.86698C10.1174 3.83399 10.419 3.81701 10.7209 3.81609H52.6573C54.6822 3.81609 56.6243 4.6202 58.0562 6.05151C59.488 7.48282 60.2925 9.4241 60.2925 11.4483V72.4167C60.2919 73.7331 59.9476 75.0266 59.2935 76.1692C61.1438 75.9456 62.8484 75.0533 64.0861 73.6603C65.3237 72.2674 66.0089 70.47 66.0125 68.607V7.63219C66.0125 6.62938 65.8148 5.6364 65.4307 4.71001C65.0466 3.78361 64.4836 2.94196 63.7739 2.23317C63.0643 1.52437 62.2218 0.962321 61.2948 0.579142C60.3677 0.195963 59.3741 -0.000833023 58.3709 2.65031e-06Z"
-                                                            fill="#515151" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_51_1154">
-                                                            <rect width="66" height="83" fill="white" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </div>
-                                            <div class="col-span-2 ">
-                                                <p class="mt-2 text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                                    Reportes (objetivos de p) MIR
-                                                </p>
-                                                <p class="mt-2 dark:text-gray-400">Generación de solicitudes, borradores, estatus</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                    {{-- Fin de la parte 2. Puede que se mueva, O nadota --}}
-
                 </div>
             </div>
         </div>
@@ -1121,7 +967,7 @@
                             <div>
                                 <div
                                     class="p-2 mt-8 mb-6 bg-white border-gray-200 rounded-lg shadow-lg shadow-zinc-300 dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
-                                    <a href="{{ route('bandejaentrada.pendientes') }}"
+                                    <a href="{{ route('bandejaentrada') }}"
                                         class="grid grid-cols-3 p-10 text-start justify-items-start ">
                                         <div>
                                             <svg width="83" height="83" viewBox="0 0 83 83" fill="none"
@@ -1187,6 +1033,8 @@
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+
+                    setInterval(getVMProgressAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                 });
 
                 // On window load
@@ -1194,9 +1042,11 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
+                    localStorage.setItem("VMProgressAlert", '');
                     getRejectionAlert();
                     getAcceptanceAlert();
                     getApprovedAlert();
+                    getVMProgressAlert();
                 }
 
                 // On window unload
@@ -1204,8 +1054,10 @@
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
                     localStorage.removeItem("approvedAlert");
+                    localStorage.removeItem("VMProgressAlert");
                 };
 
+                // Memorandums
                 function getRejectionAlert() {
 
                     var rejectionAlert = localStorage.getItem("rejectionAlert");
@@ -1320,14 +1172,61 @@
 
                     });
                 }
+
+                // Vales de Compra o Servicio
+                function getVMProgressAlert() {
+
+                    var VMProgressAlert = localStorage.getItem("VMProgressAlert");
+
+                    $.get('api/VMProgressAlert/{{ Auth::user()->id }}', function(data) {
+
+                        if (VMProgressAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != VMProgressAlert) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `El Vale de ${data.folios[i]} ha Progresado`,
+                                        `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("VMProgressAlert", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `El Vale de ${data.folios[i]} ha Progresado`,
+                                    `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("VMProgressAlert", data);
+                        }
+
+                    });
+                }
             @else
 
                 $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        setInterval(getVMProgressAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N4:SEGE']))
+                        setInterval(getAcceptanceAlertUT, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getAcceptanceAlertCP, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getAcceptanceAlertDA, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getRejectionAlertVale, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         setInterval(getRCMAlert, 10000);
@@ -1339,17 +1238,32 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
+                    getRejectionAlert();
+                    getAcceptanceAlert();
+                    getApprovedAlert();
+
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        localStorage.setItem("VMProgressAlert", '');
+                        getVMProgressAlert();
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N4:SEGE']))
+                        localStorage.setItem("acceptanceAlertUT", '');
+                        localStorage.setItem("acceptanceAlertCP", '');
+                        localStorage.setItem("acceptanceAlertDA", '');
+                        localStorage.setItem("rejectionAlertVale", '');
+                        getRejectionAlertVale();
+                        getAcceptanceAlertUT();
+                        getAcceptanceAlertCP();
+                        getAcceptanceAlertDA();
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         localStorage.setItem("rcmAlert", '');
                         getRCMAlert();
                     @endif
-                    getRejectionAlert();
-                    getAcceptanceAlert();
-                    getApprovedAlert();
                 }
 
                 // On window unload
@@ -1357,14 +1271,24 @@
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
                     localStorage.removeItem("approvedAlert");
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        localStorage.removeItem("VMProgressAlert");
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.removeItem("trayAlert");
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
+                        localStorage.removeItem("acceptanceAlertUT");
+                        localStorage.removeItem("acceptanceAlertCP");
+                        localStorage.removeItem("acceptanceAlertDA");
+                        localStorage.removeItem("rejectionAlertVale");
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         localStorage.removeItem("rcmAlert");
                     @endif
                 };
 
+                // Memorandums
                 function getRejectionAlert() {
 
                     var rejectionAlert = localStorage.getItem("rejectionAlert");
@@ -1470,6 +1394,7 @@
                     });
                 }
 
+                // Bandeja de Entrada
                 function getTrayAlert() {
 
                     var trayAlert = localStorage.getItem("trayAlert");
@@ -1505,6 +1430,7 @@
                     });
                 }
 
+                // Reportes CM
                 function getRCMAlert() {
 
                     var rcmAlert = localStorage.getItem("rcmAlert");
@@ -1518,7 +1444,8 @@
 
                                 data = JSON.parse(data);
                                 if (data.folios.length > 0) {
-                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`,
+                                        `/reportes-caja-menor`,
                                         '#7C3AED', 10000, 'bottom', 'center'
                                     ]);
                                 }
@@ -1529,7 +1456,8 @@
                         } else {
 
                             if (data.folios.length > 0) {
-                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`,
+                                    `/reportes-caja-menor`,
                                     '#7C3AED', 10000, 'bottom', 'center'
                                 ]);
                             }
@@ -1537,6 +1465,174 @@
                             localStorage.setItem("rcmAlert", data);
                         }
 
+                    });
+                }
+
+                // Vales de Compra o Servicio
+                function getVMProgressAlert() {
+
+                    var VMProgressAlert = localStorage.getItem("VMProgressAlert");
+
+                    $.get('api/VMProgressAlert/{{ Auth::user()->id }}', function(data) {
+
+                        if (VMProgressAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != VMProgressAlert) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tus solicitudes han Avanzado`, `/solicitudes`,
+                                        '#DB2777', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("VMProgressAlert", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tus solicitudes han Avanzado`, `/solicitudes`,
+                                    '#DB2777', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("VMProgressAlert", data);
+                        }
+                    });
+                }
+
+                function getRejectionAlertVale() {
+
+                    var rejectionAlertVale = localStorage.getItem("rejectionAlertVale");
+
+                    $.get('api/rejectionAlertVale/{{ Auth::user()->id }}', function(data) {
+                        if (rejectionAlertVale != '') {
+                            data = JSON.stringify(data);
+                            if (data != rejectionAlertVale) {
+                                data = JSON.parse(data);
+                                data.folios.forEach(folio => {
+                                    var route = (folio.type === 'folio_solicitud') ? '/solicitudes' : '/vales';
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Rechazados`, route,
+                                        '#F05252', 10000, 'bottom', 'center'
+                                    ]);
+                                });
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rejectionAlertVale", data);
+                            }
+                        } else {
+                            data.folios.forEach(folio => {
+                                var route = (folio.type === 'folio_solicitud') ? '/solicitudes' : '/vales';
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Rechazados`, route, '#F05252',
+                                    10000, 'bottom', 'center'
+                                ]);
+                            });
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlertVale", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertUT() {
+
+                    var acceptanceAlertUT = localStorage.getItem("acceptanceAlertUT");
+
+                    $.get('api/acceptanceAlertUT/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertUT != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertUT) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Unidad Tecnica`, `/vales`,
+                                        '#5682C2', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertUT", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Unidad Tecnica`, `/vales`,
+                                    '#5682C2', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertUT", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertCP() {
+
+                    var acceptanceAlertCP = localStorage.getItem("acceptanceAlertCP");
+
+                    $.get('api/acceptanceAlertCP/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertCP != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertCP) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Control Presupuestal`, `/vales`,
+                                        '#7C3AED', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertCP", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Control Presupuestal`, `/vales`,
+                                    '#7C3AED', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertCP", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertDA() {
+
+                    var acceptanceAlertDA = localStorage.getItem("acceptanceAlertDA");
+
+                    $.get('api/acceptanceAlertDA/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertDA != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertDA) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Dirección Administrativa`, `/solicitudes`,
+                                        '#0b8750', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertDA", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Dirección Administrativa`, `/solicitudes`,
+                                    '#0b8750', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertDA", data);
+                        }
                     });
                 }
             @endif

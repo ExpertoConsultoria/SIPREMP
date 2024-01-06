@@ -20,8 +20,8 @@ class CSCompraConsolidadaBorrador extends Component
     }
 
     public function mount() {
-        $this -> user = Auth::user();
-        $this -> comprasConsolidadas = compra_consolidada::where('estado', 'Borrador') -> get();
+        $this->user = Auth::user();
+        $this->comprasConsolidadas = compra_consolidada::where('estado', 'Borrador')->get();
     }
 
     public function editBorrador( $compra ) {
