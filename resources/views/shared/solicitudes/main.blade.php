@@ -113,34 +113,43 @@
     @push('js')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                 setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                 setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                setInterval(getVMProgressAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                setInterval(getRejectionAlertVale, 10000); //Cada 10 segundo (30 mil milisegundos)
             });
 
             // On window load
-            window.onload = function () {
+            window.onload = function() {
                 localStorage.setItem("rejectionAlert", '');
                 localStorage.setItem("acceptanceAlert", '');
                 localStorage.setItem("approvedAlert", '');
+                localStorage.setItem("VMProgressAlert", '');
+                localStorage.setItem("rejectionAlertVale", '');
                 getRejectionAlert();
                 getAcceptanceAlert();
                 getApprovedAlert();
+                getVMProgressAlert();
+                getRejectionAlertVale();
             }
 
             // On window unload
-            window.onbeforeunload = function () {
+            window.onbeforeunload = function() {
                 localStorage.removeItem("rejectionAlert");
                 localStorage.removeItem("acceptanceAlert");
                 localStorage.removeItem("approvedAlert");
+                localStorage.removeItem("VMProgressAlert");
+                localStorage.removeItem("rejectionAlertVale");
             };
 
+            //Memorandums
             function getRejectionAlert() {
 
                 var rejectionAlert = localStorage.getItem("rejectionAlert");
 
-                $.get('api/rejectionAlert/{{ Auth::user()->id }}', function (data) {
+                $.get('api/rejectionAlert/{{ Auth::user()->id }}', function(data) {
 
                     if (rejectionAlert != '') {
                         data = JSON.stringify(data);
@@ -149,7 +158,9 @@
 
                             data = JSON.parse(data);
                             for (let i = 0; i < data.folios.length; i++) {
-                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`, `/solicitudes/${data.folios[i]}`, '#F05252',10000,'bottom','right']);
+                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`,
+                                    `/solicitudes/${data.folios[i]}`, '#F05252', 10000, 'bottom', 'right'
+                                ]);
                             }
                             data = JSON.stringify(data);
                             localStorage.setItem("rejectionAlert", data);
@@ -158,7 +169,9 @@
                     } else {
 
                         for (let i = 0; i < data.folios.length; i++) {
-                            Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`, `/solicitudes/${data.folios[i]}`, '#F05252',10000,'bottom','right']);
+                            Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Rechazada`,
+                                `/solicitudes/${data.folios[i]}`, '#F05252', 10000, 'bottom', 'right'
+                            ]);
                         }
                         data = JSON.stringify(data);
                         localStorage.setItem("rejectionAlert", data);
@@ -171,7 +184,7 @@
 
                 var acceptanceAlert = localStorage.getItem("acceptanceAlert");
 
-                $.get('api/acceptanceAlert/{{ Auth::user()->id }}', function (data) {
+                $.get('api/acceptanceAlert/{{ Auth::user()->id }}', function(data) {
 
                     if (acceptanceAlert != '') {
                         data = JSON.stringify(data);
@@ -181,7 +194,10 @@
                             data = JSON.parse(data);
                             for (let i = 0; i < data.folios.length; i++) {
                                 @if (Auth::user()->hasAnyRole(['N7:GS:17A', 'N6:17A']))
-                                    Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
+                                        `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
+                                    ]);
                                 @endif
                             }
                             data = JSON.stringify(data);
@@ -193,7 +209,10 @@
                         for (let i = 0; i < data.folios.length; i++) {
 
                             @if (Auth::user()->hasAnyRole(['N7:GS:17A', 'N6:17A']))
-                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Validada por Unidad de Sucursales`, `/solicitudes/${data.folios[i]}`, '#5682C2',10000,'bottom','right']);
+                                Livewire.dispatch('toastifyAlert', [
+                                    `${data.folios[i]} ha sido Validada por Unidad de Sucursales`,
+                                    `/solicitudes/${data.folios[i]}`, '#5682C2', 10000, 'bottom', 'right'
+                                ]);
                             @endif
                         }
                         data = JSON.stringify(data);
@@ -207,7 +226,7 @@
 
                 var approvedAlert = localStorage.getItem("approvedAlert");
 
-                $.get('api/approvedAlert/{{ Auth::user()->id }}', function (data) {
+                $.get('api/approvedAlert/{{ Auth::user()->id }}', function(data) {
 
                     if (approvedAlert != '') {
                         data = JSON.stringify(data);
@@ -216,7 +235,10 @@
 
                             data = JSON.parse(data);
                             for (let i = 0; i < data.folios.length; i++) {
-                                Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Aprobada por Servicos Generales`, `/solicitudes/${data.folios[i]}`, '#0b8750',10000,'bottom','right']);
+                                Livewire.dispatch('toastifyAlert', [
+                                    `${data.folios[i]} ha sido Aprobada por Servicos Generales`,
+                                    `/solicitudes/${data.folios[i]}`, '#0b8750', 10000, 'bottom', 'right'
+                                ]);
                             }
                             data = JSON.stringify(data);
                             localStorage.setItem("approvedAlert", data);
@@ -225,12 +247,87 @@
                     } else {
 
                         for (let i = 0; i < data.folios.length; i++) {
-                            Livewire.dispatch('toastifyAlert', [`${data.folios[i]} ha sido Aprobada por Servicos Generales`, `/solicitudes/${data.folios[i]}`, '#0b8750',10000,'bottom','right']);
+                            Livewire.dispatch('toastifyAlert', [
+                                `${data.folios[i]} ha sido Aprobada por Servicos Generales`,
+                                `/solicitudes/${data.folios[i]}`, '#0b8750', 10000, 'bottom', 'right'
+                            ]);
                         }
                         data = JSON.stringify(data);
                         localStorage.setItem("approvedAlert", data);
                     }
 
+                });
+            }
+
+
+            function getVMProgressAlert() {
+
+                var VMProgressAlert = localStorage.getItem("VMProgressAlert");
+
+                $.get('api/VMProgressAlert/{{ Auth::user()->id }}', function(data) {
+
+                    if (VMProgressAlert != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != VMProgressAlert) {
+
+                            data = JSON.parse(data);
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `El Vale de ${data.folios[i]} ha Progresado`,
+                                    `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("VMProgressAlert", data);
+                        }
+
+                    } else {
+
+                        for (let i = 0; i < data.folios.length; i++) {
+                            Livewire.dispatch('toastifyAlert', [
+                                `El Vale de ${data.folios[i]} ha Progresado`,
+                                `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                            ]);
+                        }
+                        data = JSON.stringify(data);
+                        localStorage.setItem("VMProgressAlert", data);
+                    }
+
+                });
+            }
+
+            function getRejectionAlertVale() {
+                var rejectionAlertVale = localStorage.getItem("rejectionAlertVale");
+
+                $.get('api/rejectionAlertVale/{{ Auth::user()->id }}', function(data) {
+                    if (rejectionAlertVale != '') {
+                        data = JSON.stringify(data);
+
+                        if (data != rejectionAlertVale) {
+                            data = JSON.parse(data);
+                            data.folios.forEach(folio => {
+                                if (folio.type === 'folio_solicitud') {
+                                    Livewire.dispatch('toastifyAlert', [`${folio.value} ha sido Rechazada`,
+                                        `/solicitudes/${folio.value}`, '#F05252', 10000, 'bottom',
+                                        'right'
+                                    ]);
+                                }
+                            });
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlertVale", data);
+                        }
+                    } else {
+                        data.folios.forEach(folio => {
+                            if (folio.type === 'folio_solicitud') {
+                                Livewire.dispatch('toastifyAlert', [`${folio.value} ha sido Rechazada`,
+                                    `/solicitudes/${folio.value}`, '#F05252', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                        });
+                        data = JSON.stringify(data);
+                        localStorage.setItem("rejectionAlertVale", data);
+                    }
                 });
             }
         </script>

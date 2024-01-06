@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use Livewire\Redirector;
 use App\Models\Memorandum;
+use App\Models\Vales_compra;
 use App\Models\MemorandumList;
 
 use App\Models\Plan1Fin;
@@ -39,6 +40,16 @@ class SolicitudStatus extends Component
             $this->memorandum_details->pending_review = 0;
             $this->memorandum_details->save();
         }
+
+        $vale_details = Vales_compra::where('folio_solicitud', $this->details_of_folio)->first();
+
+        if($vale_details){
+            if($vale_details->pending_review === 1){
+                $vale_details->pending_review = 0;
+                $vale_details->save();
+            }
+        }
+
 
         $this->memorandum_details->load('solicitante');
         $this->memoList = MemorandumList::where('im_folio', $this->memorandum_details->memo_folio)->get();

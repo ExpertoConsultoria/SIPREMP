@@ -1033,6 +1033,8 @@
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+
+                    setInterval(getVMProgressAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                 });
 
                 // On window load
@@ -1040,9 +1042,11 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
+                    localStorage.setItem("VMProgressAlert", '');
                     getRejectionAlert();
                     getAcceptanceAlert();
                     getApprovedAlert();
+                    getVMProgressAlert();
                 }
 
                 // On window unload
@@ -1050,8 +1054,10 @@
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
                     localStorage.removeItem("approvedAlert");
+                    localStorage.removeItem("VMProgressAlert");
                 };
 
+                // Memorandums
                 function getRejectionAlert() {
 
                     var rejectionAlert = localStorage.getItem("rejectionAlert");
@@ -1166,14 +1172,61 @@
 
                     });
                 }
+
+                // Vales de Compra o Servicio
+                function getVMProgressAlert() {
+
+                    var VMProgressAlert = localStorage.getItem("VMProgressAlert");
+
+                    $.get('api/VMProgressAlert/{{ Auth::user()->id }}', function(data) {
+
+                        if (VMProgressAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != VMProgressAlert) {
+
+                                data = JSON.parse(data);
+                                for (let i = 0; i < data.folios.length; i++) {
+                                    Livewire.dispatch('toastifyAlert', [
+                                        `El Vale de ${data.folios[i]} ha Progresado`,
+                                        `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("VMProgressAlert", data);
+                            }
+
+                        } else {
+
+                            for (let i = 0; i < data.folios.length; i++) {
+                                Livewire.dispatch('toastifyAlert', [
+                                    `El Vale de ${data.folios[i]} ha Progresado`,
+                                    `/solicitudes/${data.folios[i]}`, '#DB2777', 10000, 'bottom', 'right'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("VMProgressAlert", data);
+                        }
+
+                    });
+                }
             @else
 
                 $(document).ready(function() {
                     setInterval(getRejectionAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getAcceptanceAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
                     setInterval(getApprovedAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        setInterval(getVMProgressAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         setInterval(getTrayAlert, 10000); //Cada 10 segundo (30 mil milisegundos)
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N4:SEGE']))
+                        setInterval(getAcceptanceAlertUT, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getAcceptanceAlertCP, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getAcceptanceAlertDA, 10000); //Cada 10 segundo (30 mil milisegundos)
+                        setInterval(getRejectionAlertVale, 10000); //Cada 10 segundo (30 mil milisegundos)
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         setInterval(getRCMAlert, 10000);
@@ -1185,17 +1238,32 @@
                     localStorage.setItem("rejectionAlert", '');
                     localStorage.setItem("acceptanceAlert", '');
                     localStorage.setItem("approvedAlert", '');
+                    getRejectionAlert();
+                    getAcceptanceAlert();
+                    getApprovedAlert();
+
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        localStorage.setItem("VMProgressAlert", '');
+                        getVMProgressAlert();
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.setItem("trayAlert", '');
                         getTrayAlert();
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N4:SEGE']))
+                        localStorage.setItem("acceptanceAlertUT", '');
+                        localStorage.setItem("acceptanceAlertCP", '');
+                        localStorage.setItem("acceptanceAlertDA", '');
+                        localStorage.setItem("rejectionAlertVale", '');
+                        getRejectionAlertVale();
+                        getAcceptanceAlertUT();
+                        getAcceptanceAlertCP();
+                        getAcceptanceAlertDA();
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         localStorage.setItem("rcmAlert", '');
                         getRCMAlert();
                     @endif
-                    getRejectionAlert();
-                    getAcceptanceAlert();
-                    getApprovedAlert();
                 }
 
                 // On window unload
@@ -1203,14 +1271,24 @@
                     localStorage.removeItem("rejectionAlert");
                     localStorage.removeItem("acceptanceAlert");
                     localStorage.removeItem("approvedAlert");
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N7:GS:17A']))
+                        localStorage.removeItem("VMProgressAlert");
+                    @endif
                     @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
                         localStorage.removeItem("trayAlert");
+                    @endif
+                    @if (Auth::user()->hasAnyRole(['N5:18A:F', 'N4:SEGE', 'N3:UNTE', 'N2:CP', 'N1:DA']))
+                        localStorage.removeItem("acceptanceAlertUT");
+                        localStorage.removeItem("acceptanceAlertCP");
+                        localStorage.removeItem("acceptanceAlertDA");
+                        localStorage.removeItem("rejectionAlertVale");
                     @endif
                     @if (Auth::user()->hasRole('N2:CP'))
                         localStorage.removeItem("rcmAlert");
                     @endif
                 };
 
+                // Memorandums
                 function getRejectionAlert() {
 
                     var rejectionAlert = localStorage.getItem("rejectionAlert");
@@ -1316,6 +1394,7 @@
                     });
                 }
 
+                // Bandeja de Entrada
                 function getTrayAlert() {
 
                     var trayAlert = localStorage.getItem("trayAlert");
@@ -1351,6 +1430,7 @@
                     });
                 }
 
+                // Reportes CM
                 function getRCMAlert() {
 
                     var rcmAlert = localStorage.getItem("rcmAlert");
@@ -1364,7 +1444,8 @@
 
                                 data = JSON.parse(data);
                                 if (data.folios.length > 0) {
-                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`,
+                                        `/reportes-caja-menor`,
                                         '#7C3AED', 10000, 'bottom', 'center'
                                     ]);
                                 }
@@ -1375,7 +1456,8 @@
                         } else {
 
                             if (data.folios.length > 0) {
-                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`, `/reportes-caja-menor`,
+                                Livewire.dispatch('toastifyAlert', [`Tienes Reportes de Compra Menor pendientes`,
+                                    `/reportes-caja-menor`,
                                     '#7C3AED', 10000, 'bottom', 'center'
                                 ]);
                             }
@@ -1383,6 +1465,174 @@
                             localStorage.setItem("rcmAlert", data);
                         }
 
+                    });
+                }
+
+                // Vales de Compra o Servicio
+                function getVMProgressAlert() {
+
+                    var VMProgressAlert = localStorage.getItem("VMProgressAlert");
+
+                    $.get('api/VMProgressAlert/{{ Auth::user()->id }}', function(data) {
+
+                        if (VMProgressAlert != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != VMProgressAlert) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tus solicitudes han Avanzado`, `/solicitudes`,
+                                        '#DB2777', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("VMProgressAlert", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tus solicitudes han Avanzado`, `/solicitudes`,
+                                    '#DB2777', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("VMProgressAlert", data);
+                        }
+                    });
+                }
+
+                function getRejectionAlertVale() {
+
+                    var rejectionAlertVale = localStorage.getItem("rejectionAlertVale");
+
+                    $.get('api/rejectionAlertVale/{{ Auth::user()->id }}', function(data) {
+                        if (rejectionAlertVale != '') {
+                            data = JSON.stringify(data);
+                            if (data != rejectionAlertVale) {
+                                data = JSON.parse(data);
+                                data.folios.forEach(folio => {
+                                    var route = (folio.type === 'folio_solicitud') ? '/solicitudes' : '/vales';
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Rechazados`, route,
+                                        '#F05252', 10000, 'bottom', 'center'
+                                    ]);
+                                });
+                                data = JSON.stringify(data);
+                                localStorage.setItem("rejectionAlertVale", data);
+                            }
+                        } else {
+                            data.folios.forEach(folio => {
+                                var route = (folio.type === 'folio_solicitud') ? '/solicitudes' : '/vales';
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Rechazados`, route, '#F05252',
+                                    10000, 'bottom', 'center'
+                                ]);
+                            });
+                            data = JSON.stringify(data);
+                            localStorage.setItem("rejectionAlertVale", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertUT() {
+
+                    var acceptanceAlertUT = localStorage.getItem("acceptanceAlertUT");
+
+                    $.get('api/acceptanceAlertUT/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertUT != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertUT) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Unidad Tecnica`, `/vales`,
+                                        '#5682C2', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertUT", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Unidad Tecnica`, `/vales`,
+                                    '#5682C2', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertUT", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertCP() {
+
+                    var acceptanceAlertCP = localStorage.getItem("acceptanceAlertCP");
+
+                    $.get('api/acceptanceAlertCP/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertCP != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertCP) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Control Presupuestal`, `/vales`,
+                                        '#7C3AED', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertCP", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Control Presupuestal`, `/vales`,
+                                    '#7C3AED', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertCP", data);
+                        }
+                    });
+                }
+
+                function getAcceptanceAlertDA() {
+
+                    var acceptanceAlertDA = localStorage.getItem("acceptanceAlertDA");
+
+                    $.get('api/acceptanceAlertDA/{{ Auth::user()->id }}', function(data) {
+
+                        if (acceptanceAlertDA != '') {
+                            data = JSON.stringify(data);
+
+                            if (data != acceptanceAlertDA) {
+
+                                data = JSON.parse(data);
+                                if (data.folios.length > 0) {
+                                    Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Dirección Administrativa`, `/solicitudes`,
+                                        '#0b8750', 10000, 'bottom', 'center'
+                                    ]);
+                                }
+                                data = JSON.stringify(data);
+                                localStorage.setItem("acceptanceAlertDA", data);
+                            }
+
+                        } else {
+
+                            if (data.folios.length > 0) {
+                                Livewire.dispatch('toastifyAlert', [`Tienes Vales Aprobados por Dirección Administrativa`, `/solicitudes`,
+                                    '#0b8750', 10000, 'bottom', 'center'
+                                ]);
+                            }
+                            data = JSON.stringify(data);
+                            localStorage.setItem("acceptanceAlertDA", data);
+                        }
                     });
                 }
             @endif

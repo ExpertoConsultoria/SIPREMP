@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use stdClass;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
 
 use Livewire\Redirector;
 use App\Models\Vales_compra;
@@ -19,6 +20,7 @@ use App\Models\Plan2Proposito;
 use App\Models\Plan3Componente;
 use App\Models\Plan4Actividad;
 use App\Models\PptoDeEgreso;
+use App\Models\User;
 
 class VDetalles extends Component
 {
@@ -40,6 +42,13 @@ class VDetalles extends Component
 
     public function mount() {
         $this->vale_details = Vales_compra::where('folio', $this->details_of_folio)->first();
+
+        $user = User::find(Auth::id());
+
+        if(($this->vale_details->pending_review === 1)&&($user->hasRole('N4:SEGE'))){
+            $this->vale_details->pending_review = 0;
+            $this->vale_details->save();
+        }
 
         $this->vale_elements = Elementos_Vale_compra::where('vales_compra_id', $this->vale_details->id)->get();
         $this->vale_details->load('solicitante');
