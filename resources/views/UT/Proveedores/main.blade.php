@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Proveedores')}}
+                    {{_('Proveedores Temporales')}}
                 </h2>
             </div>
 
@@ -26,7 +26,7 @@
         <div class="mx-auto max-w-7xl lg:px-8">
             <div class="grid justify-center overflow-hidden bg-transparent">
 
-                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+                <div class="container grid grid-cols-1 gap-6 px-8 m-auto justify-content-center sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
 
                     <div class="p-6 mt-8 bg-white border border-gray-200 rounded-lg shadow-lg w-60 w-30 text dark:shadow-none dark:bg-zinc-800 dark:border-zinc-800">
                         <a href="{{route('proveedores.pendientes')}}" class="text-right">

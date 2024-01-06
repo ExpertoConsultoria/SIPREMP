@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-black leading-tight text-gray-800 dark:text-gray-200">
-                    {{_('Historial de salidas | Inventario')}}
+                    {{_('Historial de Salidas | Inventario')}}
                 </h2>
             </div>
 
@@ -46,7 +46,7 @@
                 </button>
             </div>
         </div>
-    
+
 
     <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -77,19 +77,19 @@
                 @foreach($items_vale_salida as $item)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                     <td class="px-4 py-2">
-                        <p>{{$item -> folio_vale_salida}}</p>
+                        <p>{{$item->folio_vale_salida}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{$item -> created_at -> format('d-m-Y') }}</p>
+                        <p>{{$item->created_at->format('d-m-Y') }}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{$item -> cantidad}}</p>
+                        <p>{{$item->cantidad}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        <p>{{$item -> concepto}}</p>
+                        <p>{{$item->concepto}}</p>
                     </td>
                     <td class="px-4 py-2">
-                        @if ( $item -> sg_status ) 
+                        @if ( $item->sg_status )
                         <p>Ya fue procesado</p>
                         @else
                         <p>No ha sido procesado</p>
@@ -110,5 +110,5 @@
 
         </div>
     </div>
-    
+
 </div>

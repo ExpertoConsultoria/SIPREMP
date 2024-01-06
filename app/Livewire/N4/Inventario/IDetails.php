@@ -26,12 +26,12 @@ class IDetails extends Component
     }
 
     public function mount() {
-        $this -> valeEntrada = Vales_entrada_material::where('folio', $this -> folio) -> first();
-        // dd($this -> valeEntrada);
-        $this -> items = Materiales_recibidos::where('folio_vale_entrada', $this -> folio) -> get();
+        $this->valeEntrada = Vales_entrada_material::where('folio', $this->folio)->first();
+        // dd($this->valeEntrada);
+        $this->items = Materiales_recibidos::where('folio_vale_entrada', $this->folio)->get();
 
-        foreach($this -> items as $item) {
-            $this -> subtotal += $item -> precio_unitario * $item -> cantidad;
+        foreach($this->items as $item) {
+            $this->subtotal += $item->precio_unitario * $item->cantidad;
         }
 
         $fin = Plan1Fin::where('id',$this->valeEntrada->mir_id_fin)->first();
@@ -39,7 +39,7 @@ class IDetails extends Component
         $componente = Plan3Componente::where('id',$this->valeEntrada->mir_id_componente)->first();
         $actividad = Plan4Actividad::where('id',$this->valeEntrada->mir_id_actividad)->first();
 
-        $mir = $fin -> NoFin.'-'.$proposito -> NoProposito.'-'.$componente -> NoComponente.'-'.$actividad -> NoActividad;
-        $this -> MIR = $mir;
+        $mir = $fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
+        $this->MIR = $mir;
     }
 }

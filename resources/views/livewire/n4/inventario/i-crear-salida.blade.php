@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Salida de inventario') }}
+                    {{ __('Crear Salida de Inventario') }}
                 </h2>
             </div>
 
@@ -123,10 +123,10 @@
                                     </option>
                                 @endforeach
                                 {{-- opciones --}}
-                            </select>             
+                            </select>
                             @error('partida_presupuestal')
                                 <span class="text-xs text-rose-600">{{ $message }}</span>
-                            @enderror           
+                            @enderror
                         </div>
 
                         <div class="col-span-5 text-start">
@@ -166,19 +166,19 @@
                             @foreach($itemSalida as $item)
                             <tr class="text-center dark:bg-gray-800 dark:border-gray-700 border-b">
                                 <td class="px-6 py-3">
-                                    {{ $item -> cantidad}}
+                                    {{ $item->cantidad}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $item -> unidad_medida}}
+                                    {{ $item->unidad_medida}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $item -> concepto}}
+                                    {{ $item->concepto}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ $item -> partida_presupuestal_id}}
+                                    {{ $item->partida_presupuestal_id}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{ number_format($item -> precio_unitario) }}
+                                    {{ number_format($item->precio_unitario) }}
                                 </td>
                             </tr>
                             @endforeach

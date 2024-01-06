@@ -3,9 +3,15 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
 
             <div>
-                <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{_('Nuevo vale de compra o servicio | Solicitud #000')}}
-                </h2>
+                @if ($details_of_folio)
+                    <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                        {{_('Vale de Compra Consolidada | ')}} {{ $details_of_folio }}
+                    </h2>
+                @else
+                    <h2 class="text-xl font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                        {{_('Crear Vale de Compra Consolidada')}}
+                    </h2>
+                @endif
             </div>
 
             <div class="grid" style="justify-content: end; padding-right: 5.5rem" >
@@ -512,13 +518,13 @@
                                 @foreach($data->elementos as $elemento)
                                 <tr class="bg-white dark dark:bg-zinc-800 dark:border-gray-700 text-center">
                                     <td class="px-4 py-2">
-                                        <p>{{$elemento -> cantidad}}</p>
+                                        <p>{{$elemento->cantidad}}</p>
                                     </td>
                                     <td class="px-4 py-2">
                                         <p>pz</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>{{$elemento -> concepto}}</p>
+                                        <p>{{$elemento->concepto}}</p>
                                     </td>
                                     <td class="px-4 py-2">
                                         <p>Lapiceros</p>

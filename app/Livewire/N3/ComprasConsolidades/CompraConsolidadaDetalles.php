@@ -37,25 +37,25 @@ class CompraConsolidadaDetalles extends Component
     }
 
     public function mount() {
-        
-        $this -> compra = compra_consolidada::where('folio', $this -> folio) -> first();
-        if ( $this -> compra -> tipo_proveedor == 'Temporal' ) {
-            $this -> proveedor = proveedores_temporales::find($this -> compra -> id_proveedor);
-        } else if ( $this -> compra -> tipo_proveedor == 'Fijo' ) {
-            $this -> proveedor = Empresa::find($this -> compra -> id_proveedor);
+
+        $this->compra = compra_consolidada::where('folio', $this->folio)->first();
+        if ( $this->compra->tipo_proveedor == 'Temporal' ) {
+            $this->proveedor = proveedores_temporales::find($this->compra->id_proveedor);
+        } else if ( $this->compra->tipo_proveedor == 'Fijo' ) {
+            $this->proveedor = Empresa::find($this->compra->id_proveedor);
         }
-        // dd($this -> proveedor);
+        // dd($this->proveedor);
 
         // Forge Mir
-        $fin = Plan1Fin::where('id',$this -> compra -> mir_id_fin)->first();
-        $proposito = Plan2Proposito::where('id',$this -> compra -> mir_id_proposito)->first();
-        $componente = Plan3Componente::where('id',$this -> compra -> mir_id_componente)->first();
-        $actividad = Plan4Actividad::where('id',$this -> compra -> mir_id_actividad)->first();
+        $fin = Plan1Fin::where('id',$this->compra->mir_id_fin)->first();
+        $proposito = Plan2Proposito::where('id',$this->compra->mir_id_proposito)->first();
+        $componente = Plan3Componente::where('id',$this->compra->mir_id_componente)->first();
+        $actividad = Plan4Actividad::where('id',$this->compra->mir_id_actividad)->first();
 
-        $this -> MIR =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
+        $this->MIR =$fin->NoFin.'-'.$proposito->NoProposito.'-'.$componente->NoComponente.'-'.$actividad->NoActividad;
 
-                
-        $this -> compraElementos = item_compra_consolidada::where('compra_consolidada_id', $this->compra->id)->get();
+
+        $this->compraElementos = item_compra_consolidada::where('compra_consolidada_id', $this->compra->id)->get();
 
         $this->partidas_presupuestales = PptoDeEgreso::all();
 

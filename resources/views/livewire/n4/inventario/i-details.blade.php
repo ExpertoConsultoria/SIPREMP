@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Vale de entrada #') }}{{ $folio }}{{ __(' | Inventario') }}
+                    {{ __('Vale de Entrada | ) }}{{ $folio }}{{ __(' | Inventario') }}
                 </h2>
             </div>
             <div class="grid" style="justify-content: end; padding-right: 5.5rem">
@@ -28,15 +28,15 @@
                     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
                             <x-label for="fecha" value="{{ __('Fecha') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada -> fecha }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada->fecha }}</p>
                         </div>
                         <div>
                             <x-label for="folio" value="{{ __('Folio') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada -> folio }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada->folio }}</p>
                         </div>
                         <div>
                             <x-label for="sucursal" value="{{ __('Sucursal') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada -> lugar }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada->lugar }}</p>
                         </div>
                         <div>
                             <x-label for="mir" value="{{ __('MIR') }}"/>
@@ -46,7 +46,7 @@
                     <div class="grid grid-cols-2 gap-6 mt-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5">
                         <div>
                             <x-label for="justificacion" value="{{ __('Justificación') }}"/>
-                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada -> asunto }}</p>
+                            <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">{{ $valeEntrada->asunto }}</p>
                         </div>
                     </div>
 
@@ -121,13 +121,13 @@
                             @foreach($items as $item)
                                 <tr>
                                     <th class="px-6 py-3">
-                                        {{$item -> cantidad}}
+                                        {{$item->cantidad}}
                                     </th>
                                     <th class="px-6 py-3">
-                                        {{$item -> concepto}}
+                                        {{$item->concepto}}
                                     </th>
                                     <th class="px-6 py-3">
-                                        {{$item -> partidas_presupuestales_id}}
+                                        {{$item->partidas_presupuestales_id}}
                                     </th>
                                     <th class="px-6 py-3">
                                     {{ number_format($item->precio_unitario, 2) }}

@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('item_compra_consolidadas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('compra_consolidada_id') -> nullable();
+            $table->unsignedBigInteger('compra_consolidada_id')->nullable();
 
-            $table -> text('cantidad');
-            $table -> text('concepto');
-            $table -> text('precio_unitario');
-            $table -> text('importe');
-            $table -> text('partida_presupuestal');
-            $table -> text('total');
+            $table->text('cantidad');
+            $table->text('concepto');
+            $table->text('precio_unitario');
+            $table->text('importe');
+            $table->text('partida_presupuestal');
+            $table->text('total');
 
-            // $table -> text('subtotal');
-            // $table -> text('iva');
+            // $table->text('subtotal');
+            // $table->text('iva');
             $table->timestamps();
         });
     }

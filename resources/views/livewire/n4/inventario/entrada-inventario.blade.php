@@ -4,7 +4,7 @@
 
             <div>
                 <h2 class="text-2xl font-bold leading-tight text-gray-800 font dark:text-gray-200">
-                    {{ __('Entrada a inventario') }}
+                    {{ __('Entrada a Inventario') }}
                 </h2>
             </div>
 

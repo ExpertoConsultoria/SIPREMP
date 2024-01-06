@@ -49,92 +49,92 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if (count($reports))
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
-                    <tr>
-                        <th wire:click="ordenaPor('rcm_folio')" class="px-4 py-2 cursor-pointer">
-                            Folio
-                            @if ($ordenar == 'rcm_folio')
-                            @if ($direccion == 'asc')
-                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                            @else
-                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                            @endif
-                            @else
-                            <i class="float-right mt-1 fas fa-sort"></i>
-                            @endif
-                        </th>
-                        <th wire:click="ordenaPor('rcm_ejercicio')" class="px-4 py-2 cursor-pointer">
-                            Ejercicio
-                            @if ($ordenar == 'rcm_ejercicio')
-                            @if ($direccion == 'asc')
-                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                            @else
-                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                            @endif
-                            @else
-                            <i class="float-right mt-1 fas fa-sort"></i>
-                            @endif
-                        </th>
-                        <th wire:click="ordenaPor('rcm_inicio')" class="px-4 py-2 cursor-pointer">
-                            Desde
-                            @if ($ordenar == 'rcm_inicio')
-                            @if ($direccion == 'asc')
-                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                            @else
-                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                            @endif
-                            @else
-                            <i class="float-right mt-1 fas fa-sort"></i>
-                            @endif
-                        </th>
-                        <th wire:click="ordenaPor('rcm_fin')" class="px-4 py-2 cursor-pointer">
-                            Hasta
-                            @if ($ordenar == 'rcm_fin')
-                            @if ($direccion == 'asc')
-                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                            @else
-                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                            @endif
-                            @else
-                            <i class="float-right mt-1 fas fa-sort"></i>
-                            @endif
-                        </th>
-                        <th wire:click="ordenaPor('rcm_partida_presupuestal')" class="px-4 py-2 cursor-pointer">
-                            Partida Presupuestal
-                            @if ($ordenar == 'rcm_partida_presupuestal')
-                            @if ($direccion == 'asc')
-                            <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
-                            @else
-                            <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
-                            @endif
-                            @else
-                            <i class="float-right mt-1 fas fa-sort"></i>
-                            @endif
-                        </th>
-                        <th class="px-4 py-2 text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($reports as $report)
-                    <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700">
-                        <td class="px-4 py-2"> {{ $report->rcm_folio }} </td>
-                        <td class="px-4 py-2"> {{ $report->rcm_ejercicio }} </td>
-                        <td class="px-4 py-2"> {{ $report->rcm_inicio }} </td>
-                        <td class="px-4 py-2"> {{ $report->rcm_fin }} </td>
-                        <td class="px-4 py-2"> {{ $report->rcm_partida_presupuestal }} </td>
-                        <td class="text-center">
-                            <x-button-colors color="indigo" wire:click="reportDetails({{ $report }})">
-                                <i class="fas fa-eye"></i>
-                            </x-button-colors>
-                            <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $report->id }} })">
-                                <i class="fas fa-trash"></i>
-                            </x-button-colors>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-300 dark:bg-zinc-700 dark:text-gray-400">
+                        <tr>
+                            <th wire:click="ordenaPor('rcm_folio')" class="px-4 py-2 cursor-pointer">
+                                Folio
+                                @if ($ordenar == 'rcm_folio')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('rcm_ejercicio')" class="px-4 py-2 cursor-pointer">
+                                Ejercicio
+                                @if ($ordenar == 'rcm_ejercicio')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('rcm_inicio')" class="px-4 py-2 cursor-pointer">
+                                Desde
+                                @if ($ordenar == 'rcm_inicio')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('rcm_fin')" class="px-4 py-2 cursor-pointer">
+                                Hasta
+                                @if ($ordenar == 'rcm_fin')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th wire:click="ordenaPor('rcm_partida_presupuestal')" class="px-4 py-2 cursor-pointer">
+                                Partida Presupuestal
+                                @if ($ordenar == 'rcm_partida_presupuestal')
+                                @if ($direccion == 'asc')
+                                <i class="float-right mt-1 fas fa-sort-numeric-asc"></i>
+                                @else
+                                <i class="float-right mt-1 fas fa-sort-numeric-up-alt"></i>
+                                @endif
+                                @else
+                                <i class="float-right mt-1 fas fa-sort"></i>
+                                @endif
+                            </th>
+                            <th class="px-4 py-2 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($reports as $report)
+                        <tr class="bg-white border-b dark:bg-zinc-800 dark:border-zinc-700">
+                            <td class="px-4 py-2"> {{ $report->rcm_folio }} </td>
+                            <td class="px-4 py-2"> {{ $report->rcm_ejercicio }} </td>
+                            <td class="px-4 py-2"> {{ $report->rcm_inicio }} </td>
+                            <td class="px-4 py-2"> {{ $report->rcm_fin }} </td>
+                            <td class="px-4 py-2"> {{ $report->rcm_partida_presupuestal }} </td>
+                            <td class="text-center">
+                                <x-button-colors color="indigo" wire:click="reportDetails({{ $report }})">
+                                    <i class="fas fa-eye"></i>
+                                </x-button-colors>
+                                <x-button-colors color="red" wire:click="$dispatch('delete',{ id: {{ $report->id }} })">
+                                    <i class="fas fa-trash"></i>
+                                </x-button-colors>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             @if ($reports->hasPages())
             <div class="px-6 py-3">
                 {{ $reports->links() }}

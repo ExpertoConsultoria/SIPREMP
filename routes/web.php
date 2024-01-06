@@ -52,7 +52,6 @@ use Illuminate\Support\Facades\Route;
         use App\Livewire\N4\Inventario\ICrearSalida;
         use App\Livewire\N4\Inventario\IInventario;
         use App\Livewire\N4\Inventario\IHistorial;
-
         use App\Livewire\N4\Inventario\IDetails;
 
     /* Nivel N3 */
@@ -67,8 +66,8 @@ use Illuminate\Support\Facades\Route;
         use App\Livewire\N3\SolicitudesVales\VSRechazado;
 
         // Proveedores Temporales //
-        use App\Livewire\ut\proveedores\PGeneral;
-        use App\Livewire\ut\proveedores\PDetalles;
+        use App\Livewire\N3\ProveedoresTemporales\PPendientes;
+        use App\Livewire\N3\ProveedoresTemporales\PDetalles;
 
     /* Nivel N2 */
         // Bandeja de Entrada (Compras Consolidadas) //
@@ -166,7 +165,6 @@ Route::middleware([
         Route::get('/inventario/salida',ICrearSalida::class)->name('inventario.salida');
         Route::get('/inventario/list',IInventario::class)->name('inventario.list');
         Route::get('/inventario/historial',IHistorial::class)->name('inventario.historial');
-        Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
         Route::get('/inventario/detalles/{folio}',IDetails::class)->name('inventario.detalles');
         Route::get('/Inventario/create', EntradaInventario::class)->name('inventario.create');
 
@@ -192,12 +190,12 @@ Route::middleware([
         Route::get('/solicitudes-de-vales/rechazadas/{details_of_folio}/detalles',VSRechazado::class)->name('vales-solicitudes.details');
 
         // Compra Consolidada
-        Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('comprasconsolidadas.pendientes');
-        Route::get('/compra-consolidada/nuevaCompra',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
-        Route::get('/compra-consolidada/edit/{folioToEdit}',CSNuevaCompraConsolidada::class)->name('compraConsolidada.editBorrador');
-        Route::get('/compra-consolidada/borradorCompra',CSCompraConsolidadaBorrador::class)->name('compraConsolidada.borradorCompra');
-        Route::get('/compra-consolidada/guardado',CSCompraConsolidadaGuardado::class)->name('compraConsolidada.guardado');
-        Route::get('/compra-consolidada/detallesCompra/{folio}',CompraConsolidadaDetalles::class)->name('compraConsolidada.detalles');
+        Route::get('/compras-consolidadas/pendientes', CCBandeja::class)->name('compraConsolidada.pendientes');
+        Route::get('/compra-consolidada/create',CSNuevaCompraConsolidada::class)->name('compraConsolidada.nuevaCompra');
+        Route::get('/compra-consolidada/edit/{details_of_folio}',CSNuevaCompraConsolidada::class)->name('compraConsolidada.editBorrador');
+        Route::get('/compra-consolidada/borradores',CSCompraConsolidadaBorrador::class)->name('compraConsolidada.borradorCompra');
+        Route::get('/compra-consolidada/lista',CSCompraConsolidadaGuardado::class)->name('compraConsolidada.guardado');
+        Route::get('/compra-consolidada/detalles-compra/{folio}',CompraConsolidadaDetalles::class)->name('compraConsolidada.detalles');
 
         // Bandeja Entrada
         Route::get('/bandeja-entrada/pendientes', BEPendientes::class)->name('bandejaentrada.pendientes');
@@ -226,7 +224,7 @@ Route::middleware([
         Route::get('/solicitudes/{edit_to_folio}/edit', SolicitudesCreate::class)->name('solicitudes.edit');
 
         // Proveedores Temporales
-        Route::get('/proveedores/proveedores-pendientes', PGeneral::class)->name('proveedores.pendientes');
-        Route::get('/proveedores/proveedor-detalles/{id_proveedor}', PDetalles::class)->name('proveedores.detalles');
+        Route::get('/proveedores-temporales/pendientes', PPendientes::class)->name('proveedores.pendientes');
+        Route::get('/proveedores-temporales/detalles/{id_proveedor}', PDetalles::class)->name('proveedores.detalles');
 
 });

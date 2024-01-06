@@ -158,19 +158,19 @@ class EntradaInventario extends Component
 
     public function loadDataXML()
     {
-        $xml = file_get_contents($this -> ruta);
+        $xml = file_get_contents($this->ruta);
         $factura_json = JsonConverter::convertToJson($xml);
         $factura_json = json_decode($factura_json, true);
         $conceptos = $factura_json['Conceptos']['Concepto'];
 
         foreach( $conceptos as $concepto ) {
             $item = new stdClass;
-            $item -> cantidad = $concepto['Cantidad'];
-            $item -> unidad_medida = $concepto['Unidad'];
-            $item -> concepto = $concepto['Descripcion'];
-            $item -> precio_unitario = $concepto['ValorUnitario'];
-            $item -> importe = floatval($concepto['Importe']);
-            array_push($this -> items_inventario, $item);
+            $item->cantidad = $concepto['Cantidad'];
+            $item->unidad_medida = $concepto['Unidad'];
+            $item->concepto = $concepto['Descripcion'];
+            $item->precio_unitario = $concepto['ValorUnitario'];
+            $item->importe = floatval($concepto['Importe']);
+            array_push($this->items_inventario, $item);
         }
 
         foreach ($this->items_inventario as $index => $element) {
@@ -188,30 +188,30 @@ class EntradaInventario extends Component
 
             $vale_entrada = new Vales_entrada_material();
             $vale_entrada->folio = $this->folio;
-            $vale_entrada -> fecha = date('Y-m-d');
-            $vale_entrada -> lugar = $this -> userSede;
-            $vale_entrada -> asunto = $this -> asunto;
-            $vale_entrada -> mir_id_fin = $this -> fin_mir;
-            $vale_entrada -> mir_id_proposito = $this -> proposito_mir;
-            $vale_entrada -> mir_id_componente = $this -> componente_mir;
-            $vale_entrada -> mir_id_actividad = $this -> actividad_mir;
-            $vale_entrada -> id_receptor = null;
-            $vale_entrada -> entrego_material = null;
-            $vale_entrada -> token_recepcion = null;
-            $vale_entrada -> token_entrega = null;
-            $vale_entrada -> estatus_SG	 = null;
-            $vale_entrada -> save();
+            $vale_entrada->fecha = date('Y-m-d');
+            $vale_entrada->lugar = $this->userSede;
+            $vale_entrada->asunto = $this->asunto;
+            $vale_entrada->mir_id_fin = $this->fin_mir;
+            $vale_entrada->mir_id_proposito = $this->proposito_mir;
+            $vale_entrada->mir_id_componente = $this->componente_mir;
+            $vale_entrada->mir_id_actividad = $this->actividad_mir;
+            $vale_entrada->id_receptor = null;
+            $vale_entrada->entrego_material = null;
+            $vale_entrada->token_recepcion = null;
+            $vale_entrada->token_entrega = null;
+            $vale_entrada->estatus_SG	 = null;
+            $vale_entrada->save();
 
-            foreach ($this -> items_inventario as $item) {
-                $this -> item_compra = new Materiales_recibidos();
-                $this -> item_compra -> folio_vale_entrada = $vale_entrada -> folio;
-                $this -> item_compra -> cantidad = $item -> cantidad;
-                $this -> item_compra -> unidad_medida = $item -> unidad_medida;
-                $this -> item_compra -> concepto = $item -> concepto;
-                $this -> item_compra -> precio_unitario = $item -> precio_unitario;
-                $this -> item_compra -> importe = $item -> importe;
-                $this -> item_compra -> partida_presupuestal_id = $item -> partida_presupuestal;
-                $this -> item_compra -> save();
+            foreach ($this->items_inventario as $item) {
+                $this->item_compra = new Materiales_recibidos();
+                $this->item_compra->folio_vale_entrada = $vale_entrada->folio;
+                $this->item_compra->cantidad = $item->cantidad;
+                $this->item_compra->unidad_medida = $item->unidad_medida;
+                $this->item_compra->concepto = $item->concepto;
+                $this->item_compra->precio_unitario = $item->precio_unitario;
+                $this->item_compra->importe = $item->importe;
+                $this->item_compra->partida_presupuestal_id = $item->partida_presupuestal;
+                $this->item_compra->save();
             }
             $this->dispatch('simpleAlert','Se creó con exito el registro','success');
             return redirect()->route('inventario');
@@ -226,8 +226,8 @@ class EntradaInventario extends Component
         $this->is_loading_xml = false;
         $this->is_valid_xml = false;
         $this->is_done = false;
-        File::delete($this -> ruta);
-        $this -> items_inventario = [];
+        File::delete($this->ruta);
+        $this->items_inventario = [];
 
     }
 
@@ -242,7 +242,7 @@ class EntradaInventario extends Component
         if (strcmp( $this->extensionFile, 'xml' ) === 0) {
             $this->xml_message = 'Tipo de Archivo Revisado y Aprovado';
             $this->is_valid_xml = true;
-            $this -> ruta = 'storage/'.$this->factura_XML->store('files/Inventario/XML','public');
+            $this->ruta = 'storage/'.$this->factura_XML->store('files/Inventario/XML','public');
         } else {
             $this->xml_message = 'El archivo que subiste no es XML';
         }
@@ -250,7 +250,7 @@ class EntradaInventario extends Component
 
     public function setPartidaP($value, $id)
     {
-        $this -> items_inventario[$id] -> partida_presupuestal = $value;
+        $this->items_inventario[$id]->partida_presupuestal = $value;
     }
 
     // Forge MIR
