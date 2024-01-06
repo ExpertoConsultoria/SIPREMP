@@ -718,8 +718,8 @@ class VCreate extends Component
                         'CodigoPostal' => $this->new_codigo_postal,
                         'RazonSocial' => $this->razon_social,
                         'RFC' => $this->new_RFC,
-                        'regimen' => $this->new_regimen,
-                        'datosBanco' => $this->new_datos_banco,
+                        'Regimen' => $this->new_regimen,
+                        'DatosBanco' => $this->new_datos_banco,
                         'tipo_proveedor' => $this->tipo_proveedor,
                         'DatosContacto' => $this->telefono,
                     ]);
@@ -782,8 +782,8 @@ class VCreate extends Component
                             'CodigoPostal' => $this->new_codigo_postal,
                             'RazonSocial' => $this->razon_social,
                             'RFC' => $this->new_RFC,
-                            'regimen' => $this->new_regimen,
-                            'datosBanco' => $this->new_datos_banco,
+                            'Regimen' => $this->new_regimen,
+                            'DatosBanco' => $this->new_datos_banco,
                             'tipo_proveedor' => $this->tipo_proveedor,
                             'DatosContacto' => $this->telefono,
                         ]);

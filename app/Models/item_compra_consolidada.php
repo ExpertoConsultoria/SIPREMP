@@ -6,22 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use betterapp\LaravelDbEncrypter\Traits\EncryptableDbAttribute;
 
-class MaterialesEntregados extends Model
+class item_compra_consolidada extends Model
 {
     use HasFactory, EncryptableDbAttribute;
-
-    protected $table = 'materiales_entregados';
     protected $fillable = [
-        'folio_vale_salida',
-    ];
-
-    protected $encryptable  = [
+        'compra_consolidada_id',
         'cantidad',
-        'unidad_medida',
         'concepto',
         'precio_unitario',
-        'partida_presupuestal_id',
+        'partida_presupuestal',
+        'total',
+        'importe',
+
+        // 'iva',
+        // 'subtotal',
     ];
 
-    protected $primaryKey = 'id';
+    protected $encryptable = [
+
+    ];
 }

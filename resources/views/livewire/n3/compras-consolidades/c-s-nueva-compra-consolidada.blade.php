@@ -24,49 +24,42 @@
     <div class="py-8">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="container mx-auto">
-                <form>
                     {{-- 1ra PARTE --}}
                     <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:text-gray-300 dark:bg-zinc-800 dark:border-zinc-800">
 
                         <div class="container px-4">
                             <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-8 xl:grid-cols-10 gap-3 mb-6">
-                                <div class="col-span-1">
-                                    <x-label for="fecha" value="{{_('Fecha')}}"/>
-                                    {{-- <input wire:model.blur="fecha" type="date" name="fecha" readonly
-                                    class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required
-                                    > --}}
-                                    <label class="w-full text-sm ">00/00/0000</label>
-                                </div>
-                                <div class="col-span-1 " >
-                                    <x-label for="folio" value="{{_('Folio')}}"/>
-                                    {{-- <input wire:model.blur="fecha" type="date" name="fecha" readonly
-                                    class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required
-                                    > --}}
-                                    <label class="w-full text-sm ">SP-000001</label>
+                                <div>
+                                    <x-label for="fecha" value="{{ __('Fecha') }}" />
+                                    <input wire:model.blur="fecha" type="date" name="fecha" readonly
+                                    class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required max="2100-12-31" step="1">
                                 </div>
                                 <div class="col-span-2 ">
-                                    <x-label for="area" value="{{_('Área')}}"/>
-                                    <input name="area" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required
-                                    >
+                                    <x-label for="sku" value="{{ __('Folio SKU') }}" />
+                                    <input wire:model.blur="folio" type="text" name="folio" readonly
+                                    class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required>
                                 </div>
                                 <div class="col-span-2">
-                                    <x-label for="lugar" value="{{_('Lugar')}}"/>
-                                    <input name="lugar" readonly
-                                    class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required
-                                    >
+                                    <x-label for="sucursal" value="{{ __('Sucursal') }}" />
+                                    <input wire:model.blur="sucursal" type="text" name="sucursal" readonly
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
                                 </div>
                                 <div class="col-span-2">
+                                    <x-label for="lugar" value="{{ __('Area') }}" />
+                                    <input wire:model.blur="lugar" type="text" name="lugar" readonly
+                                        class="cursor-no-drop w-full bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder-zinc-600 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required>
+                                </div>
+                                <!-- <div class="col-span-2">
                                     <x-label for="mir" value="{{_('MIR')}}"/>
                                     <input name="mir" readonly
                                     class="cursor-no-drop w-full h-4 bg-gray-200 font-bold border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required
                                     >
-                                </div>
+                                </div> -->
                                 <div class="py-4 col-span-2">
                                     <button type="button"
                                     class="px-5 py-2 text-xs w-full font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -75,7 +68,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="container px-4 ">
                             <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-10 gap-2 mb-1" >
@@ -86,32 +78,31 @@
 
 
                                 <div class="col-span-9" >
-
                                     <div>
-                                        <div class="absolute mt-3 ml-3">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_317_4700)">
-                                                <path d="M19.8102 18.9119L14.6466 13.8308C15.9988 12.3616 16.8296 10.4187 16.8296 8.28068C16.8289 3.7071 13.0618 0 8.41447 0C3.76713 0 0 3.7071 0 8.28068C0 12.8543 3.76713 16.5614 8.41447 16.5614C10.4224 16.5614 12.2641 15.8668 13.7107 14.7122L18.8944 19.8134C19.147 20.0622 19.5571 20.0622 19.8096 19.8134C20.0628 19.5646 20.0628 19.1607 19.8102 18.9119ZM8.41447 15.2873C4.48231 15.2873 1.29468 12.1504 1.29468 8.28068C1.29468 4.41101 4.48231 1.27403 8.41447 1.27403C12.3467 1.27403 15.5343 4.41101 15.5343 8.28068C15.5343 12.1504 12.3467 15.2873 8.41447 15.2873Z" fill="#515151"/>
-                                                </g>
-                                                <defs>
-                                                <clipPath id="clip0_317_4700">
-                                                <rect width="20" height="20" fill="white"/>
-                                                </clipPath>
-                                                </defs>
-                                                </svg>
-                                                
-                                        </div>
-                                        <x-input type="text" wire:model.live="buscar" placeholder="Buscar usuario..." autofocus
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5
-                                    dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                        <x-input type="text" wire:keyup='searchProveedor' wire:model.lazy="buscar"
+                                        placeholder="Buscar..." autofocus
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-5/6 pl-10 p-2.5
+                                        dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                     </div>
-
-                                    <div class="">
-                                        <button class="uppercase text-sm text-blue-400">
-                                            <p >Dar de alta nuevo proveedor</p>
-                                        </button>
-                                    </div>
-
+                                    @if ($showResults)
+                                        <select wire:change="getProvedor($event.target.value)"
+                                        class="bg-gray-100 mt-2 w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @if (!empty($proveedores))
+                                            <option selected disabled value="">Selecciona una Opción</option>
+                                                @foreach ($proveedores as $proveedor)
+                                                    <option value="{{$proveedor ->id}}">
+                                                        {{ $proveedor->RazonSocial }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    @endif
+                                    <button type="button"
+                                        onclick="Livewire.dispatch('openModal', { component: 'shared.components.temporary-providers' })"
+                                        class="text-sm text-blue-400 uppercase">
+                                        Agregar provedor
+                                    </button>
+                                    {{ $onAddProveedor ? 'Seleccionado un proveedor temporal' : 'Seleccionado un proveedor fijo' }}
                                 </div>
                             </div>
                         </div>
@@ -130,21 +121,21 @@
                                 </div>
 
                                 {{-- <div class="flex items-center col-span-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8  gap-28 "> --}}
-                                    <div class="col-span-2 ml-0 sm:ml-1 md:ml-2 lg:ml-2 xl:ml-4">
-                                        <h1 class="font-bold">Razon social</h1>
-                                        <label class="text-sm">WALMART</label>
-                                    </div>
-
                                     <div class="col-span-2">
-                                        <h1 class="font-bold">RFC</h1>
-                                        <label class="text-sm">HHHHHH09090900</label>
+                                        <x-label for="razonsocial" value="{{ __('Razón social') }}" />
+                                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-200">
+                                            {{ $razon_social }}</p>
                                     </div>
-
                                     <div class="col-span-2">
-                                        <h1 class="font-bold">Telefono</h1>
-                                        <label class="text-sm">HHHHHH09090900</label>
+                                        <x-label for="rfc" value="{{ __('RFC') }}" />
+                                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">{{ $RFC }}</p>
                                     </div>
-
+                                    <div class="col-span-2">
+                                        <x-label for="telefono" value="{{ __('Teléfono') }}" />
+                                        <p class="font-sans text-xs text-gray-500 font-extralight dark:text-gray-400">
+                                            {{ $telefono }}
+                                        </p>
+                                    </div>
                                     <div class="col-span-2">
                                         <h1 class="font-bold">Periodo</h1>
                                         <label class="text-sm">Primer trimestre</label>
@@ -154,14 +145,97 @@
                             </div>
                         </div>
 
-                        <div class="container px-4 py-6">
-                            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-10 gap-2 mb-1">
-                                <div>
-                                    <h1 class="font-bold">Justificación</h1>
+                        <div class="text-left">
+                            <label
+                                class="block text-lg font-bold text-gray-900 dark:text-white">Justificación</label>
+                        </div>
+                        <div class="col-span-4">
+                            <textarea name="justificacion" rows="4"
+                                placeholder="Justifique el motivo de la solicitud" wire:model.blur="justificacion"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('justificacion')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        {{-- MIR --}}
+                        <div
+                            class="grid grid-cols-4 gap-2 mb-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-8">
+
+                            <div class="w-auto mx-2 mt-6 h-36">
+                                <div
+                                    class="flex items-center justify-center w-full h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-zinc-800 dark:border-zinc-700">
+                                    <p
+                                        class="content-center font-semibold leading-tight text-center text-gray-800 font dark:text-gray-200">
+                                        MIR</p>
                                 </div>
-                                <div class="col-span-9">
-                                    <textarea name="justificacion" id="" rows="4"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            </div>
+
+                            <div class="col-span-2">
+                                <div>
+                                    <x-label for="fin_mir" value="{{ __('Fin *') }}" />
+                                    <select wire:model.blur="fin_mir" wire:change="GetProposes($event.target.value)"
+                                        name="fin_mir"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        @foreach ($fines_mir as $fin_mir)
+                                            <option value="{{ $fin_mir->NoFin }}">{{ $fin_mir->DescFin }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('fin_mir')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mt-4">
+                                    <x-label for="proposito_mir" value="{{ __('Proposito *') }}" />
+                                    <select wire:model.blur="proposito_mir"
+                                        wire:change="GetComponents($event.target.value)" name="proposito_mir"
+                                        @if (!$mir2) disabled @endif
+                                        class="@if (!$mir2) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        @foreach ($propositos_mir as $proposito_mir)
+                                            <option value="{{ $proposito_mir['NoProposito'] }}">
+                                                {{ $proposito_mir['DescProposito'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('proposito_mir')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-span-2">
+                                <div>
+                                    <x-label for="componente_mir" value="{{ __('Componente *') }}" />
+                                    <select wire:model.blur="componente_mir"
+                                        wire:change="GetActivities($event.target.value)" name="componente_mir"
+                                        @if (!$mir3) disabled @endif
+                                        class="@if (!$mir3) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        @foreach ($componetes_mir as $componete_mir)
+                                            <option value="{{ $componete_mir['NoComponente'] }}">
+                                                {{ $componete_mir['DescComponente'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('componente_mir')
+                                        <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mt-4">
+                                    <x-label for="NoActividad" value="{{ __('Actividad *') }}" />
+                                    <select wire:model.blur="NoActividad" name="NoActividad" @if (!$mir4) disabled
+                                        @endif
+                                        class="@if (!$mir4) bg-gray-300 dark:bg-zinc-800 @else bg-gray-100 @endif border-gray-300 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">Selecciona una Opción</option>
+                                        @foreach ($actividades_mir as $actividad_mir)
+                                        <option value="{{ $actividad_mir['NoActividad'] }}">
+                                            {{ $actividad_mir['DescActividad'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('NoActividad')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -174,39 +248,58 @@
                         <div class="container px-4">
                             <div
                                 class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-10 gap-3 mb-6">
-                                <div class="col-span-1">
+                                <div class="col-span-2">
                                     <x-label for="cantidad" value="{{ __('Cantidad') }}" />
-                                    <input type=""name="cantidad" placeholder="int/txt/select"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <input wire:model.blur="cantidad" wire:change="CalculateAmount()" type="number" name="cantidad" step="0.01"
+                                        placeholder="0.00"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('cantidad') <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="col-span-4">
                                     <x-label for="concepto" value="{{ __('Concepto') }}" />
-                                    <input type="text" name="concepto" placeholder="txt"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <input wire:model.blur="concepto" type="text" name="concepto" placeholder="Concepto"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('concepto') <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
-                                <div class="col-span-1">
-                                    <x-label for="p_u" value="{{ __('P/U') }}" />
-                                    <input type="text" name="p_u" placeholder=""
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <div class="col-span-2">
+                                    <x-label for="precio_unitario" value="{{ __('P/U') }}" />
+                                    <input wire:model.blur="precio_unitario" wire:change="CalculateAmount()" type="number" step="0.001" placeholder="0.00"
+                                        name="precio_unitario"
+                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @error('precio_unitario') <span class="text-xs text-rose-600">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-span-1">
+                                <div class="col-span-2">
                                     <x-label for="importe" value="{{ __('Importe') }}" />
-                                    <input type="text" name="importe" placeholder="cant * p/u"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <input wire:model.blur="importe" type="number" name="importe" step="0.01" placeholder="0.00" readonly
+                                        class="w-full bg-gray-200 border border-gray-400 text-gray-900 text-sm font-bold rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        value="23">
+                                    @error('importe') <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-span-3">
-                                    <x-label for="partida_presupuestal" value="{{ __('Partida presupuestal') }}" />
-                                    <input type="text" name="partida_presupuestal" placeholder="txt/select (CATALOGO BASE DE DATOS)"
-                                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <x-label for="partida_presupuestal_id" value="{{ __('Partida presupuestal') }}" />
+                                    <div class="col-span-4">
+                                        <select wire:model.blur="partida_presupuestal_id" name="partida_presupuestal_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected value="">Selecciona una Opción</option>
+                                            @foreach ($partidas_presupuestales as $pp)
+                                            <option value="{{ $pp->CvePptal }}">{{ $pp->PartidaEspecifica }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('partida_presupuestal_id')
+                                            <span class="text-xs text-rose-600">{{ $message}}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="container px-4">
                             <div class="text-center">
-                                <button type="button"
+                                <button type="button" wire:click='AddToList'
                                     class="disabled:opacity-25 text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all active:translate-y-1">
                                     REGISTRAR
                                 </button>
@@ -216,194 +309,134 @@
                     </div>
 
                     {{-- 3ra PARTE Nota: Solucionar la vista en dispositivos moviles --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-lime-500 rounded-lg w-30 dark:text-gray-200">
-                        <div>
-                            <h1 class="text-white font-bold">Partida presupuestal</h1>
-                        </div>
-                        <div>
-                            <span class="text-sm text-white">09397589347598437597295</span>
-                        </div>
-                        <div class="ml-auto sm:col-span-2">
-                            <h1 class="text-white font-bold">DISPONIBLE</h1>
-                        </div>
-                    </div>
+                    @foreach ($partidas_data as $data)
 
-                    {{-- <div class="text-center mt-4 bg-lime-500 grid border py-2 px-6 rounded-lg grid-cols-3 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12  mb-6 sm:text-center">
-                        <div class="col-span-3 text-start">
-                            <h1 class="text-white font-bold">Partida presupuestal</h1>
-                        </div>
-                        <div class="col-span-6 text-start">
-                            <span class="text-sm text-white ">09397589347598437597295</span>
-                        </div>
-                        <div class="col-span-3">
-                            <h1 class="text-white font-bold text-start sm:text-end md:text-end lg:text-end  xl:text-end">DISPONIBLE</h1>
-                        </div>
-                    </div> --}}
+                        @if ($data->estado === 'DISPONIBLE')
+                            {{-- Partidas Disponibles --}}
+                            <div class="grid grid-cols-12 gap-2 mt-4">
+                                <div
+                                    class="relative flex items-center h-4 col-span-11 p-6 border rounded-lg gap-x-7 bg-lime-500 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                                    <div>
+                                        <h1 class="font-bold text-white">Partida presupuestal</h1>
+                                    </div>
+                                    <div>
+                                        <span class="text-sm text-white">{{ $data->nombre }}</span>
+                                    </div>
+                                    <div class="ml-auto sm:col-span-2">
+                                        <h1 class="font-bold text-white">DISPONIBLE</h1>
+                                    </div>
+                                </div>
+                                <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
+                                    class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        @elseif ($data->estado === 'NO DISPONIBLE')
+                            {{-- Partidas No Disponibles --}}
+                            <div class="grid grid-cols-12 gap-2 mt-4">
+                                <div
+                                    class="relative flex items-center h-4 col-span-11 p-6 bg-red-600 border rounded-lg gap-x-7 w-30 text dark:bg-gray-800 dark:border-gray-700">
+                                    <div>
+                                        <h1 class="font-bold text-white">Partida presupuestal</h1>
+                                    </div>
+                                    <div>
+                                        <span class="text-sm text-white">{{ $data->nombre }}</span>
+                                    </div>
+                                    <div class="ml-auto sm:col-span-2">
+                                        <h1 class="font-bold text-white">NO DISPONIBLE</h1>
+                                    </div>
+                                </div>
+                                <button type="button" wire:click="RemoveByPartida({{ json_encode($data) }})"
+                                    class=" relative items-center col-span-1 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        @endif
 
-                    {{-- 4ta parte --}}
-                    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                                <tr class="text-center dark:text-gray-200">
-                                    <th class="px-4 py-2 whitespace-nowrap">
-                                        Cantidad
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Concepto
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        P/U
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Importe
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
-                                    <td class="px-4 py-2"> 1</td>
-                                    <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
-                                    <td class="px-4 py-2">
-                                        <div class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                            <span class="mx-auto">$00.00</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                            <span class="mx-auto">$00.00</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr class="text-center text-bla">
+                                        <th class="px-4 py-2 cursor-pointer whitespace-nowrap">
+                                            Cantidad
+                                        </th>
+                                        <th class="px-4 py-2 cursor-pointer">
+                                            Concepto
+                                        </th>
+                                        <th class="px-4 py-2 cursor-pointer">
+                                            P/U
+                                        </th>
+                                        <th class="px-4 py-2 cursor-pointer">
+                                            Importe
+                                        </th>
+                                        <th class="px-4 py-2 cursor-pointer">
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data->elementos as $elemento)
+                                        <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="px-4 py-2"> {{ $elemento->cantidad }}</td>
+                                            <td class="px-4 py-2"> {{ $elemento->concepto }} </td>
+                                            <td class="px-4 py-2">
+                                                <div
+                                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                                    <span class="mx-auto">${{ $elemento->precio_unitario }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-4 py-2">
+                                                <div
+                                                    class="flex items-center w-1/2 p-2 mx-auto text-sm text-gray-900 bg-white border border-gray-400 rounded-lg ">
+                                                    <span class="mx-auto">${{ $elemento->importe }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <x-button-colors color="red" wire:click="RemoveFromList({{ json_encode($elemento) }})">
+                                                    <i class="fas fa-trash"></i>
+                                                </x-button-colors>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-zinc-700">
-                        </div>
+                            <div class="h-16 p-6 bg-white text dark:bg-gray-800 dark:border-gray-700">
+                            </div>
 
-                        <hr class="dark:border-gray-400">
+                            <hr>
 
-                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800">
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    Subtotal:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.000
-                                </p>
-                            </div>
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    I.V.A:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.00
-                                </p>
-                            </div>
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    Total:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- 5ta parte  --}}
-                    <div class="flex relative gap-x-7 items-center h-4 p-6 mt-4 bg-red-600 rounded-lg w-30 dark:text-gray-400 ">
-                        <div>
-                            <h1 class="text-white font-bold">Partida presupuestal</h1>
-                        </div>
-                        <div>
-                            <span class="text-sm text-white">09397589347598437597295</span>
-                        </div>
-                        <div class="ml-auto sm:col-span-2">
-                            <h1 class="text-white font-bold">NO DISPONIBLE</h1>
-                        </div>
-                    </div>
-
-                    {{-- 6ta parte --}}
-                    <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400">
-                                <tr class="text-center dark:text-gray-200 ">
-                                    <th class="px-4 py-2 whitespace-nowrap">
-                                        Cantidad
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Concepto
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        P/U
-                                    </th>
-                                    <th class="px-4 py-2">
-                                        Importe
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b dark:border-b-gray-400 dark:bg-zinc-800 dark:border-gray-700 text-center">
-                                    <td class="px-4 py-2"> 1</td>
-                                    <td class="px-4 py-2"> 2 gallos, 1 Tsuru </td>
-                                    <td class="px-4 py-2">
-                                        <div class=" flexitems-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                            <span class="mx-auto">$00.00</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class=" flex items-center mx-auto bg-white border w-1/2 border-gray-400 text-gray-900 text-sm rounded-lg p-2 dark:bg-zinc-800 dark:text-gray-400">
-                                            <span class="mx-auto">$00.00</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="p-6 bg-white h-16 text dark:bg-zinc-800 dark:border-none">
-                        </div>
-
-                        <hr class="dark:border-gray-400">
-
-                        <div class="grid grid-cols-12 gap-2 mb-1 bg-white p-6 dark:bg-zinc-800 ">
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    Subtotal:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.000
-                                </p>
-                            </div>
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    I.V.A:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end border rounded-lg w-2/3 ml-auto  ">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.00
-                                </p>
-                            </div>
-                            <div class="col-span-10 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    Total:
-                                </p>
-                            </div>
-                            <div class="col-span-2 px-3 text-end">
-                                <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
-                                    $00.00
-                                </p>
+                            <div class="grid grid-cols-12 gap-2 p-6 mb-1 bg-white ">
+                                <div class="col-span-10 text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                        Subtotal:</p>
+                                </div>
+                                <div class="col-span-2 px-3 text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                        ${{ $data->subtotal }}
+                                    </p>
+                                </div>
+                                <div class="col-span-10 text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">I.V.A:
+                                    </p>
+                                </div>
+                                <div class="col-span-2 px-3 border border-gray-400 rounded-lg text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                        ${{ $data->iva }}
+                                    </p>
+                                </div>
+                                <div class="col-span-10 text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">Total:
+                                    </p>
+                                </div>
+                                <div class="col-span-2 px-3 text-end">
+                                    <p class="text-sm font-semibold leading-tight text-gray-800 font dark:text-gray-200">
+                                        ${{ $data->total_compra }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        @endforeach
 
                     {{-- 7ma parte --}}
                     <div class="p-6 mt-4 bg-white border border-gray-200 rounded-lg shadow-md w-30 text dark:bg-zinc-800 dark:border-zinc-700 dark:text-gray-300">
@@ -413,30 +446,39 @@
                         <div class="mt-3 text-lg font-bold">
                             <span>Asunto</span>
                         </div>
-                        <div class="mt-1">
-                            <textarea name="justificacion" id="" rows="2" placeholder="ESPECIFICACIONES TÉCNICAS DE LA IMPRESIÓN DE BOLETAS DE EMPEÑO PARA LA MATRIZ Y SUCURSALES DEL MONTE DE PIEDAD DEL ESTADO DE OAXACA"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </textarea>
+                        <div class="col-span-4">
+                            <textarea name="asunto" rows="4"
+                                placeholder="Justifique el motivo de la solicitud" wire:model.blur="asunto"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('asunto')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Objeto</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="3" placeholder="Adquisición de boletas de empeño para surtir a todas las sucursales del Monte de Piedad del Estado de Oaxaca; con el propósito de que las sucursales cuenten con los insumos necesarios para las actividades diarias en cuanto al proceso de préstamo prendario que ofrece la Institución a los pignorantes."
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="objeto" rows="4"
+                                        placeholder="Justifique el motivo de la solicitud" wire:model.blur="objeto"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('objeto')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Alcance</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="3" placeholder="Gerencia Matriz y 22 Sucursales del Monte de Piedad del Estado de Oaxaca."
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="alcance" rows="4"
+                                        placeholder="Justifique el motivo de la solicitud" wire:model.blur="alcance"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('alcance')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -466,20 +508,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($partidas_data as $data)
+                                @foreach($data->elementos as $elemento)
                                 <tr class="bg-white dark dark:bg-zinc-800 dark:border-gray-700 text-center">
                                     <td class="px-4 py-2">
-                                        <p>1</p>
+                                        <p>{{$elemento -> cantidad}}</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>2 gallos, 1 Tsuru</p>
+                                        <p>pz</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>dasd</p>
+                                        <p>{{$elemento -> concepto}}</p>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <p>dadsasd</p>
+                                        <p>Lapiceros</p>
                                     </td>
                                 </tr>
+                                @endforeach
+                                @endforeach
                             </tbody>
                         </table>
 
@@ -491,30 +537,39 @@
                         <div class="mt-3 text-lg font-bold">
                             <span>Plazo y procedimiento de entrega</span>
                         </div>
-                        <div class="mt-1">
-                            <textarea name="justificacion" id="" rows="3" placeholder="Los bienes descritos en el Punto 3, se entregarán a partir del dieciséis de febrero del año dos mil veintitrés y “El Proveedor” tendrá como plazo 90 días posteriores a la realización del pedido, y se entregarán en el Departamento de Servicios Generales del Monte de Piedad del Estado de Oaxaca, ubicado en Avenida Morelos núm. 703 esquina Macedonio Alcalá, Colonia Centro, Oaxaca de Juárez, Oaxaca. C.P. 68000. La recepción y verificación de los bienes estará a cargo del personal que oportunamente designe la Dirección de Administración dependiente de “El Organismo” dependiendo de la requisición que se haya remitido en su oportunidad."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </textarea>
+                        <div class="col-span-4">
+                            <textarea name="procEntrega" rows="4"
+                                placeholder="Especifique el procedimiento de entrega" wire:model.blur="procEntrega"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('procEntrega')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="grid grid-cols-10">
                             <div class="col-span-5 mr-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Entregables</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="entregables" rows="4"
+                                        placeholder="Especifique los entregables" wire:model.blur="entregables"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('entregables')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Muestras</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="muestras" rows="4"
+                                        placeholder="Especifique las muestras" wire:model.blur="muestras"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('muestras')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -523,20 +578,26 @@
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Recursos humanos</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="RRHH" rows="4"
+                                        placeholder="Especifique los recursos humanos necesarios" wire:model.blur="RRHH"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('RRHH')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Soporte técnico</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="soporte_tecnico" rows="4"
+                                        placeholder="Especifique si es necesario soporte tecnico" wire:model.blur="soporte_tecnico"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('soporte_tecnico')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -545,46 +606,61 @@
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Mantenimiento</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="mantenimiento" rows="4"
+                                        placeholder="Especifique si es necesario mantenimiento" wire:model.blur="mantenimiento"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('mantenimiento')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-span-5 ml-2">
                                 <div class="mt-3 text-lg font-bold">
                                     <span>Capacitación y/o actualización</span>
                                 </div>
-                                <div class="mt-1">
-                                    <textarea name="justificacion" id="" rows="4" placeholder="No aplica"
-                                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    </textarea>
+                                <div class="col-span-4">
+                                    <textarea name="capacitacion" rows="4"
+                                        placeholder="Especifique si es necesario capacitacion" wire:model.blur="capacitacion"
+                                        class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                    @error('capacitacion')
+                                    <span class="text-xs text-rose-600">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="mt-3 text-lg font-bold">
                             <span>Vigencia de la contratación</span>
                         </div>
-                        <div class="mt-1">
-                            <textarea name="justificacion" id="" rows="1" placeholder="Del 16 de febrero de 2023 al 31 de diciembre de 2023."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </textarea>
+                        <div class="col-span-4">
+                            <textarea name="vigencia" rows="4"
+                                placeholder="Especifique la vigencia" wire:model.blur="vigencia"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('vigencia')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mt-3 text-lg font-bold">
                             <span>Forma de pago</span>
                         </div>
-                        <div class="mt-1">
-                            <textarea name="justificacion" id="" rows="3" placeholder="Los pagos se realizarán de acuerdo a lo siguiente: El importe será fijo durante la vigencia de la contratación, no se otorgará anticipo alguno, el pago se efectuará por cada requisición solicitada por el Departamento de Servicios Generales, y posterior a la presentación del comprobante fiscal correspondiente, mismo que deberá reunir los requisitos fiscales. Los pagos se realizarán, por parte de la Dirección Administrativa del Monte de Piedad del Estado de Oaxaca, dentro de los veinte días naturales posteriores a la presentación del comprobante fiscal correspondiente, pago que será efectuado mediante transferencia bancaria previo a que el proveedor que resulte adjudicado proporcione los datos bancarios correspondientes."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </textarea>
+                        <div class="col-span-4">
+                            <textarea name="forma_pago" rows="4"
+                                placeholder="Especifique la forma de pago" wire:model.blur="forma_pago"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('forma_pago')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mt-3 text-lg font-bold">
                             <span>Garantias</span>
                         </div>
-                        <div class="mt-1">
-                            <textarea name="justificacion" id="" rows="3" placeholder="Para garantizar el anticipo, “el proveedor” al momento de recibir el anticipo deberá otorgar fianza por el monto total del anticipo, es decir, por el 30% del monto total de los bienes adquiridos, a más tardar quince días posteriores al otorgamiento del mismo. La garantía de cumplimiento se constituirá al 10% del monto total adjudicado considerando el impuesto al valor agregado (I.V.A.), la cual podrá presentarse a través de fianza, billete de depósito o cheque certificado y constituirse a favor del Monte de Piedad del Estado de Oaxaca, con fundamento en el numeral 104 fracción I de los Lineamientos en Materia de Adquisiciones, Enajenaciones, Arrendamientos, Prestación de Servicios y Administración de Bienes Muebles e Inmuebles del Monte de Piedad del Estado de Oaxaca, la cual deberá presentarse a más tardar dentro de los diez días naturales contados a partir de la formalización del contrato."
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            </textarea>
+                        <div class="col-span-4">
+                            <textarea name="garantia" rows="4"
+                                placeholder="Especifique la garantia" wire:model.blur="garantia"
+                                class="w-11/12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error('garantia')
+                            <span class="text-xs text-rose-600">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="py-4">
@@ -596,28 +672,23 @@
                     </div>
 
                     {{-- Botonoes --}}
-                            <div class="container mt-16 flex relative items-center w-full">
-                                <div class="">
-                                    <button type="button"
-                                        class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                        Guardar Borrador
-                                    </button>
-                                </div>
+                    <div class="container mt-16 flex relative items-center w-full">
+                        <div class="">
+                            <button type="button" wire:click="saveDraft"
+                                class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                Guardar Borrador
+                            </button>
+                        </div>
 
-                                <div class="ml-auto sm:col-span-2">
-                                    <div class="text-center col-span-1 ml-auto">
-                                        <button type="button"
-                                            class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-
+                        <div class="ml-auto sm:col-span-2">
+                            <div class="text-center col-span-1 ml-auto">
+                                <button type="button" wire:click="saveCompra"
+                                    class="disabled:opacity-25 px-8 py-4 focus:outline- text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-all active:translate-y-1">
+                                    Guardar
+                                </button>
                             </div>
-
-
-                </form>
-
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

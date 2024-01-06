@@ -16,22 +16,22 @@ class Materiales_recibidos extends Model
     protected $fillable = [
         'folio_vale',
         'cantidad',
-        'partidas_presupuestales_id',
+        'partida_presupuestal_id',
         'precio_unitario',
+        'folio_vale_entrada'
     ];
 
     protected $encryptable = [
-        'folio_vale',
         'unidad_medida',
         'concepto',
         'importe',
     ];
 
-    public function Vales_entrada_material(){
-        return $this->belongsTo(Vales_entrada_material::class);
-    }
+    // public function Vales_entrada_material(){
+    //     return $this->belongsTo(Vales_entrada_material::class);
+    // }
 
-    public function Partidas_presupuestales(){
-        return $this->belongsTo(Partidas_presupuestales::class);
-    }
+    // public function Partidas_presupuestales(){
+    //     return $this->belongsTo(Partidas_presupuestales::class);
+    // }
 }
